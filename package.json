@@ -1,0 +1,44 @@
+{
+  "name": "ez2fix-garage-door-website",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Ez2Fix Professional Garage Door Services - Bergen County NJ",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/vercel": "^8.2.6",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "astro": "^5.13.2",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.539.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "resend": "^6.0.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.4.16"
+  },
+  "keywords": [
+    "garage door repair",
+    "garage door installation",
+    "bergen county nj",
+    "hudson county nj",
+    "garage door service",
+    "garage door opener",
+    "garage door springs",
+    "emergency repair",
+    "licensed contractor"
+  ],
+  "author": "Ez2Fix",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,78 @@
+---
+// Scroll to Top Component
+---
+
+<button 
+  id="scroll-to-top" 
+  class="fixed top-1/2 right-6 z-40 w-12 h-12 bg-ez2fix-primary text-ez2fix-dark rounded-full shadow-premium hover:shadow-xl transition-all duration-300 hover:scale-110 opacity-0 invisible translate-y-4 hover:bg-ez2fix-primary/90 focus:outline-none focus:ring-2 focus:ring-ez2fix-primary focus:ring-offset-2"
+  style="transform: translateY(25vh);"
+  aria-label="Scroll to top"
+  title="Scroll to top"
+>
+  <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+  </svg>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    const threshold = window.innerHeight * 0.6; // Show after scrolling 60% of viewport (slightly below middle)
+    
+    if (!scrollToTopBtn) return;
+    
+    // Show/hide button based on scroll position
+    function toggleScrollButton() {
+      const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrolled > threshold) {
+        scrollToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+        scrollToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+      } else {
+        scrollToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+        scrollToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      }
+    }
+    
+    // Smooth scroll to top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Event listeners
+    window.addEventListener('scroll', toggleScrollButton, { passive: true });
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+    
+    // Initial check
+    toggleScrollButton();
+  });
+</script>
+
+<style>
+  #scroll-to-top {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  #scroll-to-top:hover {
+    transform: scale(1.1) translateY(calc(25vh - 2px));
+  }
+  
+  @media (max-width: 640px) {
+    #scroll-to-top {
+      right: 1rem;
+      width: 3rem;
+      height: 3rem;
+      transform: translateY(20vh) !important;
+    }
+    
+    #scroll-to-top svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+</style>
+</content>

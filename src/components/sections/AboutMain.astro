@@ -1,0 +1,174 @@
+---
+import Card from '@/components/ui/Card.astro';
+import { siteConfig } from '@/config/site';
+---
+
+<section class="py-16" style="background-color: #1D1912;">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Our Story -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: #F3F3E6;">
+          We Started Ez2Fix Because <span style="color: #D2A63C;">We Were Tired</span> of Seeing Our Neighbors Get Ripped Off
+        </h2>
+        <p class="text-xl max-w-4xl mx-auto leading-relaxed mb-12" style="color: #EECD5C;">
+          Back in 2014, we kept hearing the same heartbreaking stories from friends and neighbors: contractors who didn't show up, shocking bills with hidden fees, shoddy work that failed within months, and worst of all - families being pressured into expensive repairs they didn't actually need. We knew Bergen County deserved better. So we started Ez2Fix with one simple promise: treat every customer the way we'd want our own family treated.
+        </p>
+        
+        <!-- Founder Quote -->
+        <Card class="p-8 shadow-xl border-2 max-w-4xl mx-auto mb-16" style="background: rgba(238, 205, 92, 0.1); backdrop-filter: blur(10px); border-color: #EECD5C;">
+          <div class="flex items-center justify-center mb-6">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mr-4" style="background-color: #D2A63C;">
+              <span class="text-2xl font-bold" style="color: #F3F3E6;">EF</span>
+            </div>
+            <div class="text-left">
+              <div class="text-lg font-bold" style="color: #F3F3E6;">Ez2Fix Founders</div>
+              <div class="text-sm" style="color: #D2A63C;">Elmwood Park Residents Since 2005</div>
+            </div>
+          </div>
+          <blockquote class="text-xl italic leading-relaxed" style="color: #F3F3E6;">
+            "When your garage door breaks, you're already stressed about the inconvenience and worried about the cost. The last thing you should have to worry about is whether you can trust the repair company. We started Ez2Fix because every Bergen County family deserves a garage door company that shows up on time, explains everything clearly, charges fair prices, and stands behind their work. That's not just our business model - it's our promise to our neighbors."
+          </blockquote>
+        </Card>
+      </div>
+
+      <!-- Our Values & Credentials Combined -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        
+        <!-- Quality -->
+        <Card class="p-8 shadow-xl border-2 text-center h-full" style="background-color: #F3F3E6; border-color: #D2A63C;">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%);">
+            <svg class="h-10 w-10" style="color: #F3F3E6;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4" style="color: #1D1912;">Quality First</h3>
+          <p class="leading-relaxed mb-6" style="color: #1D1912;">
+            Premium parts, expert installation, comprehensive warranties. We use only manufacturer-approved components 
+            and stand behind every job with industry-leading guarantees.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #BB8525;">
+              <div class="w-2 h-2 rounded-full" style="background-color: #D2A63C;"></div>
+              <span>Licensed & Insured Professional</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #BB8525;">
+              <div class="w-2 h-2 rounded-full" style="background-color: #D2A63C;"></div>
+              <span>Manufacturer Certifications</span>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Honest Service -->
+        <Card class="p-8 shadow-xl border-2 text-center h-full" style="background-color: #F3F3E6; border-color: #BB8525;">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #BB8525 0%, #D2A63C 100%);">
+            <svg class="h-10 w-10" style="color: #F3F3E6;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4" style="color: #1D1912;">Honest Pricing</h3>
+          <p class="leading-relaxed mb-6" style="color: #1D1912;">
+            Clear, upfront pricing with no hidden fees. We explain exactly what needs to be done and why, 
+            so you can make informed decisions about your garage door.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #BB8525;">
+              <div class="w-2 h-2 rounded-full" style="background-color: #BB8525;"></div>
+              <span>Transparent, Written Estimates</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #BB8525;">
+              <div class="w-2 h-2 rounded-full" style="background-color: #BB8525;"></div>
+              <span>No Pressure Sales Tactics</span>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Community Focus -->
+        <Card class="p-8 shadow-xl border-2 text-center h-full" style="background-color: #F3F3E6; border-color: #EECD5C;">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #EECD5C 0%, #D2A63C 100%);">
+            <svg class="h-10 w-10" style="color: #1D1912;" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4" style="color: #1D1912;">Community First</h3>
+          <p class="leading-relaxed mb-6" style="color: #1D1912;">
+            We're not just a business – we're your Bergen County neighbors. Our reputation is built on 
+            treating every customer like family and being accountable to our community.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #BB8525;">
+              <div class="w-2 h-2 rounded-full" style="background-color: #EECD5C;"></div>
+              <span>Local Business Partnerships</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #BB8525;">
+              <div class="w-2 h-2 rounded-full" style="background-color: #EECD5C;"></div>
+              <span>Community Safety Initiatives</span>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <!-- Success Metrics & Social Proof -->
+      <div class="text-center mb-16">
+        <h3 class="text-3xl font-bold mb-8" style="color: #F3F3E6;">
+          A Decade of <span style="color: #D2A63C;">Proven Results</span>
+        </h3>
+        
+        <!-- Main Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <Card class="p-6 text-center shadow-lg border-2" style="background-color: #F3F3E6; border-color: #D2A63C;">
+            <div class="text-3xl font-bold mb-2" style="color: #D2A63C;">10+</div>
+            <div class="text-sm font-semibold mb-2" style="color: #1D1912;">Years Experience</div>
+            <p class="text-xs" style="color: #BB8525;">Serving Bergen County since 2014</p>
+          </Card>
+          
+          <Card class="p-6 text-center shadow-lg border-2" style="background-color: #F3F3E6; border-color: #EECD5C;">
+            <div class="text-3xl font-bold mb-2" style="color: #EECD5C;">10,000+</div>
+            <div class="text-sm font-semibold mb-2" style="color: #1D1912;">Doors Serviced</div>
+            <p class="text-xs" style="color: #BB8525;">From repairs to installations</p>
+          </Card>
+          
+          <Card class="p-6 text-center shadow-lg border-2" style="background-color: #F3F3E6; border-color: #BB8525;">
+            <div class="text-3xl font-bold mb-2" style="color: #BB8525;">5.0★</div>
+            <div class="text-sm font-semibold mb-2" style="color: #1D1912;">Google Rating</div>
+            <p class="text-xs" style="color: #BB8525;">Based on verified reviews</p>
+          </Card>
+          
+          <Card class="p-6 text-center shadow-lg border-2" style="background-color: #F3F3E6; border-color: #D2A63C;">
+            <div class="text-3xl font-bold mb-2" style="color: #D2A63C;">14</div>
+            <div class="text-sm font-semibold mb-2" style="color: #1D1912;">Communities</div>
+            <p class="text-xs" style="color: #BB8525;">Across Bergen County</p>
+          </Card>
+        </div>
+
+        <!-- Customer Testimonial -->
+        <Card class="p-8 shadow-xl border-2 max-w-4xl mx-auto" style="background-color: #F3F3E6; border-color: #D2A63C;">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex space-x-1">
+              {[1,2,3,4,5].map(() => (
+                <svg class="h-6 w-6" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                </svg>
+              ))}
+            </div>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background-color: #D2A63C; color: #F3F3E6;">Recent Review</span>
+          </div>
+          <blockquote class="text-lg leading-relaxed mb-6 italic" style="color: #1D1912;">
+            "Ez2Fix has been our go-to for three years now. They installed our garage door, and when we needed a small adjustment recently, 
+            they came out at no charge. That's the kind of service that keeps customers for life."
+          </blockquote>
+          <div class="flex items-center justify-center">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: #D2A63C;">
+              <span class="text-lg font-bold" style="color: #F3F3E6;">SM</span>
+            </div>
+            <div class="text-left">
+              <div class="font-semibold" style="color: #1D1912;">Sarah M.</div>
+              <div class="text-sm" style="color: #BB8525;">Saddle Brook, NJ</div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </div>
+</section>

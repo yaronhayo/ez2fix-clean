@@ -1,0 +1,11 @@
+<!-- Placeholder for 32x32 PNG favicon - In production, this would be a PNG file -->
+<!-- For now, creating an SVG that can be converted to PNG later -->
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="14" fill="#D2A63C" stroke="#1D1912" stroke-width="1"/>
+    <rect x="6" y="8" width="20" height="16" fill="#F3F3E6" stroke="#1D1912" stroke-width="1" rx="1"/>
+    <line x1="6" y1="12" x2="26" y2="12" stroke="#1D1912" stroke-width="0.5"/>
+    <line x1="6" y1="16" x2="26" y2="16" stroke="#1D1912" stroke-width="0.5"/>
+    <line x1="6" y1="20" x2="26" y2="20" stroke="#1D1912" stroke-width="0.5"/>
+    <circle cx="23" cy="16" r="1.5" fill="#BB8525"/>
+    <text x="16" y="29" text-anchor="middle" font-family="Arial" font-size="6" font-weight="bold" fill="#F3F3E6">E</text>
+</svg>

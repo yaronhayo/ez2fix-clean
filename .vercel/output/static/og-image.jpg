@@ -1,0 +1,100 @@
+<!-- This would be a high-quality 1200x630 JPG image in production -->
+<!-- Creating optimized SVG version for better social media compatibility -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <!-- Background gradient -->
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1D1912"/>
+            <stop offset="100%" stop-color="#2A2420"/>
+        </linearGradient>
+        <linearGradient id="doorGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#F3F3E6"/>
+            <stop offset="100%" stop-color="#E8E8D5"/>
+        </linearGradient>
+        <radialGradient id="logoGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#EECD5C"/>
+            <stop offset="100%" stop-color="#D2A63C"/>
+        </radialGradient>
+    </defs>
+    
+    <rect width="1200" height="630" fill="url(#bgGradient)"/>
+    
+    <!-- Brand elements background -->
+    <rect x="0" y="0" width="1200" height="100" fill="rgba(210, 166, 60, 0.1)"/>
+    <rect x="0" y="530" width="1200" height="100" fill="rgba(210, 166, 60, 0.1)"/>
+    
+    <!-- Main Content Area -->
+    <g transform="translate(80, 120)">
+        
+        <!-- Left Side: Enhanced Logo and Visual -->
+        <g transform="translate(0, 0)">
+            <!-- Company Logo Circle with gradient -->
+            <circle cx="120" cy="80" r="60" fill="url(#logoGradient)" stroke="#F3F3E6" stroke-width="4"/>
+            <circle cx="120" cy="80" r="45" fill="#F3F3E6"/>
+            <text x="120" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#1D1912">E</text>
+            
+            <!-- Large Garage Door Illustration with more detail -->
+            <rect x="50" y="180" width="240" height="180" fill="url(#doorGradient)" stroke="#D2A63C" stroke-width="5" rx="12"/>
+            
+            <!-- Enhanced Door Panels -->
+            <line x1="50" y1="210" x2="290" y2="210" stroke="#BB8525" stroke-width="3"/>
+            <line x1="50" y1="240" x2="290" y2="240" stroke="#BB8525" stroke-width="3"/>
+            <line x1="50" y1="270" x2="290" y2="270" stroke="#BB8525" stroke-width="3"/>
+            <line x1="50" y1="300" x2="290" y2="300" stroke="#BB8525" stroke-width="3"/>
+            <line x1="50" y1="330" x2="290" y2="330" stroke="#BB8525" stroke-width="3"/>
+            
+            <!-- Door Handle with more detail -->
+            <circle cx="270" cy="270" r="12" fill="#D2A63C" stroke="#1D1912" stroke-width="3"/>
+            <rect x="264" y="264" width="12" height="12" fill="#BB8525" rx="3"/>
+            
+            <!-- Spring illustration -->
+            <g transform="translate(20, 170)">
+                <circle cx="0" cy="0" r="8" fill="none" stroke="#BB8525" stroke-width="3"/>
+                <circle cx="0" cy="12" r="6" fill="none" stroke="#BB8525" stroke-width="2"/>
+                <circle cx="0" cy="20" r="4" fill="none" stroke="#BB8525" stroke-width="2"/>
+                <line x1="0" y1="-8" x2="0" y2="24" stroke="#BB8525" stroke-width="2"/>
+            </g>
+        </g>
+        
+        <!-- Right Side: Enhanced Text Content -->
+        <g transform="translate(380, 30)">
+            <!-- Company Name with better typography -->
+            <text x="0" y="80" font-family="Arial, sans-serif" font-size="84" font-weight="bold" fill="#F3F3E6">Ez2Fix</text>
+            <rect x="0" y="90" width="400" height="4" fill="#D2A63C"/>
+            <text x="0" y="140" font-family="Arial, sans-serif" font-size="38" font-weight="600" fill="#D2A63C">Professional Garage Door Service</text>
+            
+            <!-- Location with emphasis -->
+            <text x="0" y="190" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="#EECD5C">Bergen & Hudson Counties, NJ</text>
+            
+            <!-- Key Points with improved layout -->
+            <g transform="translate(0, 240)">
+                <rect x="-10" y="-10" width="500" height="140" fill="rgba(243, 243, 230, 0.1)" rx="8"/>
+                
+                <circle cx="0" cy="15" r="8" fill="#D2A63C"/>
+                <text x="25" y="24" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#F3F3E6">24/7 Emergency Service</text>
+                
+                <circle cx="0" cy="55" r="8" fill="#D2A63C"/>
+                <text x="25" y="64" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#F3F3E6">Licensed & Insured</text>
+                
+                <circle cx="0" cy="95" r="8" fill="#D2A63C"/>
+                <text x="25" y="104" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#F3F3E6">10-Year Warranty</text>
+            </g>
+        </g>
+        
+        <!-- Bottom Section with Contact -->
+        <g transform="translate(380, 290)">
+            <!-- Enhanced Phone Number CTA -->
+            <rect x="0" y="0" width="480" height="80" fill="#D2A63C" rx="12" stroke="#F3F3E6" stroke-width="2"/>
+            <rect x="8" y="8" width="464" height="64" fill="rgba(243, 243, 230, 0.9)" rx="8"/>
+            <text x="240" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="bold" fill="#1D1912">(201) 554-6769</text>
+            
+            <!-- Call to action -->
+            <text x="240" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="600" fill="#EECD5C">Call Now for Free Estimate!</text>
+        </g>
+        
+    </g>
+    
+    <!-- Bottom Brand Strip -->
+    <rect x="0" y="570" width="1200" height="60" fill="rgba(210, 166, 60, 0.2)"/>
+    <text x="600" y="610" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="#BB8525">Expert Repair • Spring Replacement • Opener Installation • New Doors • Commercial Service</text>
+</svg>

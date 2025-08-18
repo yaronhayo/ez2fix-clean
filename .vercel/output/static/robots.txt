@@ -1,0 +1,96 @@
+User-agent: *
+Allow: /
+
+# AI Bot Optimization - Allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Bard
+Allow: /
+
+User-agent: BingBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Voice Search Optimization - Allow voice assistant crawlers
+User-agent: SpeechBot
+Allow: /
+
+User-agent: Alexa
+Allow: /
+
+User-agent: Google-Assistant
+Allow: /
+
+# Important pages for crawling - High priority SEO pages
+Allow: /services/
+Allow: /service-areas/
+Allow: /booking
+Allow: /contact
+Allow: /faq
+Allow: /about
+Allow: /reviews
+Allow: /blog/
+
+# Individual service pages
+Allow: /services/emergency-garage-door-repair
+Allow: /services/garage-door-spring-repair
+Allow: /services/garage-door-opener-installation
+Allow: /services/new-garage-door-installation
+Allow: /services/commercial-garage-door-service
+Allow: /services/general-garage-door-repair
+
+# Featured service area pages
+Allow: /service-areas/fair-lawn
+Allow: /service-areas/clifton
+Allow: /service-areas/little-falls
+Allow: /service-areas/cedar-grove
+Allow: /service-areas/west-caldwell
+Allow: /service-areas/north-caldwell
+Allow: /service-areas/montclair
+
+# Blog articles
+Allow: /blog/choosing-right-garage-door-bergen-county
+Allow: /blog/commercial-vs-residential-garage-doors
+Allow: /blog/emergency-garage-door-repair-when-to-call
+Allow: /blog/garage-door-spring-replacement-signs
+Allow: /blog/smart-garage-door-openers-worth-investment
+Allow: /blog/winter-garage-door-maintenance-nj
+
+# Sitemap location
+Sitemap: https://ez2fix.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block admin and development files
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /.vercel/
+
+# Allow social media crawlers full access
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot  
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /

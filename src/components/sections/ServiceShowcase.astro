@@ -1,0 +1,102 @@
+---
+import { siteConfig } from '@/config/site';
+import ServiceCard from '@/components/ui/ServiceCard.astro';
+
+const detailedServices = [
+  {
+    title: "24/7 Emergency Repair",
+    description: "Door won't close? Stuck open? We understand the panic and stress. Available 24/7 to restore your peace of mind.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp",
+    features: ["Available 24/7", "Same-Day Service", "All Brands", "Safety First"],
+    warranty: "1-Year Warranty",
+    badge: "24/7 AVAILABLE",
+    href: "/services/emergency-garage-door-repair",
+    popular: true
+  },
+  {
+    title: "Spring Repair",
+    description: "Broken springs make your door a 400-pound safety hazard. We have the tools and experience to keep your family safe.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg",
+    features: ["Safe Replacement", "Quality Springs", "Proper Balance", "Peace of Mind"],
+    warranty: "10-Year Warranty",
+    badge: "MOST COMMON",
+    href: "/services/garage-door-spring-repair",
+    popular: true
+  },
+  {
+    title: "Smart Opener Installation",
+    description: "Upgrade to smart technology you can control from anywhere. Never wonder if you closed the garage door again.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp",
+    features: ["Smart Control", "Phone Alerts", "Backup Power", "Easy Setup"],
+    warranty: "15-Year Warranty",
+    badge: "SMART HOME",
+    href: "/services/garage-door-opener-installation",
+    popular: false
+  },
+  {
+    title: "New Door Installation",
+    description: "Transform your home's curb appeal and boost property value with a beautiful new garage door.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png",
+    features: ["Boost Home Value", "Custom Styles", "Energy Savings", "Curb Appeal"],
+    warranty: "15-Year Warranty",
+    badge: "CURB APPEAL",
+    href: "/services/new-garage-door-installation",
+    popular: false
+  },
+  {
+    title: "Commercial Service",
+    description: "When business doors fail, operations stop. We understand every minute counts and get you back to making money fast.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg",
+    features: ["Minimize Downtime", "Heavy-Duty", "Maintenance Plans", "Business Focus"],
+    warranty: "Commercial Warranty",
+    badge: "BUSINESS",
+    href: "/services/commercial-garage-door-service",
+    popular: false
+  },
+  {
+    title: "General Repair",
+    description: "Strange noises? Door sticking? These warning signs could lead to expensive damage. Fix small problems before they become big ones.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png",
+    features: ["Prevent Problems", "Stop Noises", "Smooth Operation", "Peace of Mind"],
+    warranty: "1-Year Warranty",
+    badge: "ALL REPAIRS",
+    href: "/services/general-garage-door-repair",
+    popular: false
+  }
+];
+---
+
+<section class="py-20" style="background-color: #F3F3E6;">
+  <div class="container mx-auto px-4">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: #1D1912;">
+        We Fix What <span style="color: #D2A63C;">Keeps You Up at Night</span>
+        <br />
+        <span class="text-2xl md:text-3xl font-medium" style="color: #BB8525;">Your Neighbors' Trusted Choice Since Day One</span>
+      </h2>
+      <p class="text-xl max-w-4xl mx-auto leading-relaxed mb-8" style="color: #1D1912;">
+        Every garage door problem has the same thing in common - it disrupts your life when you least expect it. 
+        Whether it's <span style="color: #D2A63C; font-weight: 700;">security worries at 2 AM</span> or 
+        <span style="color: #BB8525; font-weight: 700;">being late for work</span>, we've seen it all and we're here to help.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid-responsive-3 gap-responsive">
+      {detailedServices.map((service) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          image={service.image}
+          features={service.features}
+          warranty={service.warranty}
+          badge={service.badge}
+          href={service.href}
+          popular={service.popular}
+        />
+      ))}
+    </div>
+  </div>
+</section>

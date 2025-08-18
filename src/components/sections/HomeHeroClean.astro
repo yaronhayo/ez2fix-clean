@@ -1,0 +1,284 @@
+---
+import { siteConfig } from '@/config/site';
+import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import Card from '@/components/ui/Card.astro';
+import CTA from '@/components/ui/CTA.astro';
+---
+
+<section class="relative hero-responsive overflow-hidden hero-section">
+  <!-- Video Background -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    class="absolute inset-0 w-full h-full object-cover hero-video"
+    id="heroVideo"
+    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231D1912'/%3E%3Cstop offset='100%25' stop-color='%232A2420'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bg)'/%3E%3C/svg%3E"
+  >
+    <source src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
+  </video>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+  <div class="container-responsive relative z-10">
+      
+      <!-- Hero Content Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
+        
+        <!-- Left Side - Hero Content -->
+        <div class="hero-content-responsive order-2 lg:order-1">
+          
+          <!-- Trust Indicators - Moved Higher and Always Side by Side -->
+          <div class="flex items-center justify-center space-x-6 mb-8 lg:mb-6">
+            <div class="flex items-center space-x-2">
+              <svg class="h-4 w-4 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+              </svg>
+              <span class="text-body-small font-semibold text-ez2fix-gold">Neighbors Love Us</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="h-4 w-4 text-ez2fix-brown" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+              </svg>
+              <span class="text-body-small font-semibold text-ez2fix-gold">Licensed & Insured</span>
+            </div>
+          </div>
+
+          <!-- Main Headlines -->
+          <h1 class="hero-title-responsive text-ez2fix-cream mb-4 sm:mb-5 lg:mb-6 animate-on-scroll">
+            <span class="text-ez2fix-cream">When Your Garage Door Breaks,</span>
+            <br />
+            <span class="text-ez2fix-gold">Call</span> <span class="text-ez2fix-primary">Ez2Fix</span>
+          </h1>
+          
+          <!-- Subtitle -->
+          <p class="hero-subtitle-responsive text-ez2fix-cream mb-6 sm:mb-8 lg:mb-10 animate-on-scroll">
+            <span class="text-ez2fix-gold font-semibold">10,000+ Northern NJ families</span> trust us for garage door repair.
+          </p>
+          
+          <!-- CTAs -->
+          <div class="cta-group-responsive mb-6 sm:mb-8 lg:mb-0 animate-on-scroll">
+            <CTA 
+              variant="phone"
+              size="medium"
+              href={siteConfig.links.phone}
+              text={`Call ${siteConfig.business.phone}`}
+              icon="phone"
+              ariaLabel={`Call Ez2Fix at ${siteConfig.business.phone}`}
+              class="btn-premium shadow-premium hover-lift cta-responsive"
+            />
+            <CTA 
+              variant="secondary"
+              size="medium"
+              href="/services"
+              text="View All Services"
+              icon="arrow"
+              ariaLabel="View all garage door services"
+              class="btn-premium hover-lift cta-responsive"
+            />
+          </div>
+
+
+        </div>
+
+        <!-- Right Side - Booking Form (Desktop) -->
+        <div class="order-1 lg:order-2 hidden lg:block animate-on-scroll">
+          <Card class="card-responsive-large shadow-premium border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
+            <BookingFormClean variant="hero" />
+            
+            <!-- Form Benefits -->
+            <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
+              <div class="grid grid-cols-2 gap-3 text-center">
+                <div>
+                  <div class="text-heading-3 text-ez2fix-dark">Professional Service</div>
+                  <div class="text-body-small text-ez2fix-brown">Licensed & Insured</div>
+                </div>
+                <div>
+                  <div class="text-heading-3 text-ez2fix-dark">Free Estimates</div>
+                  <div class="text-body-small text-ez2fix-brown">No Hidden Fees</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+
+
+
+      </div>
+    </div>
+</section>
+
+<style>
+  .hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Desktop optimization - better above-the-fold positioning */
+  @media (min-width: 1024px) {
+    .hero-section {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 6rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-section {
+      padding-top: 8rem;
+    }
+  }
+
+
+
+  @media screen and (max-height: 600px) and (orientation: landscape) {
+    .hero-section {
+      min-height: auto;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .scroll-indicator {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .hero-section {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  /* Mobile-specific spacing adjustments */
+  @media screen and (max-width: 1023px) {
+    .hero-section {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    
+    .hero-content-responsive {
+      margin-top: -2rem;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .hero-content-responsive {
+      margin-top: -3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none;
+    }
+    .hero-section {
+      background: var(--gradient-dark);
+    }
+    .scroll-indicator,
+    .animate-bounce,
+    .animate-scroll-dot {
+      animation: none;
+    }
+  }
+
+  @media (min-width: 475px) {
+    .xs\:text-3xl {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  /* Form positioning optimization */
+  @media (min-width: 1024px) {
+    .hero-section .max-w-md {
+      max-width: 24rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-section .max-w-md {
+      max-width: 26rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Video optimization
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      const isSlowConnection = connection && (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g');
+      
+      if (prefersReducedMotion || isSlowConnection) {
+        heroVideo.style.display = 'none';
+        heroVideo.closest('.hero-section').style.background = 'var(--gradient-dark)';
+      } else {
+        heroVideo.addEventListener('canplaythrough', function() {
+          this.style.opacity = '1';
+        });
+        
+        const playPromise = heroVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            heroVideo.style.display = 'none';
+            heroVideo.closest('.hero-section').style.background = 'var(--gradient-dark)';
+          });
+        }
+      }
+    }
+
+    // Animate elements
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    // Animate hero content
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('animate-in');
+      }, index * 100);
+    });
+    
+    // Observe other scroll animations
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Handle mobile scroll indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+      let hasScrolled = false;
+      
+      const handleScroll = () => {
+        if (!hasScrolled && window.scrollY > 50) {
+          hasScrolled = true;
+          scrollIndicator.classList.add('hidden');
+          window.removeEventListener('scroll', handleScroll);
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // Also hide on touch/click
+      scrollIndicator.addEventListener('click', () => {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+</script>

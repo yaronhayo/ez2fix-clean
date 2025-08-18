@@ -1,0 +1,123 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  priority?: boolean;
+  quality?: number;
+  format?: 'webp' | 'avif' | 'jpg' | 'png';
+}
+
+const {
+  src,
+  alt,
+  width = '100%',
+  height = 'auto',
+  class: className = '',
+  loading = 'lazy',
+  sizes = '100vw',
+  priority = false,
+  quality = 80,
+  format = 'webp'
+} = Astro.props;
+
+// Generate optimized image URLs for different formats
+const generateOptimizedUrl = (originalSrc: string, fmt: string, w?: number) => {
+  // For Vercel Blob Storage URLs, add optimization parameters
+  if (originalSrc.includes('vercel-storage.com')) {
+    const params = new URLSearchParams();
+    if (w) params.append('w', w.toString());
+    params.append('q', quality.toString());
+    params.append('fm', fmt);
+    return `${originalSrc}?${params.toString()}`;
+  }
+  return originalSrc;
+};
+
+// Generate responsive sizes
+const responsiveSizes = [400, 800, 1200, 1600];
+---
+
+<picture>
+  <!-- Modern formats for better compression -->
+  {format === 'avif' && (
+    <source 
+      type="image/avif"
+      srcset={responsiveSizes.map(w => `${generateOptimizedUrl(src, 'avif', w)} ${w}w`).join(', ')}
+      sizes={sizes}
+    />
+  )}
+  
+  <source 
+    type="image/webp"
+    srcset={responsiveSizes.map(w => `${generateOptimizedUrl(src, 'webp', w)} ${w}w`).join(', ')}
+    sizes={sizes}
+  />
+  
+  <!-- Fallback JPEG -->
+  <img
+    src={generateOptimizedUrl(src, 'jpg')}
+    srcset={responsiveSizes.map(w => `${generateOptimizedUrl(src, 'jpg', w)} ${w}w`).join(', ')}
+    alt={alt}
+    width={width}
+    height={height}
+    class={`optimized-image ${className}`}
+    loading={priority ? 'eager' : loading}
+    sizes={sizes}
+    decoding="async"
+    style="contain: layout style;"
+  />
+</picture>
+
+<style>
+  .optimized-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+  }
+  
+  .optimized-image[loading="lazy"] {
+    opacity: 0;
+  }
+  
+  .optimized-image.loaded {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Progressive image loading
+    const images = document.querySelectorAll('.optimized-image[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            });
+            imageObserver.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '50px 0px'
+      });
+      
+      images.forEach(img => imageObserver.observe(img));
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      images.forEach(img => {
+        (img as HTMLImageElement).addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+      });
+    }
+  });
+</script>

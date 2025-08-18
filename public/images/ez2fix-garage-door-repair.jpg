@@ -1,0 +1,45 @@
+<!-- This would be an actual JPG image file in production -->
+<!-- Creating SVG placeholder for garage door repair service image -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+    <!-- Background gradient -->
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F3F3E6"/>
+            <stop offset="100%" stop-color="#E8E8D5"/>
+        </linearGradient>
+    </defs>
+    
+    <rect width="800" height="600" fill="url(#bgGrad)"/>
+    
+    <!-- Garage door illustration -->
+    <rect x="150" y="200" width="500" height="300" fill="#F3F3E6" stroke="#D2A63C" stroke-width="6" rx="8"/>
+    
+    <!-- Door panels -->
+    <line x1="150" y1="250" x2="650" y2="250" stroke="#BB8525" stroke-width="3"/>
+    <line x1="150" y1="300" x2="650" y2="300" stroke="#BB8525" stroke-width="3"/>
+    <line x1="150" y1="350" x2="650" y2="350" stroke="#BB8525" stroke-width="3"/>
+    <line x1="150" y1="400" x2="650" y2="400" stroke="#BB8525" stroke-width="3"/>
+    <line x1="150" y1="450" x2="650" y2="450" stroke="#BB8525" stroke-width="3"/>
+    
+    <!-- Door handle -->
+    <circle cx="600" cy="350" r="15" fill="#D2A63C" stroke="#1D1912" stroke-width="3"/>
+    
+    <!-- Tools illustration -->
+    <g transform="translate(50, 100)">
+        <!-- Wrench -->
+        <rect x="0" y="0" width="80" height="15" fill="#BB8525" rx="7"/>
+        <circle cx="10" cy="7.5" r="12" fill="none" stroke="#BB8525" stroke-width="3"/>
+        
+        <!-- Screwdriver -->
+        <rect x="20" y="30" width="60" height="8" fill="#D2A63C" rx="4"/>
+        <rect x="75" y="28" width="20" height="12" fill="#1D1912" rx="2"/>
+    </g>
+    
+    <!-- Service title -->
+    <text x="400" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#1D1912">Professional Garage Door Repair</text>
+    <text x="400" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#BB8525">Expert Service • Licensed Technicians • Quality Parts</text>
+    
+    <!-- Brand mark -->
+    <circle cx="400" cy="550" r="30" fill="#D2A63C"/>
+    <text x="400" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#F3F3E6">E</text>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "name": "Ez2Fix Garage Door Service",
+  "short_name": "Ez2Fix",
+  "description": "Professional garage door repair and installation in Bergen & Hudson Counties, NJ. Licensed contractor with 10-year warranty.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1D1912",
+  "theme_color": "#D2A63C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-32x32.png", 
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix%20logo.png",
+      "sizes": "300x120",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en-US",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Book Service",
+      "short_name": "Book",
+      "description": "Schedule garage door service",
+      "url": "/booking",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "Emergency Repair",
+      "short_name": "Emergency",
+      "description": "24/7 emergency garage door repair",
+      "url": "/services/emergency-garage-door-repair",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    }
+  ]
+}

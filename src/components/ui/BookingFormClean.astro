@@ -1,0 +1,490 @@
+---
+import { siteConfig } from '@/config/site';
+import CTA from '@/components/ui/CTA.astro';
+
+export interface Props {
+  variant?: 'hero' | 'inline' | 'modal';
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  service?: string;
+  location?: string;
+}
+
+const {
+  variant = 'inline',
+  title = 'Get Your Free Estimate',
+  subtitle = 'Tell us about your garage door issue and we\'ll provide an honest, detailed estimate.',
+  buttonText = 'Get My Free Estimate',
+  service = '',
+  location = ''
+} = Astro.props;
+
+const services = [
+  "24/7 Emergency Repair",
+  "Spring Repair",
+  "Smart Opener Installation", 
+  "New Door Installation",
+  "Commercial Service",
+  "General Repair",
+  "Cable & Track Repair",
+  "Maintenance Service",
+  "Safety Inspection",
+  "Not Sure - Need Diagnosis"
+];
+
+const formId = `booking-form-${variant}`;
+---
+
+<div class="booking-form-container">
+  <div class={variant === 'hero' ? 'mb-3' : 'mb-4 md:mb-6'}>
+    <h3 class={variant === 'hero' ? 'text-base lg:text-lg font-bold text-ez2fix-dark mb-1' : 'text-lg md:text-xl lg:text-2xl font-bold text-ez2fix-dark mb-2'}>
+      {title}
+    </h3>
+    {subtitle && (
+      <p class={variant === 'hero' ? 'text-xs lg:text-sm text-ez2fix-brown' : 'text-sm md:text-base text-ez2fix-brown'}>
+        {subtitle}
+      </p>
+    )}
+  </div>
+  
+  <form class={variant === 'hero' ? 'space-y-3' : 'space-y-4'} id={formId} data-variant={variant}>
+    <!-- Name -->
+    <div>
+      <label for={`name-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+        Name*
+      </label>
+      <input 
+        type="text" 
+        id={`name-${variant}`}
+        name="name" 
+        required
+        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
+        placeholder="Enter your full name"
+      />
+      <div id={`name-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label for={`phone-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+        Phone Number*
+      </label>
+      <input 
+        type="tel" 
+        id={`phone-${variant}`}
+        name="phone" 
+        required
+        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
+        placeholder="(201) 555-0123"
+      />
+      <div id={`phone-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    {variant !== 'hero' && (
+      <!-- Email -->
+      <div>
+        <label for={`email-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Email Address*
+        </label>
+        <input 
+          type="email" 
+          id={`email-${variant}`}
+          name="email"
+          required
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+          placeholder="your.email@example.com"
+        />
+        <div id={`email-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      </div>
+    )}
+
+    <!-- Service Type -->
+    <div>
+      <label for={`service-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+        Service Needed*
+      </label>
+      <select 
+        id={`service-${variant}`}
+        name="service" 
+        required
+        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white'}
+      >
+        <option value="">What can we help with?</option>
+        {services.map(serviceOption => (
+          <option value={serviceOption} selected={service === serviceOption}>{serviceOption}</option>
+        ))}
+      </select>
+      <div id={`service-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    {variant !== 'hero' && (
+      <!-- Urgency -->
+      <div>
+        <label for={`urgency-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          When do you need service?*
+        </label>
+        <select 
+          id={`urgency-${variant}`}
+          name="urgency" 
+          required
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white"
+        >
+          <option value="">Select timeframe...</option>
+          <option value="asap">ASAP</option>
+          <option value="today">Today if possible</option>
+          <option value="few-days">Within the next few days</option>
+          <option value="few-weeks">Within the next few weeks</option>
+          <option value="browsing">Not sure / Just browsing</option>
+        </select>
+        <div id={`urgency-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      </div>
+    )}
+
+    <!-- Address -->
+    <div>
+      <label for={`address-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+        Address*
+      </label>
+      <input 
+        type="text" 
+        id={`address-${variant}`}
+        name="address" 
+        required
+        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
+        placeholder={variant === 'hero' ? 'Your address...' : 'Start typing your address...'}
+        autocomplete="street-address"
+      />
+      <div id={`address-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      
+      {variant !== 'hero' && (
+        <!-- Expanded Address Fields (initially hidden) -->
+        <div id={`address-expanded-${variant}`} class="hidden mt-3 space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <input 
+                type="text" 
+                id={`city-${variant}`}
+                name="city" 
+                class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+                placeholder="City"
+                autocomplete="address-level2"
+              />
+            </div>
+            <div>
+              <input 
+                type="text" 
+                id={`state-${variant}`}
+                name="state" 
+                class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+                placeholder="State"
+                autocomplete="address-level1"
+                value="NJ"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <input 
+                type="text" 
+                id={`zip-${variant}`}
+                name="zip" 
+                class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+                placeholder="Zip Code"
+                autocomplete="postal-code"
+                pattern="[0-9]{5}(-[0-9]{4})?"
+              />
+            </div>
+            <div>
+              <input 
+                type="text" 
+                id={`unit-${variant}`}
+                name="unit" 
+                class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+                placeholder="Unit/Apt (optional)"
+                autocomplete="address-line2"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {variant !== 'hero' && (
+      <!-- Notes -->
+      <div>
+        <label for={`notes-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Notes
+        </label>
+        <textarea 
+          id={`notes-${variant}`}
+          name="notes" 
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors min-h-[100px] resize-vertical"
+          placeholder="Tell us more about your garage door issue, special instructions, or any questions you have..."
+        ></textarea>
+      </div>
+    )}
+
+    <!-- Consent Checkbox -->
+    <div>
+      <div class={variant === 'hero' ? 'flex items-start space-x-2' : 'flex items-start space-x-3'}>
+        <input 
+          type="checkbox" 
+          id={`consent-${variant}`}
+          name="consent" 
+          required
+          class={variant === 'hero' ? 'mt-0.5 h-3 w-3 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-1 focus:ring-offset-1' : 'mt-1 h-4 w-4 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2 focus:ring-offset-2'}
+        />
+        <label for={`consent-${variant}`} class={variant === 'hero' ? 'text-xs leading-tight text-ez2fix-dark' : 'text-sm leading-relaxed text-ez2fix-dark'}>
+          I agree to receive service updates via call, text, or email, and I accept the 
+          <a href="/privacy-policy" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Privacy Policy</a> and 
+          <a href="/terms-of-service" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Terms & Conditions</a>.*
+        </label>
+      </div>
+      <div id={`consent-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class={variant === 'hero' ? 'pt-1' : 'pt-2'}>
+      <CTA 
+        variant="primary"
+        size={variant === 'hero' ? 'small' : 'medium'}
+        text={buttonText}
+        icon="check"
+        class="w-full btn-premium shadow-premium hover-lift"
+      />
+    </div>
+    
+    <p class={variant === 'hero' ? 'text-ez2fix-brown text-center text-xs mt-2' : 'text-ez2fix-brown text-center text-xs mt-3'}>
+      * Required fields. We respect your privacy and never share your information.
+    </p>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    // Initialize reCAPTCHA
+    try {
+      const { loadRecaptcha } = await import('@/lib/recaptcha');
+      await loadRecaptcha();
+    } catch (error) {
+      console.error('Failed to load reCAPTCHA:', error);
+    }
+    
+    const forms = document.querySelectorAll('[id^="booking-form-"]');
+    
+    forms.forEach(form => {
+      const variant = form.dataset.variant;
+      
+      // Phone formatting
+      const phoneInput = form.querySelector(`#phone-${variant}`);
+      phoneInput?.addEventListener('input', function() {
+        const value = this.value.replace(/\D/g, '');
+        if (value.length >= 10) {
+          this.value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+        }
+      });
+      
+      // Address autocomplete setup
+      const addressInput = form.querySelector(`#address-${variant}`);
+      const addressExpanded = form.querySelector(`#address-expanded-${variant}`);
+      
+      // Initialize Google Maps address autocomplete
+      if (addressInput) {
+        // Use a simple approach without complex async
+        setupManualAddressParsing(addressInput, addressExpanded, variant);
+      }
+      
+      // Clear errors on input
+      const inputs = form.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          clearError(this.name, variant);
+        });
+      });
+      
+      // Form validation and submission
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Basic validation
+        const required = variant === 'hero' 
+          ? ['name', 'phone', 'service', 'address', 'consent']
+          : ['name', 'phone', 'email', 'service', 'urgency', 'address', 'consent'];
+        
+        let hasErrors = false;
+        required.forEach(field => {
+          const value = field === 'consent' ? data[field] : data[field]?.trim();
+          if (!value) {
+            showError(field, 'This field is required.', variant);
+            hasErrors = true;
+          }
+        });
+        
+        // Email validation
+        if (data.email && !isValidEmail(data.email.trim())) {
+          showError('email', 'Please enter a valid email address.', variant);
+          hasErrors = true;
+        }
+        
+        // Phone validation
+        if (data.phone && !isValidPhone(data.phone.trim())) {
+          showError('phone', 'Please enter a valid phone number.', variant);
+          hasErrors = true;
+        }
+        
+        if (hasErrors) return;
+        
+        // Show loading state
+        const button = form.querySelector('a[class*="btn"]') || form.querySelector('button');
+        const originalText = button.textContent;
+        button.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Submitting...';
+        button.style.pointerEvents = 'none';
+        
+        try {
+          // Execute reCAPTCHA
+          const { executeRecaptcha } = await import('@/lib/recaptcha');
+          const recaptchaToken = await executeRecaptcha('booking_form');
+          
+          // Build full address
+          const fullAddress = data.address.trim() + 
+            (data.city ? `, ${data.city.trim()}` : '') + 
+            (data.state ? `, ${data.state.trim()}` : ', NJ') + 
+            (data.zip ? ` ${data.zip.trim()}` : '') +
+            (data.unit ? `, Unit ${data.unit.trim()}` : '');
+          
+          const response = await fetch('/api/booking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: data.name.trim(),
+              email: data.email?.trim() || '',
+              phone: data.phone.trim(),
+              address: fullAddress,
+              service: data.service,
+              urgency: data.urgency || 'flexible',
+              description: data.notes?.trim() || '',
+              recaptchaToken,
+              consent: data.consent,
+              source: 'website_form'
+            })
+          });
+          
+          if (response.ok) {
+            window.location.href = '/thank-you';
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          alert('Sorry, there was an error submitting your request. Please try again or call us directly at ' + '(201) 554-6769');
+          button.innerHTML = originalText;
+          button.style.pointerEvents = 'auto';
+        }
+      });
+    });
+    
+    function setupManualAddressParsing(addressInput, addressExpanded, variant) {
+      // Try to initialize Google Maps autocomplete asynchronously
+      import('@/lib/maps').then(async ({ initializeGoogleMaps, setupAddressAutocomplete }) => {
+        try {
+          await initializeGoogleMaps();
+          const autocomplete = setupAddressAutocomplete(addressInput, {
+            restrictToServiceArea: true,
+            onPlaceSelected: (place) => {
+              if (place.address_components && addressExpanded) {
+                addressExpanded.classList.remove('hidden');
+                
+                // Auto-fill expanded address fields  
+                const cityInput = addressInput.closest('form').querySelector(`#city-${variant}`);
+                const zipInput = addressInput.closest('form').querySelector(`#zip-${variant}`);
+                
+                place.address_components.forEach(component => {
+                  const types = component.types;
+                  
+                  if (types.includes('locality') && cityInput) {
+                    cityInput.value = component.long_name;
+                  }
+                  
+                  if (types.includes('postal_code') && zipInput) {
+                    zipInput.value = component.long_name;
+                  }
+                });
+              }
+            }
+          });
+        } catch (error) {
+          console.warn('Google Maps autocomplete not available, using fallback:', error);
+        }
+      }).catch(() => {
+        console.warn('Google Maps module not available, using manual parsing');
+      });
+      
+      // Manual address parsing fallback
+      addressInput?.addEventListener('input', function() {
+        const value = this.value.trim();
+        if (value.length > 10 || value.includes(',')) {
+          // Show expanded fields when user starts typing a substantial address
+          addressExpanded?.classList.remove('hidden');
+          
+          // Try to parse the address if it contains commas
+          if (value.includes(',')) {
+            const parts = value.split(',').map(part => part.trim());
+            if (parts.length >= 2) {
+              const form = addressInput.closest('form');
+              const cityInput = form.querySelector(`#city-${variant}`);
+              const zipInput = form.querySelector(`#zip-${variant}`);
+              
+              // Try to extract city and zip from the input
+              const lastPart = parts[parts.length - 1];
+              const zipMatch = lastPart.match(/\b\d{5}(-\d{4})?\b/);
+              
+              if (zipMatch && zipInput) {
+                zipInput.value = zipMatch[0];
+                const cityPart = lastPart.replace(zipMatch[0], '').replace(/\s*NJ\s*/i, '').trim();
+                if (cityPart && cityInput) {
+                  cityInput.value = cityPart;
+                }
+              } else if (parts.length >= 2 && cityInput) {
+                cityInput.value = parts[1];
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    function showError(field, message, variant) {
+      const errorEl = document.getElementById(`${field}-error-${variant}`);
+      const inputEl = document.getElementById(`${field}-${variant}`);
+      if (errorEl && inputEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+        inputEl.style.borderColor = '#ef4444';
+        inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    
+    function clearError(field, variant) {
+      const errorEl = document.getElementById(`${field}-error-${variant}`);
+      const inputEl = document.getElementById(`${field}-${variant}`);
+      if (errorEl && inputEl) {
+        errorEl.classList.add('hidden');
+        inputEl.style.borderColor = '';
+      }
+    }
+    
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    function isValidPhone(phone) {
+      const cleaned = phone.replace(/\D/g, '');
+      return cleaned.length === 10;
+    }
+  });
+</script>

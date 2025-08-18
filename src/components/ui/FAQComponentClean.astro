@@ -1,0 +1,126 @@
+---
+export interface Props {
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+  title?: string;
+  subtitle?: string;
+}
+
+const { 
+  faqs, 
+  title = "Common Questions About Our Service",
+  subtitle = "We believe in transparency. Here are answers to questions homeowners frequently ask about our garage door services."
+} = Astro.props;
+---
+
+<section class="space-section-md bg-gradient-to-br from-white via-ez2fix-cream/50 to-ez2fix-gold/10">
+  <div class="container-responsive">
+    <!-- Enhanced Section Header -->
+    <div class="section-header-responsive animate-on-scroll">
+      <h2 class="section-title-responsive text-ez2fix-dark" set:html={title} />
+      <p class="section-subtitle-responsive text-ez2fix-brown" set:html={subtitle} />
+    </div>
+    
+    <!-- Enhanced FAQ Grid -->
+    <div class="max-w-4xl mx-auto space-y-4 mb-8">
+      {faqs.map((faq, index) => (
+        <div class="faq-item card-responsive shadow-premium border-2 border-ez2fix-brown/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-ez2fix-primary hover-lift animate-on-scroll">
+          <button 
+            class="faq-question w-full text-left p-4 sm:p-6 flex items-start justify-between focus-enhanced bg-white hover:bg-ez2fix-gold/5 transition-colors touch-target"
+            data-faq-index={index}
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <h3 class="text-heading-3 text-ez2fix-dark pr-4 flex-1">
+              {faq.question}
+            </h3>
+            <div class="flex-shrink-0 ml-4">
+              <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                <svg 
+                  class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+              </div>
+            </div>
+          </button>
+          <div 
+            class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-gradient-to-br from-white to-ez2fix-cream/30"
+            id={`faq-answer-${index}`}
+            aria-labelledby={`faq-question-${index}`}
+          >
+            <div class="p-4 sm:p-6 pt-0">
+              <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                <p class="text-body-base text-ez2fix-brown leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Enhanced Read All FAQs CTA -->
+    <div class="text-center animate-on-scroll">
+      <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold">
+        <a href="/faq" class="cta-responsive bg-white text-ez2fix-primary hover:bg-ez2fix-primary hover:text-white btn-premium hover-lift inline-flex items-center justify-center shadow-lg">
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Read All FAQs
+          <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqButtons = document.querySelectorAll('.faq-question');
+    
+    faqButtons.forEach((button) => {
+      button.addEventListener('click', function() {
+        const index = this.getAttribute('data-faq-index');
+        const faqItem = this.closest('.faq-item');
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = faqItem.querySelector('.faq-icon');
+        
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+        
+        // Close all FAQs
+        faqButtons.forEach((btn, i) => {
+          const otherAnswer = btn.closest('.faq-item').querySelector('.faq-answer');
+          const otherIcon = btn.closest('.faq-item').querySelector('.faq-icon');
+          
+          btn.setAttribute('aria-expanded', 'false');
+          otherAnswer.style.maxHeight = '0px';
+          otherIcon.style.transform = 'rotate(0deg)';
+        });
+        
+        // Open clicked FAQ if it wasn't open
+        if (!isOpen) {
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          icon.style.transform = 'rotate(45deg)';
+        }
+      });
+      
+      // Keyboard support
+      button.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+  });
+</script>

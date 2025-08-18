@@ -1,0 +1,114 @@
+---
+export interface Props {
+  layout?: 'horizontal' | 'vertical' | 'grid';
+  showDividers?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  items?: ('licensed' | 'rating' | 'family' | 'warranty' | 'emergency' | 'experience')[];
+  textColor?: string;
+  iconColor?: string;
+}
+
+const {
+  layout = 'horizontal',
+  showDividers = true,
+  size = 'md',
+  items = ['licensed', 'rating', 'family'],
+  textColor = '#BB8525',
+  iconColor = '#D2A63C'
+} = Astro.props;
+
+const trustItems = {
+  licensed: {
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    text: 'Licensed & Insured',
+    filled: false,
+    color: iconColor
+  },
+  rating: {
+    icon: 'M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z',
+    text: '5.0★ Customer Rating',
+    filled: true,
+    color: '#EECD5C'
+  },
+  family: {
+    icon: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
+    text: 'Family Owned Since 2014',
+    filled: true,
+    color: '#BB8525'
+  },
+  warranty: {
+    icon: 'M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z',
+    text: '10-Year Warranty',
+    filled: true,
+    color: '#EECD5C'
+  },
+  emergency: {
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+    text: '24/7 Emergency Service',
+    filled: false,
+    color: iconColor
+  },
+  experience: {
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    text: '10+ Years Experience',
+    filled: false,
+    color: iconColor
+  }
+};
+
+const sizeClasses = {
+  sm: {
+    icon: 'h-4 w-4',
+    text: 'text-xs',
+    spacing: 'space-x-1'
+  },
+  md: {
+    icon: 'h-5 w-5',
+    text: 'text-sm',
+    spacing: 'space-x-2'
+  },
+  lg: {
+    icon: 'h-6 w-6',
+    text: 'text-base',
+    spacing: 'space-x-3'
+  }
+};
+
+const layoutClasses = {
+  horizontal: 'flex justify-center items-center space-x-4 md:space-x-8 flex-wrap gap-4',
+  vertical: 'flex flex-col space-y-4',
+  grid: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
+};
+---
+
+<div class={`${layoutClasses[layout]} font-semibold`} style={`color: ${textColor};`}>
+  {items.map((itemKey, index) => {
+    const item = trustItems[itemKey];
+    if (!item) return null;
+    
+    return (
+      <>
+        <div class={`flex items-center ${sizeClasses[size].spacing}`}>
+          <svg 
+            class={`${sizeClasses[size].icon} flex-shrink-0`} 
+            style={`color: ${item.color};`}
+            fill={item.filled ? "currentColor" : "none"} 
+            stroke={item.filled ? "none" : "currentColor"} 
+            viewBox="0 0 24 24"
+            stroke-width={item.filled ? "0" : "2"}
+          >
+            <path 
+              stroke-linecap={item.filled ? "round" : "round"} 
+              stroke-linejoin={item.filled ? "round" : "round"} 
+              d={item.icon}
+            />
+          </svg>
+          <span class={sizeClasses[size].text}>{item.text}</span>
+        </div>
+        {showDividers && layout === 'horizontal' && index < items.length - 1 && (
+          <div class="w-px h-4" style={`background-color: ${textColor};`}></div>
+        )}
+      </>
+    );
+  })}
+</div>

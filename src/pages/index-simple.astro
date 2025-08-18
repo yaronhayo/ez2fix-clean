@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config/site';
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Ez2Fix - Garage Door Repair Bergen County NJ"
+  description="Professional garage door repair and installation services in Bergen County NJ"
+>
+  <main id="main-content">
+    <section class="min-h-screen flex items-center justify-center bg-ez2fix-cream">
+      <div class="text-center max-w-2xl mx-auto px-4">
+        <h1 class="text-4xl md:text-6xl font-bold text-ez2fix-dark mb-6">
+          <span class="text-ez2fix-primary">Ez2Fix</span>
+          <br>
+          Garage Door Service
+        </h1>
+        <p class="text-xl text-ez2fix-brown mb-8">
+          Professional garage door repair and installation in Bergen County NJ
+        </p>
+        <div class="space-x-4">
+          <a href="tel:2015546769" class="bg-ez2fix-primary text-ez2fix-dark px-8 py-3 rounded-lg font-semibold hover:bg-ez2fix-gold transition-colors">
+            Call (201) 554-6769
+          </a>
+          <a href="/services" class="bg-ez2fix-brown text-white px-8 py-3 rounded-lg font-semibold hover:bg-ez2fix-dark transition-colors">
+            Our Services
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+    <!-- Safari pinned tab should be monochromatic -->
+    <rect width="180" height="180" fill="#000"/>
+    
+    <!-- Garage Door Structure -->
+    <rect x="40" y="50" width="100" height="80" fill="#fff" rx="4"/>
+    
+    <!-- Door Panels (negative space) -->
+    <line x1="40" y1="70" x2="140" y2="70" stroke="#000" stroke-width="2"/>
+    <line x1="40" y1="90" x2="140" y2="90" stroke="#000" stroke-width="2"/>
+    <line x1="40" y1="110" x2="140" y2="110" stroke="#000" stroke-width="2"/>
+    
+    <!-- Door Handle -->
+    <circle cx="125" cy="90" r="4" fill="#000"/>
+    
+    <!-- Company Initial -->
+    <text x="90" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#fff">E</text>
+    
+    <!-- Hardware -->
+    <rect x="75" y="140" width="30" height="4" fill="#fff" rx="2"/>
+</svg>

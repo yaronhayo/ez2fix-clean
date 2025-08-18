@@ -1,0 +1,198 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeaderClean from '@/components/layout/HeaderClean.astro';
+import FooterClean from '@/components/layout/FooterClean.astro';
+import HomeHeroClean from '@/components/sections/HomeHeroClean.astro';
+import HomeMainClean from '@/components/sections/HomeMainClean.astro';
+import FAQComponentClean from '@/components/ui/FAQComponentClean.astro';
+import ReviewsCarouselClean from '@/components/ui/ReviewsCarouselClean.astro';
+import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import Card from '@/components/ui/Card.astro';
+import CTASectionClean from '@/components/ui/CTASectionClean.astro';
+import { siteConfig } from '@/config/site';
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Garage Door Repair Bergen County NJ | Licensed Contractor | Ez2Fix | #1 Emergency Service"
+  description="#1 Garage door repair Bergen County NJ. Licensed contractor #13VH13553300 serving Elmwood Park, Fair Lawn, Clifton. 24/7 emergency repair, spring replacement, opener installation. 10-year warranty, 10,000+ customers. Call (201) 554-6769!"
+  keywords="garage door repair bergen county nj, garage door installation bergen county, emergency garage door repair nj, garage door spring repair bergen county, garage door opener installation nj, garage door repair elmwood park nj, garage door repair fair lawn nj, garage door repair clifton nj, garage door contractor bergen county, licensed garage door repair nj, garage door service north caldwell, garage door repair west caldwell, garage door service montclair nj, garage door repair little falls nj, garage door service cedar grove nj"
+>
+  <Fragment slot="head">
+    <!-- Preload hero video for faster loading -->
+    <link rel="preload" as="video" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
+  </Fragment>
+  
+  
+  <HeaderClean />
+  <main id="main-content">
+    <HomeHeroClean />
+    
+    <div class="py-8 hidden lg:block"></div>
+    
+    <!-- Mobile Form Section (only visible on mobile) -->
+    <section class="lg:hidden space-section-sm bg-gradient-to-br from-ez2fix-cream via-white to-ez2fix-gold/5">
+      <div class="container-responsive">
+        <div class="max-w-md mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-6 animate-on-scroll">
+            <h2 class="text-heading-1 text-ez2fix-dark mb-3">
+              Get Your <span class="text-ez2fix-primary">Free Estimate</span>
+            </h2>
+            <p class="text-body-base text-ez2fix-brown">
+              Quick form for honest estimates.
+            </p>
+          </div>
+
+          <!-- Enhanced Form Card -->
+          <Card class="card-responsive-large shadow-premium border-2 bg-white border-ez2fix-primary hover:shadow-2xl transition-all duration-300 animate-on-scroll">
+            <BookingFormClean 
+              variant="inline"
+              title=""
+              subtitle=""
+              buttonText="Get My Free Estimate"
+            />
+            
+            <!-- Enhanced Form Benefits -->
+            <div class="mt-6 pt-6 border-t border-ez2fix-brown/20">
+              <div class="grid grid-cols-2 gap-4 text-center">
+                <div class="p-3 rounded-lg bg-ez2fix-primary/5 border border-ez2fix-primary/20">
+                  <div class="w-8 h-8 mx-auto mb-2 bg-ez2fix-primary rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                  </div>
+                  <div class="text-heading-3 text-ez2fix-dark">Professional Service</div>
+                  <div class="text-body-small text-ez2fix-brown">Licensed & Insured</div>
+                </div>
+                <div class="p-3 rounded-lg bg-ez2fix-gold/5 border border-ez2fix-gold/20">
+                  <div class="w-8 h-8 mx-auto mb-2 bg-ez2fix-gold rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                    </svg>
+                  </div>
+                  <div class="text-heading-3 text-ez2fix-dark">Free Estimates</div>
+                  <div class="text-body-small text-ez2fix-brown">No Hidden Fees</div>
+                </div>
+              </div>
+              
+              <!-- Trust Indicators -->
+              <div class="mt-4 pt-4 border-t border-ez2fix-brown/10">
+                <div class="flex items-center justify-center space-x-4 text-body-small text-ez2fix-brown">
+                  <div class="flex items-center space-x-1">
+                    <svg class="w-4 h-4 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                    </svg>
+                    <span>5.0★ Rating</span>
+                  </div>
+                  <div class="flex items-center space-x-1">
+                    <svg class="w-4 h-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>24/7 Service</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </section>
+    
+    <div class="py-8"></div>
+    
+    <HomeMainClean />
+    
+    <div class="py-8"></div>
+    
+    <FAQComponentClean 
+      faqs={[
+        {
+          question: "How do you price garage door repair services in Elmwood Park, NJ?",
+          answer: "Garage door repair costs vary depending on the specific issue and required parts. We provide free estimates with upfront pricing - no hidden fees or surprises! Contact us for a personalized quote based on your specific needs."
+        },
+        {
+          question: "What is your service availability for garage door repairs?",
+          answer: "Ez2Fix provides prompt garage door repair service throughout Elmwood Park and surrounding areas. We offer reliable service and are available for service calls. Contact us to discuss your specific scheduling needs."
+        },
+        {
+          question: "What garage door brands do you service in Elmwood Park?",
+          answer: "We service ALL major garage door brands including LiftMaster, Chamberlain, Genie, Craftsman, Wayne Dalton, Clopay, Amarr, and Chi. Our licensed technicians carry parts for most common brands on their trucks for efficient repairs."
+        },
+        {
+          question: "How long do garage door springs last and when should I replace them?",
+          answer: "Garage door springs typically last 7-10 years or 10,000 cycles. Warning signs include: garage door won't open, closes too fast, makes loud noises, or appears crooked. NEVER attempt DIY spring repair - it's extremely dangerous! Call Ez2Fix for safe, professional spring replacement with a 10-year warranty."
+        },
+        {
+          question: "Are you licensed and insured for garage door work in NJ?",
+          answer: "Absolutely! Ez2Fix is fully licensed (#13VH13553300) and insured for all garage door work in New Jersey. We're a family-owned business serving Elmwood Park since 2014 with an A+ BBB rating and 5-star Google reviews."
+        },
+        {
+          question: "Do you offer senior discounts on garage door services?",
+          answer: "Yes! Ez2Fix proudly offers a senior discount (65+) on garage door repairs and installations. We believe in taking care of our community's seniors with honest, affordable service. Just mention this discount when you call!"
+        }
+      ]}
+      title="Got Questions About <span class='text-ez2fix-primary'>Garage Door Repair</span> in Elmwood Park?"
+      subtitle="<strong>Honest answers from Ez2Fix</strong> - your local garage door experts! From pricing to warranties, we've got you covered with transparent, helpful information."
+    />
+    
+    <div class="py-8"></div>
+    
+    <section class="py-16 bg-gradient-to-br from-ez2fix-cream via-white to-ez2fix-gold/5">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12 animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-ez2fix-dark">
+              <span class="text-ez2fix-primary">Happy</span> Neighbors
+            </h2>
+            <p class="text-xl max-w-2xl mx-auto leading-relaxed mb-8 text-ez2fix-brown">
+              Real families sharing their experiences with Ez2Fix service.
+            </p>
+          </div>
+          
+          <div class="animate-on-scroll">
+            <ReviewsCarouselClean pageType="homepage" />
+          </div>
+          
+          <div class="text-center mt-8 animate-on-scroll">
+            <a href="/reviews" class="btn-secondary text-lg px-8 py-3">
+              Read All Reviews
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="py-8"></div>
+
+    <CTASectionClean 
+      title="Ready to <span class='text-ez2fix-gold'>Fix This?</span>"
+      subtitle="Stop worrying. <span class='text-ez2fix-gold font-bold'>One call fixes everything</span>."
+      stats={[
+        { number: "15+", label: "Years Local" },
+        { number: "10K+", label: "Families Helped" },
+        { number: "24/7", label: "Available" }
+      ]}
+      primaryCTA={{
+        text: `Call ${siteConfig.business.phone}`,
+        href: siteConfig.links.phone,
+        icon: "phone"
+      }}
+      secondaryCTA={{
+        text: "Book Online",
+        href: "/booking",
+        icon: "arrow"
+      }}
+      trustIndicators={[
+        { icon: "shield", text: "Licensed & Insured" },
+        { icon: "star", text: "5.0★ Rating" },
+        { icon: "check", text: "Guaranteed Work" }
+      ]}
+      theme="dark"
+    />
+  </main>
+  <FooterClean />
+  
+
+</BaseLayout>

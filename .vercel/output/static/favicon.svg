@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <!-- Background Circle with brand colors -->
+    <circle cx="16" cy="16" r="16" fill="#D2A63C"/>
+    
+    <!-- Inner circle for contrast -->
+    <circle cx="16" cy="16" r="12" fill="#F3F3E6"/>
+    
+    <!-- Ez2Fix logo representation -->
+    <g transform="translate(16, 16)">
+        <!-- Main "E" from Ez2Fix -->
+        <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1D1912">E</text>
+    </g>
+    
+    <!-- Small "2" indicator -->
+    <text x="23" y="12" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#1D1912">2</text>
+    
+    <!-- Minimal garage door indicator -->
+    <rect x="6" y="24" width="20" height="6" fill="#1D1912" rx="1"/>
+    <line x1="8" y1="26" x2="24" y2="26" stroke="#D2A63C" stroke-width="0.5"/>
+    <line x1="8" y1="28" x2="24" y2="28" stroke="#D2A63C" stroke-width="0.5"/>
+    <circle cx="23" cy="27" r="0.8" fill="#D2A63C"/>
+    
+    <style>
+        @media (prefers-color-scheme: dark) {
+            circle:first-child { fill: #D2A63C; }
+            circle:nth-child(2) { fill: #1D1912; }
+            text { fill: #F3F3E6; }
+            rect { fill: #F3F3E6; }
+            line { stroke: #D2A63C; }
+        }
+    </style>
+</svg>

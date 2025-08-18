@@ -1,0 +1,39 @@
+import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute } from "./astro/server-B2kn4zWz.js";
+import "kleur/colors";
+import { s as siteConfig } from "./BaseLayout-DZ4ZSGBd.js";
+import { $ as $$Card } from "./Card-DzqDmBJQ.js";
+const $$Astro = createAstro("https://ez2fix.com");
+const $$ServiceCard = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$ServiceCard;
+  const {
+    title,
+    description,
+    image,
+    features,
+    warranty,
+    badge,
+    href,
+    popular = false,
+    theme = "light",
+    class: className = ""
+  } = Astro2.props;
+  const isDark = theme === "dark";
+  const cardBg = isDark ? popular ? "bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown/20" : "bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown/10" : popular ? "bg-gradient-to-br from-white to-ez2fix-primary/5" : "bg-white";
+  const cardBorder = isDark ? popular ? "border-ez2fix-primary" : "border-ez2fix-gold/30" : popular ? "border-ez2fix-primary" : "border-ez2fix-brown/30";
+  const titleColor = isDark ? "text-ez2fix-cream" : "text-ez2fix-dark";
+  const descColor = isDark ? "text-ez2fix-cream" : "text-ez2fix-brown";
+  const featureColor = isDark ? "text-ez2fix-cream" : "text-ez2fix-dark";
+  const borderColor = isDark ? "border-ez2fix-gold/20" : "border-ez2fix-brown/10";
+  const warrantyBg = isDark ? "bg-gradient-to-r from-ez2fix-gold/20 to-ez2fix-primary/20 border-ez2fix-gold/30" : "bg-gradient-to-r from-ez2fix-gold/10 to-ez2fix-primary/10 border-ez2fix-gold/20";
+  const warrantyTitleColor = isDark ? "text-ez2fix-gold" : "text-ez2fix-dark";
+  const warrantyTextColor = isDark ? "text-ez2fix-cream" : "text-ez2fix-brown";
+  return renderTemplate`${renderComponent($$result, "Card", $$Card, { "class": `relative overflow-hidden card-responsive shadow-premium hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 group hover-lift h-full flex flex-col ${cardBg} ${cardBorder} ${className}` }, { "default": ($$result2) => renderTemplate`  ${maybeRenderHead()}<a${addAttribute(href, "href")} class="relative h-48 sm:h-56 lg:h-48 overflow-hidden rounded-t-lg block group-hover:opacity-95 transition-opacity duration-300"> <img${addAttribute(image, "src")}${addAttribute(title, "alt")} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"> <div${addAttribute(`absolute inset-0 ${isDark ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/70 via-black/20 to-transparent"}`, "class")}></div> <!-- Enhanced Badge --> <div class="absolute top-3 left-3"> <div${addAttribute(`px-3 py-1.5 text-xs font-bold rounded-full shadow-lg backdrop-blur-sm ${isDark ? popular ? "bg-ez2fix-primary text-ez2fix-dark border border-ez2fix-gold/50" : "bg-ez2fix-gold/90 text-ez2fix-dark border border-ez2fix-primary/30" : popular ? "bg-ez2fix-primary text-ez2fix-dark border border-ez2fix-gold/30" : "bg-ez2fix-brown/90 text-ez2fix-cream border border-white/20"}`, "class")}> ${badge} </div> </div> <!-- Popular Indicator --> ${popular && renderTemplate`<div class="absolute top-3 right-3"> <div${addAttribute(`w-8 h-8 rounded-full flex items-center justify-center shadow-lg ${isDark ? "bg-ez2fix-gold" : "bg-ez2fix-gold"}`, "class")}> <svg class="w-4 h-4 text-ez2fix-dark" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"></path> </svg> </div> </div>`} </a> <div class="p-4 sm:p-6 space-y-4 flex-1 flex flex-col"> <!-- Service Header - Clickable Title --> <div class="flex-1"> <a${addAttribute(href, "href")} class="block group-hover:opacity-90 transition-opacity duration-300"> <h3${addAttribute(`text-heading-3 ${titleColor} mb-3 line-clamp-2 hover:text-ez2fix-primary transition-colors duration-300`, "class")}>${title}</h3> </a> <p${addAttribute(`text-body-base ${descColor} line-clamp-3 leading-relaxed`, "class")}>${description}</p> </div> <!-- Service Features --> <div${addAttribute(`border-t ${borderColor} pt-4`, "class")}> <div class="grid grid-cols-1 gap-2"> ${features.map((feature) => renderTemplate`<div class="flex items-center space-x-2"> <div${addAttribute(`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${isDark ? "bg-ez2fix-primary/20" : "bg-ez2fix-primary/10"}`, "class")}> <svg class="w-3 h-3 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24"> <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path> </svg> </div> <span${addAttribute(`text-body-small ${featureColor} font-medium`, "class")}>${feature}</span> </div>`)} </div> </div> <!-- Warranty Info --> <div${addAttribute(`${warrantyBg} p-3 rounded-lg border`, "class")}> <div class="text-center"> <div${addAttribute(`text-body-small font-bold ${warrantyTitleColor}`, "class")}>Warranty</div> <div${addAttribute(`text-body-small ${warrantyTextColor} font-medium`, "class")}>${warranty}</div> </div> </div> <!-- Enhanced CTA Buttons --> <div class="flex flex-col sm:flex-row gap-3 pt-2"> <a${addAttribute(siteConfig.links.phone, "href")}${addAttribute(`flex-1 btn-responsive-small bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold ${isDark ? "shadow-lg" : ""}`, "class")}> <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path> </svg>
+Call Now
+</a> <a href="/booking"${addAttribute(`flex-1 btn-responsive-small border-2 border-ez2fix-primary text-ez2fix-primary hover:bg-ez2fix-primary hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold ${isDark ? "bg-transparent hover:bg-ez2fix-primary" : "bg-transparent"}`, "class")}> <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path> </svg>
+Get Quote
+</a> </div> </div> ` })}`;
+}, "/Users/yaronhayo/Dev_Projects/Projects_2025/ez2fix-clean/src/components/ui/ServiceCard.astro", void 0);
+export {
+  $$ServiceCard as $
+};

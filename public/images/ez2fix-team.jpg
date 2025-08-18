@@ -1,0 +1,54 @@
+<!-- This would be an actual JPG image of the Ez2Fix team in production -->
+<!-- Creating SVG placeholder for team photo -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#F3F3E6"/>
+    
+    <!-- Service van illustration -->
+    <rect x="100" y="300" width="600" height="200" fill="#D2A63C" rx="20"/>
+    <rect x="120" y="320" width="560" height="100" fill="#F3F3E6" rx="10"/>
+    
+    <!-- Van windows -->
+    <rect x="140" y="340" width="80" height="60" fill="#87CEEB" rx="5"/>
+    <rect x="600" y="340" width="60" height="60" fill="#87CEEB" rx="5"/>
+    
+    <!-- Company name on van -->
+    <text x="400" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#1D1912">Ez2Fix</text>
+    <text x="400" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#BB8525">Garage Door Services</text>
+    
+    <!-- Wheels -->
+    <circle cx="200" cy="480" r="40" fill="#1D1912"/>
+    <circle cx="200" cy="480" r="25" fill="#BB8525"/>
+    <circle cx="600" cy="480" r="40" fill="#1D1912"/>
+    <circle cx="600" cy="480" r="25" fill="#BB8525"/>
+    
+    <!-- Team silhouettes -->
+    <g transform="translate(300, 150)">
+        <!-- Person 1 -->
+        <circle cx="0" cy="0" r="30" fill="#1D1912"/>
+        <rect x="-20" y="25" width="40" height="60" fill="#D2A63C" rx="8"/>
+        
+        <!-- Person 2 -->
+        <circle cx="80" cy="0" r="30" fill="#1D1912"/>
+        <rect x="60" y="25" width="40" height="60" fill="#BB8525" rx="8"/>
+        
+        <!-- Person 3 -->
+        <circle cx="160" cy="0" r="30" fill="#1D1912"/>
+        <rect x="140" y="25" width="40" height="60" fill="#D2A63C" rx="8"/>
+    </g>
+    
+    <!-- Header text -->
+    <text x="400" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#1D1912">The Ez2Fix Team</text>
+    <text x="400" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#BB8525">Professional • Licensed • Experienced</text>
+    
+    <!-- Tools in background -->
+    <g transform="translate(50, 100)" opacity="0.3">
+        <rect x="0" y="0" width="60" height="10" fill="#BB8525" rx="5"/>
+        <rect x="20" y="20" width="40" height="6" fill="#D2A63C" rx="3"/>
+    </g>
+    
+    <g transform="translate(650, 120)" opacity="0.3">
+        <rect x="0" y="0" width="60" height="10" fill="#BB8525" rx="5"/>
+        <rect x="20" y="20" width="40" height="6" fill="#D2A63C" rx="3"/>
+    </g>
+</svg>
