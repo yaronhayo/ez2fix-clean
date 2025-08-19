@@ -23,6 +23,9 @@ The maps are showing "❌ No valid Google Maps API key available" because:
 ## ✅ SOLUTION STEPS
 
 ### For Production Deployment (Required)
+
+**⚠️ CRITICAL: The environment variable must be available during BUILD TIME, not just runtime!**
+
 1. **Go to Vercel Dashboard**: https://vercel.com/dashboard
 2. **Select your ez2fix project**
 3. **Go to Settings** → **Environment Variables**
@@ -31,7 +34,20 @@ The maps are showing "❌ No valid Google Maps API key available" because:
    - **Value**: Your Google Maps API key (starts with AIza...)
    - **Environments**: ✅ Production, ✅ Preview, ✅ Development
 5. **Click Save**
-6. **Redeploy** your site (go to Deployments → click "⋯" → Redeploy)
+6. **IMPORTANT: Redeploy** your site (go to Deployments → click "⋯" → Redeploy)
+
+### 🔍 Verification Steps
+After deployment, check browser console on /service-areas page:
+- ✅ **Should see**: `"Build-time API key set: Valid key detected"`
+- ❌ **If you see**: `"Using placeholder - check Vercel env vars"` → Environment variable not set during build
+
+### 🚨 Troubleshooting
+If it's still not working after setting the environment variable:
+1. **Double-check the variable name**: Must be exactly `PUBLIC_GOOGLE_MAPS_API_KEY`
+2. **Check all environments are selected**: Production, Preview, Development
+3. **Verify the API key**: Should start with `AIzaSy...` and be ~39 characters long
+4. **Force redeploy**: Delete old deployments and create new one
+5. **Check browser console**: Look for the debug messages to see what key is being used
 
 ### For Local Testing (Optional)
 Edit `.env` file:
