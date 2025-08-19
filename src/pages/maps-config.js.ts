@@ -2,6 +2,8 @@
 // This bypasses build-time environment variable issues
 import type { APIRoute } from 'astro';
 
+export const prerender = false; // Force server-side rendering
+
 export const GET: APIRoute = async ({ request }) => {
   // TEMPORARY HARDCODED API KEY FOR TESTING
   // TODO: Remove this and fix Vercel environment variable access
