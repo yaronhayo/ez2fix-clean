@@ -6,6 +6,7 @@ import ServiceCard from '@/components/ui/ServiceCard.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
 import Card from '@/components/ui/Card.astro';
 import { siteConfig } from '@/config/site';
+import { clientEnv } from '@/config/env';
 
 // Cedar Grove specific data
 const locationData = {
@@ -13,6 +14,8 @@ const locationData = {
   county: 'Essex County',
   state: 'NJ',
   zip: '07009',
+  lat: 40.8532,
+  lng: -74.2290,
   neighborhoods: [
     'Cedar Grove Center',
     'North End',
@@ -272,6 +275,51 @@ const localFAQs = [
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Map Section -->
+    <section class="py-16 bg-gradient-to-r from-ez2fix-dark to-ez2fix-brown/80">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-cream mb-6">
+              We're Right Here in <span class="text-ez2fix-gold">{locationData.city}</span>
+            </h2>
+            <p class="text-xl text-ez2fix-gold max-w-3xl mx-auto leading-relaxed">
+              Located in the heart of {locationData.county}, we know every street and neighborhood in {locationData.city}. 
+              See exactly where we serve and how close we are to you.
+            </p>
+          </div>
+
+          <!-- Map Container -->
+          <Card class="p-2 shadow-2xl border-2 bg-white border-ez2fix-primary mb-8">
+            <div id="individual-location-map" class="w-full rounded-lg overflow-hidden shadow-inner" style="min-height: 400px;">
+              <div class="flex items-center justify-center h-full bg-ez2fix-cream/50">
+                <div class="text-center p-8">
+                  <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-ez2fix-primary animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                  </div>
+                  <div id="individual-map-loading" class="text-xl font-bold text-ez2fix-dark mb-2">Loading {locationData.city} Service Map...</div>
+                  <div class="text-ez2fix-brown">Pinpointing your local service area</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Map Info -->
+          <div class="text-center">
+            <div class="inline-flex items-center space-x-2 px-6 py-3 bg-ez2fix-primary/10 rounded-lg border border-ez2fix-primary/20">
+              <svg class="h-5 w-5 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span class="text-ez2fix-cream font-medium">We serve all neighborhoods throughout {locationData.city}, {locationData.state}</span>
             </div>
           </div>
         </div>
@@ -668,3 +716,141 @@ const localFAQs = [
   
   <FooterClean />
 </BaseLayout>
+
+<!-- Google Maps JavaScript API for Individual Location -->
+<script async defer 
+        src={`https://maps.googleapis.com/maps/api/js?key=${clientEnv.googleMaps.apiKey}&callback=initIndividualLocationMap`}>
+</script>
+
+<script>
+  // Global function for Google Maps callback
+  window.initIndividualLocationMap = function() {
+    const mapElement = document.getElementById('individual-location-map');
+    const loadingElement = document.getElementById('individual-map-loading');
+    
+    if (!mapElement) return;
+
+    // Hide loading message
+    if (loadingElement) {
+      loadingElement.style.display = 'none';
+    }
+
+    // Location data for this specific area
+    const locationData = {
+      city: 'Cedar Grove',
+      county: 'Essex County',
+      state: 'NJ',
+      lat: 40.8532,
+      lng: -74.2290
+    };
+
+    // Responsive zoom for individual location
+    const getIndividualZoom = () => {
+      const width = window.innerWidth;
+      if (width < 768) return 12;  // Mobile - closer view
+      if (width < 1024) return 13; // Tablet
+      return 14; // Desktop - detailed neighborhood view
+    };
+
+    // Create map centered on this location
+    const map = new google.maps.Map(mapElement, {
+      zoom: getIndividualZoom(),
+      center: { lat: locationData.lat, lng: locationData.lng },
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+        {
+          featureType: "all",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#F3F3E6" }]
+        },
+        {
+          featureType: "water",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#BB8525" }]
+        },
+        {
+          featureType: "road",
+          elementType: "geometry.stroke",
+          stylers: [{ color: "#1D1912" }]
+        },
+        {
+          featureType: "road",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#1D1912" }]
+        }
+      ]
+    });
+
+    // Add marker for this specific location
+    const marker = new google.maps.Marker({
+      position: { lat: locationData.lat, lng: locationData.lng },
+      map: map,
+      title: `${locationData.city}, ${locationData.state} - Ez2Fix Service Area`,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 15,
+        fillColor: '#D2A63C',
+        fillOpacity: 1,
+        strokeColor: '#1D1912',
+        strokeWeight: 3
+      }
+    });
+
+    // Create info window for this location
+    const infoContent = `
+      <div style="padding: 16px; font-family: Arial, sans-serif; max-width: 300px;">
+        <h3 style="color: #1D1912; margin: 0 0 8px 0; font-size: 20px; font-weight: bold;">${locationData.city}</h3>
+        <p style="color: #BB8525; margin: 0 0 12px 0; font-size: 14px;">${locationData.county}, ${locationData.state}</p>
+        
+        <p style="color: #1D1912; margin: 0 0 12px 0; font-size: 14px; line-height: 1.4;">
+          <strong>Ez2Fix Service Area</strong><br>
+          Professional garage door service for all neighborhoods throughout ${locationData.city}.
+        </p>
+        
+        <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <a href="tel:${siteConfig.business.phone}" 
+             style="background-color: #D2A63C; color: #F3F3E6; 
+                    padding: 8px 12px; border-radius: 4px; text-decoration: none; 
+                    font-size: 12px; font-weight: bold; flex: 1; text-align: center;">Call Now</a>
+          <a href="/booking" 
+             style="border: 2px solid #BB8525; color: #BB8525; background: transparent;
+                    padding: 6px 12px; border-radius: 4px; text-decoration: none; 
+                    font-size: 12px; font-weight: bold; flex: 1; text-align: center;">Get Quote</a>
+        </div>
+      </div>
+    `;
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: infoContent
+    });
+
+    // Add click event to marker
+    marker.addListener('click', () => {
+      infoWindow.open(map, marker);
+    });
+
+    // Show info window by default
+    infoWindow.open(map, marker);
+
+    // Add resize listener for responsive zoom
+    window.addEventListener('resize', () => {
+      const newZoom = getIndividualZoom();
+      if (map.getZoom() !== newZoom) {
+        map.setZoom(newZoom);
+      }
+    });
+  };
+
+  // Initialize map fallback if Google Maps fails to load
+  setTimeout(() => {
+    const mapElement = document.getElementById('individual-location-map');
+    const loadingElement = document.getElementById('individual-map-loading');
+    
+    if (loadingElement && loadingElement.style.display !== 'none') {
+      loadingElement.innerHTML = `
+        <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Map Temporarily Unavailable</div>
+        <div class="text-sm" style="color: #BB8525;">We serve all of Cedar Grove, NJ and surrounding areas</div>
+      `;
+    }
+  }, 15000); // 15 second timeout
+</script>
