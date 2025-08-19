@@ -131,11 +131,11 @@ const formId = `booking-form-${variant}`;
           class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white"
         >
           <option value="">Select timeframe...</option>
-          <option value="asap">ASAP</option>
-          <option value="today">Today if possible</option>
-          <option value="few-days">Within the next few days</option>
-          <option value="few-weeks">Within the next few weeks</option>
-          <option value="browsing">Not sure / Just browsing</option>
+          <option value="same-day">ASAP / Same Day</option>
+          <option value="next-day">Next Day</option>
+          <option value="flexible">Within a few days</option>
+          <option value="flexible">Within a few weeks</option>
+          <option value="flexible">Not sure / Just browsing</option>
         </select>
         <div id={`urgency-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
       </div>

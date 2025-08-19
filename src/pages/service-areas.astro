@@ -864,9 +864,9 @@ const serviceAreasData = {
 </BaseLayout>
 
 <!-- Google Maps JavaScript API -->
-<script>
-  // Fetch Google Maps configuration from API
-  let googleMapsApiKey = null;
+<script define:vars={{ googleMapsApiKey: clientEnv.googleMaps.apiKey }}>
+  // Initialize API key
+  let finalApiKey = null;
   
   // Global function for Google Maps callback
   window.initServiceAreasMap = function() {
@@ -1052,39 +1052,43 @@ const serviceAreasData = {
 
   };
 
-  // Fetch API key and load Google Maps
-  async function loadGoogleMapsAPI() {
+  // Load Google Maps API with direct environment variable access
+  function loadGoogleMapsAPI() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
 
-    try {
-      // Fetch the API key from our secure endpoint
-      const response = await fetch('/api/maps-config');
-      const config = await response.json();
-      
-      if (!config.apiKey) {
-        throw new Error('No API key available');
-      }
-      
-      googleMapsApiKey = config.apiKey;
-      console.log('API key fetched successfully, length:', config.apiKey.length);
-      
-      const script = document.createElement('script');
-      script.async = true;
-      script.defer = true;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&callback=initServiceAreasMap&loading=async`;
-      script.onerror = () => {
-        console.error('Failed to load Google Maps script');
-        showMapError();
-      };
-      document.head.appendChild(script);
-      
-    } catch (error) {
-      console.error('Failed to fetch Maps API configuration:', error);
-      showMapError();
+    // Get API key from environment variables injected at build time
+    const apiKey = googleMapsApiKey;
+    
+    if (location.hostname === 'localhost' || location.hostname.includes('vercel.app')) {
+      console.log('Loading Google Maps API...');
+      console.log('API key available:', !!apiKey && apiKey !== 'local_development_placeholder');
     }
+    
+    if (!apiKey || apiKey === 'local_development_placeholder' || apiKey.length < 20) {
+      console.error('❌ No valid Google Maps API key available');
+      showMapError();
+      return;
+    }
+    
+    if (location.hostname === 'localhost' || location.hostname.includes('vercel.app')) {
+      console.log('✅ Loading Google Maps script with API key, length:', apiKey.length);
+    }
+    loadMapsScript(apiKey);
+  }
+
+  function loadMapsScript(apiKey) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.defer = true;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initServiceAreasMap&loading=async`;
+    script.onerror = () => {
+      console.error('Failed to load Google Maps script');
+      showMapError();
+    };
+    document.head.appendChild(script);
   }
 
   function showMapError() {
