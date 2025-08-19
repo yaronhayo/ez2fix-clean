@@ -870,10 +870,17 @@ const serviceAreasData = {
   
   // Global function for Google Maps callback
   window.initServiceAreasMap = function() {
+    console.log('🗺️ Initializing service areas map...');
+    
     const mapElement = document.getElementById('service-areas-map');
     const loadingElement = document.getElementById('map-loading');
     
-    if (!mapElement) return;
+    if (!mapElement) {
+      console.error('❌ Map element not found');
+      return;
+    }
+    
+    try {
 
     // Hide loading message
     if (loadingElement) {
@@ -1050,6 +1057,13 @@ const serviceAreasData = {
       }
     });
 
+    console.log('✅ Service areas map initialized successfully');
+    
+    } catch (error) {
+      console.error('❌ Error initializing Google Maps:', error);
+      const errorMsg = `Map initialization failed: ${error.message}`;
+      showMapError(errorMsg);
+    }
   };
 
   // Secure API key loading from runtime endpoint
@@ -1129,21 +1143,39 @@ const serviceAreasData = {
     script.async = true;
     script.defer = true;
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initServiceAreasMap&loading=async`;
-    script.onerror = () => {
-      console.error('Failed to load Google Maps script');
-      showMapError();
+    
+    script.onerror = (event) => {
+      const errorMsg = `Google Maps script failed to load. URL: ${script.src}`;
+      console.error('❌ Google Maps script loading error:', errorMsg, event);
+      showMapError(errorMsg);
     };
+    
+    script.onload = () => {
+      console.log('✅ Google Maps script loaded successfully');
+    };
+    
     document.head.appendChild(script);
+    console.log('📡 Loading Google Maps script:', script.src);
   }
 
-  function showMapError() {
+  function showMapError(errorDetails = null) {
     const loadingElement = document.getElementById('map-loading');
     if (loadingElement) {
-      loadingElement.innerHTML = `
+      // Enhanced error reporting for debugging
+      console.error('🗺️ Map loading failed:', errorDetails);
+      
+      let errorMessage = `
         <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Interactive Map Temporarily Unavailable</div>
         <div class="text-sm mb-2" style="color: #BB8525;">Maps functionality requires configuration setup</div>
         <div class="text-xs" style="color: #BB8525;">Please see our complete service area list below</div>
       `;
+      
+      // Add specific error info if in development or for debugging
+      if (errorDetails && (window.location.hostname === 'localhost' || window.location.search.includes('debug=1'))) {
+        errorMessage += `<div class="text-xs mt-2 p-2 bg-red-100 border border-red-300 rounded" style="color: #DC2626;">Debug: ${errorDetails}</div>`;
+      }
+      
+      loadingElement.innerHTML = errorMessage;
     }
   }
 
