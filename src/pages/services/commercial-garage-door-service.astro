@@ -5,10 +5,36 @@ import FooterClean from '@/components/layout/FooterClean.astro';
 import Card from '@/components/ui/Card.astro';
 import Button from '@/components/ui/Button.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema.astro';
 import { siteConfig } from '@/config/site';
 
-const serviceTitle = "Commercial Garage Door Service";
-const serviceDescription = "Professional commercial garage door service in Bergen County, NJ. We handle heavy-duty doors, high-cycle operations, and preventive maintenance for businesses and warehouses.";
+// FAQ data for this service
+const commercialServiceFAQs = [
+  {
+    question: "What makes commercial garage door service different from residential?",
+    answer: "Commercial doors are typically larger, heavier, and see much more frequent use. They require heavy-duty springs rated for 100,000+ cycles, commercial-grade hardware, and specialized tools for service. Our technicians have expertise in industrial applications and understand business continuity needs."
+  },
+  {
+    question: "Do you offer preventive maintenance programs?",
+    answer: "Yes, we offer comprehensive preventive maintenance programs tailored to your facility's needs. Regular maintenance includes lubrication, hardware inspection, spring tension adjustment, and proactive part replacement to prevent costly breakdowns and ensure smooth operations."
+  },
+  {
+    question: "How quickly can you respond to commercial emergencies?",
+    answer: "We understand that commercial door failures can halt operations and cost thousands per hour. Our emergency response service aims to have technicians on-site within 1-2 hours during business hours, with priority given to critical business operations."
+  },
+  {
+    question: "What types of commercial facilities do you service?",
+    answer: "We service all types of commercial facilities including warehouses, distribution centers, manufacturing plants, loading docks, fire stations, retail stores, and any business with commercial overhead doors. Our experience covers various door types and sizes."
+  }
+];
+
+// Breadcrumb data
+const breadcrumbs = [
+  { name: "Home", url: "https://ez2fixllc.com/" },
+  { name: "Services", url: "https://ez2fixllc.com/services" },
+  { name: "Commercial Garage Door Service", url: "https://ez2fixllc.com/services/commercial-garage-door-service" }
+];
 ---
 
 <BaseLayout 
@@ -39,51 +65,70 @@ const serviceDescription = "Professional commercial garage door service in Berge
                 Keep your business running with professional commercial garage door service in Bergen County NJ. <strong style="color: #F3F3E6;">Heavy-duty doors, loading docks, and preventive maintenance</strong> for warehouses and commercial facilities. Licensed technicians minimize downtime.
               </p>
               
-              <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
-                  href={siteConfig.links.phone}
-                  class="text-lg px-8 py-4 font-bold shadow-lg hover:shadow-xl transition-all duration-300"
-                  style="background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%); color: #1D1912;"
-                >
-                  📞 Call Now: {siteConfig.business.phone}
-                </Button>
-                <Button 
-                  href="#booking-form"
-                  variant="outline"
-                  class="text-lg px-8 py-4 font-semibold border-2 transition-all duration-300"
-                  style="color: #EECD5C; border-color: #EECD5C; background-color: transparent;"
-                >
-                  Get Free Estimate
-                </Button>
-              </div>
+            <!-- Commercial Service CTA -->
+            <div class="mt-2">
+              <Button 
+                href={siteConfig.links.phone}
+                size="lg"
+                class="text-lg px-8 py-3 font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-fit"
+                style="background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%); color: #1D1912;"
+              >
+                <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                Call Now: {siteConfig.business.phone}
+              </Button>
+            </div>
               
-              <!-- Trust Indicators -->
-              <div class="flex items-center space-x-6 text-sm font-semibold" style="color: #F3F3E6;">
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5" style="color: #D2A63C;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                  </svg>
-                  <span>Licensed & Insured</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5" style="color: #EECD5C;" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                  </svg>
-                  <span>Commercial Warranty</span>
-                </div>
+            <!-- Trust Indicators -->
+            <div class="flex flex-wrap items-center gap-4">
+              <div class="flex items-center space-x-2">
+                <svg class="h-5 w-5" style="color: #D2A63C;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <span class="font-semibold" style="color: #F3F3E6;">Licensed & Insured</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg class="h-5 w-5" style="color: #EECD5C;" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                </svg>
+                <span class="font-semibold" style="color: #F3F3E6;">5.0★ Rating</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg class="h-5 w-5" style="color: #D2A63C;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+                <span class="font-semibold" style="color: #F3F3E6;">1-Year Warranty</span>
               </div>
             </div>
+            </div>
             
-            <!-- Booking Form -->
-            <Card class="p-3 lg:p-5 shadow-2xl border-2" style="background-color: #F3F3E6; border-color: #D2A63C;" id="booking-form">
+          <!-- Right Column - Booking Form -->
+          <div class="flex items-center justify-center">
+            <Card class="p-3 lg:p-5 shadow-2xl border-2" style="background-color: #F3F3E6; border-color: #D2A63C;">
               <BookingFormClean 
                 variant="hero"
-                title="Get Your Free Commercial Service Quote"
-                subtitle="Heavy-duty doors • Preventive maintenance"
-                buttonText="Get My Free Commercial Service Quote"
+                title="Get Commercial Service"
+                subtitle="Free estimate • Licensed technicians"
+                buttonText="Get Commercial Service"
                 service="Commercial Garage Door Service"
               />
+              
+              <!-- Form Benefits -->
+              <div class="mt-2 pt-2 border-t" style="border-color: rgba(187, 133, 37, 0.2);">
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div>
+                    <div class="text-xs font-semibold" style="color: #1D1912;">24/7 Service</div>
+                    <div class="text-xs" style="color: #BB8525;">Emergency Ready</div>
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold" style="color: #1D1912;">Licensed Tech</div>
+                    <div class="text-xs" style="color: #BB8525;">Same Day Fix</div>
+                  </div>
+                </div>
+              </div>
             </Card>
+          </div>
             
           </div>
         </div>
@@ -520,4 +565,8 @@ const serviceDescription = "Professional commercial garage door service in Berge
 
   </main>
   <FooterClean />
+  
+  <!-- Enhanced SEO Structured Data -->
+  <FAQSchema faqs={commercialServiceFAQs} />
+  <BreadcrumbSchema items={breadcrumbs} />
 </BaseLayout>
