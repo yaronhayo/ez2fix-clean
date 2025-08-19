@@ -4,12 +4,12 @@ window.GOOGLE_MAPS_CONFIG = {
   hasValidKey: false,
   debugInfo: {
   "sources": {
-    "importMeta": true,
-    "processEnv": true,
-    "clientEnv": true
+    "importMeta": false,
+    "processEnv": false,
+    "clientEnv": false
   },
   "selectedSource": "no valid key found",
-  "timestamp": "2025-08-19T09:52:01.371Z"
+  "timestamp": "2025-08-19T09:59:39.812Z"
 }
 };
 

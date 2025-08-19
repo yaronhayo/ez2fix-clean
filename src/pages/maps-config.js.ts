@@ -29,19 +29,42 @@ export const GET: APIRoute = async ({ request }) => {
   
   if (!isValidKey) {
     console.error('Runtime API key validation failed');
-    return new Response(JSON.stringify({
-      success: false,
-      error: 'Google Maps API key not properly configured',
-      debug: {
-        hasKey: !!runtimeApiKey,
-        keyLength: runtimeApiKey ? runtimeApiKey.length : 0,
-        startsWithAIza: runtimeApiKey ? runtimeApiKey.startsWith('AIza') : false,
-        isPlaceholder: runtimeApiKey === 'local_development_placeholder'
-      }
-    }), {
-      status: 500,
-      headers: { 
-        'Content-Type': 'application/json',
+    
+    // Return JavaScript code that sets an error configuration
+    const jsErrorConfig = `
+// Google Maps Runtime Configuration - ERROR STATE
+window.RUNTIME_MAPS_CONFIG = {
+  apiKey: null,
+  loaded: false,
+  error: "Google Maps API key not properly configured",
+  debug: {
+    hasKey: ${!!runtimeApiKey},
+    keyLength: ${runtimeApiKey ? runtimeApiKey.length : 0},
+    startsWithAIza: ${runtimeApiKey ? runtimeApiKey.startsWith('AIza') : false},
+    isPlaceholder: ${runtimeApiKey === 'local_development_placeholder'},
+    keyPreview: ${JSON.stringify(runtimeApiKey ? `${runtimeApiKey.substring(0, 10)}...` : 'undefined')},
+    sources: ${JSON.stringify({
+      PUBLIC_GOOGLE_MAPS_API_KEY: process.env.PUBLIC_GOOGLE_MAPS_API_KEY ? `${process.env.PUBLIC_GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined',
+      GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY ? `${process.env.GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined', 
+      MAPS_API_KEY: process.env.MAPS_API_KEY ? `${process.env.MAPS_API_KEY.substring(0, 10)}...` : 'undefined'
+    }, null, 2)}
+  }
+};
+
+console.error('❌ Google Maps API key validation failed');
+console.error('🔧 Debug info:', window.RUNTIME_MAPS_CONFIG.debug);
+console.error('🔧 Set a valid Google Maps API key in Vercel environment variables');
+
+// Trigger error handling if page is already loaded
+if (window.loadGoogleMapsFromRuntime) {
+  console.log('🚨 Triggering error handling for maps');
+  // Don't call the function since we have an error state
+}
+`.trim();
+
+    return new Response(jsErrorConfig, {
+      headers: {
+        'Content-Type': 'application/javascript',
         'Cache-Control': 'no-cache'
       }
     });
