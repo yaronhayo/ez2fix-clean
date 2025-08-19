@@ -720,12 +720,9 @@ const localFAQs = [
 </BaseLayout>
 
 <!-- Google Maps JavaScript API for Individual Location -->
-<script define:vars={{ googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY }}>
-  // Make API key available to client-side scripts
-  window.GOOGLE_MAPS_API_KEY = googleMapsApiKey;
-  console.log('Individual page - Google Maps API Key available:', !!googleMapsApiKey);
-  console.log('Individual page - API Key length:', (googleMapsApiKey || '').length);
-  console.log('Individual page - API Key preview:', (googleMapsApiKey || '').substring(0, 15) + '...');
+<script>
+  // Fetch Google Maps configuration from API
+  let googleMapsApiKey = null;
   
   // Global function for Google Maps callback
   window.initIndividualLocationMap = function() {
@@ -845,21 +842,49 @@ const localFAQs = [
     });
   };
 
-  // Load Google Maps API with proper async pattern
-  function loadIndividualMapAPI() {
+  // Fetch API key and load Google Maps
+  async function loadIndividualMapAPI() {
     if (window.google && window.google.maps) {
       initIndividualLocationMap();
       return;
     }
-    
-    const apiKey = window.GOOGLE_MAPS_API_KEY || googleMapsApiKey;
-    console.log('Loading individual map with API key available:', !!apiKey);
-    
-    const script = document.createElement('script');
-    script.async = true;
-    script.defer = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initIndividualLocationMap&loading=async`;
-    document.head.appendChild(script);
+
+    try {
+      // Fetch the API key from our secure endpoint
+      const response = await fetch('/api/maps-config');
+      const config = await response.json();
+      
+      if (!config.apiKey) {
+        throw new Error('No API key available');
+      }
+      
+      googleMapsApiKey = config.apiKey;
+      console.log('Individual map - API key fetched successfully, length:', config.apiKey.length);
+      
+      const script = document.createElement('script');
+      script.async = true;
+      script.defer = true;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&callback=initIndividualLocationMap&loading=async`;
+      script.onerror = () => {
+        console.error('Failed to load Google Maps script for individual map');
+        showIndividualMapError();
+      };
+      document.head.appendChild(script);
+      
+    } catch (error) {
+      console.error('Failed to fetch Maps API configuration for individual map:', error);
+      showIndividualMapError();
+    }
+  }
+
+  function showIndividualMapError() {
+    const loadingElement = document.getElementById('individual-map-loading');
+    if (loadingElement) {
+      loadingElement.innerHTML = `
+        <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Interactive Map Temporarily Unavailable</div>
+        <div class="text-sm" style="color: #BB8525;">Please see our service information above</div>
+      `;
+    }
   }
 
   // Start loading when DOM is ready

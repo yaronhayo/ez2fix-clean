@@ -864,12 +864,9 @@ const serviceAreasData = {
 </BaseLayout>
 
 <!-- Google Maps JavaScript API -->
-<script define:vars={{ googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY }}>
-  // Make API key available to client-side scripts
-  window.GOOGLE_MAPS_API_KEY = googleMapsApiKey;
-  console.log('Google Maps API Key available:', !!googleMapsApiKey);
-  console.log('API Key length:', (googleMapsApiKey || '').length);
-  console.log('API Key preview:', (googleMapsApiKey || '').substring(0, 15) + '...');
+<script>
+  // Fetch Google Maps configuration from API
+  let googleMapsApiKey = null;
   
   // Global function for Google Maps callback
   window.initServiceAreasMap = function() {
@@ -1055,21 +1052,49 @@ const serviceAreasData = {
 
   };
 
-  // Load Google Maps API with proper async pattern
-  function loadGoogleMapsAPI() {
+  // Fetch API key and load Google Maps
+  async function loadGoogleMapsAPI() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
-    
-    const apiKey = window.GOOGLE_MAPS_API_KEY || googleMapsApiKey;
-    console.log('Loading Google Maps with API key available:', !!apiKey);
-    
-    const script = document.createElement('script');
-    script.async = true;
-    script.defer = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initServiceAreasMap&loading=async`;
-    document.head.appendChild(script);
+
+    try {
+      // Fetch the API key from our secure endpoint
+      const response = await fetch('/api/maps-config');
+      const config = await response.json();
+      
+      if (!config.apiKey) {
+        throw new Error('No API key available');
+      }
+      
+      googleMapsApiKey = config.apiKey;
+      console.log('API key fetched successfully, length:', config.apiKey.length);
+      
+      const script = document.createElement('script');
+      script.async = true;
+      script.defer = true;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&callback=initServiceAreasMap&loading=async`;
+      script.onerror = () => {
+        console.error('Failed to load Google Maps script');
+        showMapError();
+      };
+      document.head.appendChild(script);
+      
+    } catch (error) {
+      console.error('Failed to fetch Maps API configuration:', error);
+      showMapError();
+    }
+  }
+
+  function showMapError() {
+    const loadingElement = document.getElementById('map-loading');
+    if (loadingElement) {
+      loadingElement.innerHTML = `
+        <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Interactive Map Temporarily Unavailable</div>
+        <div class="text-sm" style="color: #BB8525;">Please see our complete service area list below the map</div>
+      `;
+    }
   }
 
   // Start loading when DOM is ready
