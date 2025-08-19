@@ -1052,41 +1052,76 @@ const serviceAreasData = {
 
   };
 
-  // DIRECT API KEY - BYPASSING SERVERLESS FUNCTIONS - UPDATED
-  const GOOGLE_MAPS_API_KEY = 'AIzaSyCC7AYmLnyP7XLdADdhYFpzRRjiCqmlkhw';
-  console.log('🔥 DIRECT API KEY LOADED - FINAL VERSION');
+  // Secure API key loading from runtime endpoint
+  let cachedApiKey = null;
 
-  // Runtime Maps Loading Function
-  window.loadGoogleMapsFromRuntime = function() {
+  // Runtime Maps Loading Function - Secure API key retrieval
+  window.loadGoogleMapsFromRuntime = async function() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
 
-    console.log('✅ Using direct API key (bypassing serverless functions)');
-
-    const apiKey = GOOGLE_MAPS_API_KEY;
-    console.log('✅ Direct API key loaded, length:', apiKey.length);
-    console.log('🚀 Loading Google Maps script...');
+    console.log('🔄 Loading Google Maps API key from secure endpoint...');
     
-    loadMapsScript(apiKey);
+    try {
+      const apiKey = await getSecureApiKey();
+      if (apiKey) {
+        console.log('✅ Secure API key retrieved, loading Google Maps...');
+        loadMapsScript(apiKey);
+      } else {
+        throw new Error('No API key available');
+      }
+    } catch (error) {
+      console.error('❌ Failed to load Google Maps API key:', error);
+      showMapError();
+    }
   };
 
-  // Primary load function - tries runtime config approach
-  function loadGoogleMapsAPI() {
+  // Secure API key retrieval function
+  async function getSecureApiKey() {
+    if (cachedApiKey) return cachedApiKey;
+    
+    try {
+      const response = await fetch('/api/maps-key');
+      if (!response.ok) {
+        throw new Error(`API key endpoint failed: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      if (data.success && data.apiKey) {
+        cachedApiKey = data.apiKey;
+        return data.apiKey;
+      } else {
+        throw new Error(data.error || 'Invalid API key response');
+      }
+    } catch (error) {
+      console.error('Failed to fetch API key:', error);
+      return null;
+    }
+  }
+
+  // Primary load function - secure API key approach
+  async function loadGoogleMapsAPI() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
 
-    console.log('🔄 Loading Google Maps with DIRECT API key (bypassing serverless functions)...');
+    console.log('🔄 Loading Google Maps with secure API key from endpoint...');
     
-    // Use direct API key instead of serverless function
-    const apiKey = GOOGLE_MAPS_API_KEY;
-    console.log('✅ Direct API key available, length:', apiKey.length);
-    console.log('🚀 Loading Google Maps script directly...');
-    
-    loadMapsScript(apiKey);
+    try {
+      const apiKey = await getSecureApiKey();
+      if (apiKey) {
+        console.log('✅ Secure API key retrieved, loading Google Maps...');
+        loadMapsScript(apiKey);
+      } else {
+        throw new Error('Failed to retrieve API key');
+      }
+    } catch (error) {
+      console.error('❌ Google Maps loading failed:', error);
+      showMapError();
+    }
   }
 
   function loadMapsScript(apiKey) {

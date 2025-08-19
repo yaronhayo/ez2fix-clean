@@ -290,10 +290,9 @@ const formId = `booking-form-${variant}`;
       const addressInput = form.querySelector(`#address-${variant}`);
       const addressExpanded = form.querySelector(`#address-expanded-${variant}`);
       
-      // Initialize Google Maps address autocomplete
+      // Initialize Google Maps address autocomplete with fallback
       if (addressInput) {
-        // Use a simple approach without complex async
-        setupManualAddressParsing(addressInput, addressExpanded, variant);
+        setupAddressAutocomplete(addressInput, addressExpanded, variant);
       }
       
       // Clear errors on input
@@ -398,10 +397,68 @@ const formId = `booking-form-${variant}`;
       });
     });
     
+    async function setupAddressAutocomplete(addressInput, addressExpanded, variant) {
+      // Try to initialize Google Maps address autocomplete
+      try {
+        const { initializeGoogleMaps, setupAddressAutocomplete } = await import('@/lib/maps');
+        
+        // Initialize Google Maps if not already loaded
+        await initializeGoogleMaps();
+        
+        // Set up address autocomplete with service area restrictions
+        const autocomplete = setupAddressAutocomplete(addressInput, {
+          restrictToServiceArea: true,
+          onPlaceSelected: (place) => {
+            if (place.formatted_address) {
+              addressInput.value = place.formatted_address;
+              
+              // Fill in additional fields if they exist
+              if (addressExpanded) {
+                addressExpanded.classList.remove('hidden');
+                fillAddressComponents(place, variant);
+              }
+            }
+          }
+        });
+        
+        console.log('✅ Google Maps address autocomplete enabled');
+        
+        // Show expanded fields on focus
+        addressInput.addEventListener('focus', () => {
+          if (addressExpanded) {
+            addressExpanded.classList.remove('hidden');
+          }
+        });
+        
+      } catch (error) {
+        console.warn('Google Maps autocomplete unavailable, falling back to manual input:', error.message);
+        setupManualAddressParsing(addressInput, addressExpanded, variant);
+      }
+    }
+    
+    function fillAddressComponents(place, variant) {
+      const form = document.querySelector(`#booking-form-${variant}`);
+      if (!form || !place.address_components) return;
+      
+      const cityInput = form.querySelector(`#city-${variant}`);
+      const stateInput = form.querySelector(`#state-${variant}`);
+      const zipInput = form.querySelector(`#zip-${variant}`);
+      
+      place.address_components.forEach(component => {
+        const types = component.types;
+        
+        if (types.includes('locality') && cityInput) {
+          cityInput.value = component.long_name;
+        } else if (types.includes('administrative_area_level_1') && stateInput) {
+          stateInput.value = component.short_name;
+        } else if (types.includes('postal_code') && zipInput) {
+          zipInput.value = component.long_name;
+        }
+      });
+    }
+    
     function setupManualAddressParsing(addressInput, addressExpanded, variant) {
-      // Skip Google Maps autocomplete to avoid API key conflicts
-      // Use simple manual address input instead
-      console.log('Using manual address input (Google Maps autocomplete disabled to avoid conflicts)');
+      console.log('Using manual address input (Google Maps autocomplete unavailable)');
       
       // Setup manual address expansion on focus
       addressInput.addEventListener('focus', () => {
