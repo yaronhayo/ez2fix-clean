@@ -340,7 +340,7 @@ const localFAQs = [
         </div>
 
         <!-- Service Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <ServiceCard
               title={service.title}
@@ -619,7 +619,7 @@ const localFAQs = [
           </p>
           
           <!-- Trust Stats -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
             <div class="text-center p-4 rounded-lg bg-ez2fix-gold/10 border border-ez2fix-gold/20">
               <div class="text-3xl font-bold text-ez2fix-primary mb-2">{locationData.serviceStats.responseTime}</div>
               <div class="text-base text-ez2fix-gold">Response Time</div>
