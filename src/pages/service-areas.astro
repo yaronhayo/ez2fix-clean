@@ -954,99 +954,31 @@ const serviceAreasData = {
       ]
     });
 
-    // Add markers for each service area
+    // Add Google Maps pin markers only for areas with dedicated pages
     serviceAreas.forEach(area => {
-      // Create custom marker with different sizes for different types
-      const markerSize = area.type === "Primary" ? 10 : area.type === "Secondary" ? 8 : 6;
+      // Only create markers for areas that have their own pages
+      if (!area.hasPage) return;
       
       const marker = new google.maps.Marker({
         position: { lat: area.lat, lng: area.lng },
         map: map,
-        title: `${area.name} - ${area.type} Service Area`,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: markerSize,
-          fillColor: area.color,
-          fillOpacity: 1,
-          strokeColor: '#1D1912',
-          strokeWeight: 2
-        }
+        title: `${area.name} - Click to view detailed service information`,
+        // Use default Google Maps pin icon (red pin)
+        icon: null // Default pin
       });
 
-      // Create enhanced info window content
-      const serviceDescription = area.type === 'Primary' ? 
-        (area.hasPage ? 'Featured service area • Dedicated page • Same-day availability' : 'Same-day service available • Fastest response times') :
-        area.type === 'Secondary' ? 'Full service coverage • Reliable scheduling • Professional technicians' :
-        'Service by appointment • Complete garage door services • Licensed & insured';
-
-      const infoContent = `
-        <div style="padding: 12px; font-family: Arial, sans-serif; max-width: 280px;">
-          <h3 style="color: #1D1912; margin: 0 0 8px 0; font-size: 18px; font-weight: bold;">${area.name}</h3>
-          <p style="color: #BB8525; margin: 0 0 8px 0; font-size: 14px;">${area.county} • ${area.zip}</p>
-          
-          <div style="margin-bottom: 10px;">
-            <p style="background-color: ${area.type === 'Primary' ? 'rgba(210, 166, 60, 0.1)' : area.type === 'Secondary' ? 'rgba(238, 205, 92, 0.1)' : 'rgba(187, 133, 37, 0.1)'}; 
-                      color: ${area.color}; padding: 4px 8px; border-radius: 12px; font-size: 12px; 
-                      font-weight: bold; display: inline-block; margin: 0;">${area.type} Service Area</p>
-            ${area.hasPage ? '<p style="background-color: #D2A63C; color: #F3F3E6; padding: 3px 6px; border-radius: 8px; font-size: 11px; font-weight: bold; display: inline-block; margin: 4px 0 0 8px;">FEATURED</p>' : ''}
-          </div>
-          
-          <p style="color: #1D1912; margin: 0 0 12px 0; font-size: 13px; line-height: 1.4;">
-            ${serviceDescription}
-          </p>
-          
-          <div style="display: flex; gap: 8px; margin-top: 12px;">
-            ${area.hasPage ? 
-              `<a href="/service-areas/${area.slug}" 
-                 style="background-color: #D2A63C; color: #F3F3E6; 
-                        padding: 8px 12px; border-radius: 4px; text-decoration: none; 
-                        font-size: 12px; font-weight: bold; flex: 1; text-align: center;">View Details</a>` :
-              `<a href="tel:(201) 554-6769" 
-                 style="background-color: ${area.color}; color: ${area.type === 'Secondary' ? '#1D1912' : '#F3F3E6'}; 
-                        padding: 8px 12px; border-radius: 4px; text-decoration: none; 
-                        font-size: 12px; font-weight: bold; flex: 1; text-align: center;">Call Now</a>`
-            }
-            <a href="/booking" 
-               style="border: 2px solid #BB8525; color: #BB8525; background: transparent;
-                      padding: 6px 12px; border-radius: 4px; text-decoration: none; 
-                      font-size: 12px; font-weight: bold; flex: 1; text-align: center;">Get Quote</a>
-          </div>
-        </div>
-      `;
-
-      const infoWindow = new google.maps.InfoWindow({
-        content: infoContent
-      });
-
-      // Add click event to marker
+      // Direct navigation on marker click since all markers are for pages
       marker.addListener('click', () => {
-        // Close all other info windows
-        serviceAreas.forEach(otherArea => {
-          if (otherArea.infoWindow) {
-            otherArea.infoWindow.close();
-          }
-        });
-        
-        // Open this info window
-        infoWindow.open(map, marker);
+        // Navigate directly to the service area page
+        window.location.href = `/service-areas/${area.slug}`;
       });
-
-      // Add double-click event for Primary areas to navigate directly
-      if (area.hasPage && area.slug) {
-        marker.addListener('dblclick', () => {
-          window.open(`/service-areas/${area.slug}`, '_self');
+      
+      // Change cursor to pointer for clickable markers
+      marker.addListener('mouseover', () => {
+        marker.setOptions({ 
+          cursor: 'pointer'
         });
-        
-        // Change cursor to pointer for clickable markers
-        marker.addListener('mouseover', () => {
-          marker.setOptions({ 
-            cursor: 'pointer'
-          });
-        });
-      }
-
-      // Store info window reference
-      area.infoWindow = infoWindow;
+      });
     });
 
     // Add resize listener for responsive zoom
