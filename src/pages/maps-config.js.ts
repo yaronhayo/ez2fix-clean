@@ -3,15 +3,22 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request }) => {
-  // Get API key from runtime environment (Vercel Functions have full access)
-  const runtimeApiKey = process.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+  // Get API key from runtime environment - try multiple variable names
+  const runtimeApiKey = process.env.PUBLIC_GOOGLE_MAPS_API_KEY || 
+                        process.env.GOOGLE_MAPS_API_KEY ||
+                        process.env.MAPS_API_KEY;
   
   console.log('Runtime maps config requested');
   console.log('Runtime environment check:', {
     hasRuntimeKey: !!runtimeApiKey,
     keyPreview: runtimeApiKey ? `${runtimeApiKey.substring(0, 10)}...` : 'undefined',
     keyLength: runtimeApiKey ? runtimeApiKey.length : 0,
-    isValid: !!(runtimeApiKey && runtimeApiKey.length > 30 && runtimeApiKey.startsWith('AIza'))
+    isValid: !!(runtimeApiKey && runtimeApiKey.length > 30 && runtimeApiKey.startsWith('AIza')),
+    sources: {
+      PUBLIC_GOOGLE_MAPS_API_KEY: process.env.PUBLIC_GOOGLE_MAPS_API_KEY ? `${process.env.PUBLIC_GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined',
+      GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY ? `${process.env.GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined', 
+      MAPS_API_KEY: process.env.MAPS_API_KEY ? `${process.env.MAPS_API_KEY.substring(0, 10)}...` : 'undefined'
+    }
   });
   
   // Validate the API key
