@@ -1,7 +1,7 @@
 // Google Maps and Places API Integration
 import { clientEnv, serverEnv } from '@/config/env';
 
-// Google Maps initialization with Places API for address autocomplete only
+// Google Maps initialization with Places API - uses global loader to prevent duplicates
 export async function initializeGoogleMaps(): Promise<void> {
   if (typeof window === 'undefined') {
     throw new Error('Google Maps can only be initialized on client side');
@@ -17,10 +17,17 @@ export async function initializeGoogleMaps(): Promise<void> {
     throw new Error('Google Maps API key not configured for client-side use. Check PUBLIC_GOOGLE_MAPS_API_KEY environment variable.');
   }
 
+  // Use global Maps loader to prevent duplicate loading
+  const globalLoader = (window as any).EZ2FIX_MAPS;
+  if (globalLoader && typeof globalLoader.loadAPI === 'function') {
+    return globalLoader.loadAPI(clientEnv.googleMaps.apiKey);
+  }
+
+  // Fallback to direct loading if global loader is not available
   return new Promise((resolve, reject) => {
-    // Create script element - only load Places library for autocomplete
+    // Create script element with proper async loading
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${clientEnv.googleMaps.apiKey}&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${clientEnv.googleMaps.apiKey}&libraries=places&callback=initMap&loading=async`;
     script.async = true;
     script.defer = true;
 
@@ -212,7 +219,7 @@ function geocodeAddress(address: string): Promise<google.maps.LatLng | null> {
   });
 }
 
-// Address autocomplete functionality
+// Address autocomplete functionality - uses legacy Autocomplete for now (still supported)
 export function setupAddressAutocomplete(
   input: HTMLInputElement,
   options: {
@@ -251,6 +258,9 @@ export function setupAddressAutocomplete(
     autocompleteOptions.strictBounds = true;
   }
 
+  // Use legacy Autocomplete (still supported until at least March 2026)
+  // Note: google.maps.places.PlaceAutocompleteElement is the new recommended API
+  // but requires migration of existing form handling
   const autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
 
   // Add place selection listener

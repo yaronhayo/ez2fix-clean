@@ -25,7 +25,7 @@ window.EZ2FIX_MAPS = window.EZ2FIX_MAPS || {
       this.callbacks.push(resolve);
       
       // Create global callback
-      window.EZ2FIX_MAPS_CALLBACK = () => {
+      window.initMap = () => {
         this.isLoading = false;
         this.isLoaded = true;
         
@@ -36,7 +36,7 @@ window.EZ2FIX_MAPS = window.EZ2FIX_MAPS || {
       
       // Load script
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=EZ2FIX_MAPS_CALLBACK&loading=async`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap&loading=async`;
       script.async = true;
       script.defer = true;
       script.onerror = () => {
