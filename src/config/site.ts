@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Professional Garage Door Repair Elmwood Park NJ | Ez2Fix | Licensed Contractor",
   description: "Expert garage door repair & installation in Elmwood Park, NJ. 10-year warranty, professional service, senior discount. Licensed #13VH13553300. Call (201) 554-6769!",
   url: "https://ez2fixllc.com",
-  ogImage: "/og-image.jpg",
+  ogImage: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix%20logo.png",
   logo: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix%20logo.png",
   author: "Ez2Fix Team",
   links: {

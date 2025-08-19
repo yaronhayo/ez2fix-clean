@@ -183,10 +183,10 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, Astro.url)} />
+    <meta property="og:image" content={siteConfig.logo} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content="Ez2Fix Professional Garage Door Services - Bergen & Hudson Counties NJ" />
     <meta property="og:site_name" content={siteConfig.business.name} />
     <meta property="og:locale" content="en_US" />
@@ -199,7 +199,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
+    <meta property="twitter:image" content={siteConfig.logo} />
     <meta property="twitter:image:alt" content="Ez2Fix Professional Garage Door Services - Bergen & Hudson Counties NJ" />
     <meta property="twitter:site" content="@ez2fix" />
     <meta property="twitter:creator" content="@ez2fix" />
@@ -218,13 +218,13 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     
     <!-- Favicon and Apple Touch Icons -->
     <link rel="icon" type="image/png" href={siteConfig.logo} sizes="any" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#D2A63C" />
+    <link rel="icon" type="image/png" href={siteConfig.logo} sizes="32x32" />
+    <link rel="icon" type="image/png" href={siteConfig.logo} sizes="16x16" />
+    <link rel="apple-touch-icon" sizes="180x180" href={siteConfig.logo} />
+    <link rel="shortcut icon" href={siteConfig.logo} />
     <meta name="theme-color" content="#D2A63C" />
     <meta name="msapplication-TileColor" content="#D2A63C" />
+    <meta name="msapplication-TileImage" content={siteConfig.logo} />
     
     <!-- Preload Critical Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
