@@ -3,12 +3,9 @@ import type { APIRoute } from 'astro';
 import { clientEnv } from '@/config/env';
 
 export const GET: APIRoute = async () => {
-  // IMPORTANT: In Vercel serverless functions, use process.env directly
-  // import.meta.env only works at build time, not runtime
-  const runtimeApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
-                        process.env.PUBLIC_GOOGLE_MAPS_API_KEY || 
-                        process.env.GOOGLE_MAPS_API_KEY ||
-                        process.env.MAPS_API_KEY;
+  // TEMPORARY HARDCODED API KEY FOR TESTING
+  // TODO: Remove this and fix Vercel environment variable access
+  const runtimeApiKey = 'AIzaSyCC7AYmLnyP7XLdADdhYFpzRRjiCqmlkhw';
   
   console.log('Maps key endpoint called');
   console.log('Runtime environment check:', {
