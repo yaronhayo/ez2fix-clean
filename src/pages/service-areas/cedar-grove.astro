@@ -865,15 +865,15 @@ const localFAQs = [
       googleMapsApiKey = config.apiKey;
       console.log('Individual map - API key fetched successfully, length:', config.apiKey.length);
       
-      const script = document.createElement('script');
-      script.async = true;
-      script.defer = true;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&callback=initIndividualLocationMap&loading=async`;
-      script.onerror = () => {
-        console.error('Failed to load Google Maps script for individual map');
+      // Use centralized Maps loader to prevent duplicates
+      try {
+        await window.EZ2FIX_MAPS.loadAPI(config.apiKey);
+        console.log("Individual map - Google Maps API loaded via centralized loader");
+        initIndividualLocationMap();
+      } catch (error) {
+        console.error("Failed to load Google Maps API for individual map:", error);
         showIndividualMapError();
-      };
-      document.head.appendChild(script);
+      }
       
     } catch (error) {
       console.error('Failed to fetch Maps API configuration for individual map:', error);
