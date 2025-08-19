@@ -1,0 +1,22 @@
+---
+import { clientEnv } from '@/config/env';
+---
+
+<html>
+<head>
+  <title>Environment Debug</title>
+</head>
+<body>
+  <h1>Environment Variables Debug</h1>
+  <p>Google Maps API Key Available: {clientEnv.googleMaps.apiKey ? 'YES' : 'NO'}</p>
+  <p>API Key Length: {clientEnv.googleMaps.apiKey.length}</p>
+  <p>API Key Preview: {clientEnv.googleMaps.apiKey.substring(0, 10)}...</p>
+  
+  <script>
+    console.log('Client-side check:');
+    console.log('PUBLIC_GOOGLE_MAPS_API_KEY available:', !!import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY);
+    console.log('PUBLIC_GOOGLE_MAPS_API_KEY length:', (import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY || '').length);
+    console.log('PUBLIC_GOOGLE_MAPS_API_KEY preview:', (import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY || '').substring(0, 10) + '...');
+  </script>
+</body>
+</html>

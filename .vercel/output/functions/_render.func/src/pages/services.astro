@@ -1,0 +1,879 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeaderClean from '@/components/layout/HeaderClean.astro';
+import FooterClean from '@/components/layout/FooterClean.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import ServiceCard from '@/components/ui/ServiceCard.astro';
+import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import FAQComponentClean from '@/components/ui/FAQComponentClean.astro';
+import ReviewsCarouselClean from '@/components/ui/ReviewsCarouselClean.astro';
+import CTASectionClean from '@/components/ui/CTASectionClean.astro';
+import Card from '@/components/ui/Card.astro';
+import { siteConfig } from '@/config/site';
+
+// Reuse service data from homepage
+const services = [
+  {
+    title: "24/7 Emergency Repair",
+    description: "Door won't close? Stuck open? We understand the panic and stress. Available 24/7 to restore your peace of mind.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp",
+    features: ["Available 24/7", "Same-Day Service", "All Brands", "Safety First"],
+    warranty: "1-Year Warranty",
+    badge: "24/7 AVAILABLE",
+    href: "/services/emergency-garage-door-repair",
+    popular: true
+  },
+  {
+    title: "Spring Repair",
+    description: "Broken springs make your door a 400-pound safety hazard. We have the tools and experience to keep your family safe.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg",
+    features: ["Safe Replacement", "Quality Springs", "Proper Balance", "Peace of Mind"],
+    warranty: "10-Year Warranty",
+    badge: "MOST COMMON",
+    href: "/services/garage-door-spring-repair",
+    popular: true
+  },
+  {
+    title: "Smart Opener Installation",
+    description: "Upgrade to smart technology you can control from anywhere. Never wonder if you closed the garage door again.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp",
+    features: ["Smart Control", "Phone Alerts", "Backup Power", "Easy Setup"],
+    warranty: "15-Year Warranty",
+    badge: "SMART HOME",
+    href: "/services/garage-door-opener-installation",
+    popular: false
+  },
+  {
+    title: "New Door Installation",
+    description: "Transform your home's curb appeal and boost property value with a beautiful new garage door.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png",
+    features: ["Boost Home Value", "Custom Styles", "Energy Savings", "Curb Appeal"],
+    warranty: "15-Year Warranty",
+    badge: "CURB APPEAL",
+    href: "/services/new-garage-door-installation",
+    popular: false
+  },
+  {
+    title: "Commercial Service",
+    description: "When business doors fail, operations stop. We understand every minute counts and get you back to making money fast.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg",
+    features: ["Minimize Downtime", "Heavy-Duty", "Maintenance Plans", "Business Focus"],
+    warranty: "Commercial Warranty",
+    badge: "BUSINESS",
+    href: "/services/commercial-garage-door-service",
+    popular: false
+  },
+  {
+    title: "General Repair",
+    description: "Strange noises? Door sticking? These warning signs could lead to expensive damage. Fix small problems before they become big ones.",
+    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png",
+    features: ["Prevent Problems", "Stop Noises", "Smooth Operation", "Peace of Mind"],
+    warranty: "1-Year Warranty",
+    badge: "ALL REPAIRS",
+    href: "/services/general-garage-door-repair",
+    popular: false
+  }
+];
+
+// Benefits from booking page
+const benefits = [
+  {
+    icon: "shield",
+    title: "Licensed & Insured",
+    description: "Professional service you can trust with full licensing and insurance protection"
+  },
+  {
+    icon: "star",
+    title: "5.0★ Rating",
+    description: "Consistently rated 5 stars by satisfied customers across Bergen County"
+  },
+  {
+    icon: "check",
+    title: "10-Year Warranty",
+    description: "Premium parts and professional installation backed by comprehensive warranty"
+  },
+  {
+    icon: "phone",
+    title: "24/7 Emergency",
+    description: "Round-the-clock emergency service when you need us most"
+  }
+];
+
+// Common garage door issues we fix
+const commonIssues = [
+  {
+    issue: "Broken Springs",
+    description: "The most dangerous garage door problem - springs under 400+ lbs of tension",
+    solution: "Safe professional replacement with high-quality springs",
+    urgency: "Emergency"
+  },
+  {
+    issue: "Door Won't Open/Close",
+    description: "Stuck doors leave your home vulnerable and disrupt your daily routine",
+    solution: "Quick diagnosis and repair to restore normal operation",
+    urgency: "Same Day"
+  },
+  {
+    issue: "Noisy Operation",
+    description: "Grinding, squeaking, or rattling sounds indicate worn components",
+    solution: "Lubrication, adjustment, and part replacement as needed",
+    urgency: "Preventive"
+  },
+  {
+    issue: "Opener Problems",
+    description: "Remote not working, motor running but door not moving, or erratic behavior",
+    solution: "Opener repair or smart upgrade with modern features",
+    urgency: "Same Day"
+  },
+  {
+    issue: "Off-Track Door",
+    description: "Door came off its tracks - dangerous and requires immediate attention",
+    solution: "Professional realignment and track repair for safe operation",
+    urgency: "Emergency"
+  },
+  {
+    issue: "Weather Damage",
+    description: "Storm damage, dents, or panels that affect function and security",
+    solution: "Panel replacement or complete door installation",
+    urgency: "Priority"
+  }
+];
+
+// Process steps - how we help
+const processSteps = [
+  {
+    step: "1",
+    title: "You Call, We Listen",
+    description: "Tell us what's wrong - we understand your concern and schedule promptly"
+  },
+  {
+    step: "2", 
+    title: "We Diagnose Safely",
+    description: "Professional assessment with safety first - no guesswork"
+  },
+  {
+    step: "3",
+    title: "Clear Pricing Upfront", 
+    description: "Honest estimates before work begins - no surprises ever"
+  },
+  {
+    step: "4",
+    title: "Fix It Right, Guarantee It",
+    description: "Quality work with 10-year warranty - your peace of mind matters"
+  }
+];
+---
+
+<BaseLayout 
+  title="Professional Garage Door Services Bergen County NJ | Licensed #13VH13553300 | Ez2Fix"
+  description="Complete garage door services Bergen County NJ: emergency repair, spring replacement, opener installation, new door installation, commercial service. Licensed contractor #13VH13553300. 10-year warranty, 24/7 service. Call (201) 554-6769!"
+  keywords="garage door services bergen county nj, professional garage door repair bergen county, garage door spring repair nj, garage door opener installation bergen county, new garage door installation nj, emergency garage door service bergen county, commercial garage door service nj, garage door maintenance bergen county, licensed garage door contractor nj, garage door company bergen county, garage door services elmwood park, garage door services fair lawn, garage door services clifton nj, garage door services north caldwell, garage door services west caldwell, garage door services montclair, garage door services little falls, garage door services cedar grove"
+>
+  <Fragment slot="head">
+    <!-- Services-specific Schema Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://ez2fixllc.com/services#services",
+      "name": "Professional Garage Door Services",
+      "description": "Complete garage door services including emergency repair, spring replacement, opener installation, and new door installation in Bergen & Hudson Counties, NJ.",
+      "serviceType": [
+        "Emergency Garage Door Repair",
+        "Garage Door Spring Repair", 
+        "Garage Door Opener Installation",
+        "New Garage Door Installation",
+        "Commercial Garage Door Service",
+        "Garage Door Maintenance"
+      ],
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Ez2Fix Garage Door Services",
+        "telephone": "(201) 554-6769",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Elmwood Park, NJ 07407",
+          "addressLocality": "Elmwood Park",
+          "addressRegion": "NJ",
+          "postalCode": "07407",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": [
+        "Bergen County, NJ",
+        "Hudson County, NJ", 
+        "Elmwood Park, NJ",
+        "Fair Lawn, NJ",
+        "Clifton, NJ",
+        "Paramus, NJ",
+        "Hackensack, NJ"
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "servicePhone": "+12015546769",
+        "serviceUrl": "https://ez2fixllc.com/services"
+      }
+    })} />
+  </Fragment>
+  
+  <HeaderClean />
+  <main id="main-content">
+    <!-- Hero Section with PageHero component -->
+    <PageHero 
+      title="Professional <span class='text-ez2fix-primary'>Garage Door Services</span> Bergen County"
+      subtitle="From emergency repairs to beautiful new installations - we handle every garage door need with professional expertise and honest pricing."
+      backgroundImage="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage-door.webp"
+      breadcrumbs={[
+        { name: "Home", href: "/" },
+        { name: "Services", href: "/services" }
+      ]}
+      stats={[
+        { number: "24/7", label: "Emergency Service" },
+        { number: "10-Year", label: "Warranty" },
+        { number: "Licensed", label: "#13VH13553300" }
+      ]}
+      theme="dark"
+      size="large"
+    />
+
+    <!-- Services Grid Section - Reusing ServiceCard from homepage -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+            Complete <span class="text-ez2fix-primary">Garage Door Solutions</span>
+          </h2>
+          <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+            Whatever your garage door needs, we've got you covered with professional service and premium parts. 
+            <span class="text-ez2fix-primary font-bold">Every service backed by our 10-year warranty</span>.
+          </p>
+        </div>
+
+        <!-- Service Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {services.map((service, index) => (
+            <ServiceCard
+              title={service.title}
+              description={service.description}
+              image={service.image}
+              features={service.features}
+              warranty={service.warranty}
+              badge={service.badge}
+              href={service.href}
+              popular={service.popular}
+              theme="light"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Issues We Fix Section -->
+    <section class="space-section-lg gradient-dark">
+      <div class="container-responsive">
+        <div class="section-header-responsive text-center">
+          <h2 class="section-title-responsive text-ez2fix-cream">
+            Common <span class="text-ez2fix-primary">Garage Door Issues</span> We Fix
+          </h2>
+          <p class="section-subtitle-responsive text-ez2fix-gold max-w-3xl mx-auto">
+            From emergency breakdowns to preventive maintenance, we've seen it all. 
+            <span class="text-ez2fix-primary font-bold">Here's how we help your neighbors every day</span>.
+          </p>
+        </div>
+
+        <!-- Issues Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {commonIssues.map((issue, index) => (
+            <Card class="p-6 lg:p-8 bg-ez2fix-cream border-2 border-ez2fix-primary shadow-premium hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 h-full">
+              <div class="flex items-start space-x-4 mb-4">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center flex-shrink-0">
+                  {issue.urgency === 'Emergency' && (
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                  )}
+                  {issue.urgency === 'Same Day' && (
+                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  )}
+                  {issue.urgency === 'Priority' && (
+                    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  )}
+                  {issue.urgency === 'Preventive' && (
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                  )}
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-xl font-bold text-ez2fix-dark">{issue.issue}</h3>
+                    <span class={`px-3 py-1 rounded-full text-xs font-bold ${
+                      issue.urgency === 'Emergency' ? 'bg-red-100 text-red-800' :
+                      issue.urgency === 'Same Day' ? 'bg-orange-100 text-orange-800' :
+                      issue.urgency === 'Priority' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-green-100 text-green-800'
+                    }`}>
+                      {issue.urgency}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <p class="text-base text-ez2fix-brown mb-4 leading-relaxed">
+                {issue.description}
+              </p>
+              
+              <div class="border-t border-ez2fix-brown/20 pt-4">
+                <div class="flex items-center space-x-2 mb-2">
+                  <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                  </svg>
+                  <span class="text-sm font-semibold text-ez2fix-primary">Our Solution:</span>
+                </div>
+                <p class="text-sm text-ez2fix-dark font-medium">
+                  {issue.solution}
+                </p>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <!-- How We Help Process -->
+        <div class="mt-16">
+          <div class="text-center mb-12">
+            <h3 class="text-display-2 font-bold text-ez2fix-cream mb-4">
+              How We Turn Your <span class="text-ez2fix-primary">Problem Into Relief</span>
+            </h3>
+            <p class="text-body-large text-ez2fix-gold max-w-2xl mx-auto">
+              Every call follows our proven process designed to minimize your stress and maximize results.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {processSteps.map((step, index) => (
+              <div class="text-center">
+                <div class="relative mb-6">
+                  <div class="w-20 h-20 mx-auto rounded-full bg-ez2fix-primary flex items-center justify-center">
+                    {index === 0 && (
+                      <svg class="w-8 h-8 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                      </svg>
+                    )}
+                    {index === 1 && (
+                      <svg class="w-8 h-8 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                      </svg>
+                    )}
+                    {index === 2 && (
+                      <svg class="w-8 h-8 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                      </svg>
+                    )}
+                    {index === 3 && (
+                      <svg class="w-8 h-8 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    )}
+                  </div>
+                  <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-ez2fix-gold rounded-full flex items-center justify-center">
+                    <span class="text-ez2fix-dark font-bold text-sm">{step.step}</span>
+                  </div>
+                </div>
+                <h4 class="text-xl font-bold text-ez2fix-cream mb-3">{step.title}</h4>
+                <p class="text-base text-ez2fix-gold leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section - Reusing style from booking page -->
+    <section class="space-section-lg gradient-dark">
+      <div class="container-responsive">
+        <div class="section-header-responsive text-center">
+          <h2 class="section-title-responsive text-ez2fix-cream">
+            Why Choose <span class="text-ez2fix-primary">Ez2Fix?</span>
+          </h2>
+          <p class="section-subtitle-responsive text-ez2fix-gold max-w-3xl mx-auto">
+            When you choose Ez2Fix, you're not just getting a repair - you're getting peace of mind 
+            from Bergen County's most trusted garage door professionals.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {benefits.map((benefit, index) => (
+            <Card class={`text-center p-6 lg:p-8 shadow-premium border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 h-full ${
+              index % 2 === 0 ? 'bg-ez2fix-cream border-ez2fix-primary' : 'bg-ez2fix-dark border-ez2fix-gold'
+            }`}>
+              <div class={`mb-6 flex justify-center ${index % 2 === 0 ? 'text-ez2fix-primary' : 'text-ez2fix-gold'}`}>
+                {benefit.icon === 'shield' && (
+                  <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                  </svg>
+                )}
+                {benefit.icon === 'star' && (
+                  <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                  </svg>
+                )}
+                {benefit.icon === 'check' && (
+                  <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                )}
+                {benefit.icon === 'phone' && (
+                  <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                  </svg>
+                )}
+              </div>
+              <h3 class={`text-heading-2 font-bold mb-4 ${index % 2 === 0 ? 'text-ez2fix-dark' : 'text-ez2fix-cream'}`}>
+                {benefit.title}
+              </h3>
+              <p class={`text-body-base leading-relaxed ${index % 2 === 0 ? 'text-ez2fix-brown' : 'text-ez2fix-gold'}`}>
+                {benefit.description}
+              </p>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section - Enhanced with better content -->
+    <section class="space-section-lg bg-ez2fix-cream">
+      <div class="container-responsive">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <!-- Left Column - Content -->
+          <div>
+            <h2 class="section-title-responsive text-ez2fix-dark mb-6">
+              Ready to Get <span class="text-ez2fix-primary">Professional Service?</span>
+            </h2>
+            <p class="text-body-large text-ez2fix-brown leading-relaxed mb-8">
+              Join thousands of satisfied neighbors who chose Ez2Fix for their garage door needs. 
+              Get your personalized estimate and experience the difference professional service makes.
+            </p>
+            
+            <!-- Service Guarantees -->
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 rounded-full bg-ez2fix-primary flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <span class="text-body-base text-ez2fix-dark font-medium">Same-day service available</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 rounded-full bg-ez2fix-primary flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <span class="text-body-base text-ez2fix-dark font-medium">Upfront pricing - no surprises</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 rounded-full bg-ez2fix-primary flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <span class="text-body-base text-ez2fix-dark font-medium">10-year warranty on all work</span>
+              </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 gap-6 mb-8">
+              <div class="text-center p-4 rounded-lg bg-ez2fix-primary/10 border border-ez2fix-primary/20">
+                <div class="text-display-2 font-bold text-ez2fix-primary">24/7</div>
+                <div class="text-body-small text-ez2fix-brown">Emergency Service</div>
+              </div>
+              <div class="text-center p-4 rounded-lg bg-ez2fix-gold/10 border border-ez2fix-gold/20">
+                <div class="text-display-2 font-bold text-ez2fix-gold">Licensed</div>
+                <div class="text-body-small text-ez2fix-brown">#13VH13553300</div>
+              </div>
+            </div>
+            
+            <!-- Emergency Contact -->
+            <Card class="p-6 bg-gradient-to-r from-ez2fix-primary/10 to-ez2fix-gold/10 border-2 border-ez2fix-primary">
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-primary flex items-center justify-center">
+                  <svg class="h-6 w-6 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-heading-3 font-bold text-ez2fix-dark">Need Emergency Service?</div>
+                  <a href={siteConfig.links.phone} class="text-heading-2 font-bold text-ez2fix-primary hover:underline">
+                    Call {siteConfig.business.phone}
+                  </a>
+                </div>
+              </div>
+            </Card>
+          </div>
+          
+          <!-- Right Column - Form -->
+          <div>
+            <Card class="p-8 shadow-premium border-2 bg-white border-ez2fix-primary">
+              <BookingFormClean 
+                variant="inline"
+                title="Get Your Free Service Estimate"
+                subtitle="Tell us about your garage door issue and we'll provide a personalized estimate with no obligation."
+                buttonText="Get My Free Estimate"
+                showTitle={true}
+              />
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+            Service Questions <span class="text-ez2fix-primary">Your Neighbors</span> Always Ask
+          </h2>
+          <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto mb-12">
+            When garage doors break, the same worries come up every time. Here's what other families in your neighborhood wanted to know - 
+            <span class="font-bold text-ez2fix-primary">and our honest answers</span>.
+          </p>
+        </div>
+
+        <!-- Custom FAQ Implementation -->
+        <div class="max-w-4xl mx-auto space-y-4 mb-12">
+          <div class="bg-ez2fix-cream border-2 border-ez2fix-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="faq-question w-full text-left p-6 flex items-start justify-between hover:bg-ez2fix-primary/5 transition-colors" data-faq="0">
+              <h3 class="text-xl font-bold text-ez2fix-dark pr-4 flex-1">
+                What do you do when neighbors call with garage door problems?
+              </h3>
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                  <svg class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <div class="p-6 pt-0">
+                <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                  <p class="text-base text-ez2fix-brown leading-relaxed">
+                    We treat every call like it's coming from family. Whether it's a spring that snapped at midnight, a door that won't close leaving your home vulnerable, or an opener that died in a storm - we bring everything needed to fix it right the first time. From emergency repairs to beautiful new installations, we're here for whatever your family needs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-ez2fix-cream border-2 border-ez2fix-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="faq-question w-full text-left p-6 flex items-start justify-between hover:bg-ez2fix-primary/5 transition-colors" data-faq="1">
+              <h3 class="text-xl font-bold text-ez2fix-dark pr-4 flex-1">
+                How fast will you come when our garage door breaks?
+              </h3>
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                  <svg class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <div class="p-6 pt-0">
+                <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                  <p class="text-base text-ez2fix-brown leading-relaxed">
+                    We know how stressful it is when your door breaks - you can't get to work, your home isn't secure, or you're worried about safety. That's why we prioritize getting to you as quickly as possible. When you call, you're not just another appointment - you're a neighbor who needs help, and we'll be there.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-ez2fix-cream border-2 border-ez2fix-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="faq-question w-full text-left p-6 flex items-start justify-between hover:bg-ez2fix-primary/5 transition-colors" data-faq="2">
+              <h3 class="text-xl font-bold text-ez2fix-dark pr-4 flex-1">
+                Will I get surprised by hidden costs after you arrive?
+              </h3>
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                  <svg class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <div class="p-6 pt-0">
+                <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                  <p class="text-base text-ez2fix-brown leading-relaxed">
+                    Never. We understand you're already stressed about the broken door - the last thing you need is surprise charges. Before we touch anything, we'll show you exactly what's wrong, explain your options in plain English, and give you honest upfront pricing. No surprises, no pressure, just straight answers.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-ez2fix-cream border-2 border-ez2fix-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="faq-question w-full text-left p-6 flex items-start justify-between hover:bg-ez2fix-primary/5 transition-colors" data-faq="3">
+              <h3 class="text-xl font-bold text-ez2fix-dark pr-4 flex-1">
+                What if something goes wrong after you fix my door?
+              </h3>
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                  <svg class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <div class="p-6 pt-0">
+                <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                  <p class="text-base text-ez2fix-brown leading-relaxed">
+                    We stand behind our work with a 10-year warranty because we use premium parts and expert installation. But more than that - we're your neighbors. If you ever have concerns, just call. We want you to feel completely confident that your family is safe and your door will work perfectly for years to come.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-ez2fix-cream border-2 border-ez2fix-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="faq-question w-full text-left p-6 flex items-start justify-between hover:bg-ez2fix-primary/5 transition-colors" data-faq="4">
+              <h3 class="text-xl font-bold text-ez2fix-dark pr-4 flex-1">
+                What if you can't fix my specific garage door brand?
+              </h3>
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                  <svg class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <div class="p-6 pt-0">
+                <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                  <p class="text-base text-ez2fix-brown leading-relaxed">
+                    In 15+ years serving Northern NJ families, we've never met a garage door we couldn't fix. Whether it's a LiftMaster, Chamberlain, Genie, or that old door from 1985 that 'no one makes parts for anymore' - we find a way. Our trucks are stocked with parts for every major brand, and if we don't have it, we'll get it.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-ez2fix-cream border-2 border-ez2fix-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="faq-question w-full text-left p-6 flex items-start justify-between hover:bg-ez2fix-primary/5 transition-colors" data-faq="5">
+              <h3 class="text-xl font-bold text-ez2fix-dark pr-4 flex-1">
+                Can I just fix the broken spring myself to save money?
+              </h3>
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                  <svg class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <div class="p-6 pt-0">
+                <div class="border-l-4 border-ez2fix-primary/30 pl-4">
+                  <p class="text-base text-ez2fix-brown leading-relaxed">
+                    Please don't risk it. These springs hold 400+ pounds of tension - we've seen too many neighbors get seriously hurt trying DIY repairs. Your safety and your family's peace of mind are worth more than saving a few dollars. We'll fix it safely, quickly, and with a warranty that protects you for 10 years.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Read All FAQs CTA -->
+        <div class="text-center">
+          <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold shadow-lg">
+            <a 
+              href="/faq"
+              class="px-8 py-3 bg-white text-ez2fix-primary hover:bg-ez2fix-primary hover:text-white inline-flex items-center justify-center shadow-lg transition-all duration-300 rounded-lg font-semibold"
+            >
+              <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Read All FAQs
+              <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          <p class="text-sm text-ez2fix-brown mt-3 max-w-md mx-auto">
+            Get answers to all your garage door questions and concerns
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const faqButtons = document.querySelectorAll('.faq-question');
+        
+        faqButtons.forEach((button) => {
+          button.addEventListener('click', function() {
+            const faqIndex = this.getAttribute('data-faq');
+            const faqItem = this.closest('div');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = faqItem.querySelector('.faq-icon');
+            
+            const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+            
+            // Close all FAQs
+            faqButtons.forEach((btn) => {
+              const otherAnswer = btn.closest('div').querySelector('.faq-answer');
+              const otherIcon = btn.closest('div').querySelector('.faq-icon');
+              
+              otherAnswer.style.maxHeight = '0px';
+              otherIcon.style.transform = 'rotate(0deg)';
+            });
+            
+            // Open clicked FAQ if it wasn't open
+            if (!isOpen) {
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+              icon.style.transform = 'rotate(45deg)';
+            }
+          });
+        });
+      });
+    </script>
+
+    <!-- Reviews Section -->
+    <section class="space-section-lg gradient-dark">
+      <div class="container-responsive">
+        <div class="section-header-responsive text-center">
+          <h2 class="section-title-responsive text-ez2fix-cream">
+            Service <span class="text-ez2fix-primary">Success Stories</span>
+          </h2>
+          <p class="section-subtitle-responsive text-ez2fix-gold max-w-3xl mx-auto">
+            Real customers sharing their experiences with our professional garage door services. 
+            <span class="text-ez2fix-primary font-bold">See why your neighbors trust Ez2Fix</span>.
+          </p>
+        </div>
+        
+        <!-- Trust Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto">
+          <div class="text-center p-6 rounded-lg bg-ez2fix-cream/10 border border-ez2fix-gold/20">
+            <div class="text-display-2 font-bold text-ez2fix-primary mb-2">10,000+</div>
+            <div class="text-body-base text-ez2fix-gold">Happy Customers</div>
+          </div>
+          <div class="text-center p-6 rounded-lg bg-ez2fix-cream/10 border border-ez2fix-gold/20">
+            <div class="text-display-2 font-bold text-ez2fix-primary mb-2">5.0★</div>
+            <div class="text-body-base text-ez2fix-gold">Average Rating</div>
+          </div>
+          <div class="text-center p-6 rounded-lg bg-ez2fix-cream/10 border border-ez2fix-gold/20">
+            <div class="text-display-2 font-bold text-ez2fix-primary mb-2">15+</div>
+            <div class="text-body-base text-ez2fix-gold">Years Experience</div>
+          </div>
+        </div>
+        
+        <ReviewsCarouselClean pageType="services" />
+        
+        <!-- Read All Reviews CTA -->
+        <div class="text-center mt-12">
+          <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-gold to-ez2fix-primary shadow-premium">
+            <a 
+              href="/reviews"
+              class="btn-responsive bg-ez2fix-dark text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark btn-premium hover-lift inline-flex items-center justify-center shadow-lg transition-all duration-300"
+            >
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+              </svg>
+              Read All Reviews
+              <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          <p class="text-body-small text-ez2fix-gold mt-3 max-w-md mx-auto">
+            See what your neighbors are saying about our garage door services
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Final CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-cream mb-6">
+            Ready to Get Professional <span class="text-ez2fix-gold">Service?</span>
+          </h2>
+          
+          <p class="text-xl md:text-2xl leading-relaxed text-ez2fix-cream mb-12">
+            Don't let garage door problems disrupt your life. <span class="text-ez2fix-gold font-bold">Professional help is just one call away</span>.
+          </p>
+          
+          <!-- Trust Stats -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
+            <div class="text-center p-4 rounded-lg bg-ez2fix-gold/10 border border-ez2fix-gold/20">
+              <div class="text-3xl font-bold text-ez2fix-primary mb-2">24/7</div>
+              <div class="text-base text-ez2fix-gold">Emergency Service</div>
+            </div>
+            <div class="text-center p-4 rounded-lg bg-ez2fix-gold/10 border border-ez2fix-gold/20">
+              <div class="text-3xl font-bold text-ez2fix-primary mb-2">10-Year</div>
+              <div class="text-base text-ez2fix-gold">Warranty</div>
+            </div>
+            <div class="text-center p-4 rounded-lg bg-ez2fix-gold/10 border border-ez2fix-gold/20">
+              <div class="text-3xl font-bold text-ez2fix-primary mb-2">Licensed</div>
+              <div class="text-base text-ez2fix-gold">#13VH13553300</div>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto mb-12">
+            <a 
+              href={siteConfig.links.phone}
+              class="flex-1 sm:flex-none px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+            >
+              <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              Call {siteConfig.business.phone}
+            </a>
+            <a 
+              href="/booking"
+              class="flex-1 sm:flex-none px-8 py-4 border-2 border-ez2fix-gold text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg bg-transparent"
+            >
+              <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              Get Free Estimate
+            </a>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-8">
+            <div class="flex items-center space-x-2">
+              <svg class="h-6 w-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span class="font-semibold text-ez2fix-cream">Licensed & Insured</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="h-6 w-6 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+              </svg>
+              <span class="font-semibold text-ez2fix-cream">5.0★ Rating</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="h-6 w-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+              </svg>
+              <span class="font-semibold text-ez2fix-cream">10-Year Warranty</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <FooterClean />
+  
+</BaseLayout>

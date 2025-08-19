@@ -1,0 +1,41 @@
+import { e as createAstro, f as createComponent, m as maybeRenderHead, h as addAttribute, u as unescapeHTML, r as renderTemplate, k as renderComponent } from './astro/server_BJwJjVcz.mjs';
+import 'kleur/colors';
+import { s as siteConfig } from './BaseLayout_D5VH6-2r.mjs';
+import { b as $$CTA } from './FooterClean_DNQtsTCW.mjs';
+
+const $$Astro = createAstro("https://ez2fixllc.com");
+const $$CTASectionClean = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$CTASectionClean;
+  const {
+    title,
+    subtitle,
+    primaryCTA = {
+      text: `Call ${siteConfig.business.phone}`,
+      href: siteConfig.links.phone,
+      icon: "phone"
+    },
+    secondaryCTA = {
+      text: "Book Service Online",
+      href: "/booking",
+      icon: "calendar"
+    },
+    stats,
+    trustIndicators,
+    theme = "dark"
+  } = Astro2.props;
+  const bgClass = theme === "dark" ? "gradient-dark" : "bg-ez2fix-cream";
+  const textClass = theme === "dark" ? "text-ez2fix-cream" : "text-ez2fix-dark";
+  const accentClass = theme === "dark" ? "text-ez2fix-gold" : "text-ez2fix-primary";
+  const icons = {
+    phone: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
+    calendar: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
+    arrow: "M17 8l4 4m0 0l-4 4m4-4H3",
+    shield: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    star: "M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z",
+    check: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+  };
+  return renderTemplate`${maybeRenderHead()}<section${addAttribute(`py-16 ${bgClass}`, "class")}> <div class="container mx-auto px-4"> <div class="max-w-4xl mx-auto text-center animate-on-scroll"> <h2${addAttribute(`text-4xl md:text-5xl font-bold mb-6 ${textClass}`, "class")}>${unescapeHTML(title)}</h2> ${subtitle && renderTemplate`<p${addAttribute(`text-xl md:text-2xl leading-relaxed mb-8 ${textClass}`, "class")}>${unescapeHTML(subtitle)}</p>`} ${stats && renderTemplate`<div class="grid-responsive-3 gap-responsive mb-12"> ${stats.map((stat) => renderTemplate`<div class="text-center p-6 rounded-lg bg-ez2fix-gold/10"> <div${addAttribute(`text-4xl font-bold mb-2 ${theme === "dark" ? "text-ez2fix-primary" : "text-ez2fix-primary"}`, "class")}> ${stat.number} </div> <div${addAttribute(`text-lg ${accentClass}`, "class")}> ${stat.label} </div> </div>`)} </div>`} <!-- CTA Buttons --> <div class="cta-mobile-stack justify-center max-w-2xl mx-auto"> ${primaryCTA && renderTemplate`${renderComponent($$result, "CTA", $$CTA, { "variant": primaryCTA.icon === "phone" ? "phone" : "primary", "size": "medium", "href": primaryCTA.href, "text": primaryCTA.text, "icon": primaryCTA.icon, "class": "cta-mobile-full" })}`} ${secondaryCTA && renderTemplate`${renderComponent($$result, "CTA", $$CTA, { "variant": "secondary", "size": "medium", "href": secondaryCTA.href, "text": secondaryCTA.text, "icon": secondaryCTA.icon, "class": `cta-mobile-full ${theme === "dark" ? "bg-transparent" : ""}` })}`} </div> ${trustIndicators && renderTemplate`<div class="mt-12 flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-8 gap-2 sm:gap-4"> ${trustIndicators.map((indicator) => renderTemplate`<div class="flex items-center space-x-2"> <svg${addAttribute(`h-6 w-6 ${theme === "dark" ? "text-ez2fix-primary" : "text-ez2fix-primary"}`, "class")} fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"${addAttribute(icons[indicator.icon], "d")}></path> </svg> <span${addAttribute(`font-semibold ${textClass}`, "class")}>${indicator.text}</span> </div>`)} </div>`} </div> </div> </section>`;
+}, "/Users/yaronhayo/Dev_Projects/Projects_2025/ez2fix-clean/src/components/ui/CTASectionClean.astro", void 0);
+
+export { $$CTASectionClean as $ };

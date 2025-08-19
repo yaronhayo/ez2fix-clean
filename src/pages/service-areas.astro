@@ -1062,10 +1062,13 @@ const serviceAreasData = {
       return;
     }
     
+    const apiKey = window.GOOGLE_MAPS_API_KEY || googleMapsApiKey;
+    console.log('Loading Google Maps with API key available:', !!apiKey);
+    
     const script = document.createElement('script');
     script.async = true;
     script.defer = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&callback=initServiceAreasMap&loading=async`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initServiceAreasMap&loading=async`;
     document.head.appendChild(script);
   }
 
