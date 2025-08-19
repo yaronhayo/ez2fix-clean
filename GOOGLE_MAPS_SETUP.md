@@ -14,22 +14,45 @@ The Google Maps integration has been **fixed** and simplified to work with Astro
 3. If valid, it loads the Google Maps JavaScript API with the key
 4. If not valid, it shows a fallback error message
 
-## For Production Deployment in Vercel
+## 🚨 ISSUE EXPLANATION
 
-**CRITICAL**: The environment variable `PUBLIC_GOOGLE_MAPS_API_KEY` must be set in Vercel's dashboard:
+The maps are showing "❌ No valid Google Maps API key available" because:
+1. **Local Development**: The `.env` file has `PUBLIC_GOOGLE_MAPS_API_KEY=local_development_placeholder`
+2. **Production**: The environment variable needs to be set in Vercel's dashboard
 
-1. Go to your Vercel project dashboard
-2. Navigate to **Settings** → **Environment Variables**
-3. Add a new environment variable:
+## ✅ SOLUTION STEPS
+
+### For Production Deployment (Required)
+1. **Go to Vercel Dashboard**: https://vercel.com/dashboard
+2. **Select your ez2fix project**
+3. **Go to Settings** → **Environment Variables**
+4. **Add New Variable**:
    - **Name**: `PUBLIC_GOOGLE_MAPS_API_KEY`
-   - **Value**: Your actual Google Maps API key (starts with AIza...)
-   - **Environments**: Check all three: Production, Preview, Development
+   - **Value**: Your Google Maps API key (starts with AIza...)
+   - **Environments**: ✅ Production, ✅ Preview, ✅ Development
+5. **Click Save**
+6. **Redeploy** your site (go to Deployments → click "⋯" → Redeploy)
 
-## For Local Testing
-Replace the placeholder value in `.env`:
+### For Local Testing (Optional)
+Edit `.env` file:
 ```bash
-PUBLIC_GOOGLE_MAPS_API_KEY=your_actual_api_key_here
+# Replace this line:
+PUBLIC_GOOGLE_MAPS_API_KEY=local_development_placeholder
+
+# With your actual API key:
+PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxx
 ```
+
+## 🔑 Getting a Google Maps API Key
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing one
+3. Enable **Maps JavaScript API**
+4. Go to **Credentials** → **Create Credentials** → **API Key**
+5. **Restrict the API key**:
+   - Application restrictions: HTTP referrers
+   - Website restrictions: Add your domain (ez2fixllc.com)
+6. Copy the API key
 
 ## Verification
 The maps should now load correctly on the `/service-areas` page with:

@@ -805,7 +805,9 @@ Gett Marketing
     }
     
     if (!apiKey || apiKey === 'local_development_placeholder' || apiKey.length < 20) {
-      console.error('❌ No valid Google Maps API key available');
+      console.error('❌ Google Maps API key not configured');
+      console.error('🔧 To fix: Set PUBLIC_GOOGLE_MAPS_API_KEY in Vercel environment variables');
+      console.error('📚 See GOOGLE_MAPS_SETUP.md for setup instructions');
       showMapError();
       return;
     }
@@ -833,7 +835,8 @@ Gett Marketing
     if (loadingElement) {
       loadingElement.innerHTML = `
         <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Interactive Map Temporarily Unavailable</div>
-        <div class="text-sm" style="color: #BB8525;">Please see our complete service area list below the map</div>
+        <div class="text-sm mb-2" style="color: #BB8525;">Maps functionality requires configuration setup</div>
+        <div class="text-xs" style="color: #BB8525;">Please see our complete service area list below</div>
       `;
     }
   }
