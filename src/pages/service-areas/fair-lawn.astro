@@ -718,6 +718,12 @@ const localFAQs = [
 </BaseLayout>
 
 <!-- Google Maps JavaScript API for Individual Location -->
+<script define:vars={{ googleMapsApiKey: clientEnv.googleMaps.apiKey }}>
+  // Make API key available to client-side scripts
+  window.GOOGLE_MAPS_API_KEY = googleMapsApiKey;
+  console.log('Individual page - Google Maps API Key available:', !!googleMapsApiKey);
+  console.log('Individual page - API Key length:', (googleMapsApiKey || '').length);
+</script>
 <script async defer 
         src={`https://maps.googleapis.com/maps/api/js?key=${clientEnv.googleMaps.apiKey}&callback=initIndividualLocationMap`}>
 </script>
