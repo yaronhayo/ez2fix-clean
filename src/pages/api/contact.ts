@@ -4,8 +4,7 @@ import { verifyRecaptcha } from '@/lib/recaptcha';
 import { sendContactFormEmail, type ContactFormData } from '@/lib/email';
 import { isDev } from '@/config/env';
 
-// Force this route to be server-side rendered
-export const prerender = false;
+// API route - will be handled by Vercel serverless functions
 
 // Security headers for all responses
 const securityHeaders = {

@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Important pages
+Allow: /services/
+Allow: /about
+Allow: /contact
+Allow: /booking
+Allow: /service-areas/
+Allow: /reviews
+Allow: /faq
+
+# Block certain pages
+Disallow: /api/
+Disallow: /thank-you
+Disallow: /accessibility-policy
+Disallow: /privacy-policy
+Disallow: /terms-of-service
+
+# Sitemap location
+Sitemap: https://ez2fixllc.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

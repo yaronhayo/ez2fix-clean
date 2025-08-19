@@ -7,12 +7,7 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
-  output: 'hybrid',
+  output: 'static',
   adapter: vercel(),
-  site: 'https://ez2fixllc.com',
-  vite: {
-    define: {
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    }
-  }
+  site: 'https://ez2fixllc.com'
 });

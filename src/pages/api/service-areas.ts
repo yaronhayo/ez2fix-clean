@@ -2,8 +2,7 @@
 import type { APIRoute } from 'astro';
 import { serverEnv } from '@/config/env';
 
-// Force this route to be server-side rendered
-export const prerender = false;
+// API route - will be handled by Vercel serverless functions
 
 // Service area data with coordinates (server-side only)
 const serviceAreas = [
