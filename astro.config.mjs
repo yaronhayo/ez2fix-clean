@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
-  output: 'static',
+  output: 'hybrid', // Enable serverless functions for API routes while keeping pages static
   adapter: vercel(),
   site: 'https://ez2fixllc.com'
 });
