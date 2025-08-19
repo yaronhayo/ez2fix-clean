@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async () => {
-  const baseUrl = 'https://ez2fixllc.com';
+  const baseUrl = 'https://www.ez2fixllc.com';
   
   // Static pages with their priorities and change frequencies
   const staticPages = [
