@@ -863,14 +863,6 @@ const serviceAreasData = {
   
 </BaseLayout>
 
-<!-- Google Maps API Key Injection -->
-<script is:inline define:vars={{ mapsApiKey: clientEnv.googleMaps.apiKey }}>
-  // Set global API key variable
-  window.GOOGLE_MAPS_API_KEY = mapsApiKey;
-  // Debug: Log what we got during build
-  console.log('Build-time API key set:', !!mapsApiKey && mapsApiKey !== 'local_development_placeholder' ? 'Valid key detected' : 'Using placeholder - check Vercel env vars');
-</script>
-
 <!-- Google Maps JavaScript API -->
 <script>
   // Initialize API key
@@ -1060,35 +1052,44 @@ const serviceAreasData = {
 
   };
 
-  // Load Google Maps API with direct environment variable access
-  function loadGoogleMapsAPI() {
+  // Load Google Maps API with runtime key fetching
+  async function loadGoogleMapsAPI() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
 
-    // Get API key from global variable set by inline script
-    const apiKey = window.GOOGLE_MAPS_API_KEY;
-    
-    if (location.hostname === 'localhost' || location.hostname.includes('vercel.app')) {
-      console.log('Loading Google Maps API...');
-      console.log('API key available:', !!apiKey && apiKey !== 'local_development_placeholder');
-    }
-    
-    if (!apiKey || apiKey === 'local_development_placeholder' || apiKey.length < 20) {
-      console.error('❌ Google Maps API key not configured');
-      console.error('🔧 Current key:', apiKey ? `"${apiKey.substring(0, 10)}..."` : 'undefined');
-      console.error('🔧 To fix: Set PUBLIC_GOOGLE_MAPS_API_KEY in Vercel environment variables');
-      console.error('📚 See GOOGLE_MAPS_SETUP.md for setup instructions');
-      console.error('🔍 Environment check: Build-time variable injection should show valid key above');
+    try {
+      console.log('🔄 Fetching Google Maps API key from server...');
+      
+      const response = await fetch('/api/maps-key');
+      const data = await response.json();
+      
+      if (!response.ok || data.error) {
+        console.error('❌ Failed to get API key from server:', data.error || 'Unknown error');
+        console.error('🔧 Debug info:', data.debug);
+        console.error('🔧 Check Vercel environment variables: PUBLIC_GOOGLE_MAPS_API_KEY');
+        showMapError();
+        return;
+      }
+      
+      if (!data.apiKey || data.apiKey.length < 20) {
+        console.error('❌ Invalid API key received from server');
+        console.error('🔧 Key length:', data.apiKey ? data.apiKey.length : 0);
+        showMapError();
+        return;
+      }
+      
+      console.log('✅ API key retrieved successfully, length:', data.apiKey.length);
+      console.log('🚀 Loading Google Maps script...');
+      
+      loadMapsScript(data.apiKey);
+      
+    } catch (error) {
+      console.error('❌ Error fetching API key:', error);
+      console.error('🔧 This might be a network issue or server configuration problem');
       showMapError();
-      return;
     }
-    
-    if (location.hostname === 'localhost' || location.hostname.includes('vercel.app')) {
-      console.log('✅ Loading Google Maps script with API key, length:', apiKey.length);
-    }
-    loadMapsScript(apiKey);
   }
 
   function loadMapsScript(apiKey) {
