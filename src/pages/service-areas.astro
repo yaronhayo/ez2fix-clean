@@ -1052,6 +1052,9 @@ const serviceAreasData = {
 
   };
 
+  // DIRECT API KEY - BYPASSING SERVERLESS FUNCTIONS
+  const GOOGLE_MAPS_API_KEY = 'AIzaSyCC7AYmLnyP7XLdADdhYFpzRRjiCqmlkhw';
+
   // Runtime Maps Loading Function
   window.loadGoogleMapsFromRuntime = function() {
     if (window.google && window.google.maps) {
@@ -1059,14 +1062,10 @@ const serviceAreasData = {
       return;
     }
 
-    if (!window.RUNTIME_MAPS_CONFIG || !window.RUNTIME_MAPS_CONFIG.apiKey) {
-      console.error('❌ Runtime maps config not available');
-      showMapError();
-      return;
-    }
+    console.log('✅ Using direct API key (bypassing serverless functions)');
 
-    const apiKey = window.RUNTIME_MAPS_CONFIG.apiKey;
-    console.log('✅ Runtime API key loaded, length:', apiKey.length);
+    const apiKey = GOOGLE_MAPS_API_KEY;
+    console.log('✅ Direct API key loaded, length:', apiKey.length);
     console.log('🚀 Loading Google Maps script...');
     
     loadMapsScript(apiKey);
@@ -1079,28 +1078,14 @@ const serviceAreasData = {
       return;
     }
 
-    console.log('🔄 Loading Google Maps with runtime configuration...');
+    console.log('🔄 Loading Google Maps with DIRECT API key (bypassing serverless functions)...');
     
-    // Check if runtime config is already loaded
-    if (window.RUNTIME_MAPS_CONFIG) {
-      window.loadGoogleMapsFromRuntime();
-      return;
-    }
+    // Use direct API key instead of serverless function
+    const apiKey = GOOGLE_MAPS_API_KEY;
+    console.log('✅ Direct API key available, length:', apiKey.length);
+    console.log('🚀 Loading Google Maps script directly...');
     
-    // Load runtime configuration
-    console.log('📡 Fetching runtime maps configuration...');
-    const script = document.createElement('script');
-    script.src = '/maps-config.js?' + Date.now(); // Cache bust
-    script.onload = () => {
-      console.log('✅ Runtime configuration script loaded');
-    };
-    script.onerror = () => {
-      console.error('❌ Failed to load runtime configuration');
-      console.error('🔧 This indicates a server-side configuration issue');
-      console.error('🔧 Check Vercel Functions and environment variables');
-      showMapError();
-    };
-    document.head.appendChild(script);
+    loadMapsScript(apiKey);
   }
 
   function loadMapsScript(apiKey) {
