@@ -5,7 +5,8 @@ import { clientEnv } from '@/config/env';
 export const GET: APIRoute = async () => {
   // IMPORTANT: In Vercel serverless functions, use process.env directly
   // import.meta.env only works at build time, not runtime
-  const runtimeApiKey = process.env.PUBLIC_GOOGLE_MAPS_API_KEY || 
+  const runtimeApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
+                        process.env.PUBLIC_GOOGLE_MAPS_API_KEY || 
                         process.env.GOOGLE_MAPS_API_KEY ||
                         process.env.MAPS_API_KEY;
   
@@ -15,6 +16,7 @@ export const GET: APIRoute = async () => {
     keyPreview: runtimeApiKey ? `${runtimeApiKey.substring(0, 10)}...` : 'undefined',
     keyLength: runtimeApiKey ? runtimeApiKey.length : 0,
     sources: {
+      NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? `${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined',
       PUBLIC_GOOGLE_MAPS_API_KEY: process.env.PUBLIC_GOOGLE_MAPS_API_KEY ? `${process.env.PUBLIC_GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined',
       GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY ? `${process.env.GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined', 
       MAPS_API_KEY: process.env.MAPS_API_KEY ? `${process.env.MAPS_API_KEY.substring(0, 10)}...` : 'undefined'
