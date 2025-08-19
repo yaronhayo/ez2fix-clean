@@ -1,1 +1,1 @@
-{"error":"Google Maps API key not configured","debug":{"hasEnvVar":true,"hasProcessEnv":true,"hasClientEnv":true}}
+{"error":"Google Maps API key not configured","debug":{"hasEnvVar":true,"hasProcessEnv":true,"hasClientEnv":true,"envVarValue":"local_deve...","processEnvValue":"local_deve...","clientEnvValue":"local_deve..."}}
