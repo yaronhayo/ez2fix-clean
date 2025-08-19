@@ -28,7 +28,7 @@ window.initServiceAreasMap=function(){const o=document.getElementById("service-a
                       font-size: 12px; font-weight: bold; flex: 1; text-align: center;">Get Quote</a>
           </div>
         </div>
-      `,r=new google.maps.InfoWindow({content:y});a.addListener("click",()=>{n.forEach(i=>{i.infoWindow&&i.infoWindow.close()}),r.open(l,a)}),e.infoWindow=r}),console.log("Service Areas Map initialized successfully")};setTimeout(()=>{document.getElementById("service-areas-map");const o=document.getElementById("map-loading");o&&o.style.display!=="none"&&(o.innerHTML=`
+      `,r=new google.maps.InfoWindow({content:y});a.addListener("click",()=>{n.forEach(i=>{i.infoWindow&&i.infoWindow.close()}),r.open(l,a)}),e.infoWindow=r})};setTimeout(()=>{document.getElementById("service-areas-map");const o=document.getElementById("map-loading");o&&o.style.display!=="none"&&(o.innerHTML=`
         <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Interactive Map Temporarily Unavailable</div>
         <div class="text-sm" style="color: #BB8525;">Please see our complete service area list below the map</div>
       `)},15e3);

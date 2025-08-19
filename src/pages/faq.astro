@@ -522,22 +522,17 @@ const faqCategories = [
     const seeMoreText = seeMoreBtn.querySelector('.see-more-text');
     const seeMoreIcon = seeMoreBtn.querySelector('.see-more-icon');
     
-    console.log('Toggle called for category:', categoryIndex);
-    console.log('Container found:', moreFaqsContainer);
-    console.log('Current display:', moreFaqsContainer.style.display);
     
     if (moreFaqsContainer.style.display === 'none' || moreFaqsContainer.style.display === '') {
       // Show more FAQs
       moreFaqsContainer.style.display = 'block';
       seeMoreText.textContent = 'See Less';
       seeMoreIcon.style.transform = 'rotate(180deg)';
-      console.log('Showing more FAQs');
     } else {
       // Hide more FAQs
       moreFaqsContainer.style.display = 'none';
       seeMoreText.textContent = 'See More';
       seeMoreIcon.style.transform = 'rotate(0deg)';
-      console.log('Hiding more FAQs');
     }
   }
 
@@ -587,7 +582,6 @@ const faqCategories = [
       categoryVisibleCounts[categoryIndex] = 0; // Start with 0 extra questions visible
       
       button.addEventListener('click', () => {
-        console.log('Button clicked for category:', categoryIndex);
         
         const seeMoreText = button.querySelector('.see-more-text');
         const seeMoreIcon = button.querySelector('.see-more-icon');
@@ -607,7 +601,6 @@ const faqCategories = [
         }
         
         const totalExtraQuestions = allExtraQuestions.length;
-        console.log('Current visible:', currentVisible, 'Total extra:', totalExtraQuestions);
         
         if (currentVisible < totalExtraQuestions) {
           // Show next batch of 4 questions
@@ -616,7 +609,6 @@ const faqCategories = [
           for (let i = currentVisible; i < nextBatchEnd; i++) {
             if (allExtraQuestions[i]) {
               allExtraQuestions[i].style.display = 'block';
-              console.log(`Showing question ${i}`);
             }
           }
           
@@ -632,20 +624,17 @@ const faqCategories = [
             seeMoreIcon.style.transform = 'rotate(0deg)';
           }
           
-          console.log(`Showing questions ${currentVisible} to ${nextBatchEnd - 1}`);
           
         } else {
           // Hide all extra questions (See Less clicked)
           allExtraQuestions.forEach((element, index) => {
             element.style.display = 'none';
-            console.log(`Hiding question ${index}`);
           });
           
           categoryVisibleCounts[categoryIndex] = 0;
           seeMoreText.textContent = 'See More';
           seeMoreIcon.style.transform = 'rotate(0deg)';
           
-          console.log('Hiding all extra FAQs');
         }
       });
     });

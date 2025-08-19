@@ -1,6 +1,6 @@
 // Email Service Integration using Resend
 import { Resend } from 'resend';
-import { serverEnv } from '@/config/env';
+import { serverEnv, isDev } from '@/config/env';
 
 // Initialize Resend client only when needed
 let resendClient: Resend | null = null;
@@ -12,13 +12,13 @@ function getResendClient(): Resend {
   }
   
   if (!resendClient) {
-    console.log('Initializing Resend client...');
+    if (isDev) console.log('Initializing Resend client...');
     try {
       resendClient = new Resend(serverEnv.email.resendApiKey);
-      console.log('Resend client initialized successfully');
+      if (isDev) console.log('Resend client initialized successfully');
     } catch (error) {
       console.error('Failed to initialize Resend client:', error);
-      throw new Error(`Failed to initialize Resend client: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error('Email service configuration error');
     }
   }
   

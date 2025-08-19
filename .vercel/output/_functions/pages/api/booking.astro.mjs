@@ -1,32 +1,32 @@
-import { v as verifyRecaptcha, s as sendBookingFormEmail } from '../../chunks/email_pSLe9Hi9.mjs';
+import { v as verifyRecaptcha, s as sendBookingFormEmail } from '../../chunks/email_CBh7Ww2H.mjs';
+import { i as isDev } from '../../chunks/env_DdGjSxDD.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const prerender = false;
+const securityHeaders = {
+  "Content-Type": "application/json",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "strict-origin-when-cross-origin"
+};
 const POST = async ({ request }) => {
   try {
-    console.log("Booking API called");
-    console.log("Request headers:", Object.fromEntries(request.headers.entries()));
-    console.log("Environment check:");
-    console.log("- RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
-    console.log("- RECAPTCHA_SECRET_KEY exists:", !!process.env.RECAPTCHA_SECRET_KEY);
-    console.log("- FROM_EMAIL exists:", !!process.env.FROM_EMAIL);
-    console.log("- TO_EMAIL exists:", !!process.env.TO_EMAIL);
+    if (isDev) ;
     let body;
     try {
       body = await request.json();
-      console.log("Request body received:", Object.keys(body));
-      console.log("Full body data:", body);
+      if (isDev) ;
     } catch (jsonError) {
       console.error("Failed to parse JSON body:", jsonError);
       return new Response(
         JSON.stringify({
           success: false,
-          error: "Invalid JSON in request body",
-          details: jsonError instanceof Error ? jsonError.message : "Unknown JSON parsing error"
+          error: "Invalid JSON in request body"
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -39,24 +39,23 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
-    console.log("Verifying reCAPTCHA token...");
+    if (isDev) ;
     try {
       const recaptchaResult = await verifyRecaptcha(recaptchaToken, "booking_form");
-      console.log("reCAPTCHA result:", recaptchaResult);
+      if (isDev) ;
       if (!recaptchaResult.success) {
         return new Response(
           JSON.stringify({
             success: false,
-            error: "reCAPTCHA verification failed",
-            details: recaptchaResult.error
+            error: "reCAPTCHA verification failed"
           }),
           {
             status: 400,
-            headers: { "Content-Type": "application/json" }
+            headers: securityHeaders
           }
         );
       }
@@ -65,12 +64,11 @@ const POST = async ({ request }) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "reCAPTCHA verification failed",
-          details: recaptchaError instanceof Error ? recaptchaError.message : "Unknown reCAPTCHA error"
+          error: "reCAPTCHA verification failed"
         }),
         {
           status: 500,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -83,7 +81,7 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -107,7 +105,7 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -121,7 +119,7 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -134,25 +132,24 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
-    console.log("Attempting to send booking form email...");
+    if (isDev) ;
     try {
       const emailResult = await sendBookingFormEmail(bookingData);
-      console.log("Email result:", emailResult);
+      if (isDev && emailResult.success) ;
       if (!emailResult.success) {
         console.error("Failed to send booking form email:", emailResult.error);
         return new Response(
           JSON.stringify({
             success: false,
-            error: `Email service error: ${emailResult.error}`,
-            details: "Please try again or call us directly."
+            error: "Email service temporarily unavailable. Please try again or call us directly."
           }),
           {
             status: 500,
-            headers: { "Content-Type": "application/json" }
+            headers: securityHeaders
           }
         );
       }
@@ -161,12 +158,11 @@ const POST = async ({ request }) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "Email service error",
-          details: emailError instanceof Error ? emailError.message : "Unknown email error"
+          error: "Email service temporarily unavailable. Please try again or call us directly."
         }),
         {
           status: 500,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -178,7 +174,7 @@ const POST = async ({ request }) => {
       }),
       {
         status: 200,
-        headers: { "Content-Type": "application/json" }
+        headers: securityHeaders
       }
     );
   } catch (error) {
@@ -186,13 +182,11 @@ const POST = async ({ request }) => {
     return new Response(
       JSON.stringify({
         success: false,
-        error: "Internal server error",
-        details: error instanceof Error ? error.message : "Unknown error",
-        stack: process.env.NODE_ENV === "development" ? error instanceof Error ? error.stack : void 0 : void 0
+        error: "Internal server error. Please try again or contact us directly."
       }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" }
+        headers: securityHeaders
       }
     );
   }

@@ -1,3 +1,7 @@
+const clientEnv = {
+  googleMaps: {
+    apiKey: ""
+  }};
 const serverEnv = {
   recaptcha: {
     secretKey: ""
@@ -63,6 +67,7 @@ const serverEnv = {
     formRateLimitWindowMs: parseInt("300000")
   }
 };
+const isDev = false;
 process.env.NODE_ENV || "development";
 
-export { serverEnv as s };
+export { clientEnv as c, isDev as i, serverEnv as s };

@@ -2,38 +2,44 @@
 import type { APIRoute } from 'astro';
 import { verifyRecaptcha } from '@/lib/recaptcha';
 import { sendBookingFormEmail, type BookingFormData } from '@/lib/email';
+import { isDev } from '@/config/env';
 
 // Force this route to be server-side rendered
 export const prerender = false;
 
+// Security headers for all responses
+const securityHeaders = {
+  'Content-Type': 'application/json',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin'
+};
+
 export const POST: APIRoute = async ({ request }) => {
   try {
-    console.log('Booking API called');
-    console.log('Request headers:', Object.fromEntries(request.headers.entries()));
-    
-    // Debug environment variables
-    console.log('Environment check:');
-    console.log('- RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
-    console.log('- RECAPTCHA_SECRET_KEY exists:', !!process.env.RECAPTCHA_SECRET_KEY);
-    console.log('- FROM_EMAIL exists:', !!process.env.FROM_EMAIL);
-    console.log('- TO_EMAIL exists:', !!process.env.TO_EMAIL);
+    if (isDev) {
+      console.log('Booking API called');
+      console.log('Environment check - required keys exist:', 
+        !!process.env.RESEND_API_KEY && !!process.env.RECAPTCHA_SECRET_KEY);
+    }
     
     let body;
     try {
       body = await request.json();
-      console.log('Request body received:', Object.keys(body));
-      console.log('Full body data:', body);
+      if (isDev) {
+        console.log('Request body received with fields:', Object.keys(body));
+      }
     } catch (jsonError) {
       console.error('Failed to parse JSON body:', jsonError);
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: 'Invalid JSON in request body',
-          details: jsonError instanceof Error ? jsonError.message : 'Unknown JSON parsing error'
+          error: 'Invalid JSON in request body'
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -49,27 +55,26 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
 
-    // Verify reCAPTCHA - temporarily disabled for debugging
-    console.log('Verifying reCAPTCHA token...');
+    // Verify reCAPTCHA
+    if (isDev) console.log('Verifying reCAPTCHA token...');
     try {
       const recaptchaResult = await verifyRecaptcha(recaptchaToken, 'booking_form');
-      console.log('reCAPTCHA result:', recaptchaResult);
+      if (isDev) console.log('reCAPTCHA verification completed');
       
       if (!recaptchaResult.success) {
         return new Response(
           JSON.stringify({ 
             success: false, 
-            error: 'reCAPTCHA verification failed',
-            details: recaptchaResult.error
+            error: 'reCAPTCHA verification failed'
           }),
           { 
             status: 400,
-            headers: { 'Content-Type': 'application/json' }
+            headers: securityHeaders
           }
         );
       }
@@ -78,12 +83,11 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: 'reCAPTCHA verification failed',
-          details: recaptchaError instanceof Error ? recaptchaError.message : 'Unknown reCAPTCHA error'
+          error: 'reCAPTCHA verification failed'
         }),
         { 
           status: 500,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -98,7 +102,7 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -126,7 +130,7 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -142,7 +146,7 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -157,28 +161,27 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
 
     // Send email
-    console.log('Attempting to send booking form email...');
+    if (isDev) console.log('Attempting to send booking form email...');
     try {
       const emailResult = await sendBookingFormEmail(bookingData);
-      console.log('Email result:', emailResult);
+      if (isDev && emailResult.success) console.log('Email sent successfully');
       
       if (!emailResult.success) {
         console.error('Failed to send booking form email:', emailResult.error);
         return new Response(
           JSON.stringify({ 
             success: false, 
-            error: `Email service error: ${emailResult.error}`,
-            details: 'Please try again or call us directly.'
+            error: 'Email service temporarily unavailable. Please try again or call us directly.'
           }),
           { 
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: securityHeaders
           }
         );
       }
@@ -187,12 +190,11 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: 'Email service error',
-          details: emailError instanceof Error ? emailError.message : 'Unknown email error'
+          error: 'Email service temporarily unavailable. Please try again or call us directly.'
         }),
         { 
           status: 500,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -206,7 +208,7 @@ export const POST: APIRoute = async ({ request }) => {
       }),
       { 
         status: 200,
-        headers: { 'Content-Type': 'application/json' }
+        headers: securityHeaders
       }
     );
 
@@ -216,13 +218,11 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: 'Internal server error',
-        details: error instanceof Error ? error.message : 'Unknown error',
-        stack: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.stack : undefined) : undefined
+        error: 'Internal server error. Please try again or contact us directly.'
       }),
       { 
         status: 500,
-        headers: { 'Content-Type': 'application/json' }
+        headers: securityHeaders
       }
     );
   }

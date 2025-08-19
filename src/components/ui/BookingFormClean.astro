@@ -418,10 +418,10 @@ const formId = `booking-form-${variant}`;
             }
           });
         } catch (error) {
-          console.warn('Google Maps autocomplete not available, using fallback:', error);
+          // Google Maps autocomplete not available, using fallback
         }
       }).catch(() => {
-        console.warn('Google Maps module not available, using manual parsing');
+        // Google Maps module not available, using manual parsing
       });
       
       // Manual address parsing fallback

@@ -2,9 +2,19 @@
 import type { APIRoute } from 'astro';
 import { verifyRecaptcha } from '@/lib/recaptcha';
 import { sendContactFormEmail, type ContactFormData } from '@/lib/email';
+import { isDev } from '@/config/env';
 
 // Force this route to be server-side rendered
 export const prerender = false;
+
+// Security headers for all responses
+const securityHeaders = {
+  'Content-Type': 'application/json',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin'
+};
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -21,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -33,12 +43,11 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: 'reCAPTCHA verification failed',
-          details: recaptchaResult.error
+          error: 'reCAPTCHA verification failed'
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -64,7 +73,7 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { 
           status: 400,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -81,7 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
           }),
           { 
             status: 400,
-            headers: { 'Content-Type': 'application/json' }
+            headers: securityHeaders
           }
         );
       }
@@ -96,11 +105,11 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: 'Failed to send email' 
+          error: 'Email service temporarily unavailable. Please try again or call us directly.' 
         }),
         { 
           status: 500,
-          headers: { 'Content-Type': 'application/json' }
+          headers: securityHeaders
         }
       );
     }
@@ -113,7 +122,7 @@ export const POST: APIRoute = async ({ request }) => {
       }),
       { 
         status: 200,
-        headers: { 'Content-Type': 'application/json' }
+        headers: securityHeaders
       }
     );
 
@@ -127,7 +136,7 @@ export const POST: APIRoute = async ({ request }) => {
       }),
       { 
         status: 500,
-        headers: { 'Content-Type': 'application/json' }
+        headers: securityHeaders
       }
     );
   }

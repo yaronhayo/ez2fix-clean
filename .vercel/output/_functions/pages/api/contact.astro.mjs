@@ -1,7 +1,15 @@
-import { v as verifyRecaptcha, a as sendContactFormEmail } from '../../chunks/email_pSLe9Hi9.mjs';
+import { v as verifyRecaptcha, a as sendContactFormEmail } from '../../chunks/email_CBh7Ww2H.mjs';
+import '../../chunks/env_DdGjSxDD.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const prerender = false;
+const securityHeaders = {
+  "Content-Type": "application/json",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "strict-origin-when-cross-origin"
+};
 const POST = async ({ request }) => {
   try {
     const body = await request.json();
@@ -14,7 +22,7 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -23,12 +31,11 @@ const POST = async ({ request }) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "reCAPTCHA verification failed",
-          details: recaptchaResult.error
+          error: "reCAPTCHA verification failed"
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -50,7 +57,7 @@ const POST = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -65,7 +72,7 @@ const POST = async ({ request }) => {
           }),
           {
             status: 400,
-            headers: { "Content-Type": "application/json" }
+            headers: securityHeaders
           }
         );
       }
@@ -77,11 +84,11 @@ const POST = async ({ request }) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "Failed to send email"
+          error: "Email service temporarily unavailable. Please try again or call us directly."
         }),
         {
           status: 500,
-          headers: { "Content-Type": "application/json" }
+          headers: securityHeaders
         }
       );
     }
@@ -92,7 +99,7 @@ const POST = async ({ request }) => {
       }),
       {
         status: 200,
-        headers: { "Content-Type": "application/json" }
+        headers: securityHeaders
       }
     );
   } catch (error) {
@@ -104,7 +111,7 @@ const POST = async ({ request }) => {
       }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" }
+        headers: securityHeaders
       }
     );
   }

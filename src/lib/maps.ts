@@ -193,7 +193,7 @@ async function addServiceAreaMarkers(map: google.maps.Map): Promise<void> {
         });
       }
     } catch (error) {
-      console.warn(`Failed to geocode ${area}:`, error);
+      // Failed to geocode area, using fallback
     }
   }
 }

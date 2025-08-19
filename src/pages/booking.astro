@@ -72,12 +72,12 @@ const testimonialHighlights = [
         <div class="max-w-6xl mx-auto">
           
           <!-- Breadcrumb -->
-          <nav class="flex items-center space-x-2 text-sm mb-8" style="color: #5A3F11;">
-            <a href="/" class="hover:underline">Home</a>
+          <nav class="flex items-center space-x-2 text-sm mb-8" style="color: #EECD5C;">
+            <a href="/" class="hover:underline hover:text-white transition-colors">Home</a>
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
-            <span style="color: #6B5416;">Book Service</span>
+            <span style="color: #D2A63C;">Book Service</span>
           </nav>
           
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -85,22 +85,22 @@ const testimonialHighlights = [
             <!-- Left Column - Content -->
             <div>
               <h1 class="text-4xl md:text-6xl font-bold mb-6" style="color: #F3F3E6;">
-                Get Your Free <span style="color: #6B5416;">Garage Door</span> Estimate
+                Get Your Free <span style="color: #EECD5C;">Garage Door</span> Estimate
               </h1>
-              <p class="text-xl leading-relaxed mb-8" style="color: #6B5416;">
+              <p class="text-xl leading-relaxed mb-8" style="color: #F3F3E6;">
                 Professional service starts with a simple form. Get your personalized estimate 
                 and schedule same-day service from Bergen County's most trusted garage door experts.
               </p>
               
               <!-- Quick Stats -->
               <div class="grid grid-cols-2 gap-6 mb-8">
-                <div class="text-center p-4 rounded-lg" style="background: rgba(238, 205, 92, 0.1);">
-                  <div class="text-3xl font-bold" style="color: #6B5416;">24/7</div>
-                  <div class="text-sm" style="color: #6B5416;">Service Available</div>
+                <div class="text-center p-4 rounded-lg" style="background: rgba(238, 205, 92, 0.2); border: 1px solid rgba(238, 205, 92, 0.3);">
+                  <div class="text-3xl font-bold" style="color: #EECD5C;">24/7</div>
+                  <div class="text-sm" style="color: #F3F3E6;">Service Available</div>
                 </div>
-                <div class="text-center p-4 rounded-lg" style="background: rgba(238, 205, 92, 0.1);">
-                  <div class="text-3xl font-bold" style="color: #D2A63C;">5.0★</div>
-                  <div class="text-sm" style="color: #EECD5C;">Customer Rating</div>
+                <div class="text-center p-4 rounded-lg" style="background: rgba(238, 205, 92, 0.2); border: 1px solid rgba(238, 205, 92, 0.3);">
+                  <div class="text-3xl font-bold" style="color: #EECD5C;">5.0★</div>
+                  <div class="text-sm" style="color: #F3F3E6;">Customer Rating</div>
                 </div>
               </div>
               
@@ -156,14 +156,14 @@ const testimonialHighlights = [
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <Card class="text-center p-8 shadow-xl border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1" style={`background-color: ${index % 2 === 0 ? '#1D1912' : 'white'}; border-color: ${index % 2 === 0 ? '#6B5416' : '#5A3F11'};`}>
-                <div class="mb-6" style={`color: ${index % 2 === 0 ? '#6B5416' : '#1D1912'};`}>
+              <Card class="text-center p-8 shadow-xl border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1" style="background-color: white; border-color: #D2A63C;">
+                <div class="mb-6" style="color: #D2A63C;">
                   <Fragment set:html={benefit.icon} />
                 </div>
-                <h3 class="text-xl font-bold mb-4" style={`color: ${index % 2 === 0 ? '#F3F3E6' : '#1D1912'};`}>
+                <h3 class="text-xl font-bold mb-4" style="color: #1D1912;">
                   {benefit.title}
                 </h3>
-                <p class="leading-relaxed" style={`color: ${index % 2 === 0 ? '#6B5416' : '#5A3F11'};`}>
+                <p class="leading-relaxed" style="color: #2A2420;">
                   {benefit.description}
                 </p>
               </Card>
@@ -180,9 +180,9 @@ const testimonialHighlights = [
           
           <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: #F3F3E6;">
-              Join <span style="color: #6B5416;">30+ Happy Customers</span> This Week
+              Join <span style="color: #EECD5C;">30+ Happy Customers</span> This Week
             </h2>
-            <p class="text-xl max-w-3xl mx-auto leading-relaxed" style="color: #6B5416;">
+            <p class="text-xl max-w-3xl mx-auto leading-relaxed" style="color: #D2A63C;">
               Real customers sharing their experiences with our booking process and service quality.
             </p>
           </div>
@@ -193,7 +193,7 @@ const testimonialHighlights = [
                 <!-- Stars -->
                 <div class="flex justify-center mb-4">
                   {[1,2,3,4,5].map(() => (
-                    <svg class="h-5 w-5" style="color: #6B5416;" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-5 w-5" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
                     </svg>
                   ))}
@@ -211,7 +211,7 @@ const testimonialHighlights = [
                   </div>
                   <div class="font-semibold" style="color: #1D1912;">{testimonial.name}</div>
                   <div class="text-sm" style="color: #BB8525;">{testimonial.location}</div>
-                  <div class="text-xs font-medium px-3 py-1 rounded-full mt-2" style="background-color: #EECD5C; color: #1D1912;">
+                  <div class="text-xs font-medium px-3 py-1 rounded-full mt-2" style="background-color: #D2A63C; color: #F3F3E6;">
                     {testimonial.service}
                   </div>
                 </div>

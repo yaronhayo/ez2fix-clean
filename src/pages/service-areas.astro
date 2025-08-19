@@ -5,6 +5,7 @@ import FooterClean from '@/components/layout/FooterClean.astro';
 import Card from '@/components/ui/Card.astro';
 import Button from '@/components/ui/Button.astro';
 import { siteConfig } from '@/config/site';
+import { clientEnv } from '@/config/env';
 
 const extendedServiceAreas = [
   // Primary Areas - Featured service area pages
@@ -791,7 +792,7 @@ const serviceAreasData = {
 
 <!-- Google Maps JavaScript API -->
 <script async defer 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&callback=initServiceAreasMap">
+        src={`https://maps.googleapis.com/maps/api/js?key=${clientEnv.googleMaps.apiKey}&callback=initServiceAreasMap`}>
 </script>
 
 <script>
@@ -947,7 +948,6 @@ const serviceAreasData = {
       area.infoWindow = infoWindow;
     });
 
-    console.log('Service Areas Map initialized successfully');
   };
 
   // Initialize map fallback if Google Maps fails to load

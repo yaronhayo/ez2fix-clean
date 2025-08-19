@@ -38,6 +38,12 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    
     <!-- Core Web Vitals & Performance Optimization -->
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="x-dns-prefetch-control" content="on" />
@@ -265,10 +271,10 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
             .then(registration => {
-              console.log('SW registered: ', registration);
+              // Service worker registered successfully
             })
             .catch(registrationError => {
-              console.log('SW registration failed: ', registrationError);
+              // Service worker registration failed
             });
         });
       }
