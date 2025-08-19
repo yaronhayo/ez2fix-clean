@@ -14,7 +14,7 @@ export async function initializeGoogleMaps(): Promise<void> {
 
   // Only load if we have the client-side API key for Places autocomplete
   if (!clientEnv.googleMaps.apiKey) {
-    throw new Error('Google Maps API key not configured for client-side use');
+    throw new Error('Google Maps API key not configured for client-side use. Check PUBLIC_GOOGLE_MAPS_API_KEY environment variable.');
   }
 
   return new Promise((resolve, reject) => {

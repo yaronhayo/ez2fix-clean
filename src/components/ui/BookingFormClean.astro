@@ -409,12 +409,15 @@ const formId = `booking-form-${variant}`;
         const { initializeGoogleMaps, setupAddressAutocomplete } = await import('@/lib/maps');
         
         // Initialize Google Maps if not already loaded
+        console.log('🌍 Initializing Google Maps for address autocomplete...');
         await initializeGoogleMaps();
+        console.log('✅ Google Maps initialized successfully');
         
         // Set up address autocomplete with service area restrictions
         const autocomplete = setupAddressAutocomplete(addressInput, {
           restrictToServiceArea: true,
           onPlaceSelected: (place) => {
+            console.log('📍 Address selected:', place.formatted_address);
             if (place.formatted_address) {
               addressInput.value = place.formatted_address;
               
@@ -423,11 +426,30 @@ const formId = `booking-form-${variant}`;
                 addressExpanded.classList.remove('hidden');
                 fillAddressComponents(place, variant);
               }
+              
+              // Add visual feedback
+              addressInput.style.borderColor = '#10b981'; // Green border
+              setTimeout(() => {
+                addressInput.style.borderColor = '';
+              }, 2000);
             }
           }
         });
         
-        console.log('✅ Google Maps address autocomplete enabled');
+        console.log('✅ Google Maps address autocomplete enabled successfully');
+        
+        // Add visual indicator that autocomplete is working
+        const autocompleteIndicator = document.createElement('div');
+        autocompleteIndicator.innerHTML = '✅ Address autocomplete enabled';
+        autocompleteIndicator.className = 'text-xs text-green-600 mt-1';
+        autocompleteIndicator.style.display = 'none';
+        addressInput.parentNode.appendChild(autocompleteIndicator);
+        
+        // Show indicator briefly
+        autocompleteIndicator.style.display = 'block';
+        setTimeout(() => {
+          autocompleteIndicator.style.display = 'none';
+        }, 3000);
         
         // Show expanded fields on focus
         addressInput.addEventListener('focus', () => {
@@ -437,7 +459,15 @@ const formId = `booking-form-${variant}`;
         });
         
       } catch (error) {
-        console.warn('Google Maps autocomplete unavailable, falling back to manual input:', error.message);
+        console.warn('⚠️ Google Maps autocomplete unavailable:', error.message);
+        console.log('🔄 Falling back to manual address input...');
+        
+        // Add visual indicator that manual input is required
+        const fallbackIndicator = document.createElement('div');
+        fallbackIndicator.innerHTML = 'ℹ️ Type your full address manually';
+        fallbackIndicator.className = 'text-xs text-blue-600 mt-1';
+        addressInput.parentNode.appendChild(fallbackIndicator);
+        
         setupManualAddressParsing(addressInput, addressExpanded, variant);
       }
     }
