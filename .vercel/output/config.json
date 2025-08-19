@@ -5,7 +5,7 @@
 			"handle": "filesystem"
 		},
 		{
-			"src": "^/assets/(.*)$",
+			"src": "^/_astro/(.*)$",
 			"headers": {
 				"cache-control": "public, max-age=31536000, immutable"
 			},
@@ -20,18 +20,6 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/about/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/about-clean/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/accessibility-policy/?$",
-			"dest": "_render"
-		},
-		{
 			"src": "^/api/booking/?$",
 			"dest": "_render"
 		},
@@ -40,135 +28,7 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/api/robots/?$",
-			"dest": "_render"
-		},
-		{
 			"src": "^/api/service-areas/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/api/sitemap/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/choosing-right-garage-door-bergen-county/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/commercial-vs-residential-garage-doors/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/emergency-garage-door-repair-when-to-call/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/garage-door-spring-replacement-signs/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/smart-garage-door-openers-worth-investment/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/winter-garage-door-maintenance-nj/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/blog/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/booking/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/contact/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/faq/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/privacy-policy/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/reviews/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/cedar-grove/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/clifton/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/fair-lawn/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/little-falls/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/montclair/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/north-caldwell/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/west-caldwell/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/service-areas/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/commercial-garage-door-service/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/emergency-garage-door-repair/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/garage-door-opener-installation/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/garage-door-spring-repair/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/general-garage-door-repair/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/new-garage-door-installation/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/services/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/sitemap/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/terms-of-service/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/thank-you/?$",
 			"dest": "_render"
 		}
 	]

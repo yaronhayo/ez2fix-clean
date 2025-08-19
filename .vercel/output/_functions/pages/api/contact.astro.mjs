@@ -1,5 +1,6 @@
-import { v as verifyRecaptcha, a as sendContactFormEmail } from "../../assets/email-CusoSo-W.js";
-import { renderers } from "../../renderers.mjs";
+import { v as verifyRecaptcha, a as sendContactFormEmail } from '../../chunks/email_o3FMYZ33.mjs';
+export { renderers } from '../../renderers.mjs';
+
 const prerender = false;
 const POST = async ({ request }) => {
   try {
@@ -108,13 +109,13 @@ const POST = async ({ request }) => {
     );
   }
 };
-const _page = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   POST,
   prerender
-}, Symbol.toStringTag, { value: "Module" }));
+}, Symbol.toStringTag, { value: 'Module' }));
+
 const page = () => _page;
-export {
-  page,
-  renderers
-};
+
+export { page };

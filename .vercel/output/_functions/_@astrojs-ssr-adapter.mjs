@@ -1,5 +1,1 @@
-import { c, a } from "./assets/_@astrojs-ssr-adapter-DYicBgsM.js";
-export {
-  c as createExports,
-  a as start
-};
+export { c as createExports, a as start } from './chunks/_@astrojs-ssr-adapter_BpOpNA8F.mjs';

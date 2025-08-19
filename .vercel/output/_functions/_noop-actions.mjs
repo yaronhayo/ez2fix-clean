@@ -1,4 +1,3 @@
 const server = {};
-export {
-  server
-};
+
+export { server };

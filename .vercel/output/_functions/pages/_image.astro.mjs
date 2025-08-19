@@ -1,6 +1,2 @@
-import { a } from "../assets/generic@_@js-BcmmUfj8.js";
-import { renderers } from "../renderers.mjs";
-export {
-  a as page,
-  renderers
-};
+export { a as page } from '../chunks/generic_BwKzo8EF.mjs';
+export { renderers } from '../renderers.mjs';

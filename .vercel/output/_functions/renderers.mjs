@@ -1,5 +1,6 @@
-import React, { createElement } from "react";
-import ReactDOM from "react-dom/server";
+import React, { createElement } from 'react';
+import ReactDOM from 'react-dom/server';
+
 const contexts = /* @__PURE__ */ new WeakMap();
 const ID_PREFIX = "r";
 function getContext(rendererContextResult) {
@@ -21,6 +22,7 @@ function incrementId(rendererContextResult) {
   ctx.currentIndex++;
   return id;
 }
+
 const StaticHtml = ({
   value,
   name,
@@ -36,6 +38,7 @@ const StaticHtml = ({
 };
 StaticHtml.shouldComponentUpdate = () => false;
 var static_html_default = StaticHtml;
+
 const slotName = (str) => str.trim().replace(/[-_]([a-z])/g, (_, w) => w.toUpperCase());
 const reactTypeof = Symbol.for("react.element");
 const reactTransitionalTypeof = Symbol.for("react.transitional.element");
@@ -193,7 +196,7 @@ const renderer = {
   supportsAstroStaticSlot: true
 };
 var server_default = renderer;
-const renderers = [Object.assign({ "name": "@astrojs/react", "clientEntrypoint": "@astrojs/react/client.js", "serverEntrypoint": "@astrojs/react/server.js" }, { ssr: server_default })];
-export {
-  renderers
-};
+
+const renderers = [Object.assign({"name":"@astrojs/react","clientEntrypoint":"@astrojs/react/client.js","serverEntrypoint":"@astrojs/react/server.js"}, { ssr: server_default }),];
+
+export { renderers };
