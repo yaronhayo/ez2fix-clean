@@ -389,39 +389,15 @@ const formId = `booking-form-${variant}`;
     });
     
     function setupManualAddressParsing(addressInput, addressExpanded, variant) {
-      // Try to initialize Google Maps autocomplete asynchronously
-      import('@/lib/maps').then(async ({ initializeGoogleMaps, setupAddressAutocomplete }) => {
-        try {
-          await initializeGoogleMaps();
-          const autocomplete = setupAddressAutocomplete(addressInput, {
-            restrictToServiceArea: true,
-            onPlaceSelected: (place) => {
-              if (place.address_components && addressExpanded) {
-                addressExpanded.classList.remove('hidden');
-                
-                // Auto-fill expanded address fields  
-                const cityInput = addressInput.closest('form').querySelector(`#city-${variant}`);
-                const zipInput = addressInput.closest('form').querySelector(`#zip-${variant}`);
-                
-                place.address_components.forEach(component => {
-                  const types = component.types;
-                  
-                  if (types.includes('locality') && cityInput) {
-                    cityInput.value = component.long_name;
-                  }
-                  
-                  if (types.includes('postal_code') && zipInput) {
-                    zipInput.value = component.long_name;
-                  }
-                });
-              }
-            }
-          });
-        } catch (error) {
-          // Google Maps autocomplete not available, using fallback
+      // Skip Google Maps autocomplete to avoid API key conflicts
+      // Use simple manual address input instead
+      console.log('Using manual address input (Google Maps autocomplete disabled to avoid conflicts)');
+      
+      // Setup manual address expansion on focus
+      addressInput.addEventListener('focus', () => {
+        if (addressExpanded) {
+          addressExpanded.classList.remove('hidden');
         }
-      }).catch(() => {
-        // Google Maps module not available, using manual parsing
       });
       
       // Manual address parsing fallback
