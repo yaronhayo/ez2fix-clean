@@ -22,7 +22,7 @@ Disallow: /privacy-policy
 Disallow: /terms-of-service
 
 # Sitemap location
-Sitemap: ${new URL('/sitemap.xml', 'https://ez2fix.com').href}
+Sitemap: ${new URL('/sitemap.xml', 'https://ez2fixllc.com').href}
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

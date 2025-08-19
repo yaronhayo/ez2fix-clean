@@ -13,7 +13,7 @@ const serverEnv = {
     address: "Bergen County, NJ",
     phone: "(201) 554-6769",
     email: "info@ez2fix.com",
-    website: "https://ez2fix.com",
+    website: "https://ez2fixllc.com",
     coordinates: {
       lat: parseFloat("40.9176"),
       lng: parseFloat("-74.0732")

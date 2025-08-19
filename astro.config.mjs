@@ -9,5 +9,5 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'static',
   adapter: vercel(),
-  site: 'https://ez2fix.com'
+  site: 'https://ez2fixllc.com'
 });

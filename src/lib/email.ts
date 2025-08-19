@@ -409,17 +409,17 @@ function generateContactFormAutoReplyHTML(data: ContactFormData): string {
           <div style="background: white; border-radius: 12px; padding: 25px; border-left: 5px solid #BB8525; margin-bottom: 30px;">
             <h3 style="color: #1D1912; margin: 0 0 20px 0; font-size: 18px; font-weight: 600; text-align: center;">🔗 Helpful Links</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-              <a href="${serverEnv.business.website || 'https://ez2fix.com'}" style="background: #F8F9FA; border: 2px solid #D2A63C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}" style="background: #F8F9FA; border: 2px solid #D2A63C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
                 <div style="color: #1D1912; font-weight: 600; font-size: 14px;">🏠 Homepage</div>
                 <div style="color: #BB8525; font-size: 12px; margin-top: 5px;">Learn more about us</div>
               </a>
-              <a href="${serverEnv.business.website || 'https://ez2fix.com'}/services" style="background: #F8F9FA; border: 2px solid #EECD5C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/services" style="background: #F8F9FA; border: 2px solid #EECD5C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
                 <div style="color: #1D1912; font-weight: 600; font-size: 14px;">🔧 Our Services</div>
                 <div style="color: #BB8525; font-size: 12px; margin-top: 5px;">See what we offer</div>
               </a>
             </div>
             <div style="text-align: center; margin-top: 15px;">
-              <a href="${serverEnv.business.website || 'https://ez2fix.com'}/reviews" style="background: #BB8525; color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: inline-block;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/reviews" style="background: #BB8525; color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: inline-block;">
                 ⭐ Read Customer Reviews
               </a>
             </div>
@@ -671,17 +671,17 @@ function generateBookingFormAutoReplyHTML(data: BookingFormData): string {
           <div style="background: white; border-radius: 12px; padding: 25px; border-left: 5px solid #BB8525; margin-bottom: 30px;">
             <h3 style="color: #1D1912; margin: 0 0 20px 0; font-size: 18px; font-weight: 600; text-align: center;">🔗 While You Wait</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-              <a href="${serverEnv.business.website || 'https://ez2fix.com'}" style="background: #F8F9FA; border: 2px solid #D2A63C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}" style="background: #F8F9FA; border: 2px solid #D2A63C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
                 <div style="color: #1D1912; font-weight: 600; font-size: 14px;">🏠 Homepage</div>
                 <div style="color: #BB8525; font-size: 12px; margin-top: 5px;">Learn more about us</div>
               </a>
-              <a href="${serverEnv.business.website || 'https://ez2fix.com'}/faq" style="background: #F8F9FA; border: 2px solid #EECD5C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/faq" style="background: #F8F9FA; border: 2px solid #EECD5C; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
                 <div style="color: #1D1912; font-weight: 600; font-size: 14px;">❓ FAQ</div>
                 <div style="color: #BB8525; font-size: 12px; margin-top: 5px;">Common questions</div>
               </a>
             </div>
             <div style="text-align: center;">
-              <a href="${serverEnv.business.website || 'https://ez2fix.com'}/reviews" style="background: #BB8525; color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: inline-block;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/reviews" style="background: #BB8525; color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: inline-block;">
                 ⭐ Read Customer Reviews
               </a>
             </div>

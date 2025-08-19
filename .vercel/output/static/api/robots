@@ -18,7 +18,7 @@ Disallow: /privacy-policy
 Disallow: /terms-of-service
 
 # Sitemap location
-Sitemap: https://ez2fix.com/sitemap.xml
+Sitemap: https://ez2fixllc.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

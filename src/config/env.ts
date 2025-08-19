@@ -14,7 +14,7 @@ export const clientEnv = {
     facebookPixelId: import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID || '',
   },
   site: {
-    url: import.meta.env.SITE_URL || 'http://localhost:4321',
+    url: import.meta.env.SITE_URL || 'https://ez2fixllc.com',
   },
 } as const;
 
@@ -34,7 +34,7 @@ export const serverEnv = {
     address: import.meta.env.BUSINESS_ADDRESS || 'Bergen County, NJ',
     phone: import.meta.env.BUSINESS_PHONE || '(201) 554-6769',
     email: import.meta.env.BUSINESS_EMAIL || 'info@ez2fix.com',
-    website: import.meta.env.BUSINESS_WEBSITE || 'https://ez2fix.com',
+    website: import.meta.env.BUSINESS_WEBSITE || 'https://ez2fixllc.com',
     coordinates: {
       lat: parseFloat(import.meta.env.BUSINESS_LAT || '40.9176'),
       lng: parseFloat(import.meta.env.BUSINESS_LNG || '-74.0732'),
