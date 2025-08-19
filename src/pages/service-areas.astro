@@ -863,9 +863,6 @@ const serviceAreasData = {
   
 </BaseLayout>
 
-<!-- Google Maps Configuration -->
-<script src="/api/maps.js" defer></script>
-
 <!-- Google Maps JavaScript API -->
 <script>
   // Initialize API key
@@ -1055,37 +1052,55 @@ const serviceAreasData = {
 
   };
 
-  // Load Google Maps API using configuration from maps.js
+  // Runtime Maps Loading Function
+  window.loadGoogleMapsFromRuntime = function() {
+    if (window.google && window.google.maps) {
+      initServiceAreasMap();
+      return;
+    }
+
+    if (!window.RUNTIME_MAPS_CONFIG || !window.RUNTIME_MAPS_CONFIG.apiKey) {
+      console.error('❌ Runtime maps config not available');
+      showMapError();
+      return;
+    }
+
+    const apiKey = window.RUNTIME_MAPS_CONFIG.apiKey;
+    console.log('✅ Runtime API key loaded, length:', apiKey.length);
+    console.log('🚀 Loading Google Maps script...');
+    
+    loadMapsScript(apiKey);
+  };
+
+  // Primary load function - tries runtime config approach
   function loadGoogleMapsAPI() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
 
-    // Wait for the maps configuration to be loaded
-    if (!window.GOOGLE_MAPS_CONFIG) {
-      console.log('⏳ Waiting for Google Maps configuration to load...');
-      setTimeout(loadGoogleMapsAPI, 100);
-      return;
-    }
-
-    console.log('🔧 Google Maps configuration loaded');
-    console.log('📊 Config details:', window.GOOGLE_MAPS_CONFIG.debugInfo);
-
-    if (!window.GOOGLE_MAPS_CONFIG.hasValidKey) {
-      console.error('❌ No valid Google Maps API key configured');
-      console.error('🔧 Current key:', window.GOOGLE_MAPS_CONFIG.apiKey);
-      console.error('🔧 Debug info:', window.GOOGLE_MAPS_CONFIG.debugInfo);
-      console.error('🔧 Set PUBLIC_GOOGLE_MAPS_API_KEY in Vercel environment variables');
-      showMapError();
-      return;
-    }
-
-    const apiKey = window.GOOGLE_MAPS_CONFIG.apiKey;
-    console.log('✅ Valid API key found, length:', apiKey.length);
-    console.log('🚀 Loading Google Maps script...');
+    console.log('🔄 Loading Google Maps with runtime configuration...');
     
-    loadMapsScript(apiKey);
+    // Check if runtime config is already loaded
+    if (window.RUNTIME_MAPS_CONFIG) {
+      window.loadGoogleMapsFromRuntime();
+      return;
+    }
+    
+    // Load runtime configuration
+    console.log('📡 Fetching runtime maps configuration...');
+    const script = document.createElement('script');
+    script.src = '/maps-config.js?' + Date.now(); // Cache bust
+    script.onload = () => {
+      console.log('✅ Runtime configuration script loaded');
+    };
+    script.onerror = () => {
+      console.error('❌ Failed to load runtime configuration');
+      console.error('🔧 This indicates a server-side configuration issue');
+      console.error('🔧 Check Vercel Functions and environment variables');
+      showMapError();
+    };
+    document.head.appendChild(script);
   }
 
   function loadMapsScript(apiKey) {
