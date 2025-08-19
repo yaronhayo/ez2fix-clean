@@ -849,7 +849,7 @@ const localFAQs = [
 
     try {
       // Fetch the API key from our secure endpoint
-      const response = await fetch('/api/maps-config');
+      const response = await fetch('/api/maps-key');
       const config = await response.json();
       
       if (!config.apiKey) {
