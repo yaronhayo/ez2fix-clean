@@ -3,34 +3,42 @@ import type { APIRoute } from 'astro';
 import { clientEnv } from '@/config/env';
 
 export const GET: APIRoute = async () => {
-  // Get API key from environment variables - check each source
-  const importMetaKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
-  const processEnvKey = process.env.PUBLIC_GOOGLE_MAPS_API_KEY;
-  const clientEnvKey = clientEnv.googleMaps.apiKey;
+  // IMPORTANT: In Vercel serverless functions, use process.env directly
+  // import.meta.env only works at build time, not runtime
+  const runtimeApiKey = process.env.PUBLIC_GOOGLE_MAPS_API_KEY || 
+                        process.env.GOOGLE_MAPS_API_KEY ||
+                        process.env.MAPS_API_KEY;
   
   console.log('Maps key endpoint called');
-  console.log('import.meta.env key:', importMetaKey ? `"${importMetaKey.substring(0, 10)}..."` : 'undefined');
-  console.log('process.env key:', processEnvKey ? `"${processEnvKey.substring(0, 10)}..."` : 'undefined');
-  console.log('clientEnv key:', clientEnvKey ? `"${clientEnvKey.substring(0, 10)}..."` : 'undefined');
+  console.log('Runtime environment check:', {
+    hasRuntimeKey: !!runtimeApiKey,
+    keyPreview: runtimeApiKey ? `${runtimeApiKey.substring(0, 10)}...` : 'undefined',
+    keyLength: runtimeApiKey ? runtimeApiKey.length : 0,
+    sources: {
+      PUBLIC_GOOGLE_MAPS_API_KEY: process.env.PUBLIC_GOOGLE_MAPS_API_KEY ? `${process.env.PUBLIC_GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined',
+      GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY ? `${process.env.GOOGLE_MAPS_API_KEY.substring(0, 10)}...` : 'undefined', 
+      MAPS_API_KEY: process.env.MAPS_API_KEY ? `${process.env.MAPS_API_KEY.substring(0, 10)}...` : 'undefined'
+    }
+  });
   
-  // Use the first valid (non-placeholder) key found
-  const apiKey = [processEnvKey, importMetaKey, clientEnvKey]
-    .find(key => key && key !== 'local_development_placeholder');
+  // Validate the API key
+  const isValidKey = runtimeApiKey && 
+                     runtimeApiKey.length > 30 && 
+                     runtimeApiKey.startsWith('AIza') &&
+                     runtimeApiKey !== 'local_development_placeholder';
   
-  console.log('Final selected key:', apiKey ? `"${apiKey.substring(0, 10)}..." (length: ${apiKey.length})` : 'none found');
-  
-  if (!apiKey || apiKey === 'local_development_placeholder') {
-    console.error('No valid Google Maps API key found');
+  if (!isValidKey) {
+    console.error('Runtime API key validation failed');
     return new Response(
       JSON.stringify({ 
-        error: 'Google Maps API key not configured',
+        success: false,
+        error: 'Google Maps API key not properly configured',
         debug: {
-          hasEnvVar: !!importMetaKey,
-          hasProcessEnv: !!processEnvKey,
-          hasClientEnv: !!clientEnvKey,
-          envVarValue: importMetaKey ? `${importMetaKey.substring(0, 10)}...` : 'undefined',
-          processEnvValue: processEnvKey ? `${processEnvKey.substring(0, 10)}...` : 'undefined',
-          clientEnvValue: clientEnvKey ? `${clientEnvKey.substring(0, 10)}...` : 'undefined'
+          hasKey: !!runtimeApiKey,
+          keyLength: runtimeApiKey ? runtimeApiKey.length : 0,
+          startsWithAIza: runtimeApiKey ? runtimeApiKey.startsWith('AIza') : false,
+          isPlaceholder: runtimeApiKey === 'local_development_placeholder',
+          keyPreview: runtimeApiKey ? `${runtimeApiKey.substring(0, 10)}...` : 'undefined'
         }
       }), 
       { 
@@ -40,11 +48,11 @@ export const GET: APIRoute = async () => {
     );
   }
   
-  console.log('Serving API key, length:', apiKey.length);
+  console.log('✅ Valid runtime API key found, serving...');
   
   return new Response(
     JSON.stringify({ 
-      apiKey: apiKey,
+      apiKey: runtimeApiKey,
       success: true
     }), 
     { 

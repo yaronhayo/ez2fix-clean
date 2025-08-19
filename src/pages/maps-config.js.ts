@@ -3,7 +3,8 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request }) => {
-  // Get API key from runtime environment - try multiple variable names
+  // IMPORTANT: In Vercel serverless functions, use process.env directly
+  // The import.meta.env pattern works at build time but not at runtime
   const runtimeApiKey = process.env.PUBLIC_GOOGLE_MAPS_API_KEY || 
                         process.env.GOOGLE_MAPS_API_KEY ||
                         process.env.MAPS_API_KEY;
