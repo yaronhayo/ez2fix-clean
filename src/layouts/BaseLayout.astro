@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@/config/site';
+import { clientEnv } from '@/config/env';
 import ScrollToTop from '@/components/ui/ScrollToTop.astro';
 import '@/styles/globals.css';
 
@@ -189,7 +190,9 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta property="og:image:alt" content="Ez2Fix Professional Garage Door Services - Bergen & Hudson Counties NJ" />
     <meta property="og:site_name" content={siteConfig.business.name} />
     <meta property="og:locale" content="en_US" />
-    <meta property="fb:app_id" content="your-facebook-app-id" />
+    {clientEnv.analytics.facebookPixelId && (
+      <meta property="fb:app_id" content={clientEnv.analytics.facebookPixelId} />
+    )}
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
