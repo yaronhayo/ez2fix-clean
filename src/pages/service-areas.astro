@@ -863,6 +863,9 @@ const serviceAreasData = {
   
 </BaseLayout>
 
+<!-- Google Maps Configuration -->
+<script src="/api/maps.js" defer></script>
+
 <!-- Google Maps JavaScript API -->
 <script>
   // Initialize API key
@@ -1052,44 +1055,37 @@ const serviceAreasData = {
 
   };
 
-  // Load Google Maps API with runtime key fetching
-  async function loadGoogleMapsAPI() {
+  // Load Google Maps API using configuration from maps.js
+  function loadGoogleMapsAPI() {
     if (window.google && window.google.maps) {
       initServiceAreasMap();
       return;
     }
 
-    try {
-      console.log('🔄 Fetching Google Maps API key from server...');
-      
-      const response = await fetch('/api/maps-key');
-      const data = await response.json();
-      
-      if (!response.ok || data.error) {
-        console.error('❌ Failed to get API key from server:', data.error || 'Unknown error');
-        console.error('🔧 Debug info:', data.debug);
-        console.error('🔧 Check Vercel environment variables: PUBLIC_GOOGLE_MAPS_API_KEY');
-        showMapError();
-        return;
-      }
-      
-      if (!data.apiKey || data.apiKey.length < 20) {
-        console.error('❌ Invalid API key received from server');
-        console.error('🔧 Key length:', data.apiKey ? data.apiKey.length : 0);
-        showMapError();
-        return;
-      }
-      
-      console.log('✅ API key retrieved successfully, length:', data.apiKey.length);
-      console.log('🚀 Loading Google Maps script...');
-      
-      loadMapsScript(data.apiKey);
-      
-    } catch (error) {
-      console.error('❌ Error fetching API key:', error);
-      console.error('🔧 This might be a network issue or server configuration problem');
-      showMapError();
+    // Wait for the maps configuration to be loaded
+    if (!window.GOOGLE_MAPS_CONFIG) {
+      console.log('⏳ Waiting for Google Maps configuration to load...');
+      setTimeout(loadGoogleMapsAPI, 100);
+      return;
     }
+
+    console.log('🔧 Google Maps configuration loaded');
+    console.log('📊 Config details:', window.GOOGLE_MAPS_CONFIG.debugInfo);
+
+    if (!window.GOOGLE_MAPS_CONFIG.hasValidKey) {
+      console.error('❌ No valid Google Maps API key configured');
+      console.error('🔧 Current key:', window.GOOGLE_MAPS_CONFIG.apiKey);
+      console.error('🔧 Debug info:', window.GOOGLE_MAPS_CONFIG.debugInfo);
+      console.error('🔧 Set PUBLIC_GOOGLE_MAPS_API_KEY in Vercel environment variables');
+      showMapError();
+      return;
+    }
+
+    const apiKey = window.GOOGLE_MAPS_CONFIG.apiKey;
+    console.log('✅ Valid API key found, length:', apiKey.length);
+    console.log('🚀 Loading Google Maps script...');
+    
+    loadMapsScript(apiKey);
   }
 
   function loadMapsScript(apiKey) {
