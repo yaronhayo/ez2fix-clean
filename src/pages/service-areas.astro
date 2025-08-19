@@ -17,7 +17,7 @@ const extendedServiceAreas = [
   { name: "North Caldwell", county: "Essex County", zip: "07006", type: "Primary", lat: 40.8715, lng: -74.2585, hasPage: true, slug: "north-caldwell" },
   { name: "Montclair", county: "Essex County", zip: "07042", type: "Primary", lat: 40.8176, lng: -74.2090, hasPage: true, slug: "montclair" },
   
-  // Secondary Areas - Full service coverage
+  // Secondary Areas - Full service coverage (Original areas)
   { name: "Elmwood Park", county: "Bergen County", zip: "07407", type: "Secondary", lat: 40.9034, lng: -74.1201, hasPage: false },
   { name: "Saddle Brook", county: "Bergen County", zip: "07663", type: "Secondary", lat: 40.8987, lng: -74.0965, hasPage: false },
   { name: "Garfield", county: "Bergen County", zip: "07026", type: "Secondary", lat: 40.8815, lng: -74.1132, hasPage: false },
@@ -27,6 +27,79 @@ const extendedServiceAreas = [
   { name: "Hackensack", county: "Bergen County", zip: "07601", type: "Secondary", lat: 40.8859, lng: -74.0432, hasPage: false },
   { name: "Maywood", county: "Bergen County", zip: "07607", type: "Secondary", lat: 40.9023, lng: -74.0632, hasPage: false },
   { name: "Rochelle Park", county: "Bergen County", zip: "07662", type: "Secondary", lat: 40.9075, lng: -74.0765, hasPage: false },
+  
+  // Additional New Jersey Cities (as requested)
+  { name: "Newark", county: "Essex County", zip: "07102", type: "Secondary", lat: 40.7357, lng: -74.1724, hasPage: false },
+  { name: "Kearny", county: "Hudson County", zip: "07032", type: "Secondary", lat: 40.7684, lng: -74.1451, hasPage: false },
+  { name: "East Orange", county: "Essex County", zip: "07017", type: "Secondary", lat: 40.7673, lng: -74.2049, hasPage: false },
+  { name: "West Orange", county: "Essex County", zip: "07052", type: "Secondary", lat: 40.7979, lng: -74.2387, hasPage: false },
+  { name: "South Orange", county: "Essex County", zip: "07079", type: "Secondary", lat: 40.7487, lng: -74.2613, hasPage: false },
+  { name: "Glen Ridge", county: "Essex County", zip: "07028", type: "Secondary", lat: 40.8048, lng: -74.2038, hasPage: false },
+  { name: "Bloomfield", county: "Essex County", zip: "07003", type: "Secondary", lat: 40.8068, lng: -74.1854, hasPage: false },
+  { name: "Nutley", county: "Essex County", zip: "07110", type: "Secondary", lat: 40.8223, lng: -74.1598, hasPage: false },
+  { name: "Belleville", county: "Essex County", zip: "07109", type: "Secondary", lat: 40.7940, lng: -74.1504, hasPage: false },
+  { name: "Verona", county: "Essex County", zip: "07044", type: "Secondary", lat: 40.8304, lng: -74.2385, hasPage: false },
+  { name: "Caldwell", county: "Essex County", zip: "07006", type: "Secondary", lat: 40.8398, lng: -74.2771, hasPage: false },
+  { name: "Roseland", county: "Essex County", zip: "07068", type: "Secondary", lat: 40.8201, lng: -74.2807, hasPage: false },
+  { name: "Franklin Lakes", county: "Bergen County", zip: "07417", type: "Secondary", lat: 41.0123, lng: -74.2071, hasPage: false },
+  { name: "Pine Brook", county: "Morris County", zip: "07058", type: "Secondary", lat: 40.8615, lng: -74.3440, hasPage: false },
+  { name: "Montville", county: "Morris County", zip: "07045", type: "Secondary", lat: 40.9001, lng: -74.3518, hasPage: false },
+  { name: "Towaco", county: "Morris County", zip: "07082", type: "Secondary", lat: 40.9354, lng: -74.3440, hasPage: false },
+  { name: "Lincoln Park", county: "Morris County", zip: "07035", type: "Secondary", lat: 40.9218, lng: -74.3007, hasPage: false },
+  { name: "Pequannock", county: "Morris County", zip: "07440", type: "Secondary", lat: 40.9431, lng: -74.2918, hasPage: false },
+  { name: "Wayne", county: "Passaic County", zip: "07470", type: "Secondary", lat: 40.9251, lng: -74.2760, hasPage: false },
+  { name: "North Haledon", county: "Passaic County", zip: "07508", type: "Secondary", lat: 40.9548, lng: -74.1854, hasPage: false },
+  { name: "Paterson", county: "Passaic County", zip: "07501", type: "Secondary", lat: 40.9168, lng: -74.1717, hasPage: false },
+  { name: "River Edge", county: "Bergen County", zip: "07661", type: "Secondary", lat: 40.9293, lng: -74.0382, hasPage: false },
+  { name: "Teaneck", county: "Bergen County", zip: "07666", type: "Secondary", lat: 40.8976, lng: -74.0160, hasPage: false },
+  { name: "Bogota", county: "Bergen County", zip: "07603", type: "Secondary", lat: 40.8762, lng: -74.0293, hasPage: false },
+  { name: "Passaic", county: "Passaic County", zip: "07055", type: "Secondary", lat: 40.8568, lng: -74.1285, hasPage: false },
+  { name: "Riverdale", county: "Morris County", zip: "07457", type: "Secondary", lat: 40.9943, lng: -74.3043, hasPage: false },
+  { name: "Oakland", county: "Bergen County", zip: "07436", type: "Secondary", lat: 41.0287, lng: -74.2354, hasPage: false },
+  { name: "Ringwood", county: "Passaic County", zip: "07456", type: "Secondary", lat: 41.1143, lng: -74.2451, hasPage: false },
+  { name: "Mahwah", county: "Bergen County", zip: "07430", type: "Secondary", lat: 41.0887, lng: -74.1432, hasPage: false },
+  { name: "Upper Saddle River", county: "Bergen County", zip: "07458", type: "Secondary", lat: 41.0573, lng: -74.0982, hasPage: false },
+  { name: "Saddle River", county: "Bergen County", zip: "07458", type: "Secondary", lat: 41.0365, lng: -74.0993, hasPage: false },
+  { name: "Montvale", county: "Bergen County", zip: "07645", type: "Secondary", lat: 41.0515, lng: -74.0404, hasPage: false },
+  { name: "Park Ridge", county: "Bergen County", zip: "07656", type: "Secondary", lat: 41.0365, lng: -74.0368, hasPage: false },
+  { name: "Old Tappan", county: "Bergen County", zip: "07675", type: "Secondary", lat: 41.0140, lng: -73.9882, hasPage: false },
+  { name: "Norwood", county: "Bergen County", zip: "07648", type: "Secondary", lat: 40.9965, lng: -73.9579, hasPage: false },
+  { name: "Rockleigh", county: "Bergen County", zip: "07647", type: "Secondary", lat: 40.9965, lng: -73.9293, hasPage: false },
+  { name: "Harrington Park", county: "Bergen County", zip: "07640", type: "Secondary", lat: 40.9882, lng: -73.9782, hasPage: false },
+  { name: "Closter", county: "Bergen County", zip: "07624", type: "Secondary", lat: 40.9732, lng: -73.9618, hasPage: false },
+  { name: "Alpine", county: "Bergen County", zip: "07620", type: "Secondary", lat: 40.9515, lng: -73.9307, hasPage: false },
+  { name: "Cresskill", county: "Bergen County", zip: "07626", type: "Secondary", lat: 40.9418, lng: -73.9596, hasPage: false },
+  { name: "Haworth", county: "Bergen County", zip: "07641", type: "Secondary", lat: 40.9601, lng: -73.9890, hasPage: false },
+  { name: "Oradell", county: "Bergen County", zip: "07649", type: "Secondary", lat: 40.9543, lng: -74.0293, hasPage: false },
+  { name: "Bergenfield", county: "Bergen County", zip: "07621", type: "Secondary", lat: 40.9282, lng: -73.9973, hasPage: false },
+  { name: "Tenafly", county: "Bergen County", zip: "07670", type: "Secondary", lat: 40.9251, lng: -73.9626, hasPage: false },
+  { name: "Englewood", county: "Bergen County", zip: "07631", type: "Secondary", lat: 40.8931, lng: -73.9726, hasPage: false },
+  { name: "Englewood Cliffs", county: "Bergen County", zip: "07632", type: "Secondary", lat: 40.8818, lng: -73.9465, hasPage: false },
+  { name: "Leonia", county: "Bergen County", zip: "07605", type: "Secondary", lat: 40.8615, lng: -73.9890, hasPage: false },
+  { name: "Fort Lee", county: "Bergen County", zip: "07024", type: "Secondary", lat: 40.8507, lng: -73.9704, hasPage: false },
+  { name: "Edgewater", county: "Bergen County", zip: "07020", type: "Secondary", lat: 40.8251, lng: -73.9732, hasPage: false },
+  { name: "Cliffside Park", county: "Bergen County", zip: "07010", type: "Secondary", lat: 40.8218, lng: -74.0043, hasPage: false },
+  { name: "Fairview", county: "Bergen County", zip: "07022", type: "Secondary", lat: 40.8126, lng: -74.0007, hasPage: false },
+  { name: "North Bergen", county: "Hudson County", zip: "07047", type: "Secondary", lat: 40.8043, lng: -74.0118, hasPage: false },
+  { name: "Palisades Park", county: "Bergen County", zip: "07650", type: "Secondary", lat: 40.8482, lng: -73.9968, hasPage: false },
+  { name: "Ridgefield", county: "Bergen County", zip: "07657", type: "Secondary", lat: 40.8354, lng: -74.0118, hasPage: false },
+  { name: "Little Ferry", county: "Bergen County", zip: "07643", type: "Secondary", lat: 40.8451, lng: -74.0393, hasPage: false },
+  { name: "Ridgefield Park", county: "Bergen County", zip: "07660", type: "Secondary", lat: 40.8568, lng: -74.0218, hasPage: false },
+  { name: "Hasbrouck Heights", county: "Bergen County", zip: "07604", type: "Secondary", lat: 40.8582, lng: -74.0729, hasPage: false },
+  { name: "Guttenberg", county: "Hudson County", zip: "07093", type: "Secondary", lat: 40.7929, lng: -74.0043, hasPage: false },
+  { name: "West New York", county: "Hudson County", zip: "07093", type: "Secondary", lat: 40.7873, lng: -74.0140, hasPage: false },
+  { name: "Lyndhurst", county: "Bergen County", zip: "07071", type: "Secondary", lat: 40.8126, lng: -74.1243, hasPage: false },
+  { name: "Rutherford", county: "Bergen County", zip: "07070", type: "Secondary", lat: 40.8265, lng: -74.1068, hasPage: false },
+  { name: "Carlstadt", county: "Bergen County", zip: "07072", type: "Secondary", lat: 40.8390, lng: -74.0893, hasPage: false },
+  { name: "Teterboro", county: "Bergen County", zip: "07608", type: "Secondary", lat: 40.8604, lng: -74.0607, hasPage: false },
+  { name: "Wyckoff", county: "Bergen County", zip: "07481", type: "Secondary", lat: 40.9904, lng: -74.1732, hasPage: false },
+  { name: "Waldwick", county: "Bergen County", zip: "07463", type: "Secondary", lat: 41.0107, lng: -74.1257, hasPage: false },
+  { name: "Ho-Ho-Kus", county: "Bergen County", zip: "07423", type: "Secondary", lat: 40.9965, lng: -74.1015, hasPage: false },
+  { name: "Midland Park", county: "Bergen County", zip: "07432", type: "Secondary", lat: 40.9918, lng: -74.1401, hasPage: false },
+  { name: "Ridgewood", county: "Bergen County", zip: "07450", type: "Secondary", lat: 40.9779, lng: -74.1168, hasPage: false },
+  { name: "Glen Rock", county: "Bergen County", zip: "07452", type: "Secondary", lat: 40.9631, lng: -74.1257, hasPage: false },
+  { name: "Prospect Park", county: "Passaic County", zip: "07508", type: "Secondary", lat: 40.9365, lng: -74.1729, hasPage: false },
+  { name: "Harrison", county: "Hudson County", zip: "07029", type: "Secondary", lat: 40.7465, lng: -74.1557, hasPage: false },
   
   // Extended Areas - By appointment
   { name: "Jersey City", county: "Hudson County", zip: "07302", type: "Extended", lat: 40.7178, lng: -74.0431, hasPage: false },
@@ -465,7 +538,7 @@ const serviceAreasData = {
           <div class="text-center mt-12">
             <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold shadow-lg">
               <a 
-                href="#all-areas"
+                href="#every-town-we-serve"
                 class="px-8 py-3 bg-ez2fix-dark text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark inline-flex items-center justify-center shadow-lg transition-all duration-300 rounded-lg font-bold"
               >
                 <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -615,7 +688,7 @@ const serviceAreasData = {
     </section>
 
     <!-- All Service Areas List -->
-    <section class="py-16" style="background-color: #1D1912;">
+    <section id="every-town-we-serve" class="py-16" style="background-color: #1D1912;">
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
           
@@ -791,14 +864,15 @@ const serviceAreasData = {
 </BaseLayout>
 
 <!-- Google Maps JavaScript API -->
-<script define:vars={{ googleMapsApiKey: clientEnv.googleMaps.apiKey }}>
+<script define:vars={{ googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY }}>
   // Make API key available to client-side scripts
   window.GOOGLE_MAPS_API_KEY = googleMapsApiKey;
   console.log('Google Maps API Key available:', !!googleMapsApiKey);
   console.log('API Key length:', (googleMapsApiKey || '').length);
+  console.log('API Key preview:', (googleMapsApiKey || '').substring(0, 15) + '...');
 </script>
 <script async defer 
-        src={`https://maps.googleapis.com/maps/api/js?key=${clientEnv.googleMaps.apiKey}&callback=initServiceAreasMap`}>
+        src={`https://maps.googleapis.com/maps/api/js?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY}&callback=initServiceAreasMap`}>
 </script>
 
 <script>
