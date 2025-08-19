@@ -13,6 +13,9 @@ export default defineConfig({
   
   // Built-in redirects for the most common old URLs
   redirects: {
+    // SEO essentials
+    '/sitemap.xml': '/api/sitemap',
+    
     // Core page redirects
     '/index.html': '/',
     '/home': '/',
