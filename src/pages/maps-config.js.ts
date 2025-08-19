@@ -9,7 +9,7 @@ export const GET: APIRoute = async ({ request }) => {
                         process.env.GOOGLE_MAPS_API_KEY ||
                         process.env.MAPS_API_KEY;
   
-  console.log('Runtime maps config requested - testing env vars...');
+  console.log('Runtime maps config requested - env vars re-added...');
   console.log('Runtime environment check:', {
     hasRuntimeKey: !!runtimeApiKey,
     keyPreview: runtimeApiKey ? `${runtimeApiKey.substring(0, 10)}...` : 'undefined',
