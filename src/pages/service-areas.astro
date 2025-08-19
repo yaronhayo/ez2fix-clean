@@ -870,12 +870,7 @@ const serviceAreasData = {
   console.log('Google Maps API Key available:', !!googleMapsApiKey);
   console.log('API Key length:', (googleMapsApiKey || '').length);
   console.log('API Key preview:', (googleMapsApiKey || '').substring(0, 15) + '...');
-</script>
-<script async defer 
-        src={`https://maps.googleapis.com/maps/api/js?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY}&callback=initServiceAreasMap`}>
-</script>
-
-<script>
+  
   // Global function for Google Maps callback
   window.initServiceAreasMap = function() {
     const mapElement = document.getElementById('service-areas-map');
@@ -1059,6 +1054,27 @@ const serviceAreasData = {
     });
 
   };
+
+  // Load Google Maps API with proper async pattern
+  function loadGoogleMapsAPI() {
+    if (window.google && window.google.maps) {
+      initServiceAreasMap();
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.async = true;
+    script.defer = true;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&callback=initServiceAreasMap&loading=async`;
+    document.head.appendChild(script);
+  }
+
+  // Start loading when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadGoogleMapsAPI);
+  } else {
+    loadGoogleMapsAPI();
+  }
 
   // Initialize map fallback if Google Maps fails to load
   setTimeout(() => {

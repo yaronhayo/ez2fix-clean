@@ -724,12 +724,7 @@ const localFAQs = [
   console.log('Individual page - Google Maps API Key available:', !!googleMapsApiKey);
   console.log('Individual page - API Key length:', (googleMapsApiKey || '').length);
   console.log('Individual page - API Key preview:', (googleMapsApiKey || '').substring(0, 15) + '...');
-</script>
-<script async defer 
-        src={`https://maps.googleapis.com/maps/api/js?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY}&callback=initIndividualLocationMap`}>
-</script>
-
-<script>
+  
   // Global function for Google Maps callback
   window.initIndividualLocationMap = function() {
     const mapElement = document.getElementById('individual-location-map');
@@ -847,6 +842,27 @@ const localFAQs = [
       }
     });
   };
+
+  // Load Google Maps API with proper async pattern
+  function loadIndividualMapAPI() {
+    if (window.google && window.google.maps) {
+      initIndividualLocationMap();
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.async = true;
+    script.defer = true;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&callback=initIndividualLocationMap&loading=async`;
+    document.head.appendChild(script);
+  }
+
+  // Start loading when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadIndividualMapAPI);
+  } else {
+    loadIndividualMapAPI();
+  }
 
   // Initialize map fallback if Google Maps fails to load
   setTimeout(() => {
