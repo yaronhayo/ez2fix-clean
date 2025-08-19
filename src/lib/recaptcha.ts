@@ -9,6 +9,13 @@ export function loadRecaptcha(): Promise<void> {
       return;
     }
 
+    // If no site key is configured, skip reCAPTCHA
+    if (!clientEnv.recaptcha.siteKey) {
+      console.warn('reCAPTCHA site key not configured - form will work without CAPTCHA protection');
+      resolve();
+      return;
+    }
+
     // Check if already loaded
     if (window.grecaptcha) {
       resolve();
@@ -42,6 +49,12 @@ export async function executeRecaptcha(action: string = 'submit'): Promise<strin
     throw new Error('reCAPTCHA can only be executed on client side');
   }
 
+  // If no site key is configured, return a placeholder token
+  if (!clientEnv.recaptcha.siteKey) {
+    console.warn('reCAPTCHA site key not configured - returning placeholder token');
+    return 'no-recaptcha-configured';
+  }
+
   if (!window.grecaptcha) {
     throw new Error('reCAPTCHA not loaded');
   }
@@ -63,11 +76,21 @@ export async function verifyRecaptcha(
   minimumScore: number = 0.5
 ): Promise<{ success: boolean; score?: number; action?: string; error?: string }> {
   try {
+    // If no secret key is configured, skip verification but allow form to work
     if (!serverEnv.recaptcha.secretKey) {
-      console.warn('reCAPTCHA secret key not configured');
+      console.warn('reCAPTCHA secret key not configured - skipping verification');
       return {
-        success: false,
-        error: 'reCAPTCHA not configured - please contact us directly at (201) 554-6769'
+        success: true,
+        error: 'reCAPTCHA not configured but form allowed'
+      };
+    }
+
+    // If placeholder token from client, skip verification
+    if (token === 'no-recaptcha-configured') {
+      console.warn('Placeholder reCAPTCHA token received - skipping verification');
+      return {
+        success: true,
+        error: 'reCAPTCHA not configured but form allowed'
       };
     }
 
