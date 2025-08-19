@@ -269,7 +269,7 @@ const formId = `booking-form-${variant}`;
       const { loadRecaptcha } = await import('@/lib/recaptcha');
       await loadRecaptcha();
     } catch (error) {
-      console.error('Failed to load reCAPTCHA:', error);
+      console.warn('reCAPTCHA loading failed, forms will work without CAPTCHA protection:', error.message);
     }
     
     const forms = document.querySelectorAll('[id^="booking-form-"]');
@@ -345,11 +345,17 @@ const formId = `booking-form-${variant}`;
         button.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Submitting...';
         button.style.pointerEvents = 'none';
         
+        // Get reCAPTCHA token (with fallback)
+        let recaptchaToken = 'no-recaptcha-configured';
         try {
-          // Execute reCAPTCHA
           const { executeRecaptcha } = await import('@/lib/recaptcha');
-          const recaptchaToken = await executeRecaptcha('booking_form');
-          
+          recaptchaToken = await executeRecaptcha('booking_form');
+          console.log('reCAPTCHA executed successfully');
+        } catch (recaptchaError) {
+          console.warn('reCAPTCHA execution failed, proceeding without CAPTCHA protection:', recaptchaError.message);
+        }
+        
+        try {
           // Build full address
           const fullAddress = data.address.trim() + 
             (data.city ? `, ${data.city.trim()}` : '') + 
@@ -357,6 +363,7 @@ const formId = `booking-form-${variant}`;
             (data.zip ? ` ${data.zip.trim()}` : '') +
             (data.unit ? `, Unit ${data.unit.trim()}` : '');
           
+          console.log('Submitting form data to /api/booking');
           const response = await fetch('/api/booking', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -375,13 +382,16 @@ const formId = `booking-form-${variant}`;
           });
           
           if (response.ok) {
+            console.log('Form submitted successfully, redirecting to thank-you page');
             window.location.href = '/thank-you';
           } else {
-            throw new Error('Submission failed');
+            const errorData = await response.json();
+            console.error('API response error:', errorData);
+            throw new Error(errorData.error || 'Submission failed');
           }
         } catch (error) {
           console.error('Form submission error:', error);
-          alert('Sorry, there was an error submitting your request. Please try again or call us directly at ' + '(201) 554-6769');
+          alert('Sorry, there was an error submitting your request. Please try again or call us directly at (201) 554-6769');
           button.innerHTML = originalText;
           button.style.pointerEvents = 'auto';
         }
