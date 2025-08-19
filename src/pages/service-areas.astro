@@ -917,41 +917,19 @@ const serviceAreasData = {
       { name: "Secaucus", county: "Hudson County", zip: "07094", type: "Extended", lat: 40.7896, lng: -74.0565, color: "#BB8525", hasPage: false }
     ];
 
-    // Responsive zoom levels based on screen size
+    // Responsive zoom levels based on screen size - zoomed in closer
     const getResponsiveZoom = () => {
       const width = window.innerWidth;
-      if (width < 768) return 9;  // Mobile
-      if (width < 1024) return 10; // Tablet
-      return 11; // Desktop
+      if (width < 768) return 11;  // Mobile
+      if (width < 1024) return 12; // Tablet
+      return 13; // Desktop
     };
 
     // Center map on the service area with responsive zoom
     const map = new google.maps.Map(mapElement, {
       zoom: getResponsiveZoom(),
       center: { lat: 40.8500, lng: -74.1700 }, // Centered on our primary coverage area
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [
-        {
-          featureType: "all",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#F3F3E6" }]
-        },
-        {
-          featureType: "water",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#BB8525" }]
-        },
-        {
-          featureType: "road",
-          elementType: "geometry.stroke",
-          stylers: [{ color: "#1D1912" }]
-        },
-        {
-          featureType: "road",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#1D1912" }]
-        }
-      ]
+      mapTypeId: google.maps.MapTypeId.SATELLITE // Satellite view by default
     });
 
     // Add Google Maps pin markers only for areas with dedicated pages
@@ -963,8 +941,15 @@ const serviceAreasData = {
         position: { lat: area.lat, lng: area.lng },
         map: map,
         title: `${area.name} - Click to view detailed service information`,
-        // Use default Google Maps pin icon (red pin)
-        icon: null // Default pin
+        icon: {
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+          scale: 6,
+          fillColor: '#ebc959',
+          fillOpacity: 1,
+          strokeColor: '#1D1912',
+          strokeWeight: 2,
+          rotation: 180 // Point downward like a pin
+        }
       });
 
       // Direct navigation on marker click since all markers are for pages
