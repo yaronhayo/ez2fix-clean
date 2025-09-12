@@ -15,7 +15,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="space-section-md bg-gradient-to-br from-white via-ez2fix-cream/50 to-ez2fix-gold/10">
+<section class="space-section-sm bg-gradient-to-br from-white via-ez2fix-cream/50 to-ez2fix-gold/10">
   <div class="container-responsive">
     <!-- Enhanced Section Header -->
     <div class="section-header-responsive animate-on-scroll">
@@ -24,11 +24,11 @@ const {
     </div>
     
     <!-- Enhanced FAQ Grid -->
-    <div class="max-w-4xl mx-auto space-y-4 mb-8">
+    <div class="max-w-4xl mx-auto space-y-3 mb-6">
       {faqs.map((faq, index) => (
         <div class="faq-item card-responsive shadow-premium border-2 border-ez2fix-brown/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-ez2fix-primary hover-lift animate-on-scroll">
           <button 
-            class="faq-question w-full text-left p-4 sm:p-6 flex items-start justify-between focus-enhanced bg-white hover:bg-ez2fix-gold/5 transition-colors touch-target"
+            class="faq-question w-full text-left p-3 sm:p-4 flex items-start justify-between focus-enhanced bg-white hover:bg-ez2fix-gold/5 transition-colors touch-target"
             data-faq-index={index}
             aria-expanded="false"
             aria-controls={`faq-answer-${index}`}
@@ -54,7 +54,7 @@ const {
             id={`faq-answer-${index}`}
             aria-labelledby={`faq-question-${index}`}
           >
-            <div class="p-4 sm:p-6 pt-0">
+            <div class="p-3 sm:p-4 pt-0">
               <div class="border-l-4 border-ez2fix-primary/30 pl-4">
                 <p class="text-body-base text-ez2fix-brown leading-relaxed">
                   {faq.answer}

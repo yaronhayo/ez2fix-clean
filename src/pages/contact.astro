@@ -3,14 +3,16 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeaderClean from '@/components/layout/HeaderClean.astro';
 import FooterClean from '@/components/layout/FooterClean.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import ProfessionalContactForm from '@/components/ui/ProfessionalContactForm.astro';
+import ServiceAreaMap from '@/components/sections/ServiceAreaMap.astro';
 import Card from '@/components/ui/Card.astro';
 import { siteConfig } from '@/config/site';
 ---
 
 <BaseLayout 
-  title="Contact Ez2Fix Bergen County NJ | Licensed Garage Door Contractor (201) 554-6769"
-  description="Contact Ez2Fix for professional garage door service in Bergen County, NJ. Licensed contractor #13VH13553300 offering free estimates, emergency service & honest pricing. Call (201) 554-6769 or get your free estimate online today!"
-  keywords="contact ez2fix bergen county nj, garage door service contact bergen county, garage door repair phone number nj, ez2fix contact information, garage door contractor bergen county contact, free garage door estimate bergen county, garage door service elmwood park fair lawn clifton contact"
+  title="Contact Ez2Fix - Professional Garage Door Service New Jersey | Licensed Contractor"
+  description="Contact Ez2Fix for professional garage door service in NJ. Licensed contractor #13VH13553300. Complete service across 5 counties. Get expert consultation."
+  keywords="garage door company contact, garage door service New Jersey, professional garage door contractor, contact ez2fix, garage door repair contact nj, licensed garage door contractor nj, garage door service phone number"
 >
   <Fragment slot="head">
     <!-- Contact Page Schema Markup -->
@@ -27,7 +29,7 @@ import { siteConfig } from '@/config/site';
         "email": "ez2fixllc@gmail.com",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Elmwood Park, NJ 07407",
+          "streetAddress": "Mobile Service - Serving All New Jersey",
           "addressLocality": "Elmwood Park",
           "addressRegion": "NJ",
           "postalCode": "07407",
@@ -41,9 +43,10 @@ import { siteConfig } from '@/config/site';
             "availableLanguage": "English",
             "areaServed": [
               "Bergen County, NJ",
-              "Hudson County, NJ",
+              "Hudson County, NJ", 
               "Passaic County, NJ",
-              "Essex County, NJ"
+              "Essex County, NJ",
+              "Morris County, NJ"
             ]
           },
           {
@@ -86,10 +89,10 @@ import { siteConfig } from '@/config/site';
           <!-- Page Title -->
           <div class="text-center">
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-ez2fix-dark mb-6">
-              Contact <span class="text-ez2fix-primary">Ez2Fix</span>
+              Contact Ez2Fix for Professional Garage Door Service
             </h1>
             <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Ready to get your garage door fixed? Multiple ways to reach Bergen County's most trusted garage door service.
+              Ready to contact our garage door company? Professional garage door contractor serving New Jersey with expert consultation and complete service across 5 counties.
             </p>
           </div>
         </div>
@@ -155,9 +158,9 @@ import { siteConfig } from '@/config/site';
                       </svg>
                     </div>
                     <div>
-                      <h3 class="text-xl font-bold mb-2 text-ez2fix-dark">Service Area</h3>
+                      <h3 class="text-xl font-bold mb-2 text-ez2fix-dark">Service Area Coverage</h3>
                       <p class="text-ez2fix-brown">
-                        Bergen County, Hudson County, Passaic County, and Essex County
+                        Professional garage door service New Jersey: Bergen, Hudson, Passaic, Essex, and Morris Counties
                       </p>
                       <p class="text-sm text-ez2fix-brown mt-2">Licensed contractor #13VH13553300</p>
                     </div>
@@ -166,74 +169,65 @@ import { siteConfig } from '@/config/site';
               </div>
             </div>
             
-            <!-- Contact Form -->
+            <!-- Professional Contact Form -->
             <div>
-              <Card class="p-8 shadow-xl border-2 border-ez2fix-primary bg-white">
-                <BookingFormClean 
-                  variant="inline"
-                  title="Get Your Free Estimate"
-                  subtitle="Fill out this form and we'll contact you with a personalized estimate for your garage door needs."
-                  buttonText="Send My Request"
-                  showTitle={true}
-                />
-              </Card>
+              <ProfessionalContactForm />
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Google Maps Service Area Integration -->
+    <ServiceAreaMap 
+      title="Professional Garage Door Service New Jersey Coverage"
+      subtitle="Licensed garage door contractor serving 5 counties with complete garage door company contact and service solutions."
+    />
+
     <!-- Service Hours & Emergency Info -->
     <section class="py-16 md:py-20 gradient-dark">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
           <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-cream mb-6">
-            <span class="text-ez2fix-primary">Service Hours</span> & Emergency Info
+            Professional Garage Door Contractor <span class="text-ez2fix-primary">Service Hours</span>
           </h2>
-          <p class="text-lg text-ez2fix-gold mb-12">
-            We're here when you need us most, with flexible scheduling and 24/7 emergency response.
+          <p class="text-lg text-ez2fix-gold mb-8">
+            Licensed garage door service New Jersey with flexible scheduling and 24/7 emergency response across 5 counties.
           </p>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Regular Hours -->
-            <Card class="p-8 bg-ez2fix-cream border-2 border-ez2fix-primary">
-              <div class="text-center">
-                <div class="w-16 h-16 bg-ez2fix-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-4">Regular Service Hours</h3>
-                <div class="space-y-2 text-ez2fix-brown">
-                  <div class="flex justify-between">
-                    <span>Monday - Friday:</span>
-                    <span class="font-semibold">7:00 AM - 8:00 PM</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span>Saturday:</span>
-                    <span class="font-semibold">8:00 AM - 6:00 PM</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span>Sunday:</span>
-                    <span class="font-semibold">9:00 AM - 5:00 PM</span>
-                  </div>
-                </div>
+          <!-- Professional Credentials Banner -->
+          <div class="bg-ez2fix-primary/20 border-2 border-ez2fix-primary rounded-lg p-6 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+              <div>
+                <p class="text-ez2fix-cream font-bold text-lg">Licensed Contractor</p>
+                <p class="text-ez2fix-gold text-sm">#13VH13553300</p>
               </div>
-            </Card>
-            
-            <!-- Emergency Service -->
-            <Card class="p-8 bg-ez2fix-cream border-2 border-ez2fix-gold">
-              <div class="text-center">
-                <div class="w-16 h-16 bg-ez2fix-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                  </svg>
-                </div>
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-4">Emergency Service</h3>
-                <div class="text-ez2fix-brown">
-                  <p class="text-lg font-semibold text-ez2fix-primary mb-2">24/7 Available</p>
-                  <p class="mb-2">Garage door stuck? Spring broken? We respond to emergencies around the clock.</p>
-                  <p class="text-sm">Average response time: 45 minutes</p>
+              <div>
+                <p class="text-ez2fix-cream font-bold text-lg">Quality Standards</p>
+                <p class="text-ez2fix-gold text-sm">Full Warranty Protection</p>
+              </div>
+              <div>
+                <p class="text-ez2fix-cream font-bold text-lg">Professional Service</p>
+                <p class="text-ez2fix-gold text-sm">5 Counties Coverage</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="max-w-2xl mx-auto">
+            <!-- 24/7 Service -->
+            <Card class="p-12 bg-ez2fix-cream border-2 border-ez2fix-primary text-center">
+              <div class="w-24 h-24 bg-ez2fix-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark mb-6">24/7 Professional Service</h3>
+              <div class="text-ez2fix-brown space-y-4">
+                <p class="text-xl font-semibold text-ez2fix-primary">Available Around the Clock</p>
+                <p class="text-lg">No regular hours - we're here whenever you need garage door service. Day or night, weekends and holidays.</p>
+                <div class="bg-ez2fix-primary/10 border border-ez2fix-primary rounded-lg p-4 mt-6">
+                  <p class="font-semibold text-ez2fix-dark">Emergency or Scheduled Service</p>
+                  <p class="text-sm text-ez2fix-brown mt-1">Garage door stuck? Spring broken? Need routine maintenance? We handle it all, anytime.</p>
                 </div>
               </div>
             </Card>

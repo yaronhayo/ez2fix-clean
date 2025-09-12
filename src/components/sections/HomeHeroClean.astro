@@ -31,53 +31,47 @@ import CTA from '@/components/ui/CTA.astro';
         <!-- Left Side - Hero Content -->
         <div class="hero-content-responsive order-2 lg:order-1">
           
-          <!-- Trust Indicators - Moved Higher and Always Side by Side -->
-          <div class="flex items-center justify-center space-x-6 mb-8 lg:mb-6">
-            <div class="flex items-center space-x-2">
-              <svg class="h-4 w-4 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-              </svg>
-              <span class="text-body-small font-semibold text-ez2fix-gold">Neighbors Love Us</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <svg class="h-4 w-4 text-ez2fix-brown" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
-              </svg>
-              <span class="text-body-small font-semibold text-ez2fix-gold">Licensed & Insured</span>
-            </div>
-          </div>
 
-          <!-- Main Headlines -->
-          <h1 class="hero-title-responsive text-ez2fix-cream mb-4 sm:mb-5 lg:mb-6 animate-on-scroll">
-            <span class="text-ez2fix-cream">When Your Garage Door Breaks,</span>
+          <!-- SEO-Optimized Main Headlines -->
+          <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6 animate-on-scroll">
+            <span class="text-white">Professional</span> <span class="text-ez2fix-gold">Garage Door Repair</span>
             <br />
-            <span class="text-ez2fix-gold">Call</span> <span class="text-ez2fix-primary">Ez2Fix</span>
+            <span class="text-white">&</span> <span class="text-ez2fix-primary">Installation Services</span>
+            <br />
+            <span class="text-ez2fix-gold">in New Jersey</span>
           </h1>
           
-          <!-- Subtitle -->
-          <p class="hero-subtitle-responsive text-ez2fix-cream mb-6 sm:mb-8 lg:mb-10 animate-on-scroll">
-            <span class="text-ez2fix-gold font-semibold">10,000+ Northern NJ families</span> trust us for garage door repair.
+          <!-- SEO-Optimized Subtitle with Keywords -->
+          <p class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8 animate-on-scroll">
+            Professional <span class="text-ez2fix-gold font-semibold">garage door repair near me</span> and <span class="text-ez2fix-gold font-semibold">garage door installation</span> across 5 New Jersey counties.
           </p>
           
+          <!-- Service Coverage -->
+          <div class="text-center lg:text-left mb-6 animate-on-scroll">
+            <p class="text-sm md:text-base text-ez2fix-gold mb-2">Serving Bergen • Essex • Morris • Hudson • Passaic Counties</p>
+            <p class="text-sm text-ez2fix-primary">Licensed Contractor #13VH13553300 • 12,000+ Families Served</p>
+          </div>
+
+          
           <!-- CTAs -->
-          <div class="cta-group-responsive mb-6 sm:mb-8 lg:mb-0 animate-on-scroll">
+          <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0 animate-on-scroll">
             <CTA 
               variant="phone"
-              size="medium"
+              size="large"
               href={siteConfig.links.phone}
               text={`Call ${siteConfig.business.phone}`}
               icon="phone"
               ariaLabel={`Call Ez2Fix at ${siteConfig.business.phone}`}
-              class="btn-premium shadow-premium hover-lift cta-responsive"
+              class="btn-premium shadow-premium hover-lift cta-responsive w-full sm:w-auto"
             />
             <CTA 
               variant="secondary"
               size="medium"
               href="/services"
-              text="View All Services"
+              text="View Services"
               icon="arrow"
               ariaLabel="View all garage door services"
-              class="btn-premium hover-lift cta-responsive"
+              class="hover-lift cta-responsive w-full sm:w-auto"
             />
           </div>
 
@@ -93,12 +87,12 @@ import CTA from '@/components/ui/CTA.astro';
             <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
               <div class="grid grid-cols-2 gap-3 text-center">
                 <div>
-                  <div class="text-heading-3 text-ez2fix-dark">Professional Service</div>
-                  <div class="text-body-small text-ez2fix-brown">Licensed & Insured</div>
+                  <div class="text-heading-3 text-ez2fix-dark">Same Day Fix</div>
+                  <div class="text-body-small text-ez2fix-brown">Usually 2-3 Hours</div>
                 </div>
                 <div>
-                  <div class="text-heading-3 text-ez2fix-dark">Free Estimates</div>
-                  <div class="text-body-small text-ez2fix-brown">No Hidden Fees</div>
+                  <div class="text-heading-3 text-ez2fix-dark">Honest Pricing</div>
+                  <div class="text-body-small text-ez2fix-brown">Price Before Work</div>
                 </div>
               </div>
             </div>

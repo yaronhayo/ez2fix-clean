@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Homepage - Highest Priority -->
+  <url>
+    <loc>https://ez2fixllc.com/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/ez2fix-logo.webp</image:loc>
+      <image:caption>Ez2Fix LLC Professional Garage Door Service Logo</image:caption>
+      <image:title>Ez2Fix LLC - Licensed Garage Door Contractor New Jersey</image:title>
+    </image:image>
+  </url>
+
+  <!-- Main Service Categories -->
+  <url>
+    <loc>https://ez2fixllc.com/services/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/professional-garage-door-services.webp</image:loc>
+      <image:caption>Professional garage door repair and installation services</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Individual Service Pages -->
+  <url>
+    <loc>https://ez2fixllc.com/services/emergency-garage-door-repair</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/emergency-garage-door-repair.webp</image:loc>
+      <image:caption>Professional emergency garage door repair service in New Jersey</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/garage-door-spring-repair</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/garage-door-spring-repair.webp</image:loc>
+      <image:caption>Professional garage door spring repair and replacement services</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/garage-door-opener-installation</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/smart-garage-door-opener.webp</image:loc>
+      <image:caption>Smart garage door opener installation services</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/new-garage-door-installation</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/new-garage-door-installation.webp</image:loc>
+      <image:caption>Professional new garage door installation services</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/commercial-garage-door-service</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/commercial-garage-doors.webp</image:loc>
+      <image:caption>Commercial garage door service and maintenance</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/general-garage-door-repair</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Service Areas with Geographic Data -->
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/new-jersey-service-areas.webp</image:loc>
+      <image:caption>Ez2Fix service areas across 5 counties in New Jersey</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Location-Specific Pages -->
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/fair-lawn</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/fair-lawn-garage-door-service.webp</image:loc>
+      <image:caption>Professional garage door service in Fair Lawn, NJ</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/little-falls</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/clifton</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/cedar-grove</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/west-caldwell</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/north-caldwell</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/montclair</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Content Pages -->
+  <url>
+    <loc>https://ez2fixllc.com/about</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/about-ez2fix-team.webp</image:loc>
+      <image:caption>Meet the Ez2Fix professional garage door team</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/faq</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/reviews</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://ez2fixllc.com/images/customer-reviews.webp</image:loc>
+      <image:caption>Real customer reviews and testimonials</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/contact</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/booking</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Blog Content for AI Training -->
+  <url>
+    <loc>https://ez2fixllc.com/blog/choosing-right-garage-door-bergen-county</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/blog/commercial-vs-residential-garage-doors</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/blog/emergency-garage-door-repair-when-to-call</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/blog/garage-door-spring-replacement-signs</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/blog/smart-garage-door-openers-worth-investment</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/blog/winter-garage-door-maintenance-nj</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://ez2fixllc.com/privacy-policy</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/terms-of-service</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <!-- Thank You Pages -->
+  <url>
+    <loc>https://ez2fixllc.com/thank-you</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
+</urlset>

@@ -21,8 +21,7 @@ const quickLinks = [
   { name: "FAQ", href: "/faq", icon: "faq" },
   { name: "Reviews", href: "/reviews", icon: "star" },
   { name: "Contact", href: "/contact", icon: "email" },
-  { name: "Book Service", href: "/booking", icon: "calendar" },
-  { name: "Sitemap", href: "/sitemap", icon: "sitemap" }
+  { name: "Book Service", href: "/booking", icon: "calendar" }
 ];
 
 const socialLinks = [
@@ -74,7 +73,7 @@ const icons = {
         </div>
         
         <p class="text-lg leading-relaxed mb-6 max-w-md text-ez2fix-cream">
-          Hudson & Bergen Counties' trusted garage door repair and installation experts. 
+          New Jersey's trusted mobile garage door repair and installation experts. 
           Licensed, insured, and committed to exceptional service.
         </p>
         
@@ -103,7 +102,7 @@ const icons = {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.location}/>
             </svg>
             <span class="text-ez2fix-cream">
-              {siteConfig.business.address}
+              Mobile Service - Serving All New Jersey
             </span>
           </div>
           
@@ -114,22 +113,6 @@ const icons = {
             <span class="text-ez2fix-cream">
               {siteConfig.business.hours}
             </span>
-          </div>
-        </div>
-
-        <!-- Trust Indicators -->
-        <div class="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 mt-6 pt-6 border-t border-ez2fix-brown/30">
-          <div class="flex items-center space-x-2">
-            <svg class="h-5 w-5 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.shield}/>
-            </svg>
-            <span class="text-sm font-semibold text-ez2fix-cream">Licensed & Insured</span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <svg class="h-5 w-5 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
-              <path d={icons.star}/>
-            </svg>
-            <span class="text-sm font-semibold text-ez2fix-cream">5.0★ Rated</span>
           </div>
         </div>
       </div>
@@ -223,6 +206,22 @@ const icons = {
       </div>
     </div>
     
+    <!-- Trust Indicators -->
+    <div class="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 mb-8 pt-8 border-t border-ez2fix-brown/30">
+      <div class="flex items-center space-x-2">
+        <svg class="h-5 w-5 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.shield}/>
+        </svg>
+        <span class="text-sm font-semibold text-ez2fix-cream">Licensed & Insured</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <svg class="h-5 w-5 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
+          <path d={icons.star}/>
+        </svg>
+        <span class="text-sm font-semibold text-ez2fix-cream">5.0★ Rated</span>
+      </div>
+    </div>
+    
     <!-- Bottom Bar -->
     <div class="border-t border-ez2fix-brown pt-8">
       <div class="flex flex-col space-y-4 text-center">
@@ -230,13 +229,6 @@ const icons = {
         <p class="text-ez2fix-gold">
           © <span id="current-year"></span> {siteConfig.business.name}. All rights reserved.
         </p>
-        
-        <!-- Legal Links -->
-        <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6">
-          <a href="/privacy-policy" class="hover:underline transition-colors text-ez2fix-gold">Privacy Policy</a>
-          <a href="/terms-of-service" class="hover:underline transition-colors text-ez2fix-gold">Terms of Service</a>
-          <a href="/accessibility-policy" class="hover:underline transition-colors text-ez2fix-gold">Accessibility</a>
-        </div>
         
         <!-- Attribution -->
         <div>
@@ -251,6 +243,13 @@ const icons = {
               Gett Marketing
             </a>
           </p>
+        </div>
+        
+        <!-- Legal Links -->
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6">
+          <a href="/privacy-policy" class="hover:underline transition-colors text-ez2fix-gold">Privacy Policy</a>
+          <a href="/terms-of-service" class="hover:underline transition-colors text-ez2fix-gold">Terms of Service</a>
+          <a href="/accessibility-policy" class="hover:underline transition-colors text-ez2fix-gold">Accessibility</a>
         </div>
       </div>
     </div>

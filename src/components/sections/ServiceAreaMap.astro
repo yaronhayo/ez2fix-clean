@@ -1,0 +1,242 @@
+---
+import Card from '@/components/ui/Card.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  showInteractiveMap?: boolean;
+}
+
+const {
+  title = 'Professional Garage Door Service Coverage Area',
+  subtitle = 'Licensed garage door contractor serving 5 counties in New Jersey with complete professional service.',
+  showInteractiveMap = true
+} = Astro.props;
+---
+
+<section class="py-16 bg-ez2fix-cream">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+          {title}
+        </h2>
+        <p class="text-lg text-ez2fix-brown max-w-3xl mx-auto">
+          {subtitle}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Interactive Google Map -->
+        <Card class="p-6 bg-white border-2 border-ez2fix-primary shadow-xl">
+          <h3 class="text-xl font-bold text-ez2fix-dark mb-4 text-center">
+            Service Area Map
+          </h3>
+          
+          <!-- Map Container -->
+          <div id="service-area-map" class="w-full h-80 md:h-96 bg-ez2fix-cream/30 rounded-lg relative overflow-hidden">
+            <!-- Loading placeholder -->
+            <div id="map-loading" class="absolute inset-0 flex items-center justify-center bg-ez2fix-cream/50">
+              <div class="text-center">
+                <div class="animate-pulse">
+                  <svg class="h-12 w-12 text-ez2fix-primary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-ez2fix-brown">Loading service area map...</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Map Legend -->
+          <div class="mt-4 text-sm">
+            <div class="flex items-center justify-center space-x-6 text-center">
+              <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-ez2fix-primary rounded-full border-2 border-ez2fix-dark"></div>
+                <span class="text-ez2fix-dark">Ez2Fix Location</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-ez2fix-gold rounded-full border border-ez2fix-dark"></div>
+                <span class="text-ez2fix-dark">Service Areas</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-ez2fix-primary/20 border-2 border-ez2fix-primary rounded"></div>
+                <span class="text-ez2fix-dark">Coverage Zone</span>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Business Information & Service Areas -->
+        <div class="space-y-6">
+          
+          <!-- Business Information -->
+          <Card class="p-6 bg-white border-2 border-ez2fix-gold shadow-xl">
+            <h3 class="text-xl font-bold text-ez2fix-dark mb-4">
+              Professional Garage Door Contractor Information
+            </h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-ez2fix-primary mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <div>
+                  <p class="font-semibold text-ez2fix-dark">Licensed & Insured</p>
+                  <p class="text-sm text-ez2fix-brown">Contractor License #13VH13553300</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-ez2fix-gold mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                </svg>
+                <div>
+                  <p class="font-semibold text-ez2fix-dark">5.0★ Google Rating</p>
+                  <p class="text-sm text-ez2fix-brown">Trusted by hundreds of customers</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-ez2fix-brown mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <div>
+                  <p class="font-semibold text-ez2fix-dark">Family Owned Business</p>
+                  <p class="text-sm text-ez2fix-brown">Locally owned and operated</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-ez2fix-primary mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                  <p class="font-semibold text-ez2fix-dark">24/7 Emergency Service</p>
+                  <p class="text-sm text-ez2fix-brown">Available for urgent garage door repairs</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <!-- County Coverage -->
+          <Card class="p-6 bg-white border-2 border-ez2fix-brown shadow-xl">
+            <h3 class="text-xl font-bold text-ez2fix-dark mb-4">
+              Complete Service Coverage - 5 Counties
+            </h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="flex items-center space-x-2 p-2 rounded bg-ez2fix-cream/30">
+                <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                </svg>
+                <span class="text-sm font-semibold text-ez2fix-dark">Bergen County</span>
+              </div>
+              <div class="flex items-center space-x-2 p-2 rounded bg-ez2fix-cream/30">
+                <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                </svg>
+                <span class="text-sm font-semibold text-ez2fix-dark">Hudson County</span>
+              </div>
+              <div class="flex items-center space-x-2 p-2 rounded bg-ez2fix-cream/30">
+                <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                </svg>
+                <span class="text-sm font-semibold text-ez2fix-dark">Passaic County</span>
+              </div>
+              <div class="flex items-center space-x-2 p-2 rounded bg-ez2fix-cream/30">
+                <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                </svg>
+                <span class="text-sm font-semibold text-ez2fix-dark">Essex County</span>
+              </div>
+              <div class="flex items-center space-x-2 p-2 rounded bg-ez2fix-cream/30">
+                <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                </svg>
+                <span class="text-sm font-semibold text-ez2fix-dark">Morris County</span>
+              </div>
+              <div class="flex items-center space-x-2 p-2 rounded bg-ez2fix-primary/10 border border-ez2fix-primary">
+                <svg class="h-4 w-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                <span class="text-sm font-semibold text-ez2fix-primary">Call to Confirm Others</span>
+              </div>
+            </div>
+            
+            <div class="mt-4 p-3 bg-ez2fix-gold/10 border border-ez2fix-gold rounded-lg">
+              <p class="text-xs text-ez2fix-dark">
+                <strong>Professional garage door service New Jersey:</strong> We provide complete garage door company contact and service across all major areas. Contact our garage door service team to confirm availability in your specific location.
+              </p>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    const mapContainer = document.getElementById('service-area-map');
+    const loadingElement = document.getElementById('map-loading');
+    
+    if (!mapContainer) return;
+    
+    try {
+      // Import maps functionality
+      const { initializeGoogleMaps, createServiceAreaMap } = await import('@/lib/maps');
+      
+      // Initialize Google Maps
+      console.log('🗺️ Initializing Google Maps for service area...');
+      await initializeGoogleMaps();
+      console.log('✅ Google Maps loaded successfully');
+      
+      // Hide loading indicator
+      if (loadingElement) {
+        loadingElement.style.display = 'none';
+      }
+      
+      // Create the service area map
+      const map = createServiceAreaMap(mapContainer, {
+        showRadius: true,
+        showMarkers: true,
+        interactive: true
+      });
+      
+      console.log('✅ Service area map created successfully');
+      
+      // Add professional garage door service keywords to map description
+      const infoContent = `
+        <div style="max-width: 250px; padding: 10px;">
+          <h3 style="margin: 0 0 8px 0; color: #1D1912; font-size: 16px;">Ez2Fix Professional Garage Door Service</h3>
+          <p style="margin: 0 0 4px 0; color: #BB8525; font-size: 12px;">Licensed Garage Door Contractor #13VH13553300</p>
+          <p style="margin: 0 0 4px 0; color: #D2A63C; font-weight: bold; font-size: 14px;">(201) 554-6769</p>
+          <p style="margin: 0; color: #BB8525; font-size: 11px;">Professional garage door service New Jersey • 5 counties coverage</p>
+        </div>
+      `;
+      
+    } catch (error) {
+      console.warn('⚠️ Google Maps service area map failed to load:', error.message);
+      
+      // Show fallback content
+      if (loadingElement) {
+        loadingElement.innerHTML = `
+          <div class="text-center">
+            <svg class="h-16 w-16 text-ez2fix-brown/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <h4 class="font-bold text-ez2fix-dark mb-2">Service Area: 5 Counties in New Jersey</h4>
+            <p class="text-sm text-ez2fix-brown mb-3">Professional garage door service across Bergen, Hudson, Passaic, Essex, and Morris Counties</p>
+            <p class="text-xs text-ez2fix-brown/70">Map temporarily unavailable - Call (201) 554-6769 for service confirmation</p>
+          </div>
+        `;
+      }
+    }
+  });
+</script>

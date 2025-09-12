@@ -219,20 +219,20 @@ function geocodeAddress(address: string): Promise<google.maps.LatLng | null> {
   });
 }
 
-// Address autocomplete functionality - migrated to new PlaceAutocompleteElement API
+// Address autocomplete functionality - using traditional Autocomplete API
 export function setupAddressAutocomplete(
   input: HTMLInputElement,
   options: {
     onPlaceSelected?: (place: google.maps.places.PlaceResult) => void;
     restrictToServiceArea?: boolean;
   } = {}
-): google.maps.places.PlaceAutocompleteElement {
-  // Create the new PlaceAutocompleteElement
-  const autocompleteElement = new google.maps.places.PlaceAutocompleteElement();
-  
-  // Configure options
-  autocompleteElement.types = ['address'];
-  autocompleteElement.componentRestrictions = { country: ['US'] };
+): google.maps.places.Autocomplete {
+  // Configure autocomplete options
+  const autocompleteOptions: google.maps.places.AutocompleteOptions = {
+    types: ['address'],
+    componentRestrictions: { country: 'US' },
+    fields: ['address_components', 'formatted_address', 'geometry', 'name', 'place_id']
+  };
   
   // Restrict to service area if requested
   if (options.restrictToServiceArea) {
@@ -256,31 +256,24 @@ export function setupAddressAutocomplete(
       )
     );
     
-    // Set location bias for the new API
-    autocompleteElement.locationBias = bounds;
-    autocompleteElement.locationRestriction = bounds;
+    autocompleteOptions.bounds = bounds;
+    autocompleteOptions.strictBounds = false; // Allow suggestions outside bounds but prefer within
   }
 
-  // Copy input attributes to the autocomplete element
-  autocompleteElement.placeholder = input.placeholder;
-  autocompleteElement.value = input.value;
-  autocompleteElement.required = input.required;
-  autocompleteElement.name = input.name;
-  autocompleteElement.id = input.id;
-  autocompleteElement.className = input.className;
-  
-  // Replace the input with the autocomplete element
-  input.parentNode?.replaceChild(autocompleteElement, input);
+  // Create the Autocomplete instance
+  const autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
 
   // Add place selection listener
   if (options.onPlaceSelected) {
-    autocompleteElement.addEventListener('gmp-placeselect', (event: any) => {
-      const place = event.place;
-      options.onPlaceSelected!(place);
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (place && place.geometry) {
+        options.onPlaceSelected!(place);
+      }
     });
   }
 
-  return autocompleteElement;
+  return autocomplete;
 }
 
 // Check if address is within service area

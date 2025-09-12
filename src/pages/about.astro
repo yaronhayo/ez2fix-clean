@@ -36,7 +36,7 @@ const whyChoosePoints = [
   {
     icon: "warranty",
     title: "Industry-Leading Warranties",
-    description: "Up to 15-year warranties on parts and installations. We stand behind our work with real guarantees."
+    description: "10-year warranties on parts and installations. We stand behind our work with real guarantees."
   },
   {
     icon: "pricing",
@@ -55,14 +55,15 @@ const serviceAreas = [
   { name: "Bergen County", highlight: true },
   { name: "Hudson County", highlight: false },
   { name: "Passaic County", highlight: false },
-  { name: "Essex County", highlight: false }
+  { name: "Essex County", highlight: false },
+  { name: "Morris County", highlight: false }
 ];
 ---
 
 <BaseLayout 
-  title="About Ez2Fix Bergen County NJ | Licensed Contractor #13VH13553300 | 10,000+ Customers"
-  description="About Ez2Fix - Bergen County's #1 trusted garage door contractor. Licensed #13VH13553300, 10+ years experience, 10,000+ satisfied customers. Professional garage door repair & installation serving Elmwood Park, Fair Lawn, Clifton, North Caldwell. Industry-leading warranties."
-  keywords="about ez2fix bergen county nj, licensed garage door contractor bergen county nj, garage door company bergen county, professional garage door service bergen county, experienced garage door technicians nj, ez2fix garage door services, bergen county garage door experts, garage door contractor elmwood park, garage door company fair lawn nj"
+  title="About Ez2Fix | Licensed Garage Door Contractor New Jersey | Our Story"
+  description="Learn about Ez2Fix LLC, New Jersey's trusted garage door contractor. Licensed #13VH13553300, serving 12,000+ families across 5 counties with professional service."
+  keywords="garage door company New Jersey, licensed garage door contractor, professional garage door service, Ez2Fix garage door contractor, New Jersey garage door company, garage door service NJ, licensed contractor New Jersey"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -80,7 +81,7 @@ const serviceAreas = [
           "credentialCategory": "Professional License #13VH13553300"
         },
         "yearsOfOperation": "10+",
-        "serviceArea": ["Bergen County, NJ", "Hudson County, NJ", "Passaic County, NJ", "Essex County, NJ"]
+        "serviceArea": ["Bergen County, NJ", "Hudson County, NJ", "Passaic County, NJ", "Essex County, NJ", "Morris County, NJ"]
       }
     })} />
   </Fragment>
@@ -105,10 +106,10 @@ const serviceAreas = [
           <!-- Page Title -->
           <div class="text-center">
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-ez2fix-dark mb-6">
-              About <span class="text-ez2fix-primary">Ez2Fix</span>
+              About Ez2Fix - Licensed Garage Door Contractor New Jersey
             </h1>
             <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Bergen County's trusted garage door specialists, serving families since 2014 with professional service, honest pricing, and genuine care.
+              New Jersey's trusted garage door company serving 12,000+ families across 5 counties since 2014. Professional garage door service with licensed contractors, honest pricing, and genuine care.
             </p>
           </div>
         </div>
@@ -127,27 +128,27 @@ const serviceAreas = [
 
           <div class="prose prose-lg max-w-none text-ez2fix-brown">
             <p class="text-xl leading-relaxed mb-8">
-              Ez2Fix was founded in 2014 with a simple mission: provide Bergen County families with honest, professional garage door service they can trust. What started as a commitment to excellence has grown into a reputation that speaks for itself.
+              Ez2Fix LLC was founded in 2014 with a simple mission: provide New Jersey families with honest, professional garage door service they can trust. As a licensed garage door contractor serving 5 counties, what started as a commitment to excellence has grown into New Jersey's most trusted garage door company with over 12,000+ satisfied customers.
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               <Card class="p-6 bg-ez2fix-cream border-2 border-ez2fix-primary">
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Licensed & Professional</h3>
+                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Licensed Garage Door Contractor</h3>
                 <p class="text-ez2fix-brown">
-                  Licensed contractor <span class="font-bold text-ez2fix-primary">{companyStats.licenseNumber}</span> with comprehensive insurance coverage. Every technician is trained, certified, and committed to safety.
+                  Professional garage door service backed by New Jersey contractor license <span class="font-bold text-ez2fix-primary">{companyStats.licenseNumber}</span> with comprehensive insurance coverage. Every technician is trained, certified, and committed to safety standards.
                 </p>
               </Card>
               
               <Card class="p-6 bg-ez2fix-cream border-2 border-ez2fix-gold">
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Community Focused</h3>
+                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">New Jersey Community Focused</h3>
                 <p class="text-ez2fix-brown">
-                  We live and work in Bergen County. Your neighbors are our neighbors, and we take pride in serving the community we call home.
+                  As a garage door company New Jersey families trust, we live and work in the communities we serve across 5 counties. Your neighbors are our neighbors, and we take pride in serving the communities we call home.
                 </p>
               </Card>
             </div>
             
             <p class="text-lg leading-relaxed mb-8">
-              Over {companyStats.yearsExperience} years, we've built lasting relationships with {companyStats.customersServed} families across Bergen County. Our approach is simple: listen to your needs, provide honest recommendations, and deliver quality work that stands the test of time.
+              Over {companyStats.yearsExperience} years as a licensed garage door contractor, we've built lasting relationships with over 12,000+ families across New Jersey's 5 counties. Our professional garage door service approach is simple: listen to your needs, provide honest recommendations, and deliver quality work that stands the test of time. This is what sets our garage door company New Jersey apart from the rest.
             </p>
           </div>
         </div>
@@ -162,7 +163,7 @@ const serviceAreas = [
             Our <span class="text-ez2fix-primary">Values</span>
           </h2>
           <p class="text-lg text-ez2fix-gold max-w-3xl mx-auto">
-            These principles guide every interaction, every repair, and every installation we perform across Bergen County.
+            These principles guide every interaction, every repair, and every installation our professional garage door service team performs across New Jersey's 5 counties.
           </p>
         </div>
         
@@ -276,10 +277,10 @@ const serviceAreas = [
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
-              <span class="text-ez2fix-primary">Credentials</span> & Experience
+              Licensed Garage Door Contractor <span class="text-ez2fix-primary">Credentials</span>
             </h2>
             <p class="text-lg text-ez2fix-brown">
-              Professional qualifications and experience that give you confidence in our service.
+              Professional qualifications and certifications that give you confidence in choosing our garage door company New Jersey for all your service needs.
             </p>
           </div>
           
@@ -294,9 +295,9 @@ const serviceAreas = [
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Licensed Contractor</h3>
+                  <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Licensed Garage Door Contractor</h3>
                   <p class="text-ez2fix-brown leading-relaxed">
-                    New Jersey State Licensed Contractor <span class="font-bold text-ez2fix-primary">{companyStats.licenseNumber}</span> with comprehensive liability and workers' compensation insurance coverage.
+                    New Jersey State Licensed Contractor <span class="font-bold text-ez2fix-primary">{companyStats.licenseNumber}</span> with comprehensive liability and workers' compensation insurance coverage. Professional garage door service backed by full licensing, bonding, and industry certifications.
                   </p>
                 </div>
               </div>
@@ -311,9 +312,9 @@ const serviceAreas = [
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-xl font-bold text-ez2fix-dark mb-3">{companyStats.yearsExperience} Years of Experience</h3>
+                  <h3 class="text-xl font-bold text-ez2fix-dark mb-3">{companyStats.yearsExperience} Years Professional Service</h3>
                   <p class="text-ez2fix-brown leading-relaxed">
-                    Over a decade serving Bergen County families with {companyStats.customersServed} successful service calls and {companyStats.satisfaction} customer satisfaction rate.
+                    Over a decade as a professional garage door service provider serving New Jersey families with 12,000+ successful service calls and {companyStats.satisfaction} customer satisfaction rate across 5 counties.
                   </p>
                 </div>
               </div>
@@ -328,14 +329,14 @@ const serviceAreas = [
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
           <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-cream mb-6">
-            <span class="text-ez2fix-primary">Service Areas</span>
+            New Jersey <span class="text-ez2fix-primary">Service Areas</span>
           </h2>
           <p class="text-lg text-ez2fix-gold mb-12">
-            Proudly serving Bergen County and surrounding areas in Northern New Jersey.
+            Our licensed garage door contractor team proudly serves 5 counties across Northern New Jersey with complete professional garage door service coverage.
           </p>
           
           <!-- Service Areas Grid -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
             {serviceAreas.map((area, index) => (
               <div class={`p-4 rounded-lg text-center ${area.highlight ? 'bg-ez2fix-primary text-white' : 'bg-ez2fix-cream text-ez2fix-dark border-2 border-ez2fix-primary/20'}`}>
                 <div class={`font-bold ${area.highlight ? 'text-white' : 'text-ez2fix-primary'}`}>

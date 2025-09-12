@@ -36,7 +36,7 @@ const services = [
 const formId = `booking-form-${variant}`;
 ---
 
-<div class="booking-form-container">
+<div class="booking-form-container relative">
   <div class={variant === 'hero' ? 'mb-3' : 'mb-4 md:mb-6'}>
     <h3 class={variant === 'hero' ? 'text-base lg:text-lg font-bold text-ez2fix-dark mb-1' : 'text-lg md:text-xl lg:text-2xl font-bold text-ez2fix-dark mb-2'}>
       {title}
@@ -76,28 +76,11 @@ const formId = `booking-form-${variant}`;
         name="phone" 
         required
         class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
-        placeholder="(201) 555-0123"
+        placeholder="(201) 234-5678"
       />
       <div id={`phone-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
     </div>
 
-    {variant !== 'hero' && (
-      <!-- Email -->
-      <div>
-        <label for={`email-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
-          Email Address*
-        </label>
-        <input 
-          type="email" 
-          id={`email-${variant}`}
-          name="email"
-          required
-          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
-          placeholder="your.email@example.com"
-        />
-        <div id={`email-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
-      </div>
-    )}
 
     <!-- Service Type -->
     <div>
@@ -118,41 +101,18 @@ const formId = `booking-form-${variant}`;
       <div id={`service-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
     </div>
 
-    {variant !== 'hero' && (
-      <!-- Urgency -->
-      <div>
-        <label for={`urgency-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
-          When do you need service?*
-        </label>
-        <select 
-          id={`urgency-${variant}`}
-          name="urgency" 
-          required
-          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white"
-        >
-          <option value="">Select timeframe...</option>
-          <option value="same-day">ASAP / Same Day</option>
-          <option value="next-day">Next Day</option>
-          <option value="flexible">Within a few days</option>
-          <option value="flexible">Within a few weeks</option>
-          <option value="flexible">Not sure / Just browsing</option>
-        </select>
-        <div id={`urgency-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
-      </div>
-    )}
 
     <!-- Address -->
     <div>
       <label for={`address-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
-        Address*
+        Address <span class="text-ez2fix-brown/70">(optional)</span>
       </label>
       <input 
         type="text" 
         id={`address-${variant}`}
         name="address" 
-        required
         class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
-        placeholder={variant === 'hero' ? 'Your address...' : 'Start typing your address...'}
+        placeholder={variant === 'hero' ? 'Address (helps with faster service)...' : 'Address (helps us serve you faster)...'}
         autocomplete="street-address"
       />
       <div id={`address-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
@@ -211,18 +171,90 @@ const formId = `booking-form-${variant}`;
       )}
     </div>
 
+    <!-- How Soon? -->
+    <div>
+      <label for={`urgency-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+        How Soon?*
+      </label>
+      <select 
+        id={`urgency-${variant}`}
+        name="urgency" 
+        required
+        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white'}
+      >
+        <option value="">When do you need service?</option>
+        <option value="asap">ASAP</option>
+        <option value="today">Today if possible</option>
+        <option value="few-days">Within a few days</option>
+        <option value="few-weeks">Within a few weeks</option>
+        <option value="browsing">Not sure / Just browsing</option>
+      </select>
+      <div id={`urgency-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
     {variant !== 'hero' && (
-      <!-- Notes -->
+      <!-- Service Description & Needs Assessment -->
       <div>
         <label for={`notes-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
-          Notes
+          Service Description & Needs Assessment
         </label>
         <textarea 
           id={`notes-${variant}`}
           name="notes" 
           class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors min-h-[100px] resize-vertical"
-          placeholder="Tell us more about your garage door issue, special instructions, or any questions you have..."
+          placeholder="Please describe your garage door issue: What's not working? Any unusual sounds? When did the problem start? Any safety concerns? This helps us prepare for your appointment..."
         ></textarea>
+        <div class="text-xs text-ez2fix-brown mt-1">
+          💡 Detailed descriptions help our technicians bring the right parts and tools to complete your service in one visit
+        </div>
+      </div>
+
+      <!-- Contact Preference Selection -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Preferred Contact Method*
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div class="flex items-center space-x-2">
+            <input 
+              type="radio" 
+              id={`contact-phone-${variant}`}
+              name="contactPreference" 
+              value="phone"
+              required
+              class="h-4 w-4 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2"
+              checked
+            />
+            <label for={`contact-phone-${variant}`} class="text-sm text-ez2fix-dark">
+              📞 Phone Call
+            </label>
+          </div>
+          <div class="flex items-center space-x-2">
+            <input 
+              type="radio" 
+              id={`contact-text-${variant}`}
+              name="contactPreference" 
+              value="text"
+              class="h-4 w-4 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2"
+            />
+            <label for={`contact-text-${variant}`} class="text-sm text-ez2fix-dark">
+              💬 Text Message
+            </label>
+          </div>
+          <div class="flex items-center space-x-2">
+            <input 
+              type="radio" 
+              id={`contact-email-${variant}`}
+              name="contactPreference" 
+              value="email"
+              class="h-4 w-4 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2"
+            />
+            <label for={`contact-email-${variant}`} class="text-sm text-ez2fix-dark">
+              📧 Email
+            </label>
+          </div>
+        </div>
+        <div id={`contactPreference-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
       </div>
     )}
 
@@ -256,8 +288,11 @@ const formId = `booking-form-${variant}`;
       />
     </div>
     
+    <!-- Hidden reCAPTCHA badge container -->
+    <div id="recaptcha-badge" style="display: none; visibility: hidden; opacity: 0; width: 0; height: 0; position: absolute; left: -9999px;"></div>
+    
     <p class={variant === 'hero' ? 'text-ez2fix-brown text-center text-xs mt-2' : 'text-ez2fix-brown text-center text-xs mt-3'}>
-      * Required fields. We respect your privacy and never share your information.
+      * Required fields. We respect your privacy and never share your information. This form is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" class="underline hover:no-underline" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" class="underline hover:no-underline" target="_blank" rel="noopener">Terms of Service</a> apply.
     </p>
   </form>
 </div>
@@ -310,25 +345,21 @@ const formId = `booking-form-${variant}`;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Basic validation
-        const required = variant === 'hero' 
-          ? ['name', 'phone', 'service', 'address', 'consent']
-          : ['name', 'phone', 'email', 'service', 'urgency', 'address', 'consent'];
+        // Basic validation - Updated for contact preference
+        const basicRequired = ['name', 'phone', 'service', 'urgency', 'consent'];
+        const fullFormRequired = variant !== 'hero' ? ['contactPreference'] : [];
+        const required = [...basicRequired, ...fullFormRequired];
         
         let hasErrors = false;
         required.forEach(field => {
           const value = field === 'consent' ? data[field] : data[field]?.trim();
           if (!value) {
-            showError(field, 'This field is required.', variant);
+            const fieldName = field === 'contactPreference' ? 'Contact preference' : field.charAt(0).toUpperCase() + field.slice(1);
+            showError(field, `${fieldName} is required.`, variant);
             hasErrors = true;
           }
         });
         
-        // Email validation
-        if (data.email && !isValidEmail(data.email.trim())) {
-          showError('email', 'Please enter a valid email address.', variant);
-          hasErrors = true;
-        }
         
         // Phone validation
         if (data.phone && !isValidPhone(data.phone.trim())) {
@@ -361,16 +392,21 @@ const formId = `booking-form-${variant}`;
         }
         
         try {
-          // Get address value from either regular input or PlaceAutocompleteElement
-          const addressElement = form.querySelector(`#address-${variant}`) || form.querySelector(`gmp-place-autocomplete`);
+          // Get address value from the input field
+          const addressElement = form.querySelector(`#address-${variant}`);
           const addressValue = addressElement?.value || data.address?.trim() || '';
           
-          // Build full address
-          const fullAddress = addressValue + 
-            (data.city ? `, ${data.city.trim()}` : '') + 
-            (data.state ? `, ${data.state.trim()}` : ', NJ') + 
-            (data.zip ? ` ${data.zip.trim()}` : '') +
-            (data.unit ? `, Unit ${data.unit.trim()}` : '');
+          // Build full address - ensure zip code is included
+          const cityValue = data.city?.trim() || '';
+          const stateValue = data.state?.trim() || 'NJ';
+          const zipValue = data.zip?.trim() || '';
+          const unitValue = data.unit?.trim() || '';
+          
+          let fullAddress = addressValue;
+          if (cityValue) fullAddress += `, ${cityValue}`;
+          if (stateValue) fullAddress += `, ${stateValue}`;
+          if (zipValue) fullAddress += ` ${zipValue}`;
+          if (unitValue) fullAddress += `, Unit ${unitValue}`;
           
           console.log('Submitting form data to /api/booking');
           const response = await fetch('/api/booking', {
@@ -378,12 +414,12 @@ const formId = `booking-form-${variant}`;
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               name: data.name.trim(),
-              email: data.email?.trim() || '',
               phone: data.phone.trim(),
               address: fullAddress,
               service: data.service,
-              urgency: data.urgency || 'flexible',
+              urgency: data.urgency || 'browsing',
               description: data.notes?.trim() || '',
+              contactPreference: data.contactPreference || 'phone',
               recaptchaToken,
               consent: data.consent,
               source: 'website_form'
@@ -417,15 +453,13 @@ const formId = `booking-form-${variant}`;
         await initializeGoogleMaps();
         console.log('✅ Google Maps initialized successfully');
         
-        // Set up address autocomplete with service area restrictions using new PlaceAutocompleteElement API
-        const autocompleteElement = setupAddressAutocomplete(addressInput, {
+        // Set up address autocomplete with service area restrictions
+        const autocomplete = setupAddressAutocomplete(addressInput, {
           restrictToServiceArea: true,
           onPlaceSelected: (place) => {
-            console.log('📍 Address selected:', place.displayName || place.formattedAddress);
+            console.log('📍 Address selected:', place.formatted_address);
             
-            // The new API provides different property names
-            const addressText = place.displayName || place.formattedAddress || place.name;
-            if (addressText) {
+            if (place.formatted_address) {
               // Fill in additional fields if they exist
               if (addressExpanded) {
                 addressExpanded.classList.remove('hidden');
@@ -433,31 +467,18 @@ const formId = `booking-form-${variant}`;
               }
               
               // Add visual feedback
-              autocompleteElement.style.borderColor = '#10b981'; // Green border
+              addressInput.style.borderColor = '#10b981'; // Green border
               setTimeout(() => {
-                autocompleteElement.style.borderColor = '';
+                addressInput.style.borderColor = '';
               }, 2000);
             }
           }
         });
         
-        console.log('✅ Google Maps address autocomplete enabled with new PlaceAutocompleteElement API');
-        
-        // Add visual indicator that autocomplete is working
-        const autocompleteIndicator = document.createElement('div');
-        autocompleteIndicator.innerHTML = '✅ Address autocomplete enabled (New API)';
-        autocompleteIndicator.className = 'text-xs text-green-600 mt-1';
-        autocompleteIndicator.style.display = 'none';
-        autocompleteElement.parentNode?.appendChild(autocompleteIndicator);
-        
-        // Show indicator briefly
-        autocompleteIndicator.style.display = 'block';
-        setTimeout(() => {
-          autocompleteIndicator.style.display = 'none';
-        }, 3000);
+        console.log('✅ Google Maps address autocomplete enabled');
         
         // Show expanded fields on focus
-        autocompleteElement.addEventListener('focus', () => {
+        addressInput.addEventListener('focus', () => {
           if (addressExpanded) {
             addressExpanded.classList.remove('hidden');
           }
@@ -485,35 +506,19 @@ const formId = `booking-form-${variant}`;
       const stateInput = form.querySelector(`#state-${variant}`);
       const zipInput = form.querySelector(`#zip-${variant}`);
       
-      // Handle both old and new API structures
-      const addressComponents = place.address_components || place.addressComponents;
-      
-      if (addressComponents) {
-        addressComponents.forEach(component => {
+      // Parse address components using traditional API
+      if (place.address_components) {
+        place.address_components.forEach(component => {
           const types = component.types;
           
           if (types.includes('locality') && cityInput) {
-            cityInput.value = component.long_name || component.longText;
+            cityInput.value = component.long_name;
           } else if (types.includes('administrative_area_level_1') && stateInput) {
-            stateInput.value = component.short_name || component.shortText;
+            stateInput.value = component.short_name;
           } else if (types.includes('postal_code') && zipInput) {
-            zipInput.value = component.long_name || component.longText;
+            zipInput.value = component.long_name;
           }
         });
-      } else {
-        // Try to extract from place properties directly (new API)
-        if (place.addressComponents) {
-          // New API structure
-          for (const component of place.addressComponents) {
-            if (component.types.includes('locality') && cityInput) {
-              cityInput.value = component.longText;
-            } else if (component.types.includes('administrative_area_level_1') && stateInput) {
-              stateInput.value = component.shortText;
-            } else if (component.types.includes('postal_code') && zipInput) {
-              zipInput.value = component.longText;
-            }
-          }
-        }
       }
     }
     

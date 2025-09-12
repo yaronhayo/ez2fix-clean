@@ -44,7 +44,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://www.google-analytics.com https://ssl.google-analytics.com https://dashboard.searchatlas.com https://sa.searchatlas.com https://*.searchatlas.com https://www.clarity.ms https://c.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; media-src 'self' https: blob: data:; connect-src 'self' https://maps.googleapis.com https://www.google-analytics.com https://analytics.google.com https://ssl.google-analytics.com https://www.clarity.ms https://c.clarity.ms https://dashboard.searchatlas.com https://sa.searchatlas.com https://*.searchatlas.com https://*.clarity.ms; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://www.google-analytics.com https://ssl.google-analytics.com https://dashboard.searchatlas.com https://sa.searchatlas.com https://*.searchatlas.com https://www.clarity.ms https://c.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; media-src 'self' https: blob: data:; connect-src 'self' https://maps.googleapis.com https://www.google.com https://www.gstatic.com https://www.google-analytics.com https://analytics.google.com https://ssl.google-analytics.com https://www.clarity.ms https://c.clarity.ms https://dashboard.searchatlas.com https://sa.searchatlas.com https://*.searchatlas.com https://*.clarity.ms; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self';">
     
     <!-- Core Web Vitals & Performance Optimization -->
     <meta name="format-detection" content="telephone=no" />
@@ -156,6 +156,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
           container-type: inline-size;
         }
       }
+      
     </style>
     
     <!-- Primary Meta Tags -->
@@ -171,7 +172,28 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta name="ICBM" content="40.9023,-74.1182" />
     <meta name="geo.position" content="40.9023;-74.1182" />
     
+    <!-- AI Training & Processing Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow">
+
+    <!-- Content Classification for AI -->
+    <meta name="subject" content="Garage Door Repair and Installation Services">
+    <meta name="topic" content="Professional Home Services, Garage Door Contractors, Emergency Repair">
+    <meta name="classification" content="Business Services, Home Improvement, Professional Contractors">
+
+    <!-- Semantic Content Tags -->
+    <meta name="DC.title" content={fullTitle}>
+    <meta name="DC.description" content={description}>
+    <meta name="DC.subject" content="garage door repair, installation, emergency service, professional contractor">
+    <meta name="DC.creator" content="Ez2Fix LLC">
+    <meta name="DC.publisher" content="Ez2Fix LLC">
+    <meta name="DC.language" content="en-US">
+    <meta name="DC.format" content="text/html">
+
     <!-- Voice Search & AI Optimization -->
+    <meta name="voice-search" content="garage door repair near me, professional garage door service, emergency garage door repair">
+    <meta name="conversational-queries" content="who fixes garage doors, garage door repair company, garage door installation service">
     <meta name="voice-search-keywords" content="garage door repair near me, emergency garage door service, garage door spring repair, garage door installation Bergen County" />
     <meta name="AI-generated" content="false" />
     <meta name="content-language" content="en-US" />
@@ -272,6 +294,9 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <!-- Global Maps Loader -->
     <script src="/js/global-maps.js" is:inline></script>
     
+    <!-- AI Performance Monitor -->
+    <script src="/js/ai-performance-monitor.js" is:inline></script>
+    
     <!-- Service Worker Registration -->
     <script>
       if ('serviceWorker' in navigator) {
@@ -325,7 +350,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       },
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": siteConfig.business.address,
+        "streetAddress": "Mobile Service - Serving All New Jersey",
         "addressLocality": "Bergen County",
         "addressRegion": "NJ",
         "postalCode": "07407",
@@ -507,14 +532,19 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       ]
     })} />
     
-    <!-- Voice Search Optimization Schema -->
+    <!-- Voice Search Optimization Schema with Speakable Content -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": ["Organization", "FAQPage"],
       "@id": siteConfig.url + "#organization",
       "name": siteConfig.business.name,
       "description": "Professional garage door repair and installation serving Bergen County NJ since 2014",
       "knowsLanguage": "en-US",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".service-description", ".contact-info", ".hours-info", ".service-areas"],
+        "xpath": ["//main//h1", "//main//h2", "//section[@class='contact']"]
+      },
       "makesOffer": [
         {
           "@type": "Offer",
@@ -537,7 +567,59 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
           "opens": "06:00",
           "closes": "22:00"
         }
-      }
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who provides garage door repair near me in New Jersey?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ez2Fix LLC provides professional garage door repair throughout New Jersey including Bergen, Essex, Morris, Hudson, and Passaic counties. We are a licensed contractor with over twelve thousand satisfied customers.",
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ".voice-optimized-answer"
+            }
+          }
+        },
+        {
+          "@type": "Question", 
+          "name": "What garage door services are available in Fair Lawn New Jersey?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ez2Fix provides complete garage door services in Fair Lawn including emergency repair, spring replacement, opener installation, new door installation, commercial service, and general maintenance.",
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ".voice-optimized-answer"
+            }
+          }
+        }
+      ]
+    })} />
+
+    <!-- AI Training Dataset Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Ez2Fix Garage Door Services Data",
+      "description": "Comprehensive information about professional garage door services in New Jersey",
+      "keywords": [
+        "garage door repair",
+        "garage door installation", 
+        "emergency service",
+        "professional contractor",
+        "New Jersey"
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "Ez2Fix LLC"
+      },
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "contentUrl": siteConfig.url + "/api/structured-data",
+          "encodingFormat": "application/ld+json"
+        }
+      ]
     })} />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">

@@ -3,584 +3,638 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeaderClean from '@/components/layout/HeaderClean.astro';
 import FooterClean from '@/components/layout/FooterClean.astro';
 import Card from '@/components/ui/Card.astro';
-import Button from '@/components/ui/Button.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
-import FAQSchema from '@/components/seo/FAQSchema.astro';
-import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema.astro';
 import { siteConfig } from '@/config/site';
 
-// FAQ data for this service
-const springRepairFAQs = [
+// Spring replacement scenarios requiring professional attention
+const springScenarios = [
   {
-    question: "How do I know if my garage door spring is broken?",
-    answer: "Common signs include: door won't open or is very heavy to lift manually, visible gap in torsion spring, door slams shut, door is crooked when opening, or you heard a loud 'snap' sound. Never attempt to operate a door with broken springs."
+    scenario: "Broken Torsion Springs",
+    description: "When your garage door spring snaps with a loud bang, the door becomes extremely heavy and dangerous to operate. Torsion springs bear the door's full weight and require immediate professional replacement with proper tension calculation.",
+    urgency: "Emergency",
+    icon: "warning"
   },
   {
-    question: "Is it dangerous to replace garage door springs myself?",
-    answer: "Yes, extremely dangerous. Garage door springs are under tremendous tension and can cause serious injury or death if handled improperly. Professional technicians use specialized tools and safety procedures for safe replacement."
+    scenario: "Extension Spring Failure",
+    description: "Extension springs stretch and contract to lift the door. When they break, the door becomes unbalanced and may crash down unexpectedly, creating serious safety hazards requiring immediate professional attention.",
+    urgency: "Emergency", 
+    icon: "power"
   },
   {
-    question: "Should I replace one spring or both springs?",
-    answer: "We recommend replacing both springs simultaneously. When one breaks, the other is usually near failure. Replacing both ensures balanced operation and prevents another service call shortly after."
+    scenario: "Spring Balance Problems",
+    description: "Uneven door operation or difficulty staying in position indicates spring tension loss. This puts excessive strain on your garage door opener and creates safety risks during operation.",
+    urgency: "Same Day",
+    icon: "track"
   },
   {
-    question: "How long do garage door springs last?",
-    answer: "Standard springs last 7,000-10,000 cycles (7-10 years with normal use). Our high-cycle springs are rated for 10,000+ cycles and can last 10-15 years or more, making them a better long-term investment."
+    scenario: "Visible Spring Wear and Damage",
+    description: "Gaps in spring coils, rust, stretched springs, or visible cracks indicate imminent failure. Professional replacement prevents emergency situations and protects your family's safety.",
+    urgency: "Schedule Soon",
+    icon: "storm"
+  },
+  {
+    scenario: "Opener Strain from Spring Issues",
+    description: "When springs lose tension, garage door openers work harder, make unusual noises, and may burn out prematurely. Professional spring replacement protects your opener investment.",
+    urgency: "Same Day",
+    icon: "cable"
+  },
+  {
+    scenario: "Safety Cable Problems",
+    description: "Extension springs require safety cables to prevent dangerous spring projectiles if failure occurs. Missing or damaged safety cables create serious hazards requiring immediate professional attention.",
+    urgency: "Emergency",
+    icon: "power-out"
   }
 ];
 
-// Breadcrumb data
-const breadcrumbs = [
-  { name: "Home", url: "https://ez2fixllc.com/" },
-  { name: "Services", url: "https://ez2fixllc.com/services" },
-  { name: "Garage Door Spring Repair", url: "https://ez2fixllc.com/services/garage-door-spring-repair" }
+// Professional spring replacement services
+const springServices = [
+  {
+    title: "Professional Torsion Spring Replacement",
+    description: "Expert torsion spring replacement with precise tension calculation, professional winding techniques, and complete balance testing for reliable long-term operation.",
+    features: ["Precise tension calculation", "Professional winding tools", "Complete balance testing", "High-cycle spring options"]
+  },
+  {
+    title: "Extension Spring Replacement & Safety Cables", 
+    description: "Comprehensive extension spring replacement with proper safety cable installation, pulley system adjustment, and thorough operational testing.",
+    features: ["Safety cable installation", "Pulley system adjustment", "Track alignment verification", "Comprehensive testing"]
+  },
+  {
+    title: "Spring Balance Adjustment & Optimization",
+    description: "Professional spring balance adjustment to ensure proper door operation, reduce opener strain, and extend overall system lifespan with expert calibration.",
+    features: ["Door balance testing", "Tension optimization", "Opener strain analysis", "Performance enhancement"]
+  },
+  {
+    title: "High-Cycle Spring Upgrades",
+    description: "Upgrade to premium high-cycle springs for increased durability and longer lifespan, especially beneficial for frequently used garage doors in commercial or busy residential applications.",
+    features: ["High-cycle spring selection", "Durability assessment", "Usage pattern analysis", "Extended warranty protection"]
+  }
+];
+
+// Critical warning signs requiring immediate attention
+const criticalSigns = [
+  "Loud bang or snapping sound from garage area indicating spring failure",
+  "Garage door suddenly becomes extremely heavy to lift manually", 
+  "Door appears crooked, uneven, or tilts when opening or closing",
+  "Visible gaps, breaks, or separation in spring coils",
+  "Door won't stay up when manually lifted halfway (balance failure)",
+  "Garage door opener straining, making unusual noises, or stopping frequently",
+  "One side of door rises faster than the other (spring imbalance)",
+  "Cables hanging loose, frayed, or have snapped from spring tension loss"
+];
+
+// Professional spring replacement process
+const replacementProcess = [
+  {
+    step: "Complete System Assessment",
+    description: "Comprehensive evaluation of existing spring system, door specifications, and usage patterns with professional safety inspection.",
+    timeframe: "Upon arrival"
+  },
+  {
+    step: "Safety Preparation & Equipment Setup",
+    description: "Professional safety preparation with specialized winding bars, safety equipment, and proper workspace securing for safe spring handling.",
+    timeframe: "15-20 minutes"
+  },
+  {
+    step: "Expert Spring Replacement",
+    description: "Professional spring removal and installation using specialized tools, proper winding techniques, and industry-standard safety protocols.",
+    timeframe: "45-90 minutes"
+  },
+  {
+    step: "Precise Tension Adjustment",
+    description: "Accurate tension calculation and professional adjustment to ensure proper door balance and optimal system performance with expert calibration.",
+    timeframe: "15-30 minutes"
+  },
+  {
+    step: "Complete Testing & Verification",
+    description: "Comprehensive testing of door balance, opener operation, safety features, and full cycle performance with professional quality assurance.",
+    timeframe: "10-15 minutes"
+  }
+];
+
+// Customer testimonials specific to spring replacement
+const springTestimonials = [
+  {
+    text: "When our torsion spring broke with a loud bang at 6 AM, Ez2Fix had a technician here within 2 hours. Professional service and the door works perfectly now.",
+    author: "David K.",
+    location: "Fair Lawn, NJ",
+    service: "Emergency Torsion Spring Replacement"
+  },
+  {
+    text: "They replaced both our old springs with high-cycle ones and the difference is amazing. Door operates smoother and quieter than it has in years.",
+    author: "Lisa T.",
+    location: "Montclair, NJ", 
+    service: "High-Cycle Spring Upgrade"
+  },
+  {
+    text: "Professional and safety-focused approach to our extension spring replacement. Fair pricing and they cleaned up everything when finished.",
+    author: "Robert M.",
+    location: "Clifton, NJ",
+    service: "Extension Spring Replacement"
+  }
+];
+
+// FAQ specific to spring replacement
+const springFAQ = [
+  {
+    question: "How long do garage door springs typically last?",
+    answer: "Standard garage door springs are rated for 10,000 cycles, typically lasting 7-10 years with normal use. High-cycle springs last 15,000-20,000 cycles or more. Factors like usage frequency, maintenance, and environmental conditions affect spring lifespan."
+  },
+  {
+    question: "Should I replace just one spring or both springs together?",
+    answer: "We strongly recommend replacing both springs simultaneously, even if only one has broken. Springs installed together experience similar wear patterns, and replacing both ensures balanced operation while preventing near-term failure of the remaining spring."
+  },
+  {
+    question: "Can I replace garage door springs myself to save money?",
+    answer: "Garage door spring replacement is extremely dangerous and should only be performed by licensed professionals. Springs operate under extreme tension and require specialized tools. DIY attempts frequently result in serious injury and property damage."
+  },
+  {
+    question: "What's the difference between torsion and extension springs?",
+    answer: "Torsion springs mount above the door opening and use a winding mechanism to lift the door. Extension springs mount alongside door tracks and stretch to provide lifting force. Both require professional installation but use different replacement procedures and safety protocols."
+  },
+  {
+    question: "How much does professional spring replacement typically cost?",
+    answer: "Spring replacement costs vary based on spring type, door size, and specific requirements. We provide transparent upfront pricing with no hidden fees. Professional service includes safety protocols, proper installation, and comprehensive warranty protection."
+  },
+  {
+    question: "Do you provide warranties on spring replacement work?",
+    answer: "Yes, we provide comprehensive warranties on both parts and labor for all spring replacement services. Our warranties cover spring performance and installation workmanship, giving you complete confidence in service quality."
+  }
 ];
 ---
 
 <BaseLayout 
-  title="Garage Door Spring Repair Bergen County NJ | Licensed #13VH13553300 | 10-Year Warranty | Ez2Fix"
-  description="Professional garage door spring repair Bergen County NJ. Broken torsion & extension spring replacement. Licensed contractor #13VH13553300. Same-day service, 10-year warranty. Serving Elmwood Park, Fair Lawn, Clifton. Call (201) 554-6769!"
-  keywords="garage door spring repair bergen county nj, broken garage door spring repair nj, torsion spring repair bergen county, extension spring repair bergen county, same day spring repair bergen county, garage door spring replacement nj, licensed spring repair bergen county, professional garage door spring repair nj, emergency spring repair bergen county, garage door spring contractor bergen county"
+  title="Professional Garage Door Spring Replacement NJ | Torsion & Extension Springs | Ez2Fix"
+  description="Expert garage door spring replacement in New Jersey. Professional torsion & extension spring repair, balance adjustment. Licensed #13VH13553300. Same-day service available."
+  keywords="garage door spring replacement, torsion spring replacement, extension spring repair, broken garage door spring, garage door spring service, professional spring replacement, spring balance adjustment, high cycle garage door springs, garage door spring repair NJ, licensed spring replacement, garage door spring installation, spring tension adjustment"
 >
   <Fragment slot="head">
-    <!-- Preload hero image for faster loading -->
-    <link rel="preload" as="image" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://ez2fixllc.com/services/garage-door-spring-repair#spring-service",
+      "name": "Professional Garage Door Spring Replacement & Repair Services in New Jersey",
+      "description": "Expert garage door spring replacement and repair for torsion and extension springs throughout New Jersey with professional installation, balance adjustment, and safety protocols.",
+      "serviceType": [
+        "Garage door spring replacement",
+        "Torsion spring replacement",
+        "Extension spring repair",
+        "Spring balance adjustment",
+        "High cycle spring installation",
+        "Professional spring repair",
+        "Spring tension adjustment",
+        "Safety cable installation"
+      ],
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Ez2Fix LLC",
+        "telephone": "(201) 554-6769",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "New Jersey",
+          "addressRegion": "NJ",
+          "addressCountry": "US"
+        },
+        "license": "#13VH13553300"
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Bergen County, NJ"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Essex County, NJ"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Morris County, NJ"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hudson County, NJ"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Passaic County, NJ"
+        }
+      ]
+    })} />
   </Fragment>
   
-  
-  <!-- Main Content (hidden initially) -->
-
-    <HeaderClean />
+  <HeaderClean />
   <main id="main-content">
     
-    <!-- Hero Section with Booking Form -->
-    <section class="relative min-h-screen flex items-center" style="background: linear-gradient(rgba(29, 25, 18, 0.7), rgba(29, 25, 18, 0.7)), url('https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg') center/cover;">
-      <div class="container mx-auto px-4 py-8">
-        <div class="max-w-6xl mx-auto">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <!-- Hero Section -->
+    <section class="relative hero-responsive overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg" 
+          alt="Professional garage door spring replacement service" 
+          class="w-full h-full object-cover"
+          width="1920"
+          height="1080"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+      </div>
+      
+      <div class="container-responsive relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
+          
+          <!-- Hero Content -->
+          <div class="hero-content-responsive order-2 lg:order-1">
             
-            <!-- Hero Content -->
-            <div class="space-y-4">
-              <div>
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold" style="background-color: #D2A63C; color: #1D1912;">MOST COMMON REPAIR</span>
-              </div>
-              
-              <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style="color: #F3F3E6;">
-                Garage Door Spring Repair <span style="color: #EECD5C;">Bergen County NJ</span>
-              </h1>
-              
-              <p class="text-lg md:text-xl leading-relaxed" style="color: #EECD5C;">
-                Broken garage door spring? Ez2Fix provides professional garage door spring repair in Bergen County NJ. <strong style="color: #F3F3E6;">Same-day service for torsion and extension springs</strong> with a 10-year warranty. Licensed technicians safely replace broken springs and restore your garage door operation.
-              </p>
-              
-            <!-- Spring Repair CTA -->
-            <div class="mt-2">
-              <Button 
+            <!-- Badge -->
+            <div class="mb-6">
+              <span class="inline-block px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm">
+                PROFESSIONAL SPRING REPLACEMENT
+              </span>
+            </div>
+            
+            <!-- Headlines -->
+            <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6">
+              <span class="text-white">Professional</span>
+              <br />
+              <span class="text-ez2fix-gold">Garage Door Spring</span>
+              <br />
+              <span class="text-ez2fix-primary">Replacement Services</span>
+              <br />
+              <span class="text-white">in New Jersey</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8">
+              Professional spring replacement with safety-first approach. Licensed technicians handle torsion and extension springs with specialized tools and proper tension adjustment.
+            </p>
+            
+            <!-- CTAs -->
+            <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0">
+              <a 
                 href={siteConfig.links.phone}
-                size="lg"
-                class="text-lg px-8 py-3 font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-fit"
-                style="background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%); color: #1D1912;"
+                class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
               >
-                <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                Call Now: {siteConfig.business.phone}
-              </Button>
+                <span>Call {siteConfig.business.phone}</span>
+              </a>
             </div>
-              
-            <!-- Trust Indicators -->
-            <div class="flex flex-wrap items-center gap-4">
-              <div class="flex items-center space-x-2">
-                <svg class="h-5 w-5" style="color: #D2A63C;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                </svg>
-                <span class="font-semibold" style="color: #F3F3E6;">Licensed & Insured</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <svg class="h-5 w-5" style="color: #EECD5C;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                </svg>
-                <span class="font-semibold" style="color: #F3F3E6;">5.0★ Rating</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <svg class="h-5 w-5" style="color: #D2A63C;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                </svg>
-                <span class="font-semibold" style="color: #F3F3E6;">1-Year Warranty</span>
-              </div>
-            </div>
-            </div>
-            
-          <!-- Right Column - Booking Form -->
-          <div class="flex items-center justify-center">
-            <Card class="p-3 lg:p-5 shadow-2xl border-2" style="background-color: #F3F3E6; border-color: #D2A63C;">
-              <BookingFormClean 
-                variant="hero"
-                title="Get Your Free Spring Repair Estimate"
-                subtitle="Professional spring replacement with safety guarantee"
-                buttonText="Get My Free Spring Repair Estimate"
-                service="Spring Replacement"
-              />
-              
+          </div>
+
+          <!-- Booking Form (Desktop) -->
+          <div class="order-1 lg:order-2 hidden lg:block">
+            <Card class="card-responsive-large shadow-premium border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
+              <BookingFormClean variant="hero" />
               
               <!-- Form Benefits -->
-              <div class="mt-2 pt-2 border-t" style="border-color: rgba(187, 133, 37, 0.2);">
-                <div class="grid grid-cols-2 gap-2 text-center">
+              <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
+                <div class="grid grid-cols-2 gap-3 text-center">
                   <div>
-                    <div class="text-xs font-semibold" style="color: #1D1912;">24/7 Service</div>
-                    <div class="text-xs" style="color: #BB8525;">Emergency Ready</div>
+                    <div class="text-heading-3 text-ez2fix-dark">Safety First</div>
+                    <div class="text-body-small text-ez2fix-brown">Professional Tools</div>
                   </div>
                   <div>
-                    <div class="text-xs font-semibold" style="color: #1D1912;">Licensed Tech</div>
-                    <div class="text-xs" style="color: #BB8525;">Same Day Fix</div>
+                    <div class="text-heading-3 text-ez2fix-dark">Quality Springs</div>
+                    <div class="text-body-small text-ez2fix-brown">High-Cycle Options</div>
                   </div>
                 </div>
               </div>
             </Card>
           </div>
-            
+        </div>
+      </div>
+    </section>
+
+    <!-- When You Need Professional Spring Replacement -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              When You Need Professional <span class="text-ez2fix-primary">Spring Replacement</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Professional garage door spring replacement becomes necessary when springs fail or show signs of imminent failure. Understanding these scenarios helps protect your family's safety and prevents costly emergency situations.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {springScenarios.map((scenario) => (
+              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-4">
+                  <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
+                    {scenario.icon === 'warning' && (
+                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'power' && (
+                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'track' && (
+                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'storm' && (
+                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'cable' && (
+                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'power-out' && (
+                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364L18.364 5.636"/>
+                      </svg>
+                    )}
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold text-ez2fix-dark">{scenario.scenario}</h3>
+                    <span class={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
+                      scenario.urgency === 'Emergency' ? 'bg-ez2fix-primary/10 text-ez2fix-primary' :
+                      scenario.urgency === 'Same Day' ? 'bg-ez2fix-gold/10 text-ez2fix-gold' :
+                      'bg-ez2fix-brown/10 text-ez2fix-brown'
+                    }`}>
+                      {scenario.urgency}
+                    </span>
+                  </div>
+                </div>
+                <p class="text-ez2fix-brown leading-relaxed">{scenario.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Problem/Solution Stories -->
-    <section class="py-16" style="background-color: #F3F3E6;">
+    <!-- Professional Spring Replacement Process -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: #1D1912;">
-              How We've Helped Your <span style="color: #D2A63C;">Neighbors</span> with Broken Springs
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Professional Spring <span class="text-ez2fix-primary">Replacement Process</span>
             </h2>
-            <p class="text-lg max-w-3xl mx-auto" style="color: #BB8525;">
-              See how we've helped Bergen County homeowners with their broken garage door spring emergencies.
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Our garage door spring replacement process prioritizes safety while ensuring proper tension calculation, quality spring selection, and comprehensive system testing for reliable long-term operation.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {replacementProcess.map((step, index) => (
+              <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-ez2fix-primary/20 text-center">
+                <div class="w-16 h-16 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <span class="text-2xl font-bold text-ez2fix-primary">{index + 1}</span>
+                </div>
+                <h3 class="text-lg font-bold text-ez2fix-dark mb-3">{step.step}</h3>
+                <p class="text-ez2fix-brown text-sm mb-2">{step.description}</p>
+                <span class="text-xs text-ez2fix-gold font-medium">{step.timeframe}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Spring Replacement Services -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              <span class="text-ez2fix-primary">Professional Spring</span> Replacement Services
+            </h2>
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Comprehensive garage door spring services designed to restore proper door operation, reduce opener strain, and ensure family safety with professional installation and testing.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- Story 1 -->
-            <Card class="p-8 border-2" style="background-color: white; border-color: #EECD5C;">
-              <h3 class="text-xl font-bold mb-4" style="color: #1D1912;">
-                The Loud Snap in Jersey City
-              </h3>
-              
-              <div class="mb-4">
-                <h4 class="font-semibold mb-2" style="color: #D2A63C;">The Problem:</h4>
-                <p class="text-sm mb-4" style="color: #BB8525;">
-                  Sarah from Jersey City called us at 7 AM after hearing a loud "SNAP" sound from her garage. Her garage door wouldn't open, and she could see one of the torsion springs had broken completely. She was stuck with her car trapped inside.
-                </p>
-              </div>
-              
-              <div class="mb-4">
-                <h4 class="font-semibold mb-2" style="color: #D2A63C;">Our Diagnosis:</h4>
-                <p class="text-sm mb-4" style="color: #BB8525;">
-                  Our technician arrived within 2 hours and confirmed the torsion spring failure. The spring was original equipment from 2018 and had reached its cycle limit. We also found the companion spring was showing wear and recommended replacing both for balanced operation.
-                </p>
-              </div>
-              
-              <div class="mb-6">
-                <h4 class="font-semibold mb-2" style="color: #D2A63C;">The Solution:</h4>
-                <p class="text-sm" style="color: #BB8525;">
-                  We replaced both torsion springs with high-cycle premium springs rated for 10,000+ cycles. We properly balanced the door, tested all safety features, and provided Sarah with a 10-year warranty. She was back to normal operation within 3 hours of our arrival.
-                </p>
-              </div>
-              
-              <div class="flex items-center">
-                <div class="flex">
-                  {[1,2,3,4,5].map(() => (
-                    <svg class="h-4 w-4" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                    </svg>
+            {springServices.map((service) => (
+              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">{service.title}</h3>
+                <p class="text-ez2fix-brown leading-relaxed mb-6">{service.description}</p>
+                <ul class="space-y-2">
+                  {service.features.map((feature) => (
+                    <li class="flex items-center text-ez2fix-dark">
+                      <svg class="w-5 h-5 text-ez2fix-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                      </svg>
+                      {feature}
+                    </li>
                   ))}
-                </div>
-                <span class="text-sm font-medium ml-2" style="color: #1D1912;">Another Happy Ez2Fix Customer</span>
+                </ul>
               </div>
-            </Card>
-
-            <!-- Story 2 -->
-            <Card class="p-8 border-2" style="background-color: white; border-color: #EECD5C;">
-              <h3 class="text-xl font-bold mb-4" style="color: #1D1912;">
-                The Hoboken Extension Spring Challenge
-              </h3>
-              
-              <div class="mb-4">
-                <h4 class="font-semibold mb-2" style="color: #D2A63C;">The Problem:</h4>
-                <p class="text-sm mb-4" style="color: #BB8525;">
-                  Mike's single-car garage in Hoboken had an extension spring system. One spring had snapped and was hanging dangerously. His door was crooked and wouldn't close properly, leaving his motorcycle vulnerable to theft.
-                </p>
-              </div>
-              
-              <div class="mb-4">
-                <h4 class="font-semibold mb-2" style="color: #D2A63C;">Our Diagnosis:</h4>
-                <p class="text-sm mb-4" style="color: #BB8525;">
-                  We found the extension spring had failed due to rust and age. The safety cables were also missing, creating a serious hazard. The pulleys and hardware needed replacement due to wear from the unbalanced operation.
-                </p>
-              </div>
-              
-              <div class="mb-6">
-                <h4 class="font-semibold mb-2" style="color: #D2A63C;">The Solution:</h4>
-                <p class="text-sm" style="color: #BB8525;">
-                  We replaced both extension springs with heavy-duty springs, installed proper safety cables, and replaced worn pulleys and hardware. The door now operates smoothly and safely with full balance and proper alignment.
-                </p>
-              </div>
-              
-              <div class="flex items-center">
-                <div class="flex">
-                  {[1,2,3,4,5].map(() => (
-                    <svg class="h-4 w-4" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                    </svg>
-                  ))}
-                </div>
-                <span class="text-sm font-medium ml-2" style="color: #1D1912;">Safe & Reliable Service</span>
-              </div>
-            </Card>
-
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Service Features -->
-    <section class="py-16" style="background-color: #1D1912;">
+    <!-- Critical Warning Signs -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: #F3F3E6;">
-              Why Homeowners Trust Ez2Fix for <span style="color: #D2A63C;">Safe Spring Repair</span>
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Critical Warning Signs Requiring <span class="text-ez2fix-primary">Professional Attention</span>
             </h2>
-            <p class="text-lg max-w-3xl mx-auto" style="color: #EECD5C;">
-              Broken springs put your family at risk and leave you stranded. We understand the urgency and stress, which is why we make spring repair safe, fast, and worry-free.
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Recognizing these warning signs can prevent dangerous spring failures and costly damage. When you notice any of these signs, contact our professional spring replacement service immediately.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <Card class="p-6 text-center border-2" style="background-color: #F3F3E6; border-color: #D2A63C;">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #D2A63C;">
-                <svg class="w-8 h-8" style="color: #1D1912;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {criticalSigns.map((sign) => (
+              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg flex items-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                  <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                  </svg>
+                </div>
+                <p class="text-ez2fix-dark font-medium">{sign}</p>
               </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #1D1912;">High-Cycle Springs</h3>
-              <p class="text-sm leading-relaxed" style="color: #BB8525;">
-                We use premium high-cycle springs rated for 10,000+ cycles, lasting 3-4x longer than standard springs.
-              </p>
-            </Card>
-            
-            <Card class="p-6 text-center border-2" style="background-color: #F3F3E6; border-color: #EECD5C;">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #EECD5C;">
-                <svg class="w-8 h-8" style="color: #1D1912;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #1D1912;">Professional Tools</h3>
-              <p class="text-sm leading-relaxed" style="color: #BB8525;">
-                Our technicians use specialized spring winding bars and professional equipment for safe installation.
-              </p>
-            </Card>
-            
-            <Card class="p-6 text-center border-2" style="background-color: #F3F3E6; border-color: #BB8525;">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #BB8525;">
-                <svg class="w-8 h-8" style="color: #F3F3E6;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #1D1912;">Safety First</h3>
-              <p class="text-sm leading-relaxed" style="color: #BB8525;">
-                We follow strict safety protocols and install safety cables on extension spring systems for protection.
-              </p>
-            </Card>
-            
-            <Card class="p-6 text-center border-2" style="background-color: #F3F3E6; border-color: #D2A63C;">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #D2A63C;">
-                <svg class="w-8 h-8" style="color: #1D1912;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c.15 1.58.08 3.26-.12 4.99-.2 1.73-.6 3.4-1.15 4.96-.33.94-.74 1.83-1.27 2.59-.53.76-1.21 1.37-2.05 1.71-.84.34-1.8.25-2.6-.24-.8-.49-1.4-1.31-1.7-2.26-.3-.95-.25-1.97.12-2.89.37-.92.99-1.73 1.75-2.33.76-.6 1.68-.97 2.61-1.06.93-.09 1.87.07 2.71.47.84.4 1.55 1.01 2.02 1.76.47.75.66 1.63.53 2.49-.13.86-.56 1.65-1.17 2.24-.61.59-1.41.97-2.24 1.06-.83.09-1.68-.1-2.4-.54-.72-.44-1.27-1.09-1.54-1.85-.27-.76-.22-1.59.13-2.31.35-.72.92-1.32 1.6-1.69.68-.37 1.46-.49 2.2-.34.74.15 1.4.54 1.85 1.09z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #1D1912;">Proper Balancing</h3>
-              <p class="text-sm leading-relaxed" style="color: #BB8525;">
-                We properly tension and balance springs to ensure smooth operation and prevent premature wear.
-              </p>
-            </Card>
-            
-            <Card class="p-6 text-center border-2" style="background-color: #F3F3E6; border-color: #EECD5C;">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #EECD5C;">
-                <svg class="w-8 h-8" style="color: #1D1912;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #1D1912;">10-Year Warranty</h3>
-              <p class="text-sm leading-relaxed" style="color: #BB8525;">
-                We stand behind our spring replacements with comprehensive 10-year warranties on parts and labor.
-              </p>
-            </Card>
-            
-            <Card class="p-6 text-center border-2" style="background-color: #F3F3E6; border-color: #BB8525;">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #BB8525;">
-                <svg class="w-8 h-8" style="color: #F3F3E6;" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #1D1912;">Licensed & Insured</h3>
-              <p class="text-sm leading-relaxed" style="color: #BB8525;">
-                Our licensed technicians are fully insured, giving you peace of mind during spring replacement.
-              </p>
-            </Card>
-
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Customer Reviews -->
-    <section class="py-16" style="background-color: #F3F3E6;">
+    <!-- Customer Success Stories -->  
+    <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: #1D1912;">
-              Customer Success Stories: <span style="color: #D2A63C;">Back to Normal</span> Fast
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Spring Replacement <span class="text-ez2fix-primary">Success Stories</span>
             </h2>
-            <p class="text-lg max-w-3xl mx-auto" style="color: #BB8525;">
-              Real reviews from Bergen County homeowners who trusted us with their garage door spring repairs.
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Real experiences from New Jersey families who trusted Ez2Fix for their garage door spring replacement services.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <Card class="p-6 border-2" style="background-color: white; border-color: #EECD5C;">
-              <div class="flex mb-4">
-                {[1,2,3,4,5].map(() => (
-                  <svg class="h-5 w-5" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                  </svg>
-                ))}
-              </div>
-              <p class="text-sm italic mb-4 leading-relaxed" style="color: #1D1912;">
-                "Spring replacement was done quickly and safely. Haven't had issues since! The technician explained everything and showed me the difference between old and new springs."
-              </p>
-              <div class="flex items-center">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mr-3" style="background-color: #D2A63C;">
-                  <span class="text-sm font-bold" style="color: #F3F3E6;">TR</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {springTestimonials.map((testimonial) => (
+              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center mb-4">
+                  <div class="flex text-ez2fix-gold">
+                    {[...Array(5)].map(() => (
+                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                      </svg>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <div class="font-semibold text-sm" style="color: #1D1912;">Tom Rodriguez</div>
-                  <div class="text-xs" style="color: #BB8525;">Union City, NJ</div>
+                <p class="text-ez2fix-brown italic leading-relaxed mb-4">"{testimonial.text}"</p>
+                <div class="border-t border-ez2fix-brown/20 pt-4">
+                  <p class="font-bold text-ez2fix-dark">{testimonial.author}</p>
+                  <p class="text-sm text-ez2fix-brown">{testimonial.location}</p>
+                  <p class="text-xs text-ez2fix-primary font-medium mt-1">{testimonial.service}</p>
                 </div>
               </div>
-            </Card>
-            
-            <Card class="p-6 border-2" style="background-color: white; border-color: #EECD5C;">
-              <div class="flex mb-4">
-                {[1,2,3,4,5].map(() => (
-                  <svg class="h-5 w-5" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                  </svg>
-                ))}
-              </div>
-              <p class="text-sm italic mb-4 leading-relaxed" style="color: #1D1912;">
-                "My spring snapped at 6 AM and Ez2Fix had it fixed by lunch. Professional work, fair pricing, and they cleaned up perfectly. Highly recommend for spring issues."
-              </p>
-              <div class="flex items-center">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mr-3" style="background-color: #EECD5C;">
-                  <span class="text-sm font-bold" style="color: #1D1912;">JM</span>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm" style="color: #1D1912;">Jennifer Martinez</div>
-                  <div class="text-xs" style="color: #BB8525;">Weehawken, NJ</div>
-                </div>
-              </div>
-            </Card>
-            
-            <Card class="p-6 border-2" style="background-color: white; border-color: #EECD5C;">
-              <div class="flex mb-4">
-                {[1,2,3,4,5].map(() => (
-                  <svg class="h-5 w-5" style="color: #D2A63C;" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                  </svg>
-                ))}
-              </div>
-              <p class="text-sm italic mb-4 leading-relaxed" style="color: #1D1912;">
-                "Both springs needed replacement and Ez2Fix handled it professionally. The door works better than before and the 10-year warranty gives me confidence."
-              </p>
-              <div class="flex items-center">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mr-3" style="background-color: #BB8525;">
-                  <span class="text-sm font-bold" style="color: #F3F3E6;">DW</span>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm" style="color: #1D1912;">David Wilson</div>
-                  <div class="text-xs" style="color: #BB8525;">North Bergen, NJ</div>
-                </div>
-              </div>
-            </Card>
-
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Spring Repair FAQ -->
-    <section class="py-16" style="background-color: #1D1912;">
+    <!-- Spring Replacement FAQ -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: #F3F3E6;">
-              Your Spring Repair Questions <span style="color: #D2A63C;">Answered</span>
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Spring Replacement <span class="text-ez2fix-primary">Frequently Asked Questions</span>
             </h2>
-            <p class="text-lg" style="color: #EECD5C;">
-              Get answers to common questions about garage door spring repair and replacement.
+            <p class="text-xl md:text-2xl text-ez2fix-brown leading-relaxed">
+              Common questions about garage door spring replacement services and what to expect during professional installation.
             </p>
           </div>
 
           <div class="space-y-6">
-            
-            <div class="border-b pb-6" style="border-color: #BB8525;">
-              <h3 class="text-xl font-semibold mb-3" style="color: #F3F3E6;">
-                How do I know if my garage door spring is broken?
-              </h3>
-              <p class="leading-relaxed" style="color: #EECD5C;">
-                Common signs include: door won't open or is very heavy to lift manually, visible gap in torsion spring, door slams shut, door is crooked when opening, or you heard a loud "snap" sound. Never attempt to operate a door with broken springs.
-              </p>
-            </div>
-            
-            <div class="border-b pb-6" style="border-color: #BB8525;">
-              <h3 class="text-xl font-semibold mb-3" style="color: #F3F3E6;">
-                Is it dangerous to replace garage door springs myself?
-              </h3>
-              <p class="leading-relaxed" style="color: #EECD5C;">
-                Yes, extremely dangerous. Garage door springs are under tremendous tension and can cause serious injury or death if handled improperly. Professional technicians use specialized tools and safety procedures for safe replacement.
-              </p>
-            </div>
-            
-            <div class="border-b pb-6" style="border-color: #BB8525;">
-              <h3 class="text-xl font-semibold mb-3" style="color: #F3F3E6;">
-                Should I replace one spring or both springs?
-              </h3>
-              <p class="leading-relaxed" style="color: #EECD5C;">
-                We recommend replacing both springs simultaneously. When one breaks, the other is usually near failure. Replacing both ensures balanced operation and prevents another service call shortly after.
-              </p>
-            </div>
-            
-            <div class="border-b pb-6" style="border-color: #BB8525;">
-              <h3 class="text-xl font-semibold mb-3" style="color: #F3F3E6;">
-                How long do garage door springs last?
-              </h3>
-              <p class="leading-relaxed" style="color: #EECD5C;">
-                Standard springs last 7,000-10,000 cycles (7-10 years with normal use). Our high-cycle springs are rated for 10,000+ cycles and can last 10-15 years or more, making them a better long-term investment.
-              </p>
-            </div>
-            
-            <div>
-              <h3 class="text-xl font-semibold mb-3" style="color: #F3F3E6;">
-                What's included in your spring replacement warranty?
-              </h3>
-              <p class="leading-relaxed" style="color: #EECD5C;">
-                Our 10-year warranty covers both the springs and our installation labor. If a spring fails within 10 years, we'll replace it at no charge. This warranty demonstrates our confidence in our premium springs and professional installation.
-              </p>
-            </div>
-
+            {springFAQ.map((faq) => (
+              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg">
+                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">{faq.question}</h3>
+                <p class="text-ez2fix-brown leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Bottom CTA Form -->
-    <section class="py-16" style="background-color: #F3F3E6;">
+    <!-- Spring Replacement Expertise Across New Jersey Counties -->
+    <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: #1D1912;">
-              Don't Stay Stuck - Get Your Springs <span style="color: #D2A63C;">Fixed Today</span>
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Spring Replacement Expertise Across <span class="text-ez2fix-primary">New Jersey Counties</span>
             </h2>
-            <p class="text-lg max-w-2xl mx-auto" style="color: #BB8525;">
-              Don't risk injury trying to fix broken springs yourself. Get professional spring replacement with our 10-year warranty.
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Our professional spring replacement expertise extends throughout New Jersey's diverse communities, addressing unique challenges from urban Bergen County to suburban Morris County environments.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             
-            <!-- Contact Options -->
-            <div>
-              <h3 class="text-2xl font-bold mb-6" style="color: #1D1912;">Get Help Now</h3>
-              
-              <div class="space-y-6">
-                <div class="flex items-center space-x-4">
-                  <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #D2A63C;">
-                    <svg class="w-6 h-6" style="color: #1D1912;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-lg" style="color: #1D1912;">Call for Immediate Service</h4>
-                    <a href={siteConfig.links.phone} class="text-xl font-bold hover:underline" style="color: #D2A63C;">
-                      {siteConfig.business.phone}
-                    </a>
-                  </div>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                  <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #EECD5C;">
-                    <svg class="w-6 h-6" style="color: #1D1912;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-lg" style="color: #1D1912;">Schedule Online</h4>
-                    <p style="color: #BB8525;">Free estimates • Fast response</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Trust Indicators -->
-              <div class="mt-8 p-4 rounded-lg" style="background-color: rgba(210, 166, 60, 0.1);">
-                <div class="flex items-center justify-between text-sm font-semibold">
-                  <div class="flex items-center space-x-2">
-                    <svg class="h-4 w-4" style="color: #D2A63C;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                    </svg>
-                    <span style="color: #1D1912;">Licensed & Insured</span>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <svg class="h-4 w-4" style="color: #EECD5C;" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                    </svg>
-                    <span style="color: #1D1912;">10-Year Warranty</span>
-                  </div>
-                </div>
-              </div>
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Bergen County</h3>
+              <p class="text-ez2fix-brown text-sm mb-4">Urban spring replacement expertise with experience in attached garage systems and space-constrained installations</p>
+              <div class="text-xs text-ez2fix-gold font-medium">Elmwood Park • Fair Lawn • Clifton</div>
             </div>
+
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Essex County</h3>
+              <p class="text-ez2fix-brown text-sm mb-4">Historic home spring replacement with modern integration and preservation considerations</p>
+              <div class="text-xs text-ez2fix-gold font-medium">Montclair • Newark • Bloomfield</div>
+            </div>
+
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Morris County</h3>
+              <p class="text-ez2fix-brown text-sm mb-4">Suburban spring service with larger garage systems and high-cycle spring upgrade options</p>
+              <div class="text-xs text-ez2fix-gold font-medium">Pine Brook • Roseland • Montville</div>
+            </div>
+
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Hudson County</h3>
+              <p class="text-ez2fix-brown text-sm mb-4">Coastal environment spring replacement with corrosion resistance and weather durability focus</p>
+              <div class="text-xs text-ez2fix-gold font-medium">Jersey City • Hoboken • Bayonne</div>
+            </div>
+
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Passaic County</h3>
+              <p class="text-ez2fix-brown text-sm mb-4">Comprehensive spring coverage addressing diverse architectural styles and system configurations</p>
+              <div class="text-xs text-ez2fix-gold font-medium">Wayne • Clifton • Paterson</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown text-ez2fix-cream">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          
+          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-gold mb-6">
+            Need Professional Spring Replacement?
+          </h2>
+          
+          <p class="text-xl md:text-2xl text-ez2fix-cream mb-8 leading-relaxed">
+            Don't risk your safety with DIY spring replacement. Our licensed technicians provide professional garage door spring replacement with safety protocols, quality parts, and comprehensive warranties.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
+            <a 
+              href={siteConfig.links.phone}
+              class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+            >
+              <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              <span>Call for Spring Service: {siteConfig.business.phone}</span>
+            </a>
             
-            <!-- Bottom Contact Form -->
-            <Card class="p-3 sm:p-4 shadow-xl border-2" style="background-color: white; border-color: #D2A63C;">
-              <BookingFormClean 
-                variant="hero"
-                title="Get Your Free Spring Repair Quote"
-                subtitle="Professional installation • 10-year warranty"
-                buttonText="Get Free Spring Repair Estimate"
-                service="Spring Replacement"
-              />
-              
-              <!-- Form Benefits -->
-              <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t" style="border-color: rgba(187, 133, 37, 0.2);">
-                <div class="grid grid-cols-2 gap-2 sm:gap-4 text-center">
-                  <div>
-                    <div class="text-xs sm:text-sm font-semibold" style="color: #1D1912;">Safety Guaranteed</div>
-                    <div class="text-xs" style="color: #BB8525;">Professional Service</div>
-                  </div>
-                  <div>
-                    <div class="text-xs sm:text-sm font-semibold" style="color: #1D1912;">10-Year Warranty</div>
-                    <div class="text-xs" style="color: #BB8525;">Premium Parts</div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            
+            <a 
+              href="/services"
+              class="px-8 py-4 bg-transparent text-ez2fix-cream border-2 border-ez2fix-cream hover:bg-ez2fix-cream hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 rounded-lg font-bold text-lg"
+            >
+              <span>View All Services</span>
+              <svg class="ml-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          
+          <div class="flex items-center justify-center space-x-8 text-sm">
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span class="text-ez2fix-cream font-medium">Licensed #13VH13553300</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-ez2fix-gold" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+              </svg>
+              <span class="text-ez2fix-cream font-medium">Professional Safety Standards</span>
+            </div>
           </div>
         </div>
       </div>
@@ -588,8 +642,4 @@ const breadcrumbs = [
 
   </main>
   <FooterClean />
-  
-  <!-- Enhanced SEO Structured Data -->
-  <FAQSchema faqs={springRepairFAQs} />
-  <BreadcrumbSchema items={breadcrumbs} />
 </BaseLayout>

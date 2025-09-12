@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <url>
+    <loc>https://ez2fixllc.com/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://ez2fixllc.com/images/hero-video-thumbnail.webp</video:thumbnail_loc>
+      <video:title>Ez2Fix Professional Garage Door Services</video:title>
+      <video:description>Professional garage door repair and installation services throughout Bergen County and Hudson County, New Jersey. Licensed, insured, and experienced technicians.</video:description>
+      <video:content_loc>https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:tag>garage door repair</video:tag>
+      <video:tag>professional service</video:tag>
+      <video:tag>Bergen County</video:tag>
+      <video:tag>New Jersey</video:tag>
+      <video:category>Home Improvement</video:category>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/garage-door-spring-repair</loc>
+    <video:video>
+      <video:thumbnail_loc>https://ez2fixllc.com/images/spring-repair-video-thumbnail.webp</video:thumbnail_loc>
+      <video:title>Garage Door Spring Repair Process</video:title>
+      <video:description>Watch our professional technicians safely replace garage door springs. Learn about the repair process and safety measures we take.</video:description>
+      <video:content_loc>https://ez2fixllc.com/videos/spring-repair-process.mp4</video:content_loc>
+      <video:duration>120</video:duration>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:tag>garage door springs</video:tag>
+      <video:tag>spring repair</video:tag>
+      <video:tag>safety</video:tag>
+      <video:tag>professional service</video:tag>
+      <video:category>Home Improvement</video:category>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/garage-door-opener-installation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://ez2fixllc.com/images/opener-installation-thumbnail.webp</video:thumbnail_loc>
+      <video:title>Smart Garage Door Opener Installation</video:title>
+      <video:description>Complete installation process for smart garage door openers with WiFi connectivity and smartphone control features.</video:description>
+      <video:content_loc>https://ez2fixllc.com/videos/opener-installation.mp4</video:content_loc>
+      <video:duration>180</video:duration>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:tag>garage door opener</video:tag>
+      <video:tag>smart technology</video:tag>
+      <video:tag>installation</video:tag>
+      <video:tag>WiFi</video:tag>
+      <video:category>Technology</video:category>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/services/emergency-garage-door-repair</loc>
+    <video:video>
+      <video:thumbnail_loc>https://ez2fixllc.com/images/emergency-repair-thumbnail.webp</video:thumbnail_loc>
+      <video:title>Emergency Garage Door Repair Response</video:title>
+      <video:description>See how our emergency repair team responds to urgent garage door issues 24/7 throughout Bergen County, NJ.</video:description>
+      <video:content_loc>https://ez2fixllc.com/videos/emergency-response.mp4</video:content_loc>
+      <video:duration>90</video:duration>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:tag>emergency repair</video:tag>
+      <video:tag>24/7 service</video:tag>
+      <video:tag>fast response</video:tag>
+      <video:tag>Bergen County</video:tag>
+      <video:category>Emergency Services</video:category>
+    </video:video>
+  </url>
+
+</urlset>

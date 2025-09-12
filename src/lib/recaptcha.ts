@@ -22,15 +22,28 @@ export function loadRecaptcha(): Promise<void> {
       return;
     }
 
-    // Load the script
+    // Load the script with inline badge (hidden with CSS)
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${clientEnv.recaptcha.siteKey}`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=${clientEnv.recaptcha.siteKey}&badge=inline`;
     script.async = true;
     script.defer = true;
 
     script.onload = () => {
       // Wait for grecaptcha to be ready
       window.grecaptcha.ready(() => {
+        // Try to render the badge to a hidden container if it exists
+        const hiddenContainer = document.getElementById('recaptcha-badge');
+        if (hiddenContainer && window.grecaptcha.render) {
+          try {
+            window.grecaptcha.render(hiddenContainer, {
+              sitekey: clientEnv.recaptcha.siteKey,
+              size: 'invisible'
+            });
+          } catch (e) {
+            // If render fails, just continue - v3 doesn't use render method
+            console.log('reCAPTCHA v3 detected (no render method needed)');
+          }
+        }
         resolve();
       });
     };
@@ -151,6 +164,7 @@ declare global {
     grecaptcha: {
       ready: (callback: () => void) => void;
       execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      render?: (container: HTMLElement | string, options: { sitekey: string; size?: string }) => void;
     };
   }
 }

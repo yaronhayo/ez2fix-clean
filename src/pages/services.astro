@@ -14,61 +14,61 @@ import { siteConfig } from '@/config/site';
 // Reuse service data from homepage
 const services = [
   {
-    title: "24/7 Emergency Repair",
-    description: "Door won't close? Stuck open? We understand the panic and stress. Available 24/7 to restore your peace of mind.",
+    title: "Emergency Garage Door Repair Services",
+    description: "Professional garage door repair for urgent situations. Comprehensive garage door services available 24/7 to handle safety-focused repairs and problem resolution when you need it most.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp",
-    features: ["Available 24/7", "Same-Day Service", "All Brands", "Safety First"],
-    warranty: "1-Year Warranty",
-    badge: "24/7 AVAILABLE",
+    features: ["24/7 Emergency Service", "Same-Day Professional Repair", "All Brands Serviced", "Safety-First Approach"],
+    warranty: "10-Year Warranty",
+    badge: "24/7 EMERGENCY",
     href: "/services/emergency-garage-door-repair",
     popular: true
   },
   {
-    title: "Spring Repair",
-    description: "Broken springs make your door a 400-pound safety hazard. We have the tools and experience to keep your family safe.",
+    title: "Garage Door Spring Replacement Services",
+    description: "Professional garage door services specializing in spring system expertise and safety protocols. Complete garage door repair for torsion and extension springs with professional replacement procedures.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg",
-    features: ["Safe Replacement", "Quality Springs", "Proper Balance", "Peace of Mind"],
+    features: ["Safe Professional Replacement", "Quality Spring Systems", "Proper Balance Adjustment", "Safety Protocol Compliance"],
     warranty: "10-Year Warranty",
-    badge: "MOST COMMON",
+    badge: "SPRING EXPERTS",
     href: "/services/garage-door-spring-repair",
     popular: true
   },
   {
-    title: "Smart Opener Installation",
-    description: "Upgrade to smart technology you can control from anywhere. Never wonder if you closed the garage door again.",
+    title: "Garage Door Opener Installation Services",
+    description: "Professional garage door opener installation with smart technology integration. Complete garage door services for opener upgrades and professional garage door repair of existing systems when you need reliable operation.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp",
     features: ["Smart Control", "Phone Alerts", "Backup Power", "Easy Setup"],
-    warranty: "15-Year Warranty",
+    warranty: "10-Year Warranty",
     badge: "SMART HOME",
     href: "/services/garage-door-opener-installation",
     popular: false
   },
   {
-    title: "New Door Installation",
-    description: "Transform your home's curb appeal and boost property value with a beautiful new garage door.",
+    title: "New Garage Door Installation Services",
+    description: "Complete garage door installation by professional contractors. Expert garage door services for new construction and replacement projects with comprehensive garage door repair support and professional installation.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png",
     features: ["Boost Home Value", "Custom Styles", "Energy Savings", "Curb Appeal"],
-    warranty: "15-Year Warranty",
+    warranty: "10-Year Warranty",
     badge: "CURB APPEAL",
     href: "/services/new-garage-door-installation",
     popular: false
   },
   {
-    title: "Commercial Service",
-    description: "When business doors fail, operations stop. We understand every minute counts and get you back to making money fast.",
+    title: "Commercial Garage Door Services",
+    description: "Professional garage door services for commercial properties. Comprehensive garage door repair and maintenance solutions with professional garage door contractor expertise for business operations.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg",
     features: ["Minimize Downtime", "Heavy-Duty", "Maintenance Plans", "Business Focus"],
-    warranty: "Commercial Warranty",
+    warranty: "10-Year Warranty",
     badge: "BUSINESS",
     href: "/services/commercial-garage-door-service",
     popular: false
   },
   {
-    title: "General Repair",
-    description: "Strange noises? Door sticking? These warning signs could lead to expensive damage. Fix small problems before they become big ones.",
+    title: "General Garage Door Repair Services",
+    description: "Complete garage door repair solutions by professional contractors. Comprehensive garage door services for all repair needs including preventive maintenance and professional garage door troubleshooting.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png",
     features: ["Prevent Problems", "Stop Noises", "Smooth Operation", "Peace of Mind"],
-    warranty: "1-Year Warranty",
+    warranty: "10-Year Warranty",
     badge: "ALL REPAIRS",
     href: "/services/general-garage-door-repair",
     popular: false
@@ -165,9 +165,9 @@ const processSteps = [
 ---
 
 <BaseLayout 
-  title="Professional Garage Door Services Bergen County NJ | Licensed #13VH13553300 | Ez2Fix"
-  description="Complete garage door services Bergen County NJ: emergency repair, spring replacement, opener installation, new door installation, commercial service. Licensed contractor #13VH13553300. 10-year warranty, 24/7 service. Call (201) 554-6769!"
-  keywords="garage door services bergen county nj, professional garage door repair bergen county, garage door spring repair nj, garage door opener installation bergen county, new garage door installation nj, emergency garage door service bergen county, commercial garage door service nj, garage door maintenance bergen county, licensed garage door contractor nj, garage door company bergen county, garage door services elmwood park, garage door services fair lawn, garage door services clifton nj, garage door services north caldwell, garage door services west caldwell, garage door services montclair, garage door services little falls, garage door services cedar grove"
+  title="Professional Garage Door Services New Jersey | Complete Solutions | Ez2Fix"
+  description="Complete garage door services in NJ - repair, installation, springs, openers & commercial solutions. Licensed contractor #13VH13553300. Professional expertise."
+  keywords="garage door services, garage door repair, garage door installation, professional garage door service, garage door company services, licensed garage door contractor, emergency garage door repair, garage door spring replacement, garage door opener installation, new garage door installation, commercial garage door service, garage door maintenance service, residential garage door services, complete garage door repair services, professional garage door services near me, garage door services New Jersey, licensed garage door installation services New Jersey"
 >
   <Fragment slot="head">
     <!-- Services-specific Schema Markup -->
@@ -191,7 +191,7 @@ const processSteps = [
         "telephone": "(201) 554-6769",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Elmwood Park, NJ 07407",
+          "streetAddress": "Mobile Service - Serving All New Jersey",
           "addressLocality": "Elmwood Park",
           "addressRegion": "NJ",
           "postalCode": "07407",
@@ -217,52 +217,339 @@ const processSteps = [
   
   <HeaderClean />
   <main id="main-content">
-    <!-- Hero Section with PageHero component -->
-    <PageHero 
-      title="Professional <span class='text-ez2fix-primary'>Garage Door Services</span> Bergen County"
-      subtitle="From emergency repairs to beautiful new installations - we handle every garage door need with professional expertise and honest pricing."
-      backgroundImage="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage-door.webp"
-      breadcrumbs={[
-        { name: "Home", href: "/" },
-        { name: "Services", href: "/services" }
-      ]}
-      stats={[
-        { number: "24/7", label: "Emergency Service" },
-        { number: "10-Year", label: "Warranty" },
-        { number: "Licensed", label: "#13VH13553300" }
-      ]}
-      theme="dark"
-      size="large"
-    />
+    <!-- Professional Services Hero Section -->
+    <section class="relative py-16 md:py-24 overflow-hidden">
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0">
+        <img 
+          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage-door.webp" 
+          alt="Professional garage door services in New Jersey" 
+          class="w-full h-full object-cover"
+          width="1920"
+          height="1080"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-gradient-to-br from-black/85 via-black/70 to-black/85"></div>
+        <div class="absolute inset-0 bg-ez2fix-dark/20"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-7xl mx-auto">
+          
+          <!-- Breadcrumb -->
+          <nav class="flex items-center justify-center space-x-2 text-sm mb-8 text-ez2fix-gold">
+            <a href="/" class="hover:text-ez2fix-primary transition-colors">Home</a>
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+            <span class="text-ez2fix-primary font-semibold">Services</span>
+          </nav>
+          
+          <!-- Main Content - Clean & Focused -->
+          <div class="text-center max-w-5xl mx-auto">
+            
+            <!-- Main Headlines -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+              Professional <span class="text-ez2fix-gold">Garage Door</span> Services
+            </h1>
+            
+            <!-- Simple Value Proposition -->
+            <div class="max-w-3xl mx-auto mb-8">
+              <p class="text-xl sm:text-2xl text-ez2fix-gold mb-6 font-medium">
+                Licensed • Insured • 24/7 Emergency Service
+              </p>
+              <p class="text-lg sm:text-xl text-white/90 leading-relaxed">
+                Professional garage door repair and installation across New Jersey with guaranteed quality.
+              </p>
+            </div>
 
-    <!-- Services Grid Section - Reusing ServiceCard from homepage -->
+            <!-- Clear, Prominent CTAs -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-4xl mx-auto">
+              <a 
+                href={siteConfig.links.phone}
+                class="w-full sm:w-auto px-12 py-5 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3 min-h-[64px] whitespace-nowrap"
+              >
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                Call {siteConfig.business.phone}
+              </a>
+              
+              <a 
+                href="/booking"
+                class="w-full sm:w-auto px-12 py-5 bg-transparent border-2 border-ez2fix-gold hover:bg-ez2fix-gold text-ez2fix-gold hover:text-ez2fix-dark font-bold text-xl rounded-xl transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-3 min-h-[64px] whitespace-nowrap"
+              >
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Schedule Service
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Complete Garage Door Services -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="section-header-responsive">
+            <h2 class="section-title-responsive text-ez2fix-dark">
+              Our <span class="text-ez2fix-primary">Garage Door Services</span>
+            </h2>
+            <p class="section-subtitle-responsive text-ez2fix-brown">
+              Licensed contractor (#13VH13553300) serving 12,000+ families across New Jersey with comprehensive expertise and quality workmanship.
+            </p>
+          </div>
+
+          <!-- Enhanced Service Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {services.map((service, index) => (
+              <div class={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${
+                service.popular ? 'border-3 border-ez2fix-primary bg-gradient-to-br from-white via-ez2fix-cream/50 to-white' : 
+                'border-2 border-ez2fix-brown/20 bg-gradient-to-br from-ez2fix-cream to-white hover:border-ez2fix-primary/40'
+              }`}>
+                
+                {/* Popular Badge */}
+                {service.popular && (
+                  <div class="absolute -top-2 -right-2 z-10">
+                    <div class="bg-ez2fix-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg animate-pulse">
+                      MOST POPULAR
+                    </div>
+                  </div>
+                )}
+
+                {/* Service Badge */}
+                <div class="absolute top-4 left-4 z-10">
+                  <span class={`inline-block px-3 py-1 rounded-full text-xs font-bold shadow-sm ${
+                    service.badge === '24/7 AVAILABLE' ? 'bg-red-100 text-red-800' :
+                    service.badge === 'MOST COMMON' ? 'bg-orange-100 text-orange-800' :
+                    service.badge === 'SMART HOME' ? 'bg-blue-100 text-blue-800' :
+                    service.badge === 'CURB APPEAL' ? 'bg-green-100 text-green-800' :
+                    service.badge === 'BUSINESS' ? 'bg-purple-100 text-purple-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {service.badge}
+                  </span>
+                </div>
+
+                {/* Hero Image */}
+                <div class="relative h-48 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  
+                  {/* Overlay CTA */}
+                  <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-ez2fix-dark">View Service Details</span>
+                        <svg class="w-4 h-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div class="p-6">
+                  <div class="mb-4">
+                    <h3 class="text-heading-3 text-ez2fix-dark mb-2 group-hover:text-ez2fix-primary transition-colors">
+                      {service.title}
+                    </h3>
+                    <p class="text-body-small text-ez2fix-brown leading-relaxed line-clamp-3">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Features List */}
+                  <div class="space-y-2 mb-6">
+                    {service.features.map((feature) => (
+                      <div class="flex items-center space-x-2">
+                        <svg class="w-4 h-4 text-ez2fix-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-responsive-sm text-ez2fix-dark font-medium">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Warranty & CTA */}
+                  <div class="border-t border-ez2fix-brown/20 pt-4">
+                    <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center space-x-1">
+                        <svg class="w-4 h-4 text-ez2fix-gold" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-xs font-medium text-ez2fix-gold">{service.warranty}</span>
+                      </div>
+                      <div class="text-right">
+                        <div class="text-xs text-ez2fix-brown">Licensed #13VH13553300</div>
+                      </div>
+                    </div>
+
+                    {/* Action Button - Consistent Yellow Styling */}
+                    <a 
+                      href={service.href}
+                      class="block w-full text-center py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 group-hover:shadow-xl focus-enhanced min-h-[56px] flex items-center justify-center bg-ez2fix-gold text-ez2fix-dark hover:bg-ez2fix-primary hover:text-white shadow-lg hover:shadow-ez2fix-gold/30"
+                    >
+                      <div class="flex items-center justify-center gap-3">
+                        <span>View Service</span>
+                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Conversion Elements */}
+                <div class="absolute inset-0 pointer-events-none">
+                  {/* Trust indicators */}
+                  <div class="absolute top-2 right-2 flex space-x-1">
+                    <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                    <div class="w-2 h-2 rounded-full bg-ez2fix-gold animate-pulse animation-delay-200"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+          </div>
+          
+          {/* Call-to-Action Section */}
+          <div class="mt-16 text-center">
+            <div class="bg-gradient-to-r from-ez2fix-dark to-ez2fix-brown rounded-2xl p-8 md:p-12 shadow-xl">
+              <div class="max-w-3xl mx-auto">
+                <h3 class="text-heading-2 text-ez2fix-cream mb-4">
+                  Need Help Choosing the Right Service?
+                </h3>
+                <p class="text-body-large text-ez2fix-gold mb-8">
+                  Not sure which service you need? Our licensed technicians provide free consultations to diagnose your issue and recommend the best solution.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center max-w-3xl mx-auto">
+                  <a 
+                    href={siteConfig.links.phone}
+                    class="w-full sm:w-auto px-12 py-5 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3 min-h-[64px] focus-enhanced whitespace-nowrap"
+                  >
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    Free Quote
+                  </a>
+                  <a 
+                    href="/booking"
+                    class="w-full sm:w-auto px-12 py-5 bg-transparent border-2 border-ez2fix-gold hover:bg-ez2fix-gold text-ez2fix-gold hover:text-ez2fix-dark font-bold text-xl rounded-xl transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-3 min-h-[64px] focus-enhanced whitespace-nowrap"
+                  >
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Schedule Online
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Expertise & Quality Standards -->
     <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-            Complete <span class="text-ez2fix-primary">Garage Door Solutions</span>
-          </h2>
-          <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
-            Whatever your garage door needs, we've got you covered with professional service and premium parts. 
-            <span class="text-ez2fix-primary font-bold">Every service backed by our 10-year warranty</span>.
-          </p>
-        </div>
-
-        <!-- Service Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <ServiceCard
-              title={service.title}
-              description={service.description}
-              image={service.image}
-              features={service.features}
-              warranty={service.warranty}
-              badge={service.badge}
-              href={service.href}
-              popular={service.popular}
-              theme="light"
-            />
-          ))}
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="section-header-responsive">
+            <h2 class="section-title-responsive text-ez2fix-dark">
+              Professional <span class="text-ez2fix-primary">Contractor</span> Standards
+            </h2>
+            <p class="section-subtitle-responsive text-ez2fix-brown">
+              Licensed contractor #13VH13553300 ensuring quality workmanship across all garage door services throughout New Jersey.
+            </p>
+          </div>
+          
+          <!-- Professional Standards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Licensed Professional -->
+            <Card class="p-8 bg-white border-2 border-ez2fix-primary shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div class="w-16 h-16 bg-ez2fix-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <h3 class="text-heading-3 text-ez2fix-dark mb-4 text-center">Licensed & Insured Professional</h3>
+              <p class="text-body-base text-ez2fix-brown text-center">
+                Licensed garage door contractor #13VH13553300 with full insurance protection and complete liability coverage.
+              </p>
+            </Card>
+            
+            <!-- Quality Workmanship -->
+            <Card class="p-8 bg-white border-2 border-ez2fix-gold shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div class="w-16 h-16 bg-ez2fix-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                </svg>
+              </div>
+              <h3 class="text-heading-3 text-ez2fix-dark mb-4 text-center">Premium Quality Standards</h3>
+              <p class="text-body-base text-ez2fix-brown text-center">
+                Professional repair and installation using premium components with comprehensive workmanship guarantees.
+              </p>
+            </Card>
+            
+            <!-- Expert Knowledge -->
+            <Card class="p-8 bg-white border-2 border-ez2fix-brown shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div class="w-16 h-16 bg-ez2fix-brown rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              </div>
+              <h3 class="text-heading-3 text-ez2fix-dark mb-4 text-center">Complete Service Expertise</h3>
+              <p class="text-body-base text-ez2fix-brown text-center">
+                Comprehensive knowledge across all major brands and systems. Expert service for residential and commercial applications throughout New Jersey.
+              </p>
+            </Card>
+          </div>
+          
+          <!-- Service Coverage & Credentials -->
+          <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-ez2fix-primary">
+            <div class="text-center mb-8">
+              <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">
+                Complete Professional Garage Door Services Coverage
+              </h3>
+              <p class="text-lg text-ez2fix-brown">
+                Licensed garage door contractor serving 5 counties with comprehensive garage door repair, installation, and maintenance solutions.
+              </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+              <div class="p-4">
+                <div class="text-3xl font-bold text-ez2fix-primary mb-2">12,000+</div>
+                <div class="text-sm text-ez2fix-brown">Garage Door Services Completed</div>
+              </div>
+              <div class="p-4">
+                <div class="text-3xl font-bold text-ez2fix-gold mb-2">5.0★</div>
+                <div class="text-sm text-ez2fix-brown">Google Customer Rating</div>
+              </div>
+              <div class="p-4">
+                <div class="text-3xl font-bold text-ez2fix-brown mb-2">10-Year</div>
+                <div class="text-sm text-ez2fix-brown">Professional Warranty</div>
+              </div>
+              <div class="p-4">
+                <div class="text-3xl font-bold text-ez2fix-primary mb-2">24/7</div>
+                <div class="text-sm text-ez2fix-brown">Emergency Service Available</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -287,12 +574,12 @@ const processSteps = [
               <div class="flex items-start space-x-4 mb-4">
                 <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center flex-shrink-0">
                   {issue.urgency === 'Emergency' && (
-                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
                     </svg>
                   )}
                   {issue.urgency === 'Same Day' && (
-                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                   )}
@@ -302,7 +589,7 @@ const processSteps = [
                     </svg>
                   )}
                   {issue.urgency === 'Preventive' && (
-                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                     </svg>
                   )}
@@ -311,10 +598,10 @@ const processSteps = [
                   <div class="flex items-center justify-between mb-2">
                     <h3 class="text-xl font-bold text-ez2fix-dark">{issue.issue}</h3>
                     <span class={`px-3 py-1 rounded-full text-xs font-bold ${
-                      issue.urgency === 'Emergency' ? 'bg-red-100 text-red-800' :
-                      issue.urgency === 'Same Day' ? 'bg-orange-100 text-orange-800' :
+                      issue.urgency === 'Emergency' ? 'bg-ez2fix-primary/10 text-ez2fix-primary' :
+                      issue.urgency === 'Same Day' ? 'bg-ez2fix-gold/10 text-ez2fix-gold' :
                       issue.urgency === 'Priority' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-green-100 text-green-800'
+                      'bg-ez2fix-gold/10 text-ez2fix-gold'
                     }`}>
                       {issue.urgency}
                     </span>
@@ -397,66 +684,205 @@ const processSteps = [
             
             <!-- Call to Action -->
             <div class="text-center mt-12">
-              <div class="inline-flex items-center gap-3 bg-ez2fix-primary px-8 py-4 rounded-xl">
-                <svg class="w-6 h-6 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <a href="tel:(201) 554-6769" class="inline-flex items-center gap-3 bg-ez2fix-primary hover:bg-ez2fix-primary/90 px-10 py-5 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 focus-enhanced">
+                <svg class="w-6 h-6 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                <span class="text-ez2fix-cream font-semibold text-lg">Ready to get started? Call (201) 554-6769</span>
-              </div>
+                <span class="text-ez2fix-dark font-bold text-xl">Call (201) 554-6769</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Benefits Section - Reusing style from booking page -->
-    <section class="space-section-lg gradient-dark">
-      <div class="container-responsive">
-        <div class="section-header-responsive text-center">
-          <h2 class="section-title-responsive text-ez2fix-cream">
-            Why Choose <span class="text-ez2fix-primary">Ez2Fix?</span>
-          </h2>
-          <p class="section-subtitle-responsive text-ez2fix-gold max-w-3xl mx-auto">
-            When you choose Ez2Fix, you're not just getting a repair - you're getting peace of mind 
-            from Bergen County's most trusted garage door professionals.
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {benefits.map((benefit, index) => (
-            <Card class={`text-center p-6 lg:p-8 shadow-premium border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 h-full ${
-              index % 2 === 0 ? 'bg-ez2fix-cream border-ez2fix-primary' : 'bg-ez2fix-dark border-ez2fix-gold'
-            }`}>
-              <div class={`mb-6 flex justify-center ${index % 2 === 0 ? 'text-ez2fix-primary' : 'text-ez2fix-gold'}`}>
-                {benefit.icon === 'shield' && (
-                  <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- Professional Service Excellence Throughout New Jersey -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Professional Service <span class="text-ez2fix-primary">Excellence</span> Throughout New Jersey
+            </h2>
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Professional garage door services require technical expertise, proper licensing, quality parts, and commitment to customer satisfaction that protects your investment and ensures long-term system performance. Ez2Fix LLC brings all these elements together with New Jersey contractor license #13VH13553300, comprehensive insurance coverage, and professional standards that have earned the trust of over 12,000 families across our five-county service area.
+            </p>
+          </div>
+
+          <!-- Service Excellence Indicators Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Comprehensive Expertise -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-ez2fix-primary hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
+                  <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                   </svg>
-                )}
-                {benefit.icon === 'star' && (
-                  <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                </div>
+                <h3 class="text-xl font-bold text-ez2fix-dark">Comprehensive Expertise</h3>
+              </div>
+              <p class="text-ez2fix-brown leading-relaxed mb-4">
+                Complete range of garage door services under one roof, from emergency repairs to full system installations. Our technicians master every aspect of garage door service.
+              </p>
+            </div>
+
+            <!-- Licensed Professional Service -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-ez2fix-gold hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/10 flex items-center justify-center mr-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-ez2fix-dark">Licensed Professional Service</h3>
+              </div>
+              <p class="text-ez2fix-brown leading-relaxed mb-4">
+                New Jersey contractor license #13VH13553300 ensures full compliance with state regulations and professional insurance protection for every service call.
+              </p>
+            </div>
+
+            <!-- Proven Experience -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-ez2fix-primary hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
+                  <svg class="w-6 h-6 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
                   </svg>
-                )}
-                {benefit.icon === 'check' && (
-                  <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                </div>
+                <h3 class="text-xl font-bold text-ez2fix-dark">Proven Experience</h3>
+              </div>
+              <p class="text-ez2fix-brown leading-relaxed mb-4">
+                12,000+ satisfied customers across five counties demonstrate our consistent ability to deliver reliable garage door solutions for every service need.
+              </p>
+            </div>
+
+            <!-- Quality Assurance -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-ez2fix-gold hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/10 flex items-center justify-center mr-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                   </svg>
-                )}
-                {benefit.icon === 'phone' && (
-                  <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                  </svg>
-                )}
+                </div>
+                <h3 class="text-xl font-bold text-ez2fix-dark">Quality Assurance</h3>
               </div>
-              <h3 class={`text-heading-2 font-bold mb-4 ${index % 2 === 0 ? 'text-ez2fix-dark' : 'text-ez2fix-cream'}`}>
-                {benefit.title}
-              </h3>
-              <p class={`text-body-base leading-relaxed ${index % 2 === 0 ? 'text-ez2fix-brown' : 'text-ez2fix-gold'}`}>
-                {benefit.description}
+              <p class="text-ez2fix-brown leading-relaxed mb-4">
+                Professional warranty coverage on all services reflects our confidence in workmanship quality and commitment to long-term customer satisfaction.
               </p>
-            </Card>
-          ))}
+            </div>
+
+            <!-- Regional Authority -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-ez2fix-primary hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
+                  <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-ez2fix-dark">Regional Authority</h3>
+              </div>
+              <p class="text-ez2fix-brown leading-relaxed mb-4">
+                Established reputation throughout New Jersey with deep understanding of local building codes, weather challenges, and community requirements.
+              </p>
+            </div>
+
+            <!-- Technical Competency -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-ez2fix-gold hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/10 flex items-center justify-center mr-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-ez2fix-dark">Technical Competency</h3>
+              </div>
+              <p class="text-ez2fix-brown leading-relaxed mb-4">
+                Expertise across all major brands and systems, from traditional garage doors to smart technology integration and commercial industrial applications.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Professional Service Standards -->
+          <div class="bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown text-ez2fix-cream p-12 rounded-xl shadow-xl">
+            <div class="text-center mb-12">
+              <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-gold mb-4">
+                Professional Service Standards & Quality
+              </h3>
+              <p class="text-lg text-ez2fix-cream max-w-3xl mx-auto leading-relaxed">
+                Every garage door service call reflects our commitment to professional excellence and customer satisfaction. Our quality standards ensure reliable results you can depend on for years to come.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/20 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Licensed Contractor Standards</h4>
+                <p class="text-ez2fix-cream text-sm">Full compliance with New Jersey contractor regulations</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/20 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Insurance Protection</h4>
+                <p class="text-ez2fix-cream text-sm">Comprehensive coverage for customer peace of mind</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/20 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Warranty Coverage</h4>
+                <p class="text-ez2fix-cream text-sm">Professional backing on all service work</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/20 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Safety Protocols</h4>
+                <p class="text-ez2fix-cream text-sm">Industry-standard safety procedures on every job</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/20 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Continuing Education</h4>
+                <p class="text-ez2fix-cream text-sm">Ongoing technician training and certification</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-ez2fix-gold/20 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Customer Satisfaction</h4>
+                <p class="text-ez2fix-cream text-sm">Commitment to exceeding service expectations</p>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -549,6 +975,207 @@ const processSteps = [
         </div>
       </div>
     </section>
+    <!-- Residential & Commercial Service Capabilities -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Residential & Commercial <span class="text-ez2fix-primary">Service Capabilities</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+              Professional garage door services address both residential and commercial applications with appropriate expertise, equipment, and solutions for each property type. Residential services focus on convenience, aesthetics, energy efficiency, and family safety, while commercial services emphasize operational reliability, security, compliance, and business continuity.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Residential Services -->
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-8 shadow-lg">
+              <div class="flex items-center mb-8">
+                <div class="w-16 h-16 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
+                  <svg class="w-8 h-8 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                  </svg>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark">Residential Services</h3>
+              </div>
+
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Single and Multi-Car Garage Door Systems</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Professional installation and repair services for single-car, double-car, and multi-bay residential garage door systems. We handle everything from compact urban garage doors to expansive suburban installations.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Historic Home Garage Door Solutions</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Specialized expertise for historic New Jersey homes requiring custom garage door solutions that respect architectural integrity while providing modern functionality and security.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Modern Smart Home Integration</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Smart garage door opener installation with smartphone connectivity, home automation system integration, and advanced security features for modern residential applications.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Energy-Efficient Door Options</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Insulated garage door installation to improve home energy efficiency, reduce utility costs, and enhance comfort in attached garage spaces throughout New Jersey's varying climate conditions.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Custom Design and Installation</h4>
+                  <p class="text-ez2fix-brown leading-relaxed">
+                    Personalized garage door design consultation and installation services that complement your home's architectural style while meeting your functional requirements and budget considerations.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Commercial Services -->
+            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-8 shadow-lg">
+              <div class="flex items-center mb-8">
+                <div class="w-16 h-16 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
+                  <svg class="w-8 h-8 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark">Commercial Services</h3>
+              </div>
+
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Industrial Overhead Door Systems</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Heavy-duty garage door installation and maintenance for warehouses, manufacturing facilities, and industrial properties requiring robust, reliable access solutions that withstand high-frequency use.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Loading Dock Equipment</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Specialized installation and service of loading dock doors, dock levelers, and related equipment essential for efficient commercial freight operations and warehouse management.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">High-Traffic Commercial Installations</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Durable garage door systems designed for retail centers, automotive service facilities, and other commercial properties with frequent daily operation requirements and enhanced security needs.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Maintenance Contract Programs</h4>
+                  <p class="text-ez2fix-brown leading-relaxed mb-3">
+                    Preventive maintenance service agreements designed to minimize business disruption, extend equipment life, and ensure reliable operation of commercial garage door systems year-round.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-bold text-ez2fix-dark mb-3">Emergency Commercial Service</h4>
+                  <p class="text-ez2fix-brown leading-relaxed">
+                    Priority emergency response for commercial properties where garage door failures directly impact business operations, revenue generation, and customer service delivery.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Service Areas Throughout New Jersey -->
+          <div class="mt-16 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown text-ez2fix-cream p-12 rounded-xl shadow-xl">
+            <div class="text-center mb-12">
+              <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-gold mb-4">
+                Service Areas Throughout New Jersey
+              </h3>
+              <p class="text-lg text-ez2fix-cream max-w-4xl mx-auto leading-relaxed">
+                Professional garage door services reach communities throughout Bergen, Essex, Morris, Hudson, and Passaic counties, bringing consistent expertise and quality solutions directly to your property location. Our comprehensive service territory encompasses diverse communities from urban properties in Newark and Jersey City to suburban developments in Fair Lawn and Montclair, ensuring all New Jersey residents within our service area receive the same professional attention and quality results.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+              <div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Bergen County</h4>
+                <p class="text-ez2fix-cream text-sm">Fair Lawn, Clifton, Cedar Grove, Little Falls, West Caldwell, North Caldwell</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Essex County</h4>
+                <p class="text-ez2fix-cream text-sm">Montclair, Newark, East Orange, West Orange, Bloomfield, Nutley</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Morris County</h4>
+                <p class="text-ez2fix-cream text-sm">Pine Brook, Roseland, Caldwell, Montville, Lincoln Park, Pequannock</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Hudson County</h4>
+                <p class="text-ez2fix-cream text-sm">Jersey City, Hoboken, Bayonne, Union City, West New York, Kearny</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-ez2fix-gold mb-2">Passaic County</h4>
+                <p class="text-ez2fix-cream text-sm">Paterson, Wayne, Passaic, Hawthorne, North Haledon, Oakland</p>
+              </div>
+            </div>
+
+            <div class="text-center mt-8">
+              <div class="inline-flex items-center space-x-2 px-6 py-3 bg-ez2fix-gold/20 rounded-lg border border-ez2fix-gold/30">
+                <svg class="h-5 w-5 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span class="text-ez2fix-cream font-medium">Professional garage door services across all five New Jersey counties</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Ready to Get Started? -->
+    <section class="py-16 md:py-20 bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Get <span class="text-ez2fix-dark">Professional Service?</span>
+          </h2>
+          
+          <p class="text-xl mb-8 opacity-90">
+            Licensed contractor (#13VH13553300) serving residential and commercial properties throughout New Jersey. Contact Ez2Fix LLC for professional garage door services with quality results you can trust.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            <a 
+              href="tel:(201) 554-6769"
+              class="w-full sm:w-auto px-10 py-5 bg-white text-ez2fix-primary hover:bg-gray-100 font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3 min-h-[64px] focus-enhanced"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              Call Now
+            </a>
+            <a 
+              href="/booking"
+              class="w-full sm:w-auto px-10 py-5 bg-transparent border-2 border-white text-white hover:bg-white hover:text-ez2fix-primary font-bold text-xl rounded-xl transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-3 min-h-[64px] focus-enhanced"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              Schedule Service
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
@@ -777,42 +1404,40 @@ const processSteps = [
           </p>
         </div>
         
-        <!-- Trust Stats -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto">
-          <div class="text-center p-6 rounded-lg bg-ez2fix-cream/10 border border-ez2fix-gold/20">
-            <div class="text-display-2 font-bold text-ez2fix-primary mb-2">10,000+</div>
-            <div class="text-body-base text-ez2fix-gold">Happy Customers</div>
+        <!-- Trust Stats - Optimized Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+          <div class="text-center p-8 rounded-xl bg-ez2fix-cream/10 border-2 border-ez2fix-primary/30 hover:border-ez2fix-primary/60 transition-all duration-300 hover:bg-ez2fix-cream/20">
+            <div class="text-5xl sm:text-6xl font-bold text-ez2fix-primary mb-4">12,000+</div>
+            <div class="text-lg font-semibold text-ez2fix-gold">Families Served</div>
           </div>
-          <div class="text-center p-6 rounded-lg bg-ez2fix-cream/10 border border-ez2fix-gold/20">
-            <div class="text-display-2 font-bold text-ez2fix-primary mb-2">5.0★</div>
-            <div class="text-body-base text-ez2fix-gold">Average Rating</div>
+          <div class="text-center p-8 rounded-xl bg-ez2fix-cream/10 border-2 border-ez2fix-gold/30 hover:border-ez2fix-gold/60 transition-all duration-300 hover:bg-ez2fix-cream/20">
+            <div class="text-5xl sm:text-6xl font-bold text-ez2fix-gold mb-4">5.0★</div>
+            <div class="text-lg font-semibold text-ez2fix-primary">Google Rating</div>
           </div>
-          <div class="text-center p-6 rounded-lg bg-ez2fix-cream/10 border border-ez2fix-gold/20">
-            <div class="text-display-2 font-bold text-ez2fix-primary mb-2">15+</div>
-            <div class="text-body-base text-ez2fix-gold">Years Experience</div>
+          <div class="text-center p-8 rounded-xl bg-ez2fix-cream/10 border-2 border-ez2fix-brown/30 hover:border-ez2fix-brown/60 transition-all duration-300 hover:bg-ez2fix-cream/20">
+            <div class="text-5xl sm:text-6xl font-bold text-ez2fix-brown mb-4">24/7</div>
+            <div class="text-lg font-semibold text-ez2fix-gold">Service Available</div>
           </div>
         </div>
         
         <ReviewsCarouselClean pageType="services" />
         
-        <!-- Read All Reviews CTA -->
+        <!-- Read All Reviews CTA - Optimized -->
         <div class="text-center mt-12">
-          <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-gold to-ez2fix-primary shadow-premium">
-            <a 
-              href="/reviews"
-              class="btn-responsive bg-ez2fix-dark text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark btn-premium hover-lift inline-flex items-center justify-center shadow-lg transition-all duration-300"
-            >
-              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-              </svg>
-              Read All Reviews
-              <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
-          <p class="text-body-small text-ez2fix-gold mt-3 max-w-md mx-auto">
-            See what your neighbors are saying about our garage door services
+          <a 
+            href="/reviews"
+            class="inline-flex items-center gap-3 px-10 py-5 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus-enhanced"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+            </svg>
+            Read Customer Reviews
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <p class="text-lg text-ez2fix-gold mt-4 max-w-md mx-auto">
+            See what your neighbors are saying
           </p>
         </div>
       </div>
@@ -846,21 +1471,21 @@ const processSteps = [
           </div>
 
           <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto mb-12">
+          <div class="flex flex-col sm:flex-row gap-6 justify-center max-w-2xl mx-auto mb-12">
             <a 
               href={siteConfig.links.phone}
-              class="flex-1 sm:flex-none px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+              class="w-full sm:w-auto px-10 py-5 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3 min-h-[64px] focus-enhanced"
             >
-              <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
               </svg>
               Call {siteConfig.business.phone}
             </a>
             <a 
               href="/booking"
-              class="flex-1 sm:flex-none px-8 py-4 border-2 border-ez2fix-gold text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg bg-transparent"
+              class="w-full sm:w-auto px-10 py-5 bg-transparent border-2 border-ez2fix-gold text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark font-bold text-xl rounded-xl transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-3 min-h-[64px] focus-enhanced"
             >
-              <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               Get Free Estimate

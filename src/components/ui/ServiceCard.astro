@@ -50,7 +50,7 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
 <Card class={`relative overflow-hidden card-responsive shadow-premium hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 group hover-lift h-full flex flex-col ${cardBg} ${cardBorder} ${className}`}>
   
   <!-- Service Image - Clickable Link to Service Page -->
-  <a href={href} class="relative h-48 sm:h-56 lg:h-48 overflow-hidden rounded-t-lg block group-hover:opacity-95 transition-opacity duration-300">
+  <a href={href} class="relative aspect-video overflow-hidden rounded-t-lg block group-hover:opacity-95 transition-opacity duration-300">
     <img 
       src={image} 
       alt={title}
@@ -107,13 +107,6 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
       </div>
     </div>
 
-    <!-- Warranty Info -->
-    <div class={`${warrantyBg} p-3 rounded-lg border`}>
-      <div class="text-center">
-        <div class={`text-body-small font-bold ${warrantyTitleColor}`}>Warranty</div>
-        <div class={`text-body-small ${warrantyTextColor} font-medium`}>{warranty}</div>
-      </div>
-    </div>
 
     <!-- Enhanced CTA Buttons -->
     <div class="flex flex-col sm:flex-row gap-3 pt-2">

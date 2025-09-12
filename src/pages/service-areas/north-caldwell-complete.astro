@@ -32,6 +32,7 @@ const locationData = {
   serviceStats: {
     customersServed: '680+',
     yearsInArea: '8',
+    responseTime: '25 minutes',
     satisfactionRate: '99.8%'
   }
 };
@@ -40,7 +41,7 @@ const locationData = {
 const services = [
   {
     title: "24/7 Emergency Repair",
-    description: "Emergency repair service with same-day response across Northern NJ.",
+    description: "24/7 emergency repair service. Same-day response across Northern NJ.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp",
     features: ["Available 24/7", "Same-Day Service", "All Brands", "Safety First"],
     badge: "24/7 AVAILABLE",
@@ -49,7 +50,7 @@ const services = [
   },
   {
     title: "Spring Repair",
-    description: "Expert spring replacement with safe handling and quality parts.",
+    description: "Expert spring replacement for torsion and extension springs. Safe handling guaranteed.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg", 
     features: ["Safe Replacement", "Quality Springs", "Proper Balance", "Peace of Mind"],
     badge: "MOST COMMON",
@@ -58,7 +59,7 @@ const services = [
   },
   {
     title: "Smart Opener Installation",
-    description: "Smart opener installation with WiFi connectivity and smartphone control.",
+    description: "Smart opener installation with WiFi connectivity. Belt and chain drive options.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp",
     features: ["Smart Control", "Phone Alerts", "Backup Power", "Easy Setup"],
     badge: "SMART HOME", 
@@ -67,7 +68,7 @@ const services = [
   },
   {
     title: "New Door Installation",
-    description: "Custom garage door installation to boost home value and curb appeal.",
+    description: "Custom garage door installation. Boost home value instantly with professional service.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png",
     features: ["Boost Home Value", "Custom Styles", "Energy Savings", "Curb Appeal"],
     badge: "CURB APPEAL",
@@ -76,7 +77,7 @@ const services = [
   },
   {
     title: "Commercial Service",
-    description: "Commercial repair and maintenance with priority service for businesses.",
+    description: "Commercial repair and maintenance for NJ businesses. Priority service for minimal downtime.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg",
     features: ["Commercial Priority", "Heavy-Duty Doors", "Maintenance Plans", "Minimize Downtime"], 
     badge: "BUSINESS",
@@ -85,7 +86,7 @@ const services = [
   },
   {
     title: "Complete Repair Service", 
-    description: "Complete service for all makes and models including track repairs.",
+    description: "Complete service for all makes and models. From squeaky doors to track repairs.",
     image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png",
     features: ["All Brand Service", "Track Repairs", "Cable Replacement", "Preventive Care"],
     badge: "ALL REPAIRS",
@@ -99,7 +100,7 @@ const localTestimonial = {
   name: "Sarah M.",
   location: "Mountain Avenue, North Caldwell", 
   service: "Emergency Spring Repair",
-  quote: "When our garage door spring snapped on a Tuesday morning, Ez2Fix provided excellent service to our North Caldwell home. Professional, reliable, and quality work. They've earned our trust and recommendation to neighbors.",
+  quote: "When our garage door spring snapped at 7 AM on a Tuesday, Ez2Fix was at our house in North Caldwell within 30 minutes. Professional, fast, and reasonably priced. They've earned our trust and recommendation to neighbors.",
   rating: 5,
   date: "2024-01-15"
 };
@@ -141,9 +142,9 @@ const serviceAreas = [
               </div>
               <div class="flex items-center space-x-2">
                 <svg class="h-4 w-4 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <span class="text-xs md:text-sm font-semibold text-white">Licensed & Insured</span>
+                <span class="text-xs md:text-sm font-semibold text-white">{locationData.serviceStats.responseTime} Response</span>
               </div>
             </div>
 
@@ -151,12 +152,13 @@ const serviceAreas = [
             <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6 animate-on-scroll">
               <span class="text-white">Expert Garage Door Repair in</span>
               <br />
-              <span class="text-ez2fix-gold">{locationData.city}, NJ</span>
+              <span class="text-ez2fix-gold">{locationData.city}, NJ</span> <span class="text-ez2fix-primary">Licensed & Emergency Service</span>
             </h1>
             
             <!-- SEO-Optimized Subtitle with Local Hook -->
             <div class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8 animate-on-scroll">
-              <p class="mb-3">Professional <strong class="text-ez2fix-gold">garage door repair in North Caldwell, NJ</strong> with <strong class="text-ez2fix-gold">same-day emergency service</strong>. Licensed & insured with {locationData.serviceStats.yearsInArea} years serving <strong class="text-ez2fix-primary">Essex County</strong> families.</p>
+              <p class="mb-3">When your garage door won't open on a busy Monday morning in <strong class="text-ez2fix-gold">North Caldwell</strong>, your entire day comes to a standstill. Whether you're rushing to Route 23 or getting the kids to <strong class="text-ez2fix-gold">Mountain Way Elementary</strong>, a malfunctioning garage door isn't just an inconvenience—it's a security risk that needs immediate attention.</p>
+              <p>That's where <strong class="text-ez2fix-primary">Ez2Fix LLC</strong> comes in. As North Caldwell's trusted <strong class="text-ez2fix-gold">garage door repair company</strong>, we've been providing <strong class="text-ez2fix-gold">same-day garage door service</strong> to families throughout <strong class="text-ez2fix-primary">Essex County</strong> for {locationData.serviceStats.yearsInArea} years.</p>
             </div>
             
             <!-- Service Coverage -->
@@ -201,8 +203,8 @@ const serviceAreas = [
               <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
                 <div class="grid grid-cols-2 gap-3 text-center">
                   <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Same Day</div>
-                    <div class="text-body-small text-ez2fix-brown">Service Available</div>
+                    <div class="text-heading-3 text-ez2fix-dark">Local Service</div>
+                    <div class="text-body-small text-ez2fix-brown">{locationData.serviceStats.responseTime}</div>
                   </div>
                   <div>
                     <div class="text-heading-3 text-ez2fix-dark">Licensed NJ</div>
@@ -240,11 +242,11 @@ const serviceAreas = [
               <h3 class="text-xl font-bold text-ez2fix-dark">Emergency Garage Door Repair North Caldwell</h3>
             </div>
             <p class="text-ez2fix-brown mb-4 leading-relaxed">
-              When you need <strong>emergency garage door repair in North Caldwell</strong>, we provide 24/7 availability. You're never stuck with a broken garage door, whether it's a snapped spring at dawn or a door that won't close at night.
+              When you need <strong>emergency garage door repair in North Caldwell</strong>, we respond typically within {locationData.serviceStats.responseTime}. Our 24/7 availability means you're never stuck with a broken garage door, whether it's a snapped spring at 6 AM or a door that won't close at midnight.
             </p>
             <ul class="space-y-2 text-sm text-ez2fix-brown">
               <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>24/7 emergency response in North Caldwell</li>
-              <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>Fast emergency response service</li>
+              <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>Average {locationData.serviceStats.responseTime} response time</li>
               <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>Same-day repair completion</li>
             </ul>
           </Card>
@@ -286,50 +288,8 @@ const serviceAreas = [
           </Card>
         </div>
 
-        <!-- Service Area Map -->
-        <div class="text-center mb-16">
-          <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark mb-6">
-            Our <span class="text-ez2fix-primary">North Caldwell Service Area</span>
-          </h3>
-          <p class="text-lg text-ez2fix-brown mb-8 max-w-3xl mx-auto">
-            We serve all of North Caldwell and surrounding Essex County areas. See our coverage map below.
-          </p>
-          
-          <!-- Map Container -->
-          <div class="bg-white rounded-xl shadow-lg border-2 border-ez2fix-primary/20 p-4 max-w-4xl mx-auto">
-            <div id="service-area-map" class="w-full h-96 rounded-lg overflow-hidden bg-ez2fix-cream/30 flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
-                  <svg class="w-8 h-8 text-ez2fix-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                </div>
-                <div class="text-lg font-bold text-ez2fix-dark mb-2">Loading Service Area Map...</div>
-                <div class="text-ez2fix-brown">North Caldwell & Surrounding Areas</div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Service Area Info -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 max-w-4xl mx-auto">
-            <div class="text-center p-4 bg-white rounded-lg shadow-md border border-ez2fix-primary/20">
-              <div class="text-lg font-bold text-ez2fix-primary mb-2">Same Day</div>
-              <div class="text-ez2fix-brown">Service Available</div>
-            </div>
-            <div class="text-center p-4 bg-white rounded-lg shadow-md border border-ez2fix-primary/20">
-              <div class="text-lg font-bold text-ez2fix-primary mb-2">{locationData.serviceStats.customersServed}</div>
-              <div class="text-ez2fix-brown">Local Customers Served</div>
-            </div>
-            <div class="text-center p-4 bg-white rounded-lg shadow-md border border-ez2fix-primary/20">
-              <div class="text-lg font-bold text-ez2fix-primary mb-2">24/7</div>
-              <div class="text-ez2fix-brown">Emergency Service</div>
-            </div>
-          </div>
-        </div>
-
         <!-- Service Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
             <ServiceCard
               title={service.title}
@@ -401,10 +361,10 @@ const serviceAreas = [
               </div>
               <h3 class="text-xl font-bold text-ez2fix-dark mb-4">Rapid Response Guarantee</h3>
               <p class="text-ez2fix-brown leading-relaxed mb-4">
-                <strong>Same-day garage door service North Caldwell</strong> with reliable and prompt service. We understand that in a community like North Caldwell, quality service and reliability aren't luxuries—they're expectations.
+                <strong>Same-day garage door service North Caldwell</strong> with average {locationData.serviceStats.responseTime} response time. We understand that in a community like North Caldwell, reliability and prompt service aren't luxuries—they're expectations.
               </p>
-              <div class="text-2xl font-bold text-ez2fix-brown">Same Day</div>
-              <div class="text-sm text-ez2fix-brown">Service Available</div>
+              <div class="text-2xl font-bold text-ez2fix-brown">{locationData.serviceStats.responseTime}</div>
+              <div class="text-sm text-ez2fix-brown">Average Response Time</div>
             </Card>
           </div>
 
@@ -545,8 +505,8 @@ const serviceAreas = [
                 <div class="text-ez2fix-brown">Always Available</div>
               </div>
               <div>
-                <div class="text-2xl font-bold text-ez2fix-primary mb-2">Same Day</div>
-                <div class="text-ez2fix-brown">Service Available</div>
+                <div class="text-2xl font-bold text-ez2fix-primary mb-2">{locationData.serviceStats.responseTime}</div>
+                <div class="text-ez2fix-brown">Average Response</div>
               </div>
               <div>
                 <div class="text-2xl font-bold text-ez2fix-primary mb-2">Licensed</div>
@@ -695,156 +655,4 @@ const serviceAreas = [
       observer.observe(el);
     });
   });
-</script>
-
-<!-- Google Maps JavaScript API for Service Area Map -->
-<script>
-  // Initialize service area map
-  function initServiceAreaMap() {
-    if (!window.google || !window.google.maps) {
-      console.error('Google Maps API not available for service area map');
-      showMapError();
-      return;
-    }
-    
-    const mapElement = document.getElementById('service-area-map');
-    if (!mapElement) return;
-
-    // Location data for North Caldwell
-    const center = { lat: 40.8715, lng: -74.2585 };
-    const locations = [
-      { name: 'North Caldwell', lat: 40.8715, lng: -74.2585, primary: true },
-      { name: 'West Caldwell', lat: 40.8398, lng: -74.2951 },
-      { name: 'Caldwell', lat: 40.8390, lng: -74.2765 },
-      { name: 'Fairfield', lat: 40.8837, lng: -74.3065 },
-      { name: 'Roseland', lat: 40.8201, lng: -74.3043 },
-      { name: 'Pine Brook', lat: 40.8590, lng: -74.3493 }
-    ];
-
-    // Create map
-    const map = new google.maps.Map(mapElement, {
-      zoom: 12,
-      center: center,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [
-        {
-          featureType: "all",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#F3F3E6" }]
-        },
-        {
-          featureType: "water",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#BB8525" }]
-        },
-        {
-          featureType: "road",
-          elementType: "geometry.stroke",
-          stylers: [{ color: "#1D1912" }]
-        }
-      ]
-    });
-
-    // Add markers for each location
-    locations.forEach(location => {
-      const marker = new google.maps.Marker({
-        position: { lat: location.lat, lng: location.lng },
-        map: map,
-        title: `${location.name} - Ez2Fix Service Area`,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: location.primary ? 20 : 15,
-          fillColor: location.primary ? '#D2A63C' : '#BB8525',
-          fillOpacity: 1,
-          strokeColor: '#1D1912',
-          strokeWeight: 3
-        }
-      });
-      
-      const infoWindow = new google.maps.InfoWindow({
-        content: `
-          <div style="padding: 12px; font-family: Arial, sans-serif; max-width: 250px;">
-            <h4 style="color: #1D1912; margin: 0 0 8px 0; font-size: 16px;">${location.name}</h4>
-            <p style="color: #BB8525; margin: 0 0 8px 0; font-size: 14px;">
-              ${location.primary ? 'Primary Service Area' : 'Service Coverage Area'}
-            </p>
-            <div style="display: flex; gap: 6px; margin-top: 8px;">
-              <a href="tel:(201) 554-6769" 
-                 style="background-color: #D2A63C; color: #F3F3E6; padding: 6px 12px; 
-                        border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">Call Now</a>
-            </div>
-          </div>
-        `
-      });
-      
-      marker.addListener('click', () => {
-        infoWindow.open(map, marker);
-      });
-    });
-
-    // Show primary location info window by default
-    const primaryMarker = locations.find(loc => loc.primary);
-    if (primaryMarker) {
-      const primaryInfoWindow = new google.maps.InfoWindow({
-        content: `
-          <div style="padding: 12px; font-family: Arial, sans-serif; max-width: 250px;">
-            <h4 style="color: #1D1912; margin: 0 0 8px 0; font-size: 16px;">North Caldwell</h4>
-            <p style="color: #BB8525; margin: 0 0 8px 0; font-size: 14px;">Primary Service Area</p>
-            <div style="display: flex; gap: 6px; margin-top: 8px;">
-              <a href="tel:(201) 554-6769" 
-                 style="background-color: #D2A63C; color: #F3F3E6; padding: 6px 12px; 
-                        border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">Call Now</a>
-            </div>
-          </div>
-        `
-      });
-      
-      const marker = new google.maps.Marker({
-        position: center,
-        map: map
-      });
-      
-      primaryInfoWindow.open(map, marker);
-    }
-  }
-
-  function showMapError() {
-    const mapElement = document.getElementById('service-area-map');
-    if (mapElement) {
-      mapElement.innerHTML = `
-        <div class="text-center p-8">
-          <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Service Area Map Temporarily Unavailable</div>
-          <div class="text-sm" style="color: #BB8525;">We serve North Caldwell and all surrounding Essex County areas</div>
-        </div>
-      `;
-    }
-  }
-
-  // Load map when Google Maps API is available
-  async function loadServiceAreaMap() {
-    try {
-      const response = await fetch('/api/maps-key');
-      const config = await response.json();
-      
-      if (config.apiKey) {
-        await window.EZ2FIX_MAPS.loadAPI(config.apiKey);
-        initServiceAreaMap();
-      } else {
-        showMapError();
-      }
-    } catch (error) {
-      console.error('Failed to load service area map:', error);
-      showMapError();
-    }
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadServiceAreaMap);
-  } else {
-    loadServiceAreaMap();
-  }
-
-  // Fallback timeout
-  setTimeout(showMapError, 10000);
 </script>

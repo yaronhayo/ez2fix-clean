@@ -1,0 +1,520 @@
+---
+import { siteConfig } from '@/config/site';
+import CTA from '@/components/ui/CTA.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Professional Garage Door Company Contact',
+  subtitle = 'Contact our garage door service New Jersey team. Professional garage door contractor with complete service across all counties.'
+} = Astro.props;
+
+const services = [
+  "24/7 Emergency Repair",
+  "Spring Repair & Replacement", 
+  "Smart Opener Installation",
+  "New Door Installation",
+  "Commercial Service",
+  "Cable & Track Repair",
+  "Maintenance Service",
+  "Safety Inspection & Tune-Up",
+  "Weatherstripping & Insulation",
+  "Remote Programming",
+  "General Repair",
+  "Not Sure - Need Diagnosis"
+];
+
+const contactMethods = [
+  "Phone Call",
+  "Text Message", 
+  "Email",
+  "Any Method"
+];
+---
+
+<div class="professional-contact-form bg-white p-8 rounded-lg shadow-xl border-2 border-ez2fix-primary">
+  <div class="mb-6">
+    <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark mb-3">
+      {title}
+    </h3>
+    <p class="text-base text-ez2fix-brown">
+      {subtitle}
+    </p>
+  </div>
+  
+  <form class="space-y-6" id="professional-contact-form">
+    <!-- Customer Information Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Name -->
+      <div>
+        <label for="contact-name" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Full Name*
+        </label>
+        <input 
+          type="text" 
+          id="contact-name"
+          name="name" 
+          required
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+          placeholder="Enter your full name"
+        />
+        <div id="contact-name-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label for="contact-phone" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Phone Number*
+        </label>
+        <input 
+          type="tel" 
+          id="contact-phone"
+          name="phone" 
+          required
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+          placeholder="(201) 234-5678"
+        />
+        <div id="contact-phone-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="contact-email" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+        Email Address*
+      </label>
+      <input 
+        type="email" 
+        id="contact-email"
+        name="email" 
+        required
+        class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+        placeholder="your.email@example.com"
+      />
+      <div id="contact-email-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    <!-- Service and Contact Method Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Service Selection -->
+      <div>
+        <label for="contact-service" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Service Needed*
+        </label>
+        <select 
+          id="contact-service"
+          name="service" 
+          required
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white"
+        >
+          <option value="">Select garage door service...</option>
+          {services.map(service => (
+            <option value={service}>{service}</option>
+          ))}
+        </select>
+        <div id="contact-service-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      </div>
+
+      <!-- Preferred Contact Method -->
+      <div>
+        <label for="contact-method" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+          Preferred Contact Method*
+        </label>
+        <select 
+          id="contact-method"
+          name="contactMethod" 
+          required
+          class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white"
+        >
+          <option value="">How should we contact you?</option>
+          {contactMethods.map(method => (
+            <option value={method}>{method}</option>
+          ))}
+        </select>
+        <div id="contact-method-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      </div>
+    </div>
+
+    <!-- Service Address -->
+    <div>
+      <label for="contact-address" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+        Service Address*
+        <span class="text-ez2fix-brown/70 font-normal">(where you need garage door service)</span>
+      </label>
+      <input 
+        type="text" 
+        id="contact-address"
+        name="address" 
+        required
+        class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+        placeholder="Enter your service address (Google autocomplete enabled)"
+        autocomplete="street-address"
+      />
+      <div id="contact-address-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      <div id="service-area-validation" class="text-xs mt-1 hidden"></div>
+      
+      <!-- Expanded Address Fields -->
+      <div id="contact-address-expanded" class="hidden mt-3 space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <input 
+              type="text" 
+              id="contact-city"
+              name="city" 
+              class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+              placeholder="City"
+              autocomplete="address-level2"
+            />
+          </div>
+          <div>
+            <input 
+              type="text" 
+              id="contact-state"
+              name="state" 
+              class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+              placeholder="State"
+              autocomplete="address-level1"
+              value="NJ"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <input 
+              type="text" 
+              id="contact-zip"
+              name="zip" 
+              class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+              placeholder="Zip Code"
+              autocomplete="postal-code"
+              pattern="[0-9]{5}(-[0-9]{4})?"
+            />
+          </div>
+          <div>
+            <input 
+              type="text" 
+              id="contact-unit"
+              name="unit" 
+              class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+              placeholder="Unit/Apt (optional)"
+              autocomplete="address-line2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message/Description -->
+    <div>
+      <label for="contact-message" class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+        Describe Your Garage Door Issue*
+      </label>
+      <textarea 
+        id="contact-message"
+        name="message" 
+        required
+        rows="4"
+        class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors min-h-[120px] resize-vertical"
+        placeholder="Please describe your garage door problem, when you need service, or any specific questions you have. Include any error sounds, visual issues, or safety concerns."
+      ></textarea>
+      <div id="contact-message-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    <!-- Consent & Privacy -->
+    <div>
+      <div class="flex items-start space-x-3">
+        <input 
+          type="checkbox" 
+          id="contact-consent"
+          name="consent" 
+          required
+          class="mt-1 h-4 w-4 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2 focus:ring-offset-2"
+        />
+        <label for="contact-consent" class="text-sm leading-relaxed text-ez2fix-dark">
+          I consent to being contacted by Ez2Fix garage door company via the method selected above regarding my garage door service request. I understand this is a professional garage door contractor service. I agree to the 
+          <a href="/privacy-policy" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Privacy Policy</a> and 
+          <a href="/terms-of-service" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Terms of Service</a>.*
+        </label>
+      </div>
+      <div id="contact-consent-error" class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+    </div>
+
+    <!-- reCAPTCHA notice -->
+    <div class="text-xs text-ez2fix-brown/70 text-center">
+      🔒 This form is protected by reCAPTCHA for security
+    </div>
+
+    <!-- Submit Button -->
+    <div class="pt-4">
+      <CTA 
+        variant="primary"
+        size="large"
+        text="Send Professional Consultation Request"
+        icon="send"
+        class="w-full btn-premium shadow-premium hover-lift"
+      />
+    </div>
+    
+    <div class="bg-ez2fix-cream/50 p-4 rounded-lg border border-ez2fix-gold/30">
+      <div class="flex items-center space-x-2 mb-2">
+        <svg class="h-5 w-5 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span class="text-sm font-semibold text-ez2fix-dark">What Happens Next:</span>
+      </div>
+      <ul class="text-sm text-ez2fix-brown space-y-1">
+        <li>• Professional garage door contractor will contact you within 2 hours</li>
+        <li>• Free consultation and honest estimate with no hidden fees</li>
+        <li>• Licensed contractor #13VH13553300 serving all 5 counties</li>
+        <li>• Same-day service available for emergency repairs</li>
+      </ul>
+    </div>
+    
+    <p class="text-ez2fix-brown text-center text-xs mt-4">
+      * Required fields. Your information is secure and never shared. Professional garage door service New Jersey.
+    </p>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    // Initialize reCAPTCHA
+    try {
+      const { loadRecaptcha } = await import('@/lib/recaptcha');
+      await loadRecaptcha();
+    } catch (error) {
+      console.warn('reCAPTCHA loading failed:', error.message);
+    }
+    
+    const form = document.getElementById('professional-contact-form');
+    if (!form) return;
+    
+    // Phone formatting
+    const phoneInput = document.getElementById('contact-phone') as HTMLInputElement;
+    phoneInput?.addEventListener('input', function() {
+      const value = this.value.replace(/\D/g, '');
+      if (value.length >= 10) {
+        this.value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+      }
+    });
+    
+    // Address autocomplete setup
+    const addressInput = document.getElementById('contact-address') as HTMLInputElement;
+    const addressExpanded = document.getElementById('contact-address-expanded');
+    const serviceAreaValidation = document.getElementById('service-area-validation');
+    
+    // Initialize Google Maps address autocomplete
+    if (addressInput) {
+      setupAddressAutocomplete(addressInput, addressExpanded, serviceAreaValidation);
+    }
+    
+    // Clear errors on input
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('input', function() {
+        clearError((this as HTMLInputElement).name);
+      });
+    });
+    
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(form as HTMLFormElement);
+      const data = Object.fromEntries(formData);
+      
+      // Validation
+      const required = ['name', 'phone', 'email', 'service', 'contactMethod', 'address', 'message', 'consent'];
+      let hasErrors = false;
+      
+      required.forEach(field => {
+        const value = field === 'consent' ? data[field] : (data[field] as string)?.trim();
+        if (!value) {
+          showError(field, 'This field is required.');
+          hasErrors = true;
+        }
+      });
+      
+      // Email validation
+      if (data.email && !isValidEmail((data.email as string).trim())) {
+        showError('email', 'Please enter a valid email address.');
+        hasErrors = true;
+      }
+      
+      // Phone validation
+      if (data.phone && !isValidPhone((data.phone as string).trim())) {
+        showError('phone', 'Please enter a valid phone number.');
+        hasErrors = true;
+      }
+      
+      if (hasErrors) return;
+      
+      // Show loading state
+      const button = form.querySelector('a[class*="btn"]') as HTMLElement;
+      const originalText = button.textContent;
+      button.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...';
+      button.style.pointerEvents = 'none';
+      
+      // Get reCAPTCHA token
+      let recaptchaToken = 'no-recaptcha-configured';
+      try {
+        const { loadRecaptcha, executeRecaptcha } = await import('@/lib/recaptcha');
+        await loadRecaptcha();
+        recaptchaToken = await executeRecaptcha('contact_form');
+      } catch (recaptchaError) {
+        console.warn('reCAPTCHA execution failed:', recaptchaError.message);
+      }
+      
+      try {
+        // Build full address
+        const addressValue = (data.address as string)?.trim() || '';
+        const fullAddress = addressValue + 
+          (data.city ? `, ${(data.city as string).trim()}` : '') + 
+          (data.state ? `, ${(data.state as string).trim()}` : ', NJ') + 
+          (data.zip ? ` ${(data.zip as string).trim()}` : '') +
+          (data.unit ? `, Unit ${(data.unit as string).trim()}` : '');
+        
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: (data.name as string).trim(),
+            phone: (data.phone as string).trim(),
+            email: (data.email as string).trim(),
+            service: data.service,
+            contactMethod: data.contactMethod,
+            address: fullAddress,
+            message: (data.message as string).trim(),
+            recaptchaToken,
+            consent: data.consent,
+            source: 'professional_contact_form'
+          })
+        });
+        
+        if (response.ok) {
+          // Success - redirect to thank you page
+          window.location.href = '/thank-you?source=contact';
+        } else {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Submission failed');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Sorry, there was an error submitting your request. Please try again or call us directly at (201) 554-6769');
+        if (button && originalText) {
+          button.innerHTML = originalText;
+          button.style.pointerEvents = 'auto';
+        }
+      }
+    });
+    
+    async function setupAddressAutocomplete(addressInput: HTMLInputElement, addressExpanded: HTMLElement | null, serviceAreaValidation: HTMLElement | null) {
+      try {
+        const { initializeGoogleMaps, setupAddressAutocomplete, isAddressInServiceArea } = await import('@/lib/maps');
+        
+        await initializeGoogleMaps();
+        console.log('✅ Google Maps initialized for professional contact form');
+        
+        const autocompleteElement = setupAddressAutocomplete(addressInput, {
+          restrictToServiceArea: true,
+          onPlaceSelected: async (place) => {
+            console.log('📍 Professional contact form address selected:', place.displayName || place.formattedAddress);
+            
+            if (addressExpanded) {
+              addressExpanded.classList.remove('hidden');
+              fillAddressComponents(place);
+            }
+            
+            // Service area validation
+            if (serviceAreaValidation && place.geometry?.location) {
+              const inServiceArea = isAddressInServiceArea(place.geometry.location);
+              if (inServiceArea) {
+                serviceAreaValidation.innerHTML = '✅ Great! We provide professional garage door service in your area.';
+                serviceAreaValidation.className = 'text-xs mt-1 text-green-600 font-medium';
+                serviceAreaValidation.classList.remove('hidden');
+              } else {
+                serviceAreaValidation.innerHTML = '⚠️ This address may be outside our primary service area. We\'ll contact you to confirm availability.';
+                serviceAreaValidation.className = 'text-xs mt-1 text-orange-600 font-medium';
+                serviceAreaValidation.classList.remove('hidden');
+              }
+            }
+          }
+        });
+        
+      } catch (error) {
+        console.warn('⚠️ Google Maps autocomplete unavailable for professional contact form:', error.message);
+        setupManualAddressParsing(addressInput, addressExpanded);
+      }
+    }
+    
+    function fillAddressComponents(place: google.maps.places.PlaceResult) {
+      const cityInput = document.getElementById('contact-city') as HTMLInputElement;
+      const stateInput = document.getElementById('contact-state') as HTMLInputElement;
+      const zipInput = document.getElementById('contact-zip') as HTMLInputElement;
+      
+      const addressComponents = place.address_components || place.addressComponents;
+      
+      if (addressComponents) {
+        addressComponents.forEach(component => {
+          const types = component.types;
+          
+          if (types.includes('locality') && cityInput) {
+            cityInput.value = component.long_name || component.longText;
+          } else if (types.includes('administrative_area_level_1') && stateInput) {
+            stateInput.value = component.short_name || component.shortText;
+          } else if (types.includes('postal_code') && zipInput) {
+            zipInput.value = component.long_name || component.longText;
+          }
+        });
+      }
+    }
+    
+    function setupManualAddressParsing(addressInput: HTMLInputElement, addressExpanded: HTMLElement | null) {
+      addressInput.addEventListener('focus', () => {
+        if (addressExpanded) {
+          addressExpanded.classList.remove('hidden');
+        }
+      });
+      
+      addressInput.addEventListener('input', function() {
+        const value = this.value.trim();
+        if (value.length > 10 && addressExpanded) {
+          addressExpanded.classList.remove('hidden');
+        }
+      });
+    }
+    
+    function showError(field: string, message: string) {
+      const errorEl = document.getElementById(`contact-${field}-error`);
+      const inputEl = document.getElementById(`contact-${field}`);
+      if (errorEl && inputEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+        (inputEl as HTMLElement).style.borderColor = '#ef4444';
+        inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    
+    function clearError(field: string) {
+      const errorEl = document.getElementById(`contact-${field}-error`);
+      const inputEl = document.getElementById(`contact-${field}`);
+      if (errorEl && inputEl) {
+        errorEl.classList.add('hidden');
+        (inputEl as HTMLElement).style.borderColor = '';
+      }
+    }
+    
+    function isValidEmail(email: string) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    function isValidPhone(phone: string) {
+      const cleaned = phone.replace(/\D/g, '');
+      return cleaned.length === 10;
+    }
+  });
+</script>

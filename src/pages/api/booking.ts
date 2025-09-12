@@ -2,7 +2,7 @@
 import type { APIRoute } from 'astro';
 import { verifyRecaptcha } from '@/lib/recaptcha';
 import { sendBookingFormEmail, type BookingFormData } from '@/lib/email';
-import { isDev } from '@/config/env';
+import { isDev, serverEnv } from '@/config/env';
 
 // API route - will be handled by Vercel serverless functions
 
@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (isDev) {
       console.log('Booking API called');
       console.log('Environment check - required keys exist:', 
-        !!process.env.RESEND_API_KEY && !!process.env.RECAPTCHA_SECRET_KEY);
+        !!serverEnv.email.resendApiKey && !!serverEnv.recaptcha.secretKey);
     }
     
     let body;
@@ -44,7 +44,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
     
     // Validate required fields
-    const { name, email, phone, address, service, urgency, description, recaptchaToken, consent } = body;
+    const { 
+      name, email, phone, address, service, urgency, description, recaptchaToken, consent,
+      contactPreference, source, sessionData
+    } = body;
     
     if (!name || !phone || !address || !service || !recaptchaToken || !consent) {
       return new Response(
@@ -91,13 +94,25 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Validate urgency level
-    const validUrgencies = ['same-day', 'next-day', 'flexible'];
-    if (!validUrgencies.includes(urgency)) {
+    // Validate and map urgency level from form values to internal values
+    const urgencyMapping: Record<string, 'same-day' | 'next-day' | 'flexible'> = {
+      'asap': 'same-day',
+      'today': 'same-day', 
+      'few-days': 'next-day',
+      'few-weeks': 'flexible',
+      'browsing': 'flexible',
+      // Legacy support for existing values
+      'same-day': 'same-day',
+      'next-day': 'next-day', 
+      'flexible': 'flexible'
+    };
+
+    const mappedUrgency = urgencyMapping[urgency];
+    if (!mappedUrgency) {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: 'Invalid urgency level' 
+          error: `Invalid urgency level: ${urgency}. Please select a valid urgency option.` 
         }),
         { 
           status: 400,
@@ -106,22 +121,48 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Prepare booking form data
+    // Prepare booking form data with tracking information
     const bookingData: BookingFormData = {
       name: String(name).trim(),
-      email: String(email).trim().toLowerCase(),
+      email: email ? String(email).trim().toLowerCase() : '',
       phone: String(phone).trim(),
       address: String(address).trim(),
       service: String(service).trim(),
-      urgency: urgency as BookingFormData['urgency'],
+      urgency: mappedUrgency,
       description: String(description).trim(),
       preferredTime: body.preferredTime ? String(body.preferredTime).trim() : undefined,
       recaptchaToken,
+      // Enhanced tracking data
+      contactPreference: contactPreference ? String(contactPreference).trim() : 'phone',
+      leadSource: source ? String(source).trim() : 'website',
+      sessionData: sessionData ? {
+        referrer: sessionData.referrer || '',
+        userAgent: sessionData.userAgent || '',
+        timestamp: sessionData.timestamp || new Date().toLocaleString('en-US', {
+          timeZone: 'America/New_York',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        }) + ' ET',
+        pageViews: sessionData.pageViews || [],
+        timeOnSite: sessionData.timeOnSite || 0,
+        device: sessionData.device || 'unknown',
+        location: sessionData.location || '',
+        utmSource: sessionData.utmSource || '',
+        utmMedium: sessionData.utmMedium || '',
+        utmCampaign: sessionData.utmCampaign || '',
+        landingPage: sessionData.landingPage || '',
+        previousPages: sessionData.previousPages || [],
+      } : undefined,
     };
 
-    // Validate email format (only if email is provided)
+    // Validate email format (only if email is provided and not empty)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (bookingData.email && !emailRegex.test(bookingData.email)) {
+    if (bookingData.email && bookingData.email.length > 0 && !emailRegex.test(bookingData.email)) {
       return new Response(
         JSON.stringify({ 
           success: false, 

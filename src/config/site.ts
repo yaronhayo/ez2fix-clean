@@ -18,7 +18,7 @@ export const siteConfig = {
   business: {
     name: "Ez2Fix Garage Door Services",
     legalName: "EZ 2 FIX LLC",
-    address: "389 E 54th St, Elmwood Park, NJ 07407, USA",
+    baseLocation: "Elmwood Park, NJ 07407",
     phone: "(201) 554-6769",
     email: "ez2fixllc@gmail.com",
     hours: "7 Days a Week Service Available",

@@ -8,6 +8,132 @@ import FAQComponentClean from '@/components/ui/FAQComponentClean.astro';
 import ReviewsCarouselClean from '@/components/ui/ReviewsCarouselClean.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
 import Card from '@/components/ui/Card.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ez2Fix LLC",
+  "description": "Professional garage door repair and installation services in New Jersey",
+  "url": "https://ez2fix.com",
+  "telephone": "+12015546769",
+  "email": "info@ez2fix.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "Elmwood Park",
+    "addressRegion": "NJ",
+    "postalCode": "07407",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.9065,
+    "longitude": -74.1171
+  },
+  "serviceArea": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bergen County, NJ"
+    },
+    {
+      "@type": "AdministrativeArea", 
+      "name": "Essex County, NJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Morris County, NJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hudson County, NJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Passaic County, NJ"
+    }
+  ],
+  "hasOfferingCatalog": {
+    "@type": "OfferingCatalog",
+    "name": "Garage Door Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Emergency Garage Door Repair",
+          "description": "Emergency garage door repair services"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Garage Door Installation",
+          "description": "Professional garage door installation services"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Garage Door Spring Replacement",
+          "description": "Expert garage door spring repair and replacement"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Garage Door Opener Installation",
+          "description": "Smart garage door opener installation and repair"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Garage Door Service",
+          "description": "Commercial garage door repair and maintenance"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "General Garage Door Repair",
+          "description": "Complete garage door service for all makes and models"
+        }
+      }
+    ]
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday", 
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "06:00",
+    "closes": "22:00"
+  },
+  "sameAs": [
+    "https://www.facebook.com/ez2fix",
+    "https://www.yelp.com/biz/ez2fix",
+    "https://www.google.com/maps/place/ez2fix"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "247"
+  },
+  "license": "13VH13553300",
+  "foundingDate": "2015-01-01",
+  "priceRange": "$$"
+};
 import CTASectionClean from '@/components/ui/CTASectionClean.astro';
 import { siteConfig } from '@/config/site';
 
@@ -15,9 +141,9 @@ export const prerender = true;
 ---
 
 <BaseLayout
-  title="Garage Door Repair Bergen County NJ | Licensed Contractor | Ez2Fix | #1 Emergency Service"
-  description="#1 Garage door repair Bergen County NJ. Licensed contractor #13VH13553300 serving Elmwood Park, Fair Lawn, Clifton. 24/7 emergency repair, spring replacement, opener installation. 10-year warranty, 10,000+ customers. Call (201) 554-6769!"
-  keywords="garage door repair bergen county nj, garage door installation bergen county, emergency garage door repair nj, garage door spring repair bergen county, garage door opener installation nj, garage door repair elmwood park nj, garage door repair fair lawn nj, garage door repair clifton nj, garage door contractor bergen county, licensed garage door repair nj, garage door service north caldwell, garage door repair west caldwell, garage door service montclair nj, garage door repair little falls nj, garage door service cedar grove nj"
+  title="Professional Garage Door Repair & Installation New Jersey | Ez2Fix LLC"
+  description="Expert garage door repair & installation in NJ. Licensed contractor #13VH13553300. Serving Bergen, Essex, Morris, Hudson & Passaic counties. Professional service."
+  keywords="garage door repair, garage door repair near me, garage door installation, garage door company, New Jersey garage door service, garage door opener installation, garage door companies near me, garage door service near me, garage door spring replacement, overhead garage door, commercial garage door repair, bergen county garage door repair, essex county garage door service, morris county garage door installation, hudson county garage door company, passaic county garage door repair, professional garage door repair, licensed garage door contractor New Jersey"
 >
   <Fragment slot="head">
     <!-- Preload hero video for faster loading -->
@@ -38,10 +164,10 @@ export const prerender = true;
           <!-- Section Header -->
           <div class="text-center mb-6 animate-on-scroll">
             <h2 class="text-heading-1 text-ez2fix-dark mb-3">
-              Get Your <span class="text-ez2fix-primary">Free Estimate</span>
+              Stuck Door? <span class="text-ez2fix-primary">Get Help Now</span>
             </h2>
             <p class="text-body-base text-ez2fix-brown">
-              Quick form for honest estimates.
+              Professional estimates with transparent pricing. Expert service available.
             </p>
           </div>
 
@@ -51,7 +177,7 @@ export const prerender = true;
               variant="inline"
               title=""
               subtitle=""
-              buttonText="Get My Free Estimate"
+              buttonText="Get Help Now - It's Free"
             />
             
             <!-- Enhanced Form Benefits -->
@@ -72,8 +198,8 @@ export const prerender = true;
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
                     </svg>
                   </div>
-                  <div class="text-heading-3 text-ez2fix-dark">Free Estimates</div>
-                  <div class="text-body-small text-ez2fix-brown">No Hidden Fees</div>
+                  <div class="text-heading-3 text-ez2fix-dark">Honest Pricing</div>
+                  <div class="text-body-small text-ez2fix-brown">No Surprises Ever</div>
                 </div>
               </div>
               
@@ -90,7 +216,7 @@ export const prerender = true;
                     <svg class="w-4 h-4 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    <span>24/7 Service</span>
+                    <span>Emergency Service</span>
                   </div>
                 </div>
               </div>
@@ -104,37 +230,178 @@ export const prerender = true;
     
     <HomeMainClean />
     
+    <!-- Service Areas Section - SEO Optimized -->
+    <section class="py-16 bg-gradient-to-br from-ez2fix-cream via-white to-ez2fix-gold/5">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12 animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-ez2fix-dark">
+              Professional <span class="text-ez2fix-primary">Garage Door Services</span><br class="hidden sm:block"/> Across New Jersey
+            </h2>
+            <p class="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed mb-8 text-gray-700">
+              When your <strong class="text-ez2fix-dark">garage door repair</strong> needs arise in New Jersey, <strong class="text-ez2fix-primary">Ez2Fix LLC</strong> delivers expert <strong class="text-ez2fix-dark">garage door installation</strong> and <strong class="text-ez2fix-dark">emergency garage door repair</strong> services across Bergen, Essex, Morris, Hudson, and Passaic counties. Our licensed <strong class="text-ez2fix-dark">garage door companies near me</strong> provide <strong class="text-ez2fix-gold">professional service</strong> for residential and commercial properties throughout Northern and Central New Jersey.
+            </p>
+          </div>
+          
+          <!-- County-Based Service Areas Grid -->
+          <div class="mb-8">
+            <h3 class="text-xl md:text-2xl font-bold text-ez2fix-dark mb-6 text-center">Bergen County Garage Door Repair</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-8 animate-on-scroll">
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-primary/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/elmwood-park" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">Elmwood Park</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07407</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-gold/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/fair-lawn" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">Fair Lawn</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07410</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-primary/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/clifton" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">Clifton</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07011</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-gold/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/montclair" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">Montclair</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07042</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-primary/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/cedar-grove" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">Cedar Grove</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07009</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-gold/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/little-falls" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">Little Falls</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07424</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-primary/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/north-caldwell" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">North Caldwell</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07006</p>
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-3 md:p-4 shadow-md border border-ez2fix-gold/20 hover:shadow-lg transition-shadow">
+                <a href="/service-areas/west-caldwell" class="block text-center">
+                  <h4 class="text-base md:text-lg font-semibold text-ez2fix-dark mb-1">West Caldwell</h4>
+                  <p class="text-xs md:text-sm text-gray-700">07006</p>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Counties Coverage -->
+          <div class="mb-8">
+            <h3 class="text-xl md:text-2xl font-bold text-ez2fix-dark mb-6 text-center">Essex County Garage Door Service</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 animate-on-scroll">
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-primary/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Newark</h4>
+                <p class="text-xs text-gray-700">07102</p>
+              </div>
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-primary/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">West Orange</h4>
+                <p class="text-xs text-gray-700">07052</p>
+              </div>
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-primary/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Bloomfield</h4>
+                <p class="text-xs text-gray-700">07003</p>
+              </div>
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-primary/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Nutley</h4>
+                <p class="text-xs text-gray-700">07110</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h3 class="text-xl md:text-2xl font-bold text-ez2fix-dark mb-6 text-center">Morris & Passaic County Coverage</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 animate-on-scroll">
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-gold/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Pine Brook</h4>
+                <p class="text-xs text-gray-700">07058</p>
+              </div>
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-gold/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Wayne</h4>
+                <p class="text-xs text-gray-700">07470</p>
+              </div>
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-gold/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Paterson</h4>
+                <p class="text-xs text-gray-700">07501</p>
+              </div>
+              <div class="bg-white rounded-lg p-2 md:p-3 shadow-md border border-ez2fix-gold/10 text-center">
+                <h4 class="text-sm md:text-base font-semibold text-ez2fix-dark mb-1">Caldwell</h4>
+                <p class="text-xs text-gray-700">07006</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Comprehensive Coverage Statement -->
+          <div class="text-center">
+            <div class="max-w-4xl mx-auto">
+              <p class="text-base md:text-lg text-gray-700 mb-4">
+                <strong class="text-ez2fix-dark">Complete New Jersey Coverage:</strong> Professional <strong class="text-ez2fix-dark">garage door repair near me</strong> services across all 5 counties.
+              </p>
+              <div class="text-sm md:text-base text-gray-600 mb-6 leading-relaxed">
+                <p class="mb-2"><strong class="text-ez2fix-dark">Bergen County:</strong> Fair Lawn, Little Falls, Clifton, Cedar Grove, West Caldwell, North Caldwell, Montclair, Elmwood Park, Saddle Brook, Garfield</p>
+                <p class="mb-2"><strong class="text-ez2fix-dark">Essex County:</strong> Newark, West Orange, East Orange, South Orange, Bloomfield, Nutley, Belleville, Glen Ridge</p>
+                <p class="mb-2"><strong class="text-ez2fix-dark">Morris County:</strong> Pine Brook, Roseland, Caldwell, Verona</p>
+                <p class="mb-2"><strong class="text-ez2fix-dark">Hudson County:</strong> Jersey City, Hoboken, Bayonne, Union City, West New York</p>
+                <p class="mb-2"><strong class="text-ez2fix-dark">Passaic County:</strong> Paterson, Wayne, Clifton, Passaic, Hawthorne</p>
+              </div>
+            </div>
+            <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold">
+              <a href="/service-areas" class="bg-white text-ez2fix-primary hover:bg-ez2fix-primary hover:text-white px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center text-sm md:text-base">
+                <svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                View All Service Areas
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="py-8"></div>
     
     <FAQComponentClean 
       faqs={[
         {
-          question: "How do you price garage door repair services in Elmwood Park, NJ?",
-          answer: "Garage door repair costs vary depending on the specific issue and required parts. We provide free estimates with upfront pricing - no hidden fees or surprises! Contact us for a personalized quote based on your specific needs."
+          question: "I'm worried about the cost. How much will garage door repair really cost me?",
+          answer: "We understand that concern completely. That's why we provide upfront, transparent pricing BEFORE any work begins. Most Bergen County spring repairs range $200-400. Emergency calls cost the same as regular service - no premium charges. Free estimates always, and we honor every quote we provide."
         },
         {
-          question: "What is your service availability for garage door repairs?",
-          answer: "Ez2Fix provides prompt garage door repair service throughout Elmwood Park and surrounding areas. We offer reliable service and are available for service calls. Contact us to discuss your specific scheduling needs."
+          question: "My garage door is stuck and I can't get to work. How can Ez2Fix help?",
+          answer: "We know how stressful this situation is. Our Bergen County emergency service team prioritizes urgent calls where homeowners can't access their vehicles. We maintain fully stocked service vehicles and licensed technicians ready to respond to emergency situations during business hours."
         },
         {
-          question: "What garage door brands do you service in Elmwood Park?",
-          answer: "We service ALL major garage door brands including LiftMaster, Chamberlain, Genie, Craftsman, Wayne Dalton, Clopay, Amarr, and Chi. Our licensed technicians carry parts for most common brands on their trucks for efficient repairs."
+          question: "What garage door brands does Ez2Fix service in Bergen County?",
+          answer: "We service ALL major garage door brands throughout Bergen County including LiftMaster, Chamberlain, Genie, Craftsman, Wayne Dalton, Clopay, Amarr, and Chi. Our licensed technicians stock parts for most common brands on their service vehicles for professional repairs."
         },
         {
-          question: "How long do garage door springs last and when should I replace them?",
-          answer: "Garage door springs typically last 7-10 years or 10,000 cycles. Warning signs include: garage door won't open, closes too fast, makes loud noises, or appears crooked. NEVER attempt DIY spring repair - it's extremely dangerous! Call Ez2Fix for safe, professional spring replacement with a 10-year warranty."
+          question: "I heard a loud snap and now my door won't budge. Is this dangerous?",
+          answer: "That loud snap was likely a spring breaking - and yes, it's extremely dangerous. Garage door springs hold 400+ pounds of force. Please don't attempt to force the door open or try DIY repairs. We've treated too many preventable injuries. Contact Ez2Fix for safe, professional spring replacement with our 10-year warranty."
         },
         {
-          question: "Are you licensed and insured for garage door work in NJ?",
-          answer: "Absolutely! Ez2Fix is fully licensed (#13VH13553300) and insured for all garage door work in New Jersey. We're a family-owned business serving Elmwood Park since 2014 with an A+ BBB rating and 5-star Google reviews."
+          question: "Is Ez2Fix properly licensed and insured for NJ garage door work?",
+          answer: "Absolutely! Ez2Fix is fully licensed by New Jersey State (#13VH13553300) and carries comprehensive insurance for all garage door work. We're a local Bergen County business serving families since 2014 with an A+ BBB rating and consistent 5-star reviews."
         },
         {
-          question: "Do you offer senior discounts on garage door services?",
-          answer: "Yes! Ez2Fix proudly offers a senior discount (65+) on garage door repairs and installations. We believe in taking care of our community's seniors with honest, affordable service. Just mention this discount when you call!"
+          question: "Do you offer any discounts for Bergen County seniors?",
+          answer: "Yes! Ez2Fix proudly offers senior discounts (65+) on all garage door repairs and installations. We believe in supporting our Bergen County community's seniors with honest, affordable service. Simply mention the senior discount when you call us at (201) 554-6769!"
         }
       ]}
-      title="Got Questions About <span class='text-ez2fix-primary'>Garage Door Repair</span> in Elmwood Park?"
-      subtitle="<strong>Honest answers from Ez2Fix</strong> - your local garage door experts! From pricing to warranties, we've got you covered with transparent, helpful information."
+      title="When You're <span class='text-ez2fix-primary'>Stuck</span>, You Have Questions"
+      subtitle="<strong>Real answers to real concerns</strong> from your Bergen County neighbors who've been there. No sales pitch, just honest help."
     />
     
     <div class="py-8"></div>
@@ -144,10 +411,10 @@ export const prerender = true;
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-12 animate-on-scroll">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-ez2fix-dark">
-              <span class="text-ez2fix-primary">Happy</span> Neighbors
+              Don't Take <span class="text-ez2fix-primary">Our Word</span> For It
             </h2>
             <p class="text-xl max-w-2xl mx-auto leading-relaxed mb-8 text-ez2fix-brown">
-              Real families sharing their experiences with Ez2Fix service.
+              Here's what your Bergen County neighbors are saying about their Ez2Fix experience:
             </p>
           </div>
           
@@ -167,27 +434,27 @@ export const prerender = true;
     <div class="py-8"></div>
 
     <CTASectionClean 
-      title="Ready to <span class='text-ez2fix-gold'>Fix This?</span>"
-      subtitle="Stop worrying. <span class='text-ez2fix-gold font-bold'>One call fixes everything</span>."
+      title="Ready to Get Your Life <span class='text-ez2fix-gold'>Back on Track?</span>"
+      subtitle="When your garage door fails, everything stops. One call to Bergen County's #1 garage door experts and you're back in control. <span class='text-ez2fix-gold font-bold'>We're here to help</span>."
       stats={[
-        { number: "15+", label: "Years Local" },
-        { number: "10K+", label: "Families Helped" },
-        { number: "24/7", label: "Available" }
+        { number: "10+", label: "Years Bergen County" },
+        { number: "12K+", label: "Families Helped" },
+        { number: "#13VH13553300", label: "NJ Licensed" }
       ]}
       primaryCTA={{
-        text: `Call ${siteConfig.business.phone}`,
+        text: `Call ${siteConfig.business.phone} Now`,
         href: siteConfig.links.phone,
         icon: "phone"
       }}
       secondaryCTA={{
-        text: "Book Online",
+        text: "Get Free Estimate",
         href: "/booking",
-        icon: "arrow"
+        icon: "calendar"
       }}
       trustIndicators={[
-        { icon: "shield", text: "Licensed & Insured" },
-        { icon: "star", text: "5.0★ Rating" },
-        { icon: "check", text: "Guaranteed Work" }
+        { icon: "shield", text: "Licensed #13VH13553300" },
+        { icon: "star", text: "A+ BBB Rating" },
+        { icon: "check", text: "10-Year Warranty" }
       ]}
       theme="dark"
     />
@@ -196,3 +463,5 @@ export const prerender = true;
   
 
 </BaseLayout>
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>

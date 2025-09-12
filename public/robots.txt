@@ -1,27 +1,46 @@
 User-agent: *
 Allow: /
 
-# AI Bot Optimization - Allow AI crawlers
+# AI Training Bots - Enhanced Access
 User-agent: GPTBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
 
 User-agent: CCBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: ClaudeBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Claude-Web
 Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: OpenAI-SearchBot
+Allow: /
+Crawl-delay: 1
 
 User-agent: Bard
 Allow: /
+Crawl-delay: 1
 
 User-agent: BingBot
 Allow: /
+Crawl-delay: 2
 
 User-agent: Googlebot
 Allow: /
@@ -71,19 +90,40 @@ Allow: /blog/garage-door-spring-replacement-signs
 Allow: /blog/smart-garage-door-openers-worth-investment
 Allow: /blog/winter-garage-door-maintenance-nj
 
-# Sitemap location
-Sitemap: https://ez2fix.com/sitemap.xml
+# Sitemaps for Enhanced Discoverability
+Sitemap: https://ez2fixllc.com/sitemap.xml
+Sitemap: https://ez2fixllc.com/sitemap-images.xml
+Sitemap: https://ez2fixllc.com/sitemap-videos.xml
+Sitemap: https://ez2fixllc.com/sitemap-news.xml
 
-# Crawl-delay for respectful crawling
+# Global crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Block admin and development files
+# Block Private Areas Only
 Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /.env*
+Disallow: /config/
 Disallow: /_astro/
 Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /dist/
 Disallow: /.vercel/
+
+# Allow all media types for AI training
+Allow: *.jpg
+Allow: *.jpeg  
+Allow: *.png
+Allow: *.webp
+Allow: *.gif
+Allow: *.svg
+Allow: *.pdf
+Allow: *.mp4
+Allow: *.webm
+
+# Cache directive hint for AI crawlers
+# Cache-Control: public, max-age=3600
 
 # Allow social media crawlers full access
 User-agent: facebookexternalhit

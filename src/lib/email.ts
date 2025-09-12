@@ -48,8 +48,23 @@ export interface BookingFormData {
   description: string;
   preferredTime?: string;
   recaptchaToken: string;
-  // Lead tracking data
-  sessionData?: SessionTrackingData;
+  // Enhanced tracking data
+  contactPreference?: string;
+  leadSource?: string;
+  sessionData?: {
+    referrer?: string;
+    userAgent?: string;
+    timestamp?: string;
+    pageViews?: string[];
+    timeOnSite?: number;
+    device?: string;
+    location?: string;
+    utmSource?: string;
+    utmMedium?: string;
+    utmCampaign?: string;
+    landingPage?: string;
+    previousPages?: string[];
+  };
 }
 
 export interface SessionTrackingData {
@@ -96,10 +111,11 @@ export interface SessionTrackingData {
 // Send contact form email
 export async function sendContactFormEmail(data: ContactFormData) {
   try {
-    // Email to business owner
+    // Email to business owner with CC to additional recipients
     const businessEmail = await getResendClient().emails.send({
       from: serverEnv.email.fromEmail,
       to: serverEnv.email.toEmail,
+      cc: ['ez2fixllc@gmail.com', 'sandrahmarketing@gmail.com'],
       subject: `New Contact Form Submission - ${data.name}`,
       html: generateContactFormEmailHTML(data),
       replyTo: data.email,
@@ -130,10 +146,11 @@ export async function sendContactFormEmail(data: ContactFormData) {
 // Send booking form email
 export async function sendBookingFormEmail(data: BookingFormData) {
   try {
-    // Email to business owner
+    // Email to business owner with CC to additional recipients
     const businessEmailData: any = {
       from: serverEnv.email.fromEmail,
       to: serverEnv.email.toEmail,
+      cc: ['ez2fixllc@gmail.com', 'sandrahmarketing@gmail.com'],
       subject: `New Service Request - ${data.urgency.toUpperCase()} - ${data.name}`,
       html: generateBookingFormEmailHTML(data),
     };
@@ -290,6 +307,90 @@ function generateContactFormEmailHTML(data: ContactFormData): string {
       </div>
     </body>
     </html>
+  `;
+}
+
+function generateBookingLeadTrackingHTML(sessionData: BookingFormData['sessionData']): string {
+  if (!sessionData) return '';
+  
+  return `
+    <!-- Lead Intelligence -->
+    <div style="background: white; border-radius: 8px; padding: 25px; border-left: 5px solid #ebc959; margin-bottom: 25px;">
+      <h3 style="color: #1D1912; margin: 0 0 20px 0; font-size: 18px; font-weight: 600;">🕵️ Lead Intelligence</h3>
+      
+      <!-- Session Overview -->
+      <div style="background: #f8f9fa; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
+        <h4 style="color: #1D1912; margin: 0 0 10px 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Session Overview</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+          ${sessionData.timeOnSite ? `
+          <div>
+            <div style="color: #333333; font-size: 12px; margin-bottom: 2px;">Time on Site</div>
+            <div style="color: #1D1912; font-weight: 600;">${formatDuration(sessionData.timeOnSite)}</div>
+          </div>
+          ` : ''}
+          ${sessionData.pageViews ? `
+          <div>
+            <div style="color: #333333; font-size: 12px; margin-bottom: 2px;">Pages Visited</div>
+            <div style="color: #1D1912; font-weight: 600;">${sessionData.pageViews.length} pages</div>
+          </div>
+          ` : ''}
+          ${sessionData.device ? `
+          <div>
+            <div style="color: #333333; font-size: 12px; margin-bottom: 2px;">Device</div>
+            <div style="color: #1D1912; font-weight: 600;">${sessionData.device}</div>
+          </div>
+          ` : ''}
+          ${sessionData.location ? `
+          <div>
+            <div style="color: #333333; font-size: 12px; margin-bottom: 2px;">Location</div>
+            <div style="color: #1D1912; font-weight: 600;">${sessionData.location}</div>
+          </div>
+          ` : ''}
+        </div>
+      </div>
+
+      <!-- Traffic Source -->
+      ${sessionData.utmSource || sessionData.utmMedium || sessionData.referrer ? `
+      <div style="background: #f8f9fa; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
+        <h4 style="color: #1D1912; margin: 0 0 10px 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🚀 Traffic Source</h4>
+        <table style="width: 100%; font-size: 13px;">
+          ${sessionData.utmSource ? `
+          <tr><td style="color: #333333; padding: 3px 0; width: 100px;">Source:</td><td style="color: #1D1912; font-weight: 500;">${sessionData.utmSource}</td></tr>
+          ` : ''}
+          ${sessionData.utmMedium ? `
+          <tr><td style="color: #333333; padding: 3px 0;">Medium:</td><td style="color: #1D1912; font-weight: 500;">${sessionData.utmMedium}</td></tr>
+          ` : ''}
+          ${sessionData.utmCampaign ? `
+          <tr><td style="color: #333333; padding: 3px 0;">Campaign:</td><td style="color: #1D1912; font-weight: 500;">${sessionData.utmCampaign}</td></tr>
+          ` : ''}
+          ${sessionData.referrer ? `
+          <tr><td style="color: #333333; padding: 3px 0;">Referrer:</td><td style="color: #1D1912; font-weight: 500;">${sessionData.referrer}</td></tr>
+          ` : ''}
+          ${sessionData.landingPage ? `
+          <tr><td style="color: #333333; padding: 3px 0;">Landing Page:</td><td style="color: #1D1912; font-weight: 500;">${sessionData.landingPage}</td></tr>
+          ` : ''}
+        </table>
+      </div>
+      ` : ''}
+
+      <!-- Page Journey -->
+      ${sessionData.previousPages && sessionData.previousPages.length > 0 ? `
+      <div style="background: #f8f9fa; border-radius: 6px; padding: 15px;">
+        <h4 style="color: #1D1912; margin: 0 0 15px 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">📍 Page Journey</h4>
+        ${sessionData.previousPages.slice(0, 5).map((page, index) => `
+          <div style="display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #E8E9EA;">
+            <div style="background: #D2A63C; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; margin-right: 10px;">${index + 1}</div>
+            <div style="flex: 1;">
+              <div style="color: #1D1912; font-weight: 500; font-size: 13px;">${page}</div>
+            </div>
+          </div>
+        `).join('')}
+        ${sessionData.previousPages.length > 5 ? `
+        <div style="color: #333333; font-size: 12px; text-align: center; padding: 10px 0;">... and ${sessionData.previousPages.length - 5} more pages</div>
+        ` : ''}
+      </div>
+      ` : ''}
+    </div>
   `;
 }
 
@@ -537,10 +638,24 @@ function generateBookingFormEmailHTML(data: BookingFormData): string {
                   <a href="tel:${data.phone}" style="color: #ebc959; text-decoration: none; font-weight: 500; background: #ebc959; padding: 6px 12px; border-radius: 4px; color: #1D1912; display: inline-block;">📞 ${data.phone}</a>
                 </td>
               </tr>
-              <tr>
+              <tr style="border-bottom: 1px solid #E8E9EA;">
                 <td style="padding: 12px 0; font-weight: 600; color: #1D1912;">Address:</td>
                 <td style="padding: 12px 0; color: #333333;">${data.address}</td>
               </tr>
+              ${data.contactPreference ? `
+              <tr style="border-bottom: 1px solid #E8E9EA;">
+                <td style="padding: 12px 0; font-weight: 600; color: #1D1912;">Contact Pref:</td>
+                <td style="padding: 12px 0; color: #333333; text-transform: capitalize;">${data.contactPreference}</td>
+              </tr>
+              ` : ''}
+              ${data.leadSource ? `
+              <tr>
+                <td style="padding: 12px 0; font-weight: 600; color: #1D1912;">Lead Source:</td>
+                <td style="padding: 12px 0;">
+                  <span style="background: #f8f9fa; color: #1D1912; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; text-transform: capitalize;">${data.leadSource}</span>
+                </td>
+              </tr>
+              ` : ''}
             </table>
           </div>
 
@@ -578,7 +693,7 @@ function generateBookingFormEmailHTML(data: BookingFormData): string {
             </div>
           </div>
 
-          ${leadData ? generateLeadTrackingHTML(leadData) : ''}
+          ${data.sessionData ? generateBookingLeadTrackingHTML(data.sessionData) : ''}
 
           <!-- Quick Actions -->
           <div style="background: linear-gradient(135deg, #ebc959 0%, #f4d76b 100%); border-radius: 8px; padding: 25px; text-align: center;">
@@ -678,22 +793,42 @@ function generateBookingFormAutoReplyHTML(data: BookingFormData): string {
             </a>
           </div>
 
-          <!-- Quick Links -->
+          <!-- Helpful Resources -->
           <div style="background: white; border-radius: 12px; padding: 25px; border-left: 5px solid #ebc959; margin-bottom: 30px;">
-            <h3 style="color: #1D1912; margin: 0 0 20px 0; font-size: 18px; font-weight: 600; text-align: center;">🔗 While You Wait</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}" style="background: #f8f9fa; border: 2px solid #ebc959; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
-                <div style="color: #1D1912; font-weight: 600; font-size: 14px;">🏠 Homepage</div>
-                <div style="color: #333333; font-size: 12px; margin-top: 5px;">Learn more about us</div>
+            <h3 style="color: #1D1912; margin: 0 0 20px 0; font-size: 18px; font-weight: 600; text-align: center;">📚 Helpful Resources While You Wait</h3>
+            
+            <!-- Main Links Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/services" style="background: linear-gradient(135deg, #f8f9fa 0%, #f0f0f0 100%); border: 2px solid #ebc959; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <div style="color: #1D1912; font-weight: 600; font-size: 14px; margin-bottom: 5px;">🔧 Our Services</div>
+                <div style="color: #666666; font-size: 11px; line-height: 1.3;">Spring repair, opener installation, track alignment & more</div>
               </a>
-              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/faq" style="background: #f8f9fa; border: 2px solid #d4a736; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
-                <div style="color: #1D1912; font-weight: 600; font-size: 14px;">❓ FAQ</div>
-                <div style="color: #333333; font-size: 12px; margin-top: 5px;">Common questions</div>
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/faq" style="background: linear-gradient(135deg, #f8f9fa 0%, #f0f0f0 100%); border: 2px solid #d4a736; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <div style="color: #1D1912; font-weight: 600; font-size: 14px; margin-bottom: 5px;">❓ Common Questions</div>
+                <div style="color: #666666; font-size: 11px; line-height: 1.3;">Quick answers to frequently asked questions</div>
               </a>
             </div>
+            
+            <!-- Secondary Links -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;">
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/service-areas" style="background: #f8f9fa; border: 1px solid #e0e0e0; padding: 12px 8px; border-radius: 6px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                <div style="color: #1D1912; font-weight: 600; font-size: 12px;">📍 Service Areas</div>
+                <div style="color: #666666; font-size: 10px; margin-top: 3px;">Bergen & Hudson</div>
+              </a>
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/maintenance-tips" style="background: #f8f9fa; border: 1px solid #e0e0e0; padding: 12px 8px; border-radius: 6px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                <div style="color: #1D1912; font-weight: 600; font-size: 12px;">💡 Maintenance Tips</div>
+                <div style="color: #666666; font-size: 10px; margin-top: 3px;">Keep it running</div>
+              </a>
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/emergency" style="background: #f8f9fa; border: 1px solid #e0e0e0; padding: 12px 8px; border-radius: 6px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                <div style="color: #1D1912; font-weight: 600; font-size: 12px;">🚨 Emergency Info</div>
+                <div style="color: #666666; font-size: 10px; margin-top: 3px;">What to do</div>
+              </a>
+            </div>
+            
+            <!-- Feature Link -->
             <div style="text-align: center;">
-              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/reviews" style="background: #d4a736; color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: inline-block;">
-                ⭐ Read Customer Reviews
+              <a href="${serverEnv.business.website || 'https://ez2fixllc.com'}/reviews" style="background: linear-gradient(135deg, #ebc959 0%, #f4d76b 100%); color: #1D1912; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-block; box-shadow: 0 3px 6px rgba(235, 201, 89, 0.3); transition: all 0.3s ease;">
+                ⭐ Read 100+ Five-Star Reviews
               </a>
             </div>
           </div>

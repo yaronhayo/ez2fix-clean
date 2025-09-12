@@ -24,12 +24,12 @@ export const GET: APIRoute = async () => {
     });
   }
   
-  // Validate the API key
+  // Validate the API key - allow development placeholder in dev mode
   const isValidKey = apiKey && 
                      apiKey.length > 30 && 
                      apiKey.startsWith('AIza') &&
                      apiKey !== 'your_public_google_maps_api_key_here' &&
-                     apiKey !== 'local_development_placeholder';
+                     (isDev || apiKey !== 'local_development_placeholder');
   
   if (!isValidKey) {
     console.error('Google Maps API key validation failed');
