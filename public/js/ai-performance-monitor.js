@@ -23,41 +23,24 @@
 
     const isAIBot = detectAIBot();
 
-    // Optimize content delivery for AI consumption
+    // Optimize content delivery for AI consumption with code splitting
     if (isAIBot) {
       document.body.classList.add('ai-bot-optimized');
-      console.log('🤖 AI Bot detected - applying optimizations');
+      console.log('🤖 AI Bot detected - loading AI optimizations module');
       
-      // Enhance structured data visibility
-      const structuredData = document.querySelectorAll('[type="application/ld+json"]');
-      structuredData.forEach((script, index) => {
-        script.setAttribute('data-ai-readable', 'true');
-        script.setAttribute('data-schema-type', `schema-${index}`);
-      });
-      
-      // Add semantic landmarks for better AI understanding
-      document.querySelectorAll('section').forEach((section, index) => {
-        section.setAttribute('data-section-id', `section-${index}`);
-        section.setAttribute('role', 'region');
-        
-        const heading = section.querySelector('h1, h2, h3, h4, h5, h6');
-        if (heading) {
-          section.setAttribute('aria-label', heading.textContent.trim());
-        }
-      });
-
-      // Mark important content for AI processing
-      document.querySelectorAll('[class*="service"], [class*="contact"], [class*="hours"]').forEach(element => {
-        element.classList.add('ai-important-content');
-      });
-
-      // Add voice-search optimized classes
-      document.querySelectorAll('p, div').forEach(element => {
-        const text = element.textContent.toLowerCase();
-        if (text.includes('garage door repair') || text.includes('emergency') || text.includes('licensed')) {
-          element.classList.add('voice-search-relevant');
-        }
-      });
+      // Load AI optimization module dynamically
+      import('/js/ai-optimizations.js')
+        .then(module => {
+          module.optimizeForAI();
+          module.setupAIBotErrorTracking();
+        })
+        .catch(error => {
+          console.warn('Failed to load AI optimizations module:', error);
+          // Fallback: basic optimizations
+          document.querySelectorAll('[type="application/ld+json"]').forEach((script, index) => {
+            script.setAttribute('data-ai-readable', 'true');
+          });
+        });
     }
 
     // Core Web Vitals tracking function
@@ -87,12 +70,24 @@
       console.log(`📊 ${metric.name}:`, Math.round(metric.value * 100) / 100, metric.rating || 'good');
     }
 
-    // Load Web Vitals library dynamically
-    function loadWebVitals() {
+    // Load Web Vitals library dynamically with code splitting
+    async function loadWebVitals() {
       if (typeof webVitals !== 'undefined') {
         // Web Vitals already loaded
         initWebVitalsTracking();
         return;
+      }
+
+      // Try to load Web Vitals library dynamically
+      try {
+        const webVitalsModule = await import('https://unpkg.com/web-vitals@4/dist/web-vitals.js');
+        if (webVitalsModule && webVitalsModule.getCLS) {
+          window.webVitals = webVitalsModule;
+          initWebVitalsTracking();
+          return;
+        }
+      } catch (error) {
+        console.warn('Web Vitals library failed to load, using fallback observers');
       }
 
       // Fallback: Create basic performance observer
@@ -201,107 +196,42 @@
       }
     });
 
-    // Enhanced error tracking for AI bots
-    window.addEventListener('error', (event) => {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'javascript_error', {
-          event_category: isAIBot ? 'AI Bot Errors' : 'JavaScript Errors',
-          event_label: event.message,
-          value: 1
-        });
-      }
-      
-      if (isAIBot) {
-        console.error('🤖 Error encountered by AI bot:', event.message);
-      }
-    });
-
-    // Performance hints for AI crawlers
-    if (isAIBot) {
-      // Add performance hints to document
-      const performanceHints = document.createElement('meta');
-      performanceHints.name = 'ai-performance-optimized';
-      performanceHints.content = 'true';
-      document.head.appendChild(performanceHints);
-
-      // Mark render-critical content
-      document.querySelectorAll('h1, h2, .service-description, .contact-info').forEach(element => {
-        element.setAttribute('data-render-priority', 'high');
+    // Enhanced error tracking for non-AI bots (AI bot errors handled by AI optimization module)
+    if (!isAIBot) {
+      window.addEventListener('error', (event) => {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'javascript_error', {
+            event_category: 'JavaScript Errors',
+            event_label: event.message,
+            value: 1
+          });
+        }
       });
     }
+
+    // Performance hints for AI crawlers are handled by the AI optimizations module
 
     // Initialize tracking
     loadWebVitals();
   }
 
-  // AI Content Optimization
-  function optimizeForAI() {
-    // Add microdata attributes for better AI understanding
-    document.querySelectorAll('[itemscope]').forEach(element => {
-      element.setAttribute('data-ai-structured', 'true');
-    });
-
-    // Enhance tables with semantic markup
-    document.querySelectorAll('table').forEach(table => {
-      table.setAttribute('role', 'table');
-      const caption = table.querySelector('caption');
-      if (!caption && table.querySelector('th')) {
-        const firstRow = table.querySelector('tr');
-        if (firstRow) {
-          table.setAttribute('aria-label', 'Data table');
-        }
-      }
-    });
-
-    // Add landmark roles for navigation
-    document.querySelectorAll('nav').forEach(nav => {
-      if (!nav.getAttribute('role')) {
-        nav.setAttribute('role', 'navigation');
-      }
-    });
-
-    // Enhance lists with semantic information
-    document.querySelectorAll('ul, ol').forEach(list => {
-      const items = list.querySelectorAll('li');
-      if (items.length > 0) {
-        list.setAttribute('data-list-count', items.length);
-        
-        // Mark service lists specially
-        const hasServiceContent = Array.from(items).some(item => 
-          item.textContent.toLowerCase().includes('garage door') || 
-          item.textContent.toLowerCase().includes('repair') ||
-          item.textContent.toLowerCase().includes('installation')
-        );
-        
-        if (hasServiceContent) {
-          list.classList.add('service-list');
-          list.setAttribute('data-content-type', 'services');
-        }
-      }
-    });
-  }
+  // AI Content Optimization is now handled by the separate ai-optimizations.js module
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       initPerformanceMonitoring();
-      optimizeForAI();
     });
   } else {
     initPerformanceMonitoring();
-    optimizeForAI();
   }
 
   // Expose functions globally for debugging
   if (typeof window !== 'undefined') {
     window.ez2fixAI = {
-      detectAIBot: function() {
-        const userAgent = navigator.userAgent.toLowerCase();
-        const aiBots = ['googlebot', 'bingbot', 'gptbot', 'claude', 'anthropic', 'openai'];
-        return aiBots.some(bot => userAgent.includes(bot));
-      },
-      optimizeForAI: optimizeForAI,
-      version: '1.0.0'
+      detectAIBot: detectAIBot,
+      loadAIOptimizations: () => import('/js/ai-optimizations.js'),
+      version: '2.0.0'
     };
   }
 

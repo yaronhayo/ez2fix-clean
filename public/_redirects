@@ -1,0 +1,59 @@
+# Redirects for old website URLs - Ez2Fix LLC
+# These redirects ensure all old ez2fixllc.com URLs point to the correct new pages
+
+# Core Pages
+/garage-doors-repair/                                  /services/general-garage-door-repair           301
+/our-services/                                         /services                                       301
+/about-us/                                            /about                                          301
+/contact-us/                                          /contact                                        301
+/sample-page/                                         /                                               301
+/feed/                                                /                                               301
+
+# Service Pages - Exact Matches
+/spring-repair/                                       /services/garage-door-spring-repair            301
+/broken-garage-door-spring-repair-replacement/       /services/garage-door-spring-repair            301
+/garage-door-openers/                                 /services/garage-door-opener-installation      301
+/commercial-garage-doors/                             /services/commercial-garage-door-service       301
+
+# Service Pages - General Redirects
+/residential-garage-door/                             /services                                       301
+/control-system/                                      /services/garage-door-opener-installation      301
+/garage-door-locks/                                   /services/general-garage-door-repair           301
+/garage-door-hinges/                                  /services/general-garage-door-repair           301
+/garage-door-accessories/                             /services                                       301
+
+# Same URLs without trailing slash
+/garage-doors-repair                                  /services/general-garage-door-repair           301
+/our-services                                         /services                                       301
+/about-us                                            /about                                          301
+/contact-us                                          /contact                                        301
+/sample-page                                         /                                               301
+/feed                                                /                                               301
+/spring-repair                                       /services/garage-door-spring-repair            301
+/broken-garage-door-spring-repair-replacement       /services/garage-door-spring-repair            301
+/garage-door-openers                                 /services/garage-door-opener-installation      301
+/commercial-garage-doors                             /services/commercial-garage-door-service       301
+/residential-garage-door                             /services                                       301
+/control-system                                      /services/garage-door-opener-installation      301
+/garage-door-locks                                   /services/general-garage-door-repair           301
+/garage-door-hinges                                  /services/general-garage-door-repair           301
+/garage-door-accessories                             /services                                       301
+
+# Home page variations
+/index.html                                          /                                               301
+/home                                                /                                               301
+
+# Additional common redirects
+/get-quote                                           /booking                                        301
+/estimate                                            /booking                                        301
+/testimonials                                        /reviews                                        301
+/locations                                           /service-areas                                  301
+/areas-served                                        /service-areas                                  301
+
+# Old WordPress patterns (fallback)
+/wp-content/*                                        /                                               301
+/wp-admin/*                                          /                                               301
+
+# Old file extensions
+/*.html                                              /                                               301
+/*.php                                               /                                               301

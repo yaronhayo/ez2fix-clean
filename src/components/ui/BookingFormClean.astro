@@ -299,12 +299,22 @@ const formId = `booking-form-${variant}`;
 
 <script>
   document.addEventListener('DOMContentLoaded', async function() {
-    // Initialize reCAPTCHA
-    try {
-      const { loadRecaptcha } = await import('@/lib/recaptcha');
-      await loadRecaptcha();
-    } catch (error) {
-      console.warn('reCAPTCHA loading failed, forms will work without CAPTCHA protection:', error.message);
+    // reCAPTCHA loading state
+    let recaptchaLoaded = false;
+    
+    // Load reCAPTCHA only when needed (on form interaction)
+    async function ensureRecaptchaLoaded() {
+      if (recaptchaLoaded) return;
+      
+      try {
+        console.log('Loading reCAPTCHA on demand...');
+        const { loadRecaptcha } = await import('@/lib/recaptcha');
+        await loadRecaptcha();
+        recaptchaLoaded = true;
+        console.log('reCAPTCHA loaded successfully on demand');
+      } catch (error) {
+        console.warn('reCAPTCHA loading failed, forms will work without CAPTCHA protection:', error.message);
+      }
     }
     
     const forms = document.querySelectorAll('[id^="booking-form-"]');
@@ -330,12 +340,15 @@ const formId = `booking-form-${variant}`;
         setupAddressAutocomplete(addressInput, addressExpanded, variant);
       }
       
-      // Clear errors on input
+      // Clear errors on input and load reCAPTCHA on first interaction
       const inputs = form.querySelectorAll('input, select, textarea');
       inputs.forEach(input => {
         input.addEventListener('input', function() {
           clearError(this.name, variant);
         });
+        
+        // Load reCAPTCHA on first focus
+        input.addEventListener('focus', ensureRecaptchaLoaded, { once: true, passive: true });
       });
       
       // Form validation and submission

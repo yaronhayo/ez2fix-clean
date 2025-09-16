@@ -33,7 +33,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     // Initialize dataLayer immediately
     window.dataLayer = window.dataLayer || [];
     
-    // Delayed GTM loading function
+    // Delayed GTM loading function (GTM manages Clarity, Google Ads, etc.)
     function loadGTM() {
       if (window.gtmLoaded) return;
       window.gtmLoaded = true;

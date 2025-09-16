@@ -1,7 +1,7 @@
 // Google reCAPTCHA v3 Integration
 import { clientEnv, serverEnv } from '@/config/env';
 
-// Client-side: Load and initialize reCAPTCHA
+// Client-side: Load and initialize reCAPTCHA with intelligent loading
 export function loadRecaptcha(): Promise<void> {
   return new Promise((resolve, reject) => {
     if (typeof window === 'undefined') {
@@ -22,37 +22,48 @@ export function loadRecaptcha(): Promise<void> {
       return;
     }
 
-    // Load the script with inline badge (hidden with CSS)
-    const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${clientEnv.recaptcha.siteKey}&badge=inline`;
-    script.async = true;
-    script.defer = true;
+    // Check if we're already loading to avoid duplicate requests
+    if ((window as any).recaptchaLoading) {
+      return (window as any).recaptchaLoading;
+    }
 
-    script.onload = () => {
-      // Wait for grecaptcha to be ready
-      window.grecaptcha.ready(() => {
-        // Try to render the badge to a hidden container if it exists
-        const hiddenContainer = document.getElementById('recaptcha-badge');
-        if (hiddenContainer && window.grecaptcha.render) {
-          try {
-            window.grecaptcha.render(hiddenContainer, {
-              sitekey: clientEnv.recaptcha.siteKey,
-              size: 'invisible'
-            });
-          } catch (e) {
-            // If render fails, just continue - v3 doesn't use render method
-            console.log('reCAPTCHA v3 detected (no render method needed)');
+    // Set loading flag
+    (window as any).recaptchaLoading = new Promise((resolveLoading, rejectLoading) => {
+      // Load the script with inline badge (hidden with CSS)
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${clientEnv.recaptcha.siteKey}&badge=inline`;
+      script.async = true;
+      script.defer = true;
+
+      script.onload = () => {
+        // Wait for grecaptcha to be ready
+        window.grecaptcha.ready(() => {
+          // Try to render the badge to a hidden container if it exists
+          const hiddenContainer = document.getElementById('recaptcha-badge');
+          if (hiddenContainer && window.grecaptcha.render) {
+            try {
+              window.grecaptcha.render(hiddenContainer, {
+                sitekey: clientEnv.recaptcha.siteKey,
+                size: 'invisible'
+              });
+            } catch (e) {
+              // If render fails, just continue - v3 doesn't use render method
+              console.log('reCAPTCHA v3 detected (no render method needed)');
+            }
           }
-        }
-        resolve();
-      });
-    };
+          resolveLoading();
+        });
+      };
 
-    script.onerror = () => {
-      reject(new Error('Failed to load reCAPTCHA script'));
-    };
+      script.onerror = () => {
+        rejectLoading(new Error('Failed to load reCAPTCHA script'));
+      };
 
-    document.head.appendChild(script);
+      document.head.appendChild(script);
+    });
+
+    (window as any).recaptchaLoading.then(resolve).catch(reject);
+    return (window as any).recaptchaLoading;
   });
 }
 

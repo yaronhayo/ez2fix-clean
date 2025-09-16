@@ -499,7 +499,7 @@ function generateContactFormAutoReplyHTML(data: ContactFormData): string {
           <div style="text-align: center; margin-bottom: 35px;">
             <h2 style="color: #1D1912; margin: 0 0 15px 0; font-size: 24px; font-weight: 600;">Your Message Has Been Received</h2>
             <p style="color: #666666; font-size: 16px; line-height: 1.6; margin: 0; max-width: 450px; margin: 0 auto;">
-              Thank you for reaching out to Ez2Fix! One of our garage door experts will contact you within 2 hours during business hours to help with your ${data.service || 'garage door needs'}.
+              Thank you for reaching out to Ez2Fix! One of our garage door experts will contact you promptly during business hours to help with your ${data.service || 'garage door needs'}.
             </p>
           </div>
 
@@ -542,7 +542,7 @@ function generateContactFormAutoReplyHTML(data: ContactFormData): string {
                 <div style="background: #ebc959; color: #1D1912; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 15px; flex-shrink: 0;">1</div>
                 <div>
                   <div style="color: #1D1912; font-weight: 600; margin-bottom: 5px;">We'll Contact You</div>
-                  <div style="color: #666666; font-size: 14px; line-height: 1.5;">Our team will reach out within 2 hours during business hours to discuss your needs</div>
+                  <div style="color: #666666; font-size: 14px; line-height: 1.5;">Our team will reach out promptly during business hours to discuss your needs</div>
                 </div>
               </div>
               <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
@@ -753,7 +753,7 @@ function generateBookingFormAutoReplyHTML(data: BookingFormData): string {
           <div style="text-align: center; margin-bottom: 35px;">
             <h2 style="color: #1D1912; margin: 0 0 15px 0; font-size: 24px; font-weight: 600;">Your Service Request is Confirmed</h2>
             <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0; max-width: 450px; margin: 0 auto;">
-              Thank you for choosing Ez2Fix! We've received your ${urgencyLabels[data.urgency].toLowerCase()} request for <strong>${data.service}</strong> and will contact you within 30 minutes to schedule your appointment.
+              Thank you for choosing Ez2Fix! We've received your ${urgencyLabels[data.urgency].toLowerCase()} request for <strong>${data.service}</strong> and will contact you promptly to schedule your appointment.
             </p>
           </div>
 
@@ -841,7 +841,7 @@ function generateBookingFormAutoReplyHTML(data: BookingFormData): string {
                 <div style="background: #ebc959; color: #1D1912; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 15px; flex-shrink: 0;">1</div>
                 <div>
                   <div style="color: #1D1912; font-weight: 600; margin-bottom: 5px;">We'll Call You Soon</div>
-                  <div style="color: #333333; font-size: 14px; line-height: 1.5;">Expect our call within 30 minutes to schedule your ${urgencyLabels[data.urgency].toLowerCase()}</div>
+                  <div style="color: #333333; font-size: 14px; line-height: 1.5;">Expect our call promptly to schedule your ${urgencyLabels[data.urgency].toLowerCase()}</div>
                 </div>
               </div>
               <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">

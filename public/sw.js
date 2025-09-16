@@ -1,8 +1,11 @@
 // Service Worker for Ez2Fix - Ultra Performance Optimization
-const CACHE_NAME = 'ez2fix-v1.1.0-performance';
-const STATIC_CACHE = 'ez2fix-static-v1.1.0-performance';
-const IMAGE_CACHE = 'ez2fix-images-v1.1.0';
-const VIDEO_CACHE = 'ez2fix-videos-v1.1.0';
+const CACHE_VERSION = '1.2.0-optimized';
+const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
+const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
+const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
+const VIDEO_CACHE = `ez2fix-videos-v${CACHE_VERSION}`;
+const JS_CACHE = `ez2fix-js-v${CACHE_VERSION}`;
+const CSS_CACHE = `ez2fix-css-v${CACHE_VERSION}`;
 
 // Critical resources to cache immediately
 const CRITICAL_RESOURCES = [
@@ -11,7 +14,9 @@ const CRITICAL_RESOURCES = [
   '/service-areas',
   '/contact',
   '/booking',
-  '/manifest.json'
+  '/manifest.json',
+  '/js/global-maps.js',
+  '/js/ai-performance-monitor.js'
 ];
 
 // Static assets that can be cached
@@ -59,7 +64,7 @@ self.addEventListener('activate', event => {
       caches.keys().then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
-            if (cacheName !== CACHE_NAME && cacheName !== STATIC_CACHE) {
+            if (![CACHE_NAME, STATIC_CACHE, IMAGE_CACHE, VIDEO_CACHE, JS_CACHE, CSS_CACHE].includes(cacheName)) {
               return caches.delete(cacheName);
             }
           })
@@ -100,6 +105,18 @@ self.addEventListener('fetch', event => {
   // Handle videos with dedicated cache
   if (request.destination === 'video' || url.pathname.match(/\.(mp4|webm|mov)$/i)) {
     event.respondWith(cacheFirst(request, VIDEO_CACHE, 604800000)); // 7 days
+    return;
+  }
+
+  // Handle JavaScript files with dedicated cache
+  if (request.destination === 'script' || url.pathname.match(/\.js$/i)) {
+    event.respondWith(cacheFirst(request, JS_CACHE, 86400000)); // 24 hours
+    return;
+  }
+
+  // Handle CSS files with dedicated cache
+  if (request.destination === 'style' || url.pathname.match(/\.css$/i)) {
+    event.respondWith(cacheFirst(request, CSS_CACHE, 86400000)); // 24 hours
     return;
   }
 
