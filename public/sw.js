@@ -1,11 +1,12 @@
-// Service Worker for Ez2Fix - Ultra Performance Optimization
-const CACHE_VERSION = '1.2.0-optimized';
+// Service Worker for Ez2Fix - Aggressive JavaScript Optimization
+const CACHE_VERSION = '1.3.0-js-optimized';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
 const VIDEO_CACHE = `ez2fix-videos-v${CACHE_VERSION}`;
 const JS_CACHE = `ez2fix-js-v${CACHE_VERSION}`;
 const CSS_CACHE = `ez2fix-css-v${CACHE_VERSION}`;
+const THIRD_PARTY_CACHE = `ez2fix-third-party-v${CACHE_VERSION}`;
 
 // Critical resources to cache immediately
 const CRITICAL_RESOURCES = [
@@ -111,6 +112,21 @@ self.addEventListener('fetch', event => {
   // Handle JavaScript files with dedicated cache
   if (request.destination === 'script' || url.pathname.match(/\.js$/i)) {
     event.respondWith(cacheFirst(request, JS_CACHE, 86400000)); // 24 hours
+    return;
+  }
+
+  // Aggressive caching for third-party scripts to reduce execution time
+  const thirdPartyDomains = [
+    'www.googletagmanager.com',
+    'www.gstatic.com', 
+    'scripts.clarity.ms',
+    'maps.googleapis.com',
+    'www.google.com'
+  ];
+  
+  if (thirdPartyDomains.some(domain => url.hostname.includes(domain))) {
+    // Cache third-party scripts for much longer to prevent re-parsing
+    event.respondWith(cacheFirst(request, THIRD_PARTY_CACHE, 604800000)); // 7 days
     return;
   }
 
