@@ -61,8 +61,9 @@ const formId = `booking-form-${variant}`;
         required
         class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
         placeholder="Enter your full name"
+        aria-describedby={`name-error-${variant}`}
       />
-      <div id={`name-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      <div id={`name-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert" aria-live="polite"></div>
     </div>
 
     <!-- Phone -->
@@ -77,8 +78,9 @@ const formId = `booking-form-${variant}`;
         required
         class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
         placeholder="(201) 234-5678"
+        aria-describedby={`phone-error-${variant}`}
       />
-      <div id={`phone-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      <div id={`phone-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert" aria-live="polite"></div>
     </div>
 
 
@@ -120,17 +122,21 @@ const formId = `booking-form-${variant}`;
       {variant === 'hero' && (
         <!-- Compact Zip Code field for Hero variant -->
         <div class="mt-2">
+          <label for={`zip-${variant}`} class="block text-xs font-semibold mb-1 text-ez2fix-dark">
+            Zip Code
+          </label>
           <input 
             type="text" 
             id={`zip-${variant}`}
             name="zip" 
             class="form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
-            placeholder="Zip Code (helps with faster service)"
+            placeholder="Enter 5-digit zip code"
             autocomplete="postal-code"
             pattern="[0-9]{5}(-[0-9]{4})?"
             title="Enter 5-digit zip code"
+            aria-describedby={`zip-error-${variant}`}
           />
-          <div id={`zip-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+          <div id={`zip-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert" aria-live="polite"></div>
         </div>
       )}
       
@@ -139,16 +145,22 @@ const formId = `booking-form-${variant}`;
         <div id={`address-expanded-${variant}`} class="mt-3 space-y-3">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
             <div>
+              <label for={`city-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+                City
+              </label>
               <input 
                 type="text" 
                 id={`city-${variant}`}
                 name="city" 
                 class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
-                placeholder="City"
+                placeholder="Enter city name"
                 autocomplete="address-level2"
               />
             </div>
             <div>
+              <label for={`state-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+                State
+              </label>
               <input 
                 type="text" 
                 id={`state-${variant}`}
@@ -158,28 +170,36 @@ const formId = `booking-form-${variant}`;
                 autocomplete="address-level1"
                 value="NJ"
                 readonly
+                aria-label="State (New Jersey, read-only)"
               />
             </div>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
             <div>
+              <label for={`zip-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+                Zip Code
+              </label>
               <input 
                 type="text" 
                 id={`zip-${variant}`}
                 name="zip" 
                 class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
-                placeholder="Zip Code"
+                placeholder="Enter 5-digit zip code"
                 autocomplete="postal-code"
                 pattern="[0-9]{5}(-[0-9]{4})?"
+                title="Enter 5-digit zip code"
               />
             </div>
             <div>
+              <label for={`unit-${variant}`} class="block text-sm font-semibold mb-2 text-ez2fix-dark">
+                Unit/Apt <span class="text-gray-500 font-normal">(optional)</span>
+              </label>
               <input 
                 type="text" 
                 id={`unit-${variant}`}
                 name="unit" 
                 class="form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
-                placeholder="Unit/Apt (optional)"
+                placeholder="Unit or apartment number"
                 autocomplete="address-line2"
               />
             </div>

@@ -1,6 +1,13 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="4" fill="#D2A63C"/>
-  <path d="M8 12h16v2H8v-2zM8 16h16v2H8v-2zM8 20h12v2H8v-2z" fill="#1D1912"/>
-  <circle cx="22" cy="10" r="3" fill="#1D1912"/>
-  <path d="M20.5 9.5l1 1 2-2" stroke="#D2A63C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" fill="#ecb451"/>
+  <g transform="translate(4, 8)">
+    <!-- Simplified garage door icon -->
+    <rect x="2" y="4" width="20" height="12" rx="1" fill="#1D1912"/>
+    <!-- Horizontal lines -->
+    <line x1="3" y1="8" x2="21" y2="8" stroke="#ecb451" stroke-width="1"/>
+    <line x1="3" y1="12" x2="21" y2="12" stroke="#ecb451" stroke-width="1"/>
+    <!-- Checkmark -->
+    <circle cx="20" cy="2" r="3" fill="#1D1912"/>
+    <path d="M18 2l1 1 2-2" stroke="#ecb451" stroke-width="1" fill="none" stroke-linecap="round"/>
+  </g>
 </svg>

@@ -6,17 +6,17 @@
 
 @layer base {
   :root {
-    /* Ez2Fix Brand Colors */
+    /* Ez2Fix Brand Colors - Balanced WCAG AA Compliant */
     --ez2fix-dark: #1D1912;
-    /* Primary dark */
-    --ez2fix-brown: #BB8525;
-    /* Secondary brown */
+    /* Primary dark - 15.64:1 contrast on cream */
+    --ez2fix-brown: #8B6200;
+    /* Secondary brown - balanced 4.88:1 contrast on cream */
     --ez2fix-cream: #F3F3E6;
     /* Background cream */
-    --ez2fix-gold: #EECD5C;
-    /* Bright gold */
-    --ez2fix-primary: #D2A63C;
-    /* Brand primary gold */
+    --ez2fix-gold: #ecb451;
+    /* Bright gold - user specified color */
+    --ez2fix-primary: #ecb451;
+    /* Brand primary gold - user specified color */
 
     /* Semantic color mapping */
     --background: var(--ez2fix-cream);
@@ -47,19 +47,19 @@
     --card-foreground: #F3F3E6;
     --popover: #1D1912;
     --popover-foreground: #F3F3E6;
-    --primary: #D2A63C;
+    --primary: #ecb451;
     --primary-foreground: #1D1912;
-    --secondary: #BB8525;
+    --secondary: #8B6200;
     --secondary-foreground: #F3F3E6;
-    --muted: #BB8525;
+    --muted: #8B6200;
     --muted-foreground: #F3F3E6;
-    --accent: #EECD5C;
+    --accent: #ecb451;
     --accent-foreground: #1D1912;
-    --destructive: #D2A63C;
-    --destructive-foreground: #F3F3E6;
-    --border: #BB8525;
+    --destructive: #ecb451;
+    --destructive-foreground: #1D1912;
+    --border: #8B6200;
     --input: #1D1912;
-    --ring: #D2A63C;
+    --ring: #ecb451;
   }
 }
 

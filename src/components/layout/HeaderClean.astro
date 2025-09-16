@@ -28,15 +28,11 @@ const serviceAreas = [
     <!-- Logo -->
     <div class="flex items-center">
       <a href="/" class="flex items-center">
-        <ResponsiveImage
+        <img
           src={siteConfig.logo}
           alt="Ez2Fix - Professional Garage Door Services" 
-          width={200}
-          height={80}
-          priority={true}
-          loading="eager"
-          class="h-12 sm:h-16 lg:h-20 w-auto"
-          sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 200px"
+          class="h-10 sm:h-12 lg:h-16 w-auto object-contain max-w-[200px]"
+          style="object-fit: contain; object-position: center; max-height: 64px;"
         />
       </a>
     </div>

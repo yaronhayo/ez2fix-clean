@@ -66,14 +66,11 @@ const icons = {
       <!-- Company Info -->
       <div class="md:col-span-2 lg:col-span-2">
         <div class="flex items-center mb-6">
-          <ResponsiveImage
+          <img
             src={siteConfig.logo}
             alt="Ez2Fix Logo" 
-            width={200}
-            height={80}
-            class="h-20 w-auto"
-            loading="lazy"
-            sizes="200px"
+            class="h-16 w-auto object-contain max-w-[240px]"
+            style="object-fit: contain; object-position: center; max-height: 64px;"
           />
         </div>
         

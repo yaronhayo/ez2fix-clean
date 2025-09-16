@@ -104,6 +104,13 @@ const optimizedUrl = isExternal && src.includes('vercel-storage.com')
     height: auto;
   }
   
+  picture img.object-contain {
+    object-fit: contain;
+    object-position: center;
+    width: auto !important;
+    max-width: 100%;
+  }
+  
   /* Optimize image rendering */
   picture img[loading="lazy"] {
     opacity: 0;
