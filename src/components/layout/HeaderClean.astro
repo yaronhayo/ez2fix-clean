@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '@/config/site';
 import CTA from '@/components/ui/CTA.astro';
+import ResponsiveImage from '@/components/ui/ResponsiveImage.astro';
 
 const services = [
   { name: '24/7 Emergency Repair', href: '/services/emergency-garage-door-repair' },
@@ -27,14 +28,15 @@ const serviceAreas = [
     <!-- Logo -->
     <div class="flex items-center">
       <a href="/" class="flex items-center">
-        <img 
+        <ResponsiveImage
           src={siteConfig.logo}
           alt="Ez2Fix - Professional Garage Door Services" 
-          width="200"
-          height="80"
+          width={200}
+          height={80}
+          priority={true}
           loading="eager"
-          decoding="sync"
           class="h-12 sm:h-16 lg:h-20 w-auto"
+          sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 200px"
         />
       </a>
     </div>

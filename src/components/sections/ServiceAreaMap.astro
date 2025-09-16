@@ -181,62 +181,73 @@ const {
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', async function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const mapContainer = document.getElementById('service-area-map');
     const loadingElement = document.getElementById('map-loading');
     
     if (!mapContainer) return;
     
-    try {
-      // Import maps functionality
-      const { initializeGoogleMaps, createServiceAreaMap } = await import('@/lib/maps');
-      
-      // Initialize Google Maps
-      console.log('🗺️ Initializing Google Maps for service area...');
-      await initializeGoogleMaps();
-      console.log('✅ Google Maps loaded successfully');
-      
-      // Hide loading indicator
-      if (loadingElement) {
-        loadingElement.style.display = 'none';
+    let mapLoaded = false;
+    
+    // Lazy load Google Maps using Intersection Observer
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        entries.forEach(async (entry) => {
+          if (entry.isIntersecting && !mapLoaded) {
+            mapLoaded = true;
+            observer.disconnect(); // Stop observing
+            
+            try {
+              // Dynamic import maps functionality only when needed
+              const { initializeGoogleMaps, createServiceAreaMap } = await import('@/lib/maps');
+              
+              // Initialize Google Maps
+              console.log('🗺️ Lazy loading Google Maps for service area...');
+              await initializeGoogleMaps();
+              console.log('✅ Google Maps loaded successfully');
+              
+              // Hide loading indicator
+              if (loadingElement) {
+                loadingElement.style.display = 'none';
+              }
+              
+              // Create the service area map
+              const map = createServiceAreaMap(mapContainer, {
+                showRadius: true,
+                showMarkers: true,
+                interactive: true
+              });
+              
+              console.log('✅ Service area map created successfully');
+              
+            } catch (error) {
+              console.warn('⚠️ Google Maps service area map failed to load:', error.message);
+              
+              // Show fallback content
+              if (loadingElement) {
+                loadingElement.innerHTML = `
+                  <div class="text-center">
+                    <svg class="h-16 w-16 text-ez2fix-brown/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <h4 class="font-bold text-ez2fix-dark mb-2">Service Area: 5 Counties in New Jersey</h4>
+                    <p class="text-sm text-ez2fix-brown mb-3">Professional garage door service across Bergen, Hudson, Passaic, Essex, and Morris Counties</p>
+                    <p class="text-xs text-ez2fix-brown/70">Map temporarily unavailable - Call (201) 554-6769 for service confirmation</p>
+                  </div>
+                `;
+              }
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '100px', // Load when map is 100px from viewport
+        threshold: 0.1
       }
-      
-      // Create the service area map
-      const map = createServiceAreaMap(mapContainer, {
-        showRadius: true,
-        showMarkers: true,
-        interactive: true
-      });
-      
-      console.log('✅ Service area map created successfully');
-      
-      // Add professional garage door service keywords to map description
-      const infoContent = `
-        <div style="max-width: 250px; padding: 10px;">
-          <h3 style="margin: 0 0 8px 0; color: #1D1912; font-size: 16px;">Ez2Fix Professional Garage Door Service</h3>
-          <p style="margin: 0 0 4px 0; color: #BB8525; font-size: 12px;">Licensed Garage Door Contractor #13VH13553300</p>
-          <p style="margin: 0 0 4px 0; color: #D2A63C; font-weight: bold; font-size: 14px;">(201) 554-6769</p>
-          <p style="margin: 0; color: #BB8525; font-size: 11px;">Professional garage door service New Jersey • 5 counties coverage</p>
-        </div>
-      `;
-      
-    } catch (error) {
-      console.warn('⚠️ Google Maps service area map failed to load:', error.message);
-      
-      // Show fallback content
-      if (loadingElement) {
-        loadingElement.innerHTML = `
-          <div class="text-center">
-            <svg class="h-16 w-16 text-ez2fix-brown/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            <h4 class="font-bold text-ez2fix-dark mb-2">Service Area: 5 Counties in New Jersey</h4>
-            <p class="text-sm text-ez2fix-brown mb-3">Professional garage door service across Bergen, Hudson, Passaic, Essex, and Morris Counties</p>
-            <p class="text-xs text-ez2fix-brown/70">Map temporarily unavailable - Call (201) 554-6769 for service confirmation</p>
-          </div>
-        `;
-      }
-    }
+    );
+    
+    // Start observing the map container
+    observer.observe(mapContainer);
   });
 </script>
