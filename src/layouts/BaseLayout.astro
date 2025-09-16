@@ -28,133 +28,220 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Aggressively Optimized Third-Party Loading -->
+    <!-- Ultra-Aggressive JavaScript Optimization -->
     <script is:inline>
-    // Initialize dataLayer immediately for GTM compatibility
+    // Initialize critical globals
     window.dataLayer = window.dataLayer || [];
+    window.ezPerformanceMode = true;
     
-    // Idle-time scheduler for non-critical scripts
+    // Enhanced idle scheduler with better task management
     class IdleScheduler {
       constructor() {
         this.tasks = [];
         this.isScheduled = false;
+        this.longTaskThreshold = 16; // Keep tasks under 16ms
+        this.maxTasksPerBatch = 3;
       }
       
-      schedule(task, priority = 'low') {
-        this.tasks.push({ task, priority, scheduled: Date.now() });
-        if (!this.isScheduled) {
-          this.isScheduled = true;
-          this.runWhenIdle();
+      schedule(task, priority = 'low', delay = 0) {
+        const taskData = { 
+          task, 
+          priority, 
+          scheduled: Date.now(),
+          delay,
+          id: Math.random().toString(36).substr(2, 9)
+        };
+        
+        if (delay > 0) {
+          setTimeout(() => {
+            this.tasks.push(taskData);
+            this.runWhenIdle();
+          }, delay);
+        } else {
+          this.tasks.push(taskData);
+          if (!this.isScheduled) {
+            this.runWhenIdle();
+          }
         }
       }
       
       runWhenIdle() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback((deadline) => {
-            this.processTasks(deadline);
-          }, { timeout: 2000 });
-        } else {
-          // Fallback for Safari
-          setTimeout(() => {
-            this.processTasks({ timeRemaining: () => 16 });
-          }, 100);
-        }
-      }
-      
-      processTasks(deadline) {
-        this.isScheduled = false;
+        this.isScheduled = true;
         
-        // Process high priority tasks first
-        const highPriorityTasks = this.tasks.filter(t => t.priority === 'high');
-        const lowPriorityTasks = this.tasks.filter(t => t.priority === 'low');
-        
-        let tasksToRun = [...highPriorityTasks, ...lowPriorityTasks];
-        
-        while (tasksToRun.length > 0 && deadline.timeRemaining() > 5) {
-          const { task } = tasksToRun.shift();
-          try {
-            task();
-          } catch (e) {
-            console.warn('IdleScheduler task failed:', e);
+        const runTasks = (deadline) => {
+          let processedTasks = 0;
+          const startTime = performance.now();
+          
+          // Sort by priority and age
+          this.tasks.sort((a, b) => {
+            if (a.priority === 'critical' && b.priority !== 'critical') return -1;
+            if (b.priority === 'critical' && a.priority !== 'critical') return 1;
+            if (a.priority === 'high' && b.priority === 'low') return -1;
+            if (b.priority === 'high' && a.priority === 'low') return 1;
+            return a.scheduled - b.scheduled;
+          });
+          
+          while (this.tasks.length > 0 && processedTasks < this.maxTasksPerBatch) {
+            const timeRemaining = deadline ? deadline.timeRemaining() : 50;
+            const taskDuration = performance.now() - startTime;
+            
+            if (timeRemaining < 5 || taskDuration > this.longTaskThreshold) {
+              break;
+            }
+            
+            const { task, id } = this.tasks.shift();
+            try {
+              const taskStart = performance.now();
+              task();
+              const taskEnd = performance.now();
+              
+              // Log long tasks for debugging
+              if (taskEnd - taskStart > this.longTaskThreshold) {
+                console.warn(`Long task detected: ${id} took ${Math.round(taskEnd - taskStart)}ms`);
+              }
+            } catch (e) {
+              console.warn('IdleScheduler task failed:', e);
+            }
+            processedTasks++;
           }
-          this.tasks = this.tasks.filter(t => t.task !== task);
-        }
+          
+          this.isScheduled = false;
+          
+          // Reschedule if tasks remain
+          if (this.tasks.length > 0) {
+            this.runWhenIdle();
+          }
+        };
         
-        // If there are remaining tasks, reschedule
-        if (this.tasks.length > 0) {
-          this.runWhenIdle();
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(runTasks, { timeout: 1000 });
+        } else {
+          setTimeout(() => runTasks({ timeRemaining: () => 50 }), 16);
         }
       }
     }
     
     const scheduler = new IdleScheduler();
     
-    // Chunked GTM loading to prevent long tasks
-    function loadGTMChunked() {
+    // Code splitting for GTM to prevent monolithic script execution
+    function loadGTMInChunks() {
       if (window.gtmLoaded) return;
       window.gtmLoaded = true;
       
-      // Split GTM loading into smaller chunks
+      // Micro-chunk 1: Initialize dataLayer
       scheduler.schedule(() => {
         window.dataLayer.push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-      }, 'high');
+      }, 'critical');
       
+      // Micro-chunk 2: Load GTM script with yield points
       scheduler.schedule(() => {
         const script = document.createElement('script');
         script.async = true;
         script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TDFV4QVJ';
-        // Use smaller timeout to break up script execution
-        script.onload = () => {
-          if (window.gtag) {
-            // Delay gtag initialization to prevent blocking
-            scheduler.schedule(() => {
-              gtag('config', 'G-4E2TJ6NVPQ', { send_page_view: false });
-            });
-            scheduler.schedule(() => {
-              gtag('config', 'AW-16919013637', { send_page_view: false });
-            });
-          }
-        };
+        script.onload = () => this.processGTagConfigs();
         document.head.appendChild(script);
-      });
+      }, 'high', 100);
     }
     
-    // Much more aggressive delay - only load after significant user engagement
+    // Break gtag configs into separate microtasks
+    function processGTagConfigs() {
+      if (!window.gtag) return;
+      
+      scheduler.schedule(() => {
+        gtag('config', 'G-4E2TJ6NVPQ', { 
+          send_page_view: false,
+          custom_map: {'custom_parameter_1': 'dimension1'}
+        });
+      }, 'low', 200);
+      
+      scheduler.schedule(() => {
+        gtag('config', 'AW-16919013637', { 
+          send_page_view: false 
+        });
+      }, 'low', 300);
+    }
+    
+    // Extreme engagement gating - require significant interaction
     let userEngaged = false;
     let interactionCount = 0;
-    const engagementThreshold = 2; // Require multiple interactions
+    let scrollDepth = 0;
+    const engagementThreshold = 3; // Increased from 2
+    const scrollThreshold = 25; // Require 25% scroll
     
-    function trackEngagement() {
+    function trackEngagement(event) {
       interactionCount++;
-      if (interactionCount >= engagementThreshold && !userEngaged) {
+      
+      if (event.type === 'scroll') {
+        scrollDepth = Math.max(scrollDepth, 
+          (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        );
+      }
+      
+      const isEngaged = interactionCount >= engagementThreshold && scrollDepth >= scrollThreshold;
+      
+      if (isEngaged && !userEngaged) {
         userEngaged = true;
-        // Still delay further to ensure page is fully interactive
-        scheduler.schedule(loadGTMChunked, 'low');
+        
+        // Progressive loading with more delays
+        scheduler.schedule(() => {
+          loadGTMInChunks();
+        }, 'low', 500);
+        
+        // Remove engagement listeners to prevent memory leaks
+        ['click', 'scroll', 'keydown', 'touchstart'].forEach(eventType => {
+          document.removeEventListener(eventType, trackEngagement);
+        });
       }
     }
     
-    // Only load after meaningful user engagement
-    ['click', 'scroll', 'keydown', 'touchstart', 'mousemove'].forEach(event => 
-      document.addEventListener(event, trackEngagement, { passive: true, once: false })
+    // Lighter engagement tracking
+    ['click', 'scroll', 'keydown', 'touchstart'].forEach(event => 
+      document.addEventListener(event, trackEngagement, { 
+        passive: true, 
+        capture: false 
+      })
     );
     
-    // Much longer fallback - 10 seconds instead of 3
+    // Extended fallback - 15 seconds
     setTimeout(() => {
       if (!userEngaged) {
-        scheduler.schedule(loadGTMChunked, 'low');
+        scheduler.schedule(() => {
+          loadGTMInChunks();
+        }, 'low');
       }
-    }, 10000);
+    }, 15000);
     
-    // Load runtime performance optimizer
+    // Defer performance monitor until after critical path
+    scheduler.schedule(() => {
+      if (!document.getElementById('perf-monitor')) {
+        const script = document.createElement('script');
+        script.id = 'perf-monitor';
+        script.src = '/js/performance-optimizer.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    }, 'low', 2000);
+    
+    // Load reCAPTCHA optimizer to reduce 772ms blocking
     scheduler.schedule(() => {
       const script = document.createElement('script');
-      script.src = '/js/performance-optimizer.js';
+      script.src = '/js/recaptcha-optimizer.js';
       script.async = true;
       script.defer = true;
       document.head.appendChild(script);
-    }, 'high');
+    }, 'low', 1000);
+    
+    // Micro-optimize DOM access
+    const docEl = document.documentElement;
+    const head = document.head;
+    
+    // Batch DOM operations when possible
+    function batchDOMOperation(operation) {
+      scheduler.schedule(operation, 'low');
+    }
     </script>
-    <!-- End Aggressively Optimized Third-Party Loading -->
+    <!-- End Ultra-Aggressive JavaScript Optimization -->
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -238,7 +325,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       }
       
       /* Critical button styles to prevent LCP render delays */
-      .btn-primary {
+      .btn-primary, .bg-ez2fix-primary {
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -253,13 +340,43 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
         border: none !important;
         cursor: pointer !important;
       }
-      .btn-primary:hover {
+      .btn-primary:hover, .bg-ez2fix-primary:hover {
         transform: scale(1.05) !important;
         box-shadow: 0 10px 15px rgba(210, 166, 60, 0.4) !important;
+        background: rgba(210, 166, 60, 0.9) !important;
       }
-      .btn-primary:focus {
+      .btn-primary:focus, .bg-ez2fix-primary:focus {
         outline: 2px solid #D2A63C !important;
         outline-offset: 2px !important;
+      }
+      
+      /* Critical phone button styles - LCP element optimization */
+      a[href^="tel:"] {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%) !important;
+        padding: 1.25rem 2.5rem !important;
+        border-radius: 0.75rem !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+        text-decoration: none !important;
+        color: #1D1912 !important;
+        font-weight: 700 !important;
+        font-size: 1.25rem !important;
+        transform: translateZ(0) !important;
+      }
+      a[href^="tel:"]:hover {
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+        transform: translateY(-2px) translateZ(0) !important;
+      }
+      
+      /* SVG icon optimization */
+      a[href^="tel:"] svg {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+        color: #1D1912 !important;
+        flex-shrink: 0 !important;
       }
       
       /* Prevent layout shifts */

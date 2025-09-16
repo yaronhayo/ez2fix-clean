@@ -1,5 +1,5 @@
-// Service Worker for Ez2Fix - Aggressive JavaScript Optimization
-const CACHE_VERSION = '1.3.0-js-optimized';
+// Service Worker for Ez2Fix - Ultra-Aggressive JavaScript Optimization
+const CACHE_VERSION = '1.4.0-ultra-js-optimized';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
@@ -7,6 +7,7 @@ const VIDEO_CACHE = `ez2fix-videos-v${CACHE_VERSION}`;
 const JS_CACHE = `ez2fix-js-v${CACHE_VERSION}`;
 const CSS_CACHE = `ez2fix-css-v${CACHE_VERSION}`;
 const THIRD_PARTY_CACHE = `ez2fix-third-party-v${CACHE_VERSION}`;
+const RECAPTCHA_CACHE = `ez2fix-recaptcha-v${CACHE_VERSION}`;
 
 // Critical resources to cache immediately
 const CRITICAL_RESOURCES = [
@@ -65,7 +66,7 @@ self.addEventListener('activate', event => {
       caches.keys().then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
-            if (![CACHE_NAME, STATIC_CACHE, IMAGE_CACHE, VIDEO_CACHE, JS_CACHE, CSS_CACHE].includes(cacheName)) {
+            if (![CACHE_NAME, STATIC_CACHE, IMAGE_CACHE, VIDEO_CACHE, JS_CACHE, CSS_CACHE, THIRD_PARTY_CACHE, RECAPTCHA_CACHE].includes(cacheName)) {
               return caches.delete(cacheName);
             }
           })
@@ -115,18 +116,31 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Aggressive caching for third-party scripts to reduce execution time
+  // Ultra-aggressive caching for third-party scripts to reduce execution time
   const thirdPartyDomains = [
     'www.googletagmanager.com',
     'www.gstatic.com', 
     'scripts.clarity.ms',
     'maps.googleapis.com',
-    'www.google.com'
+    'www.google.com',
+    'fonts.googleapis.com',
+    'fonts.gstatic.com',
+    'googleads.g.doubleclick.net',
+    'www.googleadservices.com',
+    'c.bing.com',
+    'dashboard.searchatlas.com',
+    'sa.searchatlas.com'
   ];
+  
+  // Special handling for reCAPTCHA (772ms blocker)
+  if (url.hostname.includes('gstatic.com') && url.pathname.includes('recaptcha')) {
+    event.respondWith(cacheFirst(request, RECAPTCHA_CACHE, 1209600000)); // 14 days - very aggressive
+    return;
+  }
   
   if (thirdPartyDomains.some(domain => url.hostname.includes(domain))) {
     // Cache third-party scripts for much longer to prevent re-parsing
-    event.respondWith(cacheFirst(request, THIRD_PARTY_CACHE, 604800000)); // 7 days
+    event.respondWith(cacheFirst(request, THIRD_PARTY_CACHE, 1209600000)); // 14 days - ultra-aggressive
     return;
   }
 
