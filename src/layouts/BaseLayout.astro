@@ -430,14 +430,14 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     )}
     
     <!-- Favicon and Apple Touch Icons -->
-    <link rel="icon" type="image/png" href={siteConfig.logo} sizes="any" />
-    <link rel="icon" type="image/png" href={siteConfig.logo} sizes="32x32" />
-    <link rel="icon" type="image/png" href={siteConfig.logo} sizes="16x16" />
-    <link rel="apple-touch-icon" sizes="180x180" href={siteConfig.logo} />
-    <link rel="shortcut icon" href={siteConfig.logo} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/favicon.svg" />
     <meta name="theme-color" content="#D2A63C" />
     <meta name="msapplication-TileColor" content="#D2A63C" />
-    <meta name="msapplication-TileImage" content={siteConfig.logo} />
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.png" />
     
     <!-- Preload Critical Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
