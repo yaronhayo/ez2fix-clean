@@ -92,7 +92,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
         -webkit-text-size-adjust: 100%; 
       }
       body { 
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+        font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
         margin: 0; 
         padding: 0;
         overflow-x: hidden;
@@ -101,6 +101,17 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
         text-rendering: optimizeSpeed;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Font fallback to prevent invisible text during font swap */
+      @font-face {
+        font-family: 'Montserrat-fallback';
+        src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont');
+        font-display: swap;
+        ascent-override: 88%;
+        descent-override: 22%;
+        line-gap-override: 0%;
+        size-adjust: 105%;
       }
       
       /* Hero section critical styles */
@@ -137,6 +148,31 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       /* Critical form styles */
       .booking-form-container {
         contain: layout style;
+      }
+      
+      /* Critical button styles to prevent LCP render delays */
+      .btn-primary {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: 700 !important;
+        border-radius: 0.5rem !important;
+        transition: all 0.3s ease !important;
+        outline: none !important;
+        color: #1D1912 !important;
+        background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%) !important;
+        box-shadow: 0 4px 6px rgba(210, 166, 60, 0.25) !important;
+        text-decoration: none !important;
+        border: none !important;
+        cursor: pointer !important;
+      }
+      .btn-primary:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 10px 15px rgba(210, 166, 60, 0.4) !important;
+      }
+      .btn-primary:focus {
+        outline: 2px solid #D2A63C !important;
+        outline-offset: 2px !important;
       }
       
       /* Prevent layout shifts */
@@ -296,8 +332,10 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <link rel="prefetch" as="image" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp" />
     <link rel="dns-prefetch" href="https://www.google.com" />
     
-    <!-- Optimized font loading with display=swap -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <!-- Critical font loading - blocking to prevent render delays -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=block" />
+    <!-- Non-critical font weights loaded async -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" /></noscript>
     
     <!-- Preload hero video for instant playback -->
