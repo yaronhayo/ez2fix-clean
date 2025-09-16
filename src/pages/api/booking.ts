@@ -46,7 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Validate required fields
     const { 
       name, email, phone, address, service, urgency, description, recaptchaToken, consent,
-      contactPreference, source, sessionData
+      contactPreference, source, sessionData, city, state, zip, unit
     } = body;
     
     if (!name || !phone || !address || !service || !recaptchaToken || !consent) {
@@ -121,12 +121,48 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    // Build complete address from components if available
+    let completeAddress = String(address).trim();
+    
+    // If we have additional address components, build a more complete address
+    if (city || state || zip || unit) {
+      const addressParts = [completeAddress];
+      
+      if (city && !completeAddress.toLowerCase().includes(String(city).toLowerCase())) {
+        addressParts.push(String(city).trim());
+      }
+      
+      if (state && !completeAddress.toLowerCase().includes(String(state).toLowerCase())) {
+        addressParts.push(String(state).trim());
+      }
+      
+      if (zip && !completeAddress.includes(String(zip))) {
+        // Add zip code to the last part
+        const lastIndex = addressParts.length - 1;
+        addressParts[lastIndex] = `${addressParts[lastIndex]} ${String(zip).trim()}`.trim();
+      }
+      
+      if (unit && !completeAddress.toLowerCase().includes('unit') && !completeAddress.toLowerCase().includes('apt')) {
+        addressParts.push(`Unit ${String(unit).trim()}`);
+      }
+      
+      completeAddress = addressParts.join(', ');
+    }
+    
+    if (isDev) {
+      console.log('Address processing:', {
+        original: address,
+        city, state, zip, unit,
+        complete: completeAddress
+      });
+    }
+
     // Prepare booking form data with tracking information
     const bookingData: BookingFormData = {
       name: String(name).trim(),
       email: email ? String(email).trim().toLowerCase() : '',
       phone: String(phone).trim(),
-      address: String(address).trim(),
+      address: completeAddress,
       service: String(service).trim(),
       urgency: mappedUrgency,
       description: String(description).trim(),

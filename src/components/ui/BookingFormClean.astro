@@ -405,22 +405,52 @@ const formId = `booking-form-${variant}`;
         }
         
         try {
-          // Get address value from the input field
+          // Get address values from all fields
           const addressElement = form.querySelector(`#address-${variant}`);
-          const addressValue = addressElement?.value || data.address?.trim() || '';
+          const cityElement = form.querySelector(`#city-${variant}`);
+          const stateElement = form.querySelector(`#state-${variant}`);
+          const zipElement = form.querySelector(`#zip-${variant}`);
+          const unitElement = form.querySelector(`#unit-${variant}`);
           
-          // Build full address - ensure zip code is included
-          const cityValue = data.city?.trim() || '';
-          const stateValue = data.state?.trim() || 'NJ';
-          const zipValue = data.zip?.trim() || '';
-          const unitValue = data.unit?.trim() || '';
+          const addressValue = addressElement?.value?.trim() || data.address?.trim() || '';
+          const cityValue = cityElement?.value?.trim() || data.city?.trim() || '';
+          const stateValue = stateElement?.value?.trim() || data.state?.trim() || 'NJ';
+          const zipValue = zipElement?.value?.trim() || data.zip?.trim() || '';
+          const unitValue = unitElement?.value?.trim() || data.unit?.trim() || '';
           
+          // Build comprehensive full address - ensure zip code is always included
           let fullAddress = addressValue;
-          if (cityValue) fullAddress += `, ${cityValue}`;
-          if (stateValue) fullAddress += `, ${stateValue}`;
-          if (zipValue) fullAddress += ` ${zipValue}`;
-          if (unitValue) fullAddress += `, Unit ${unitValue}`;
           
+          // Add city if not already in main address
+          if (cityValue && !addressValue.toLowerCase().includes(cityValue.toLowerCase())) {
+            fullAddress += `, ${cityValue}`;
+          }
+          
+          // Add state if not already in address
+          if (stateValue && !fullAddress.toLowerCase().includes(stateValue.toLowerCase())) {
+            fullAddress += `, ${stateValue}`;
+          }
+          
+          // Always add zip code if available and not already in address
+          if (zipValue && !fullAddress.includes(zipValue)) {
+            fullAddress += ` ${zipValue}`;
+          }
+          
+          // Add unit/apartment if specified
+          if (unitValue && !fullAddress.toLowerCase().includes('unit') && !fullAddress.toLowerCase().includes('apt')) {
+            fullAddress += `, Unit ${unitValue}`;
+          }
+          
+          // Fallback: If we still don't have a complete address, try to parse from main field
+          if (!zipValue && addressValue) {
+            const zipMatch = addressValue.match(/\b(\d{5}(-\d{4})?)\b/);
+            if (!zipMatch) {
+              // Address might be incomplete - warn user
+              console.warn('No zip code found in address:', fullAddress);
+            }
+          }
+          
+          console.log('Full address being submitted:', fullAddress);
           console.log('Submitting form data to /api/booking');
           const response = await fetch('/api/booking', {
             method: 'POST',
@@ -429,6 +459,10 @@ const formId = `booking-form-${variant}`;
               name: data.name.trim(),
               phone: data.phone.trim(),
               address: fullAddress,
+              city: cityValue,
+              state: stateValue,
+              zip: zipValue,
+              unit: unitValue,
               service: data.service,
               urgency: data.urgency || 'browsing',
               description: data.notes?.trim() || '',
@@ -515,23 +549,61 @@ const formId = `booking-form-${variant}`;
       const form = document.querySelector(`#booking-form-${variant}`);
       if (!form) return;
       
+      const addressInput = form.querySelector(`#address-${variant}`);
       const cityInput = form.querySelector(`#city-${variant}`);
       const stateInput = form.querySelector(`#state-${variant}`);
       const zipInput = form.querySelector(`#zip-${variant}`);
       
+      console.log('Filling address components from Google Places:', place);
+      
       // Parse address components using traditional API
       if (place.address_components) {
+        let streetNumber = '';
+        let route = '';
+        let city = '';
+        let state = '';
+        let zipCode = '';
+        
         place.address_components.forEach(component => {
           const types = component.types;
           
-          if (types.includes('locality') && cityInput) {
-            cityInput.value = component.long_name;
-          } else if (types.includes('administrative_area_level_1') && stateInput) {
-            stateInput.value = component.short_name;
-          } else if (types.includes('postal_code') && zipInput) {
-            zipInput.value = component.long_name;
+          if (types.includes('street_number')) {
+            streetNumber = component.long_name;
+          } else if (types.includes('route')) {
+            route = component.long_name;
+          } else if (types.includes('locality')) {
+            city = component.long_name;
+          } else if (types.includes('administrative_area_level_1')) {
+            state = component.short_name;
+          } else if (types.includes('postal_code')) {
+            zipCode = component.long_name;
           }
         });
+        
+        // Build complete street address if we have components
+        if (streetNumber && route && addressInput) {
+          addressInput.value = `${streetNumber} ${route}`;
+        }
+        
+        // Fill individual fields
+        if (city && cityInput) {
+          cityInput.value = city;
+          console.log('City filled:', city);
+        }
+        
+        if (state && stateInput) {
+          stateInput.value = state;
+          console.log('State filled:', state);
+        }
+        
+        if (zipCode && zipInput) {
+          zipInput.value = zipCode;
+          console.log('Zip code filled:', zipCode);
+        }
+        
+        console.log('Address components filled - Street:', addressInput?.value, 'City:', city, 'State:', state, 'Zip:', zipCode);
+      } else {
+        console.warn('No address_components found in Google Places result');
       }
     }
     
@@ -545,36 +617,62 @@ const formId = `booking-form-${variant}`;
         }
       });
       
-      // Manual address parsing fallback
+      // Enhanced manual address parsing fallback
       addressInput?.addEventListener('input', function() {
         const value = this.value.trim();
         if (value.length > 10 || value.includes(',')) {
           // Show expanded fields when user starts typing a substantial address
           addressExpanded?.classList.remove('hidden');
           
-          // Try to parse the address if it contains commas
+          const form = addressInput.closest('form');
+          const cityInput = form.querySelector(`#city-${variant}`);
+          const stateInput = form.querySelector(`#state-${variant}`);
+          const zipInput = form.querySelector(`#zip-${variant}`);
+          
+          // Enhanced parsing for different address formats
           if (value.includes(',')) {
+            // Format: "123 Main St, Fair Lawn, NJ 07410"
             const parts = value.split(',').map(part => part.trim());
+            
             if (parts.length >= 2) {
-              const form = addressInput.closest('form');
-              const cityInput = form.querySelector(`#city-${variant}`);
-              const zipInput = form.querySelector(`#zip-${variant}`);
-              
-              // Try to extract city and zip from the input
-              const lastPart = parts[parts.length - 1];
-              const zipMatch = lastPart.match(/\b\d{5}(-\d{4})?\b/);
-              
-              if (zipMatch && zipInput) {
-                zipInput.value = zipMatch[0];
-                const cityPart = lastPart.replace(zipMatch[0], '').replace(/\s*NJ\s*/i, '').trim();
-                if (cityPart && cityInput) {
-                  cityInput.value = cityPart;
-                }
-              } else if (parts.length >= 2 && cityInput) {
+              // Extract city from second-to-last part
+              if (parts.length >= 2 && cityInput && !cityInput.value) {
                 cityInput.value = parts[1];
               }
+              
+              // Extract state and zip from last part
+              const lastPart = parts[parts.length - 1];
+              const stateZipMatch = lastPart.match(/([A-Z]{2})\s+(\d{5}(-\d{4})?)/i);
+              const zipOnlyMatch = lastPart.match(/\b(\d{5}(-\d{4})?)\b/);
+              
+              if (stateZipMatch) {
+                // Found "NJ 07410" pattern
+                if (stateInput && !stateInput.value) {
+                  stateInput.value = stateZipMatch[1].toUpperCase();
+                }
+                if (zipInput && !zipInput.value) {
+                  zipInput.value = stateZipMatch[2];
+                }
+              } else if (zipOnlyMatch && zipInput && !zipInput.value) {
+                // Found zip code only
+                zipInput.value = zipOnlyMatch[1];
+                // Try to extract city from remaining text
+                const cityPart = lastPart.replace(zipOnlyMatch[0], '').replace(/\s*NJ\s*/i, '').trim();
+                if (cityPart && cityInput && !cityInput.value) {
+                  cityInput.value = cityPart;
+                }
+              }
+            }
+          } else {
+            // Single line format: try to extract zip code
+            const zipMatch = value.match(/\b(\d{5}(-\d{4})?)\b/);
+            if (zipMatch && zipInput && !zipInput.value) {
+              zipInput.value = zipMatch[1];
+              console.log('Extracted zip code from single address line:', zipMatch[1]);
             }
           }
+          
+          console.log('Manual address parsing - Address:', value, 'City:', cityInput?.value, 'State:', stateInput?.value, 'Zip:', zipInput?.value);
         }
       });
     }
