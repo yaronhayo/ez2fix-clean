@@ -148,7 +148,7 @@
   ],
   "headers": [
     {
-      "source": "/js/**",
+      "source": "/js/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -157,7 +157,7 @@
       ]
     },
     {
-      "source": "/css/**",
+      "source": "/css/(.*)",
       "headers": [
         {
           "key": "Cache-Control", 
@@ -166,7 +166,7 @@
       ]
     },
     {
-      "source": "/_astro/**",
+      "source": "/_astro/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -175,7 +175,7 @@
       ]
     },
     {
-      "source": "/**/*.{jpg,jpeg,png,webp,avif,gif,svg,ico}",
+      "source": "/(.*)\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "source": "/sitemap*.xml",
+      "source": "/sitemap(.*)\\.xml",
       "headers": [
         {
           "key": "Cache-Control",
