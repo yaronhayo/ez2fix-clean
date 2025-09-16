@@ -492,50 +492,10 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       ]
     })} />
     
-    <!-- FAQ Schema for Voice Search -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How much does garage door repair cost in Bergen County NJ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Garage door repair costs vary by issue. We provide free estimates with upfront pricing - no hidden fees. Most repairs range from $150-$400."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer 24/7 emergency garage door repair?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Ez2Fix provides 24/7 emergency garage door repair service throughout Bergen County. Call (201) 554-6769 anytime."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long do garage door springs last?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Garage door springs typically last 7-10 years or 10,000 cycles. Warning signs include loud noises, door won't open, or closes too fast."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Are you licensed and insured in New Jersey?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Ez2Fix is fully licensed (#13VH13553300) and insured for all garage door work in New Jersey. We're BBB A+ rated."
-          }
-        }
-      ]
-    })} />
-    
     <!-- Voice Search Optimization Schema with Speakable Content -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": ["Organization", "FAQPage"],
+      "@type": "Organization",
       "@id": siteConfig.url + "#organization",
       "name": siteConfig.business.name,
       "description": "Professional garage door repair and installation serving Bergen County NJ since 2014",
