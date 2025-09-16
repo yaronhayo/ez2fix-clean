@@ -175,7 +175,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico)",
+      "source": "/(.*\\.(jpg|jpeg|png|webp|avif|gif|svg|ico))",
       "headers": [
         {
           "key": "Cache-Control",
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "source": "/sitemap(.*)\\.xml",
+      "source": "/sitemap(.*).xml",
       "headers": [
         {
           "key": "Cache-Control",
