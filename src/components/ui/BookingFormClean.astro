@@ -458,17 +458,16 @@ const formId = `booking-form-${variant}`;
           // Build comprehensive full address - ensure zip code is always included
           let fullAddress = addressValue;
           
-          // Add city if not already in main address
+          // If individual components are filled but not in main address, add them
           if (cityValue && !addressValue.toLowerCase().includes(cityValue.toLowerCase())) {
             fullAddress += `, ${cityValue}`;
           }
           
-          // Add state if not already in address
           if (stateValue && !fullAddress.toLowerCase().includes(stateValue.toLowerCase())) {
             fullAddress += `, ${stateValue}`;
           }
           
-          // Always add zip code if available and not already in address
+          // Always ensure zip code is included (most important for lead notifications)
           if (zipValue && !fullAddress.includes(zipValue)) {
             fullAddress += ` ${zipValue}`;
           }
@@ -477,6 +476,9 @@ const formId = `booking-form-${variant}`;
           if (unitValue && !fullAddress.toLowerCase().includes('unit') && !fullAddress.toLowerCase().includes('apt')) {
             fullAddress += `, Unit ${unitValue}`;
           }
+          
+          // Clean up any duplicate commas or spaces
+          fullAddress = fullAddress.replace(/,\s*,/g, ',').replace(/\s+/g, ' ').trim();
           
           // Fallback: If we still don't have a complete address, try to parse from main field
           if (!zipValue && addressValue) {
@@ -617,9 +619,16 @@ const formId = `booking-form-${variant}`;
           }
         });
         
-        // Build complete street address if we have components
+        // Build complete street address with city, state, zip for main field
         if (streetNumber && route && addressInput) {
-          addressInput.value = `${streetNumber} ${route}`;
+          let fullStreetAddress = `${streetNumber} ${route}`;
+          
+          // Add city, state, zip to main address field for complete display
+          if (city) fullStreetAddress += `, ${city}`;
+          if (state) fullStreetAddress += `, ${state}`;
+          if (zipCode) fullStreetAddress += ` ${zipCode}`;
+          
+          addressInput.value = fullStreetAddress;
         }
         
         // Fill individual fields
