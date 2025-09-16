@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '@/config/site';
 import Card from '@/components/ui/Card.astro';
+import ResponsiveImage from '@/components/ui/ResponsiveImage.astro';
 
 export interface Props {
   title: string;
@@ -51,12 +52,12 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
   
   <!-- Service Image - Clickable Link to Service Page -->
   <a href={href} class="relative aspect-video overflow-hidden rounded-t-lg block group-hover:opacity-95 transition-opacity duration-300">
-    <img 
-      src={image} 
+    <ResponsiveImage
+      src={image}
       alt={title}
       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
       loading="lazy"
-      decoding="async"
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
     />
     <div class={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-black/80 via-black/40 to-transparent' : 'bg-gradient-to-t from-black/70 via-black/20 to-transparent'}`}></div>
     

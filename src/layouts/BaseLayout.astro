@@ -28,13 +28,46 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TDFV4QVJ');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Optimized Google Tag Manager - Delayed Loading -->
+    <script is:inline>
+    // Initialize dataLayer immediately
+    window.dataLayer = window.dataLayer || [];
+    
+    // Delayed GTM loading function
+    function loadGTM() {
+      if (window.gtmLoaded) return;
+      window.gtmLoaded = true;
+      
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TDFV4QVJ');
+    }
+    
+    // Load GTM after user interaction or 3 seconds, whichever comes first
+    const userEvents = ['click', 'scroll', 'keydown', 'touchstart'];
+    let gtmLoaded = false;
+    
+    function initGTM() {
+      if (!gtmLoaded) {
+        gtmLoaded = true;
+        loadGTM();
+        userEvents.forEach(event => 
+          document.removeEventListener(event, initGTM, { passive: true })
+        );
+      }
+    }
+    
+    // Load on user interaction
+    userEvents.forEach(event => 
+      document.addEventListener(event, initGTM, { passive: true })
+    );
+    
+    // Fallback: load after 3 seconds
+    setTimeout(loadGTM, 3000);
+    </script>
+    <!-- End Optimized Google Tag Manager -->
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />

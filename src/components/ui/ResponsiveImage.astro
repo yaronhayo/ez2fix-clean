@@ -1,0 +1,115 @@
+---
+// ResponsiveImage.astro - Optimized image component with WebP support and responsive sizing
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className = '',
+  loading = 'lazy',
+  priority = false,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+} = Astro.props;
+
+// Generate WebP and fallback URLs
+// For external URLs (Vercel storage), we'll optimize by adding query parameters
+const isExternal = src.startsWith('http');
+const baseUrl = src;
+
+// For Vercel blob storage, we can add optimization parameters
+const webpUrl = isExternal && src.includes('vercel-storage.com') 
+  ? `${baseUrl}?format=webp&quality=80`
+  : baseUrl;
+
+const optimizedUrl = isExternal && src.includes('vercel-storage.com')
+  ? `${baseUrl}?quality=85`
+  : baseUrl;
+
+// Generate responsive sizes for different breakpoints
+const responsiveSizes = [
+  { width: 344, suffix: '-sm' },
+  { width: 512, suffix: '-md' },
+  { width: 768, suffix: '-lg' },
+  { width: 1024, suffix: '-xl' }
+];
+
+// Create srcset for responsive images
+const createSrcSet = (baseUrl: string, format?: string) => {
+  if (!isExternal || !src.includes('vercel-storage.com')) {
+    return baseUrl;
+  }
+  
+  return responsiveSizes
+    .map(({ width }) => {
+      const params = new URLSearchParams();
+      params.set('w', width.toString());
+      params.set('quality', '85');
+      if (format) params.set('format', format);
+      return `${baseUrl}?${params.toString()} ${width}w`;
+    })
+    .join(', ');
+};
+
+const webpSrcSet = createSrcSet(baseUrl, 'webp');
+const fallbackSrcSet = createSrcSet(baseUrl);
+---
+
+<picture class={className}>
+  <!-- WebP format for modern browsers -->
+  {isExternal && src.includes('vercel-storage.com') && (
+    <source
+      srcset={webpSrcSet}
+      sizes={sizes}
+      type="image/webp"
+    />
+  )}
+  
+  <!-- Fallback for older browsers -->
+  <img
+    src={optimizedUrl}
+    srcset={isExternal && src.includes('vercel-storage.com') ? fallbackSrcSet : undefined}
+    sizes={isExternal && src.includes('vercel-storage.com') ? sizes : undefined}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={priority ? 'eager' : loading}
+    decoding="async"
+    class={`${className} ${priority ? '' : 'transition-opacity duration-300'}`}
+    style={priority ? 'content-visibility: auto;' : undefined}
+  />
+</picture>
+
+<style>
+  picture img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Optimize image rendering */
+  picture img[loading="lazy"] {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  
+  /* Content visibility for better performance */
+  picture {
+    content-visibility: auto;
+    contain-intrinsic-size: 344px 200px;
+  }
+</style>
