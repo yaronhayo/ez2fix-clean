@@ -295,6 +295,13 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
         will-change: transform, opacity;
       }
       
+      /* Force GPU acceleration for animated elements */
+      .animate-on-scroll, .hover-lift, [class*="animate"] {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        will-change: transform, opacity;
+      }
+      
       /* Skip link accessibility */
       .skip-link {
         position: absolute;

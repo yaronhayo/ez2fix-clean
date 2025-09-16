@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@/config/site';
+import ResponsiveImage from '@/components/ui/ResponsiveImage.astro';
 
 const services = [
   { name: "24/7 Emergency Repair", href: "/services/emergency-garage-door-repair", icon: "emergency" },
@@ -65,12 +66,14 @@ const icons = {
       <!-- Company Info -->
       <div class="md:col-span-2 lg:col-span-2">
         <div class="flex items-center mb-6">
-          <img 
+          <ResponsiveImage
             src={siteConfig.logo}
             alt="Ez2Fix Logo" 
+            width={200}
+            height={80}
             class="h-20 w-auto"
             loading="lazy"
-            decoding="async"
+            sizes="200px"
           />
         </div>
         
