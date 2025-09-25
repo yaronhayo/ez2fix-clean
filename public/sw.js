@@ -1,5 +1,5 @@
 // Service Worker for Ez2Fix - Ultra-Aggressive JavaScript Optimization
-const CACHE_VERSION = '1.4.0-ultra-js-optimized';
+const CACHE_VERSION = '1.4.1-google-ads-optimized';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
@@ -125,7 +125,7 @@ self.addEventListener('fetch', event => {
   // Ultra-aggressive caching for third-party scripts to reduce execution time
   const thirdPartyDomains = [
     'www.googletagmanager.com',
-    'www.gstatic.com', 
+    'www.gstatic.com',
     'scripts.clarity.ms',
     'maps.googleapis.com',
     'www.google.com',
@@ -133,6 +133,11 @@ self.addEventListener('fetch', event => {
     'fonts.gstatic.com',
     'googleads.g.doubleclick.net',
     'www.googleadservices.com',
+    'pagead2.googlesyndication.com',
+    'tpc.googlesyndication.com',
+    'partner.googleadservices.com',
+    'stats.g.doubleclick.net',
+    'storage.googleapis.com',
     'c.bing.com',
     'dashboard.searchatlas.com',
     'sa.searchatlas.com'
