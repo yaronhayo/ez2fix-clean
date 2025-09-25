@@ -48,10 +48,16 @@ self.addEventListener('install', event => {
   event.waitUntil(
     Promise.all([
       caches.open(CACHE_NAME).then(cache => {
-        return cache.addAll(CRITICAL_RESOURCES);
+        return cache.addAll(CRITICAL_RESOURCES).catch(err => {
+          console.warn('Failed to cache some critical resources:', err);
+          return Promise.resolve();
+        });
       }),
       caches.open(STATIC_CACHE).then(cache => {
-        return cache.addAll(STATIC_RESOURCES);
+        return cache.addAll(STATIC_RESOURCES).catch(err => {
+          console.warn('Failed to cache some static resources:', err);
+          return Promise.resolve();
+        });
       })
     ]).then(() => {
       return self.skipWaiting();
