@@ -8,134 +8,15 @@ export interface Props {
   serviceUrl?: string;
 }
 
-const { 
+const {
   pageType = 'website',
   serviceName,
   serviceDescription,
   serviceUrl
 } = Astro.props;
 
-// Enhanced LocalBusiness Schema with information from old site
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${siteConfig.url}#business`,
-  "name": siteConfig.business.name,
-  "legalName": siteConfig.business.legalName,
-  "alternateName": ["Ez2Fix", "EZ2FIX", "EZ 2 FIX"],
-  "description": "Mobile garage door repair and installation services throughout New Jersey. 15+ years of experience with residential and commercial garage doors.",
-  "slogan": siteConfig.business.tagline,
-  "url": siteConfig.url,
-  "logo": `${siteConfig.url}/images/ez2fix-logo.png`,
-  "image": [
-    `${siteConfig.url}/images/ez2fix-garage-door-repair.jpg`,
-    `${siteConfig.url}/images/ez2fix-team.jpg`
-  ],
-  "telephone": siteConfig.business.phone,
-  "email": siteConfig.business.email,
-  "foundingDate": siteConfig.business.foundingYear,
-  "priceRange": "$$",
-  "currenciesAccepted": "USD",
-  "paymentAccepted": ["Cash", "Check", "Credit Card", "Financing Available"],
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Mobile Service - Serving All New Jersey",
-    "addressLocality": "Elmwood Park",
-    "addressRegion": "NJ",
-    "postalCode": "07407",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "40.9023",
-    "longitude": "-74.1182"
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "06:00",
-      "closes": "22:00"
-    }
-  ],
-  "serviceArea": {
-    "@type": "GeoCircle",
-    "geoMidpoint": {
-      "@type": "GeoCoordinates",
-      "latitude": "40.9023",
-      "longitude": "-74.1182"
-    },
-    "geoRadius": "25 miles"
-  },
-  "areaServed": siteConfig.business.serviceAreas.map(area => ({
-    "@type": "City",
-    "name": area,
-    "containedInPlace": {
-      "@type": "State",
-      "name": "New Jersey",
-      "containedInPlace": {
-        "@type": "Country",
-        "name": "United States"
-      }
-    }
-  })),
-  "hasCredential": {
-    "@type": "EducationalOccupationalCredential",
-    "credentialCategory": "Professional License",
-    "recognizedBy": {
-      "@type": "Organization",
-      "name": "State of New Jersey"
-    }
-  },
-  "knowsAbout": [
-    "Garage Door Repair",
-    "Garage Door Installation", 
-    "Spring Replacement",
-    "Garage Door Opener Installation",
-    "Emergency Garage Door Service",
-    "Commercial Garage Doors",
-    "Residential Garage Doors"
-  ],
-  "makesOffer": siteConfig.business.services.map(service => ({
-    "@type": "Offer",
-    "itemOffered": {
-      "@type": "Service",
-      "name": service,
-      "serviceType": service
-    },
-    "areaServed": siteConfig.business.serviceAreas
-  })),
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "telephone": siteConfig.business.phone,
-      "contactType": "customer service",
-      "availableLanguage": "English",
-      "areaServed": "All New Jersey"
-    },
-    {
-      "@type": "ContactPoint",
-      "email": siteConfig.business.email,
-      "contactType": "customer service",
-      "availableLanguage": "English"
-    }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/ez2fix",
-    "https://www.linkedin.com/company/ez2fix",
-    "https://twitter.com/ez2fix",
-    "https://www.youtube.com/channel/ez2fix"
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "30",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
-};
-
-// Service-specific schema if applicable
+// Service-specific schema - references the main business schema from BaseLayout
+// This prevents duplicate LocalBusiness entities which violate schema.org guidelines
 const serviceSchema = serviceName ? {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -145,7 +26,14 @@ const serviceSchema = serviceName ? {
   "provider": {
     "@id": `${siteConfig.url}#business`
   },
-  "areaServed": siteConfig.business.serviceAreas,
+  "areaServed": siteConfig.business.serviceAreas.map(area => ({
+    "@type": "City",
+    "name": area,
+    "containedInPlace": {
+      "@type": "State",
+      "name": "New Jersey"
+    }
+  })),
   "serviceType": serviceName,
   "offers": {
     "@type": "Offer",
@@ -155,22 +43,7 @@ const serviceSchema = serviceName ? {
   }
 } : null;
 
-// Organization schema for brand consistency
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${siteConfig.url}#organization`,
-  "name": siteConfig.business.legalName,
-  "url": siteConfig.url,
-  "logo": `${siteConfig.url}/images/ez2fix-logo.png`,
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": siteConfig.business.phone,
-    "contactType": "customer service"
-  }
-};
-
-// Website schema
+// WebSite schema for search box markup
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -179,7 +52,7 @@ const websiteSchema = {
   "name": siteConfig.name,
   "description": siteConfig.description,
   "publisher": {
-    "@id": `${siteConfig.url}#organization`
+    "@id": `${siteConfig.url}#business`
   },
   "potentialAction": {
     "@type": "SearchAction",
@@ -192,10 +65,12 @@ const websiteSchema = {
 };
 ---
 
-<!-- Enhanced Schema Markup for SEO -->
-<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<!-- Service-specific Schema Markup -->
 {serviceSchema && (
   <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+)}
+
+<!-- Website Schema for Search -->
+{pageType === 'website' && (
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 )}

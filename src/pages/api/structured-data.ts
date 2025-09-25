@@ -59,7 +59,7 @@ export const GET: APIRoute = async ({ request }) => {
         "description": "Professional garage door repair and installation services throughout New Jersey. Licensed contractor specializing in emergency repairs, spring replacement, opener installation, and commercial services.",
         "telephone": siteConfig.business.phone,
         "email": siteConfig.business.email,
-        "foundingDate": "2015-01-01",
+        "foundingDate": "2014",
         "slogan": "Professional Garage Door Solutions You Can Trust",
         "license": "13VH13553300",
         "address": {
