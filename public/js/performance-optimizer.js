@@ -28,8 +28,8 @@ class PerformanceOptimizer {
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
           if (entry.duration > this.longTaskThreshold) {
-            console.warn(`Long task detected: ${entry.duration.toFixed(2)}ms`);
-            
+            // Track long tasks silently for optimization without console warnings
+
             // If it's a script evaluation, try to defer similar tasks
             if (entry.name === 'script' || entry.name === 'evaluate-script') {
               this.handleLongScriptTask(entry);
@@ -164,15 +164,16 @@ class PerformanceOptimizer {
       // Ensure async loading
       script.async = true;
       
-      // Add error handling to prevent blocking
+      // Add error handling to prevent blocking (silent)
       script.onerror = () => {
-        console.warn(`Failed to load third-party script: ${src}`);
+        // Handle script loading failures silently
+        script.remove();
       };
-      
+
       // Add timeout to prevent hanging
       const timeout = setTimeout(() => {
         if (!script.loaded) {
-          console.warn(`Script timeout: ${src}`);
+          // Handle script timeout silently
           script.remove();
         }
       }, 10000);
@@ -249,7 +250,7 @@ class PerformanceOptimizer {
         try {
           task();
         } catch (e) {
-          console.warn('Task failed:', e);
+          // Task failed (handled silently)
         }
       }
       

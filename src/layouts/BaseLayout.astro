@@ -95,10 +95,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
               task();
               const taskEnd = performance.now();
               
-              // Log long tasks for debugging
-              if (taskEnd - taskStart > this.longTaskThreshold) {
-                console.warn(`Long task detected: ${id} took ${Math.round(taskEnd - taskStart)}ms`);
-              }
+              // Track task duration silently without console warnings
             } catch (e) {
               console.warn('IdleScheduler task failed:', e);
             }

@@ -35,7 +35,7 @@
           module.setupAIBotErrorTracking();
         })
         .catch(error => {
-          console.warn('Failed to load AI optimizations module:', error);
+          // Failed to load AI optimizations module (silent fallback)
           // Fallback: basic optimizations
           document.querySelectorAll('[type="application/ld+json"]').forEach((script, index) => {
             script.setAttribute('data-ai-readable', 'true');
@@ -87,7 +87,7 @@
           return;
         }
       } catch (error) {
-        console.warn('Web Vitals library failed to load, using fallback observers');
+        // Web Vitals library failed to load, using fallback observers (silent fallback)
       }
 
       // Fallback: Create basic performance observer
@@ -106,7 +106,7 @@
           });
           lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
         } catch (e) {
-          console.warn('LCP observer failed:', e);
+          // LCP observer failed (silent fallback)
         }
 
         // Track First Input Delay
@@ -124,7 +124,7 @@
           });
           fidObserver.observe({ entryTypes: ['first-input'] });
         } catch (e) {
-          console.warn('FID observer failed:', e);
+          // FID observer failed (silent fallback)
         }
 
         // Track Cumulative Layout Shift
