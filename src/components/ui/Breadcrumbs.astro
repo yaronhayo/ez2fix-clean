@@ -1,0 +1,51 @@
+---
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema.astro';
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+// Always ensure Home is the first item
+const breadcrumbItems = [
+  { name: 'Home', url: '/' },
+  ...items.filter(item => item.url !== '/')
+];
+---
+
+<!-- Breadcrumb Schema -->
+<BreadcrumbSchema items={breadcrumbItems} />
+
+<!-- Visual Breadcrumbs -->
+<nav class={`breadcrumbs ${className}`} aria-label="Breadcrumb">
+  <ol class="flex items-center space-x-2 text-sm">
+    {breadcrumbItems.map((item, index) => (
+      <li class="flex items-center">
+        {index > 0 && (
+          <svg class="w-4 h-4 mx-2 text-ez2fix-brown/50" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+          </svg>
+        )}
+        {index === breadcrumbItems.length - 1 ? (
+          <span class="font-semibold text-ez2fix-primary" aria-current="page">
+            {item.name}
+          </span>
+        ) : (
+          <a
+            href={item.url}
+            class="text-ez2fix-brown hover:text-ez2fix-primary transition-colors"
+          >
+            {item.name}
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

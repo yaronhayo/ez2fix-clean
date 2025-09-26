@@ -5,6 +5,7 @@ import FooterClean from '@/components/layout/FooterClean.astro';
 import Card from '@/components/ui/Card.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
 import { siteConfig } from '@/config/site';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 
 // Spring replacement scenarios requiring professional attention
 const springScenarios = [
@@ -214,7 +215,15 @@ const springFAQ = [
   
   <HeaderClean />
   <main id="main-content">
-    
+
+    <!-- Breadcrumbs -->
+    <div class="container mx-auto px-4 py-4">
+      <Breadcrumbs items={[
+        { name: 'Services', url: '/services' },
+        { name: 'Spring Repair', url: '/services/garage-door-spring-repair' }
+      ]} />
+    </div>
+
     <!-- Hero Section -->
     <section class="relative hero-responsive overflow-hidden">
       <div class="absolute inset-0">
