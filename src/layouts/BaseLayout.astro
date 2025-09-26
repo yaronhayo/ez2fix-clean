@@ -152,10 +152,17 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       }, 'low', 200);
       
       scheduler.schedule(() => {
-        gtag('config', 'AW-16919013637', { 
-          send_page_view: false 
+        gtag('config', 'AW-16919013637', {
+          send_page_view: false
         });
       }, 'low', 300);
+
+      scheduler.schedule(() => {
+        // Google Ads conversion tracking - ID: AW-16964948060
+        gtag('config', 'AW-16964948060', {
+          send_page_view: false
+        });
+      }, 'low', 400);
     }
     
     // Extreme engagement gating - require significant interaction
@@ -287,6 +294,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="x-dns-prefetch-control" content="on" />
     <link rel="preconnect" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com" />
+    <link rel="preload" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix%20logo.png" as="image" />
     
     <!-- Critical CSS Inline - Above the Fold Performance -->
     <style>

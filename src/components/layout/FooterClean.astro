@@ -68,10 +68,13 @@ const icons = {
         <div class="flex items-center mb-6">
           <img
             src={siteConfig.logo}
-            alt="Ez2Fix Logo" 
+            alt="Ez2Fix Logo"
             class="h-16 w-auto object-contain max-w-[240px]"
             style="object-fit: contain; object-position: center; max-height: 64px;"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
           />
+          <span class="text-xl font-bold text-blue-600 hidden">Ez2Fix</span>
         </div>
         
         <p class="text-lg leading-relaxed mb-6 max-w-md text-ez2fix-cream">

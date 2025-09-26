@@ -30,10 +30,13 @@ const serviceAreas = [
       <a href="/" class="flex items-center">
         <img
           src={siteConfig.logo}
-          alt="Ez2Fix - Professional Garage Door Services" 
+          alt="Ez2Fix - Professional Garage Door Services"
           class="h-10 sm:h-12 lg:h-16 w-auto object-contain max-w-[200px]"
           style="object-fit: contain; object-position: center; max-height: 64px;"
+          loading="eager"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
         />
+        <span class="text-lg font-bold text-blue-600 hidden">Ez2Fix</span>
       </a>
     </div>
 
