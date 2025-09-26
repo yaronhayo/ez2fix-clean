@@ -6,19 +6,22 @@ import CTA from '@/components/ui/CTA.astro';
 ---
 
 <section class="relative hero-responsive overflow-hidden hero-section">
-  <!-- Video Background -->
+  <!-- Optimized Video Background with LCP priority -->
   <video
     autoplay
     muted
     loop
     playsinline
-    preload="metadata"
-    class="absolute inset-0 w-full h-full object-cover hero-video"
+    preload="none"
+    class="absolute inset-0 w-full h-full object-cover hero-video opacity-0 transition-opacity duration-300"
     id="heroVideo"
     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231D1912'/%3E%3Cstop offset='100%25' stop-color='%232A2420'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bg)'/%3E%3C/svg%3E"
   >
     <source src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
   </video>
+
+  <!-- Immediate background for LCP -->
+  <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
 
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black bg-opacity-60"></div>
@@ -105,6 +108,23 @@ import CTA from '@/components/ui/CTA.astro';
       </div>
     </div>
 </section>
+
+<script>
+  // INP-optimized video loading
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('heroVideo');
+    if (video) {
+      // Load video after a short delay to not block interactions
+      setTimeout(() => {
+        video.load();
+        video.addEventListener('canplay', () => {
+          video.classList.remove('opacity-0');
+          video.classList.add('opacity-100');
+        }, { once: true });
+      }, 500);
+    }
+  });
+</script>
 
 <style>
   .hero-section {
