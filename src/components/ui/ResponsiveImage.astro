@@ -27,12 +27,12 @@ const {
 const isExternal = src.startsWith('http');
 const baseUrl = src;
 
-// Generate responsive sizes for different breakpoints - optimized for service cards
+// Generate responsive sizes for different breakpoints - optimized for actual display sizes
 const responsiveSizes = [
+  { width: 344, quality: 70 }, // Matches displayed dimensions
   { width: 400, quality: 75 },
   { width: 600, quality: 80 },
-  { width: 800, quality: 80 },
-  { width: 1200, quality: 85 }
+  { width: 800, quality: 85 }
 ];
 
 // Create srcset for responsive images with quality optimization
@@ -57,9 +57,9 @@ const avifSrcSet = createSrcSet(baseUrl, 'avif');
 const webpSrcSet = createSrcSet(baseUrl, 'webp');
 const jpegSrcSet = createSrcSet(baseUrl, 'jpg');
 
-// Single optimized fallback URL
+// Single optimized fallback URL - sized for typical display
 const optimizedUrl = isExternal && src.includes('vercel-storage.com')
-  ? `${baseUrl}?w=800&q=80&fm=jpg`
+  ? `${baseUrl}?w=400&q=75&fm=avif`
   : baseUrl;
 ---
 

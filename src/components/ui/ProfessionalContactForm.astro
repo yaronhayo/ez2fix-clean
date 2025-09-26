@@ -327,30 +327,89 @@ const contactMethods = [
       const formData = new FormData(form as HTMLFormElement);
       const data = Object.fromEntries(formData);
       
-      // Validation
+      // Comprehensive validation
       const required = ['name', 'phone', 'email', 'service', 'contactMethod', 'address', 'message', 'consent'];
       let hasErrors = false;
-      
+
+      // Required field validation
       required.forEach(field => {
         const value = field === 'consent' ? data[field] : (data[field] as string)?.trim();
         if (!value) {
-          showError(field, 'This field is required.');
+          const fieldName = field.charAt(0).toUpperCase() + field.slice(1);
+          showError(field, `${fieldName} is required.`);
           hasErrors = true;
         }
       });
-      
-      // Email validation
-      if (data.email && !isValidEmail((data.email as string).trim())) {
-        showError('email', 'Please enter a valid email address.');
-        hasErrors = true;
+
+      // Name validation (enhanced)
+      if (data.name && (data.name as string).trim()) {
+        const name = (data.name as string).trim();
+        if (name.length < 2) {
+          showError('name', 'Name must be at least 2 characters long.');
+          hasErrors = true;
+        } else if (!/^[a-zA-Z\s\-'\.]+$/.test(name)) {
+          showError('name', 'Name can only contain letters, spaces, hyphens, apostrophes, and periods.');
+          hasErrors = true;
+        } else if (name.length > 50) {
+          showError('name', 'Name cannot exceed 50 characters.');
+          hasErrors = true;
+        }
       }
-      
-      // Phone validation
-      if (data.phone && !isValidPhone((data.phone as string).trim())) {
-        showError('phone', 'Please enter a valid phone number.');
-        hasErrors = true;
+
+      // Email validation (enhanced)
+      if (data.email && (data.email as string).trim()) {
+        const email = (data.email as string).trim();
+        if (!isValidEmail(email)) {
+          showError('email', 'Please enter a valid email address.');
+          hasErrors = true;
+        } else if (email.length > 254) {
+          showError('email', 'Email address is too long.');
+          hasErrors = true;
+        }
       }
-      
+
+      // Phone validation (enhanced)
+      if (data.phone && (data.phone as string).trim()) {
+        const phone = (data.phone as string).trim();
+        if (!isValidPhone(phone)) {
+          showError('phone', 'Please enter a valid 10-digit phone number.');
+          hasErrors = true;
+        }
+      }
+
+      // Message validation (prevent spam and ensure quality)
+      if (data.message && (data.message as string).trim()) {
+        const message = (data.message as string).trim();
+        if (message.length < 10) {
+          showError('message', 'Please provide more details about your garage door needs (at least 10 characters).');
+          hasErrors = true;
+        } else if (message.length > 1000) {
+          showError('message', 'Message cannot exceed 1000 characters.');
+          hasErrors = true;
+        }
+        // Check for potential spam patterns
+        const spamPatterns = [
+          /http[s]?:\/\//i, // URLs
+          /www\./i, // Website references
+          /@[a-zA-Z0-9]/i, // Email addresses in message
+          /\$\d+/g, // Dollar amounts
+          /(bitcoin|crypto|investment|loan|viagra|casino)/i // Common spam words
+        ];
+        if (spamPatterns.some(pattern => pattern.test(message))) {
+          showError('message', 'Please provide a description of your garage door service needs only.');
+          hasErrors = true;
+        }
+      }
+
+      // Address validation (basic format check)
+      if (data.address && (data.address as string).trim()) {
+        const address = (data.address as string).trim();
+        if (address.length < 5) {
+          showError('address', 'Please provide a complete address.');
+          hasErrors = true;
+        }
+      }
+
       if (hasErrors) return;
       
       // Show loading state

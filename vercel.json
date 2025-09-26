@@ -1,151 +1,5 @@
 {
-  "redirects": [
-    {
-      "source": "/garage-doors-repair/",
-      "destination": "/services/general-garage-door-repair",
-      "permanent": true
-    },
-    {
-      "source": "/our-services/",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/residential-garage-door/",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/control-system/",
-      "destination": "/services/garage-door-opener-installation",
-      "permanent": true
-    },
-    {
-      "source": "/spring-repair/",
-      "destination": "/services/garage-door-spring-repair",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-locks/",
-      "destination": "/services/general-garage-door-repair",
-      "permanent": true
-    },
-    {
-      "source": "/about-us/",
-      "destination": "/about",
-      "permanent": true
-    },
-    {
-      "source": "/broken-garage-door-spring-repair-replacement/",
-      "destination": "/services/garage-door-spring-repair",
-      "permanent": true
-    },
-    {
-      "source": "/feed/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-openers/",
-      "destination": "/services/garage-door-opener-installation",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-hinges/",
-      "destination": "/services/general-garage-door-repair",
-      "permanent": true
-    },
-    {
-      "source": "/contact-us/",
-      "destination": "/contact",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-accessories/",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/sample-page/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/commercial-garage-doors/",
-      "destination": "/services/commercial-garage-door-service",
-      "permanent": true
-    },
-    {
-      "source": "/about-us",
-      "destination": "/about",
-      "permanent": true
-    },
-    {
-      "source": "/contact-us",
-      "destination": "/contact",
-      "permanent": true
-    },
-    {
-      "source": "/our-services",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/residential-garage-door",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/control-system",
-      "destination": "/services/garage-door-opener-installation",
-      "permanent": true
-    },
-    {
-      "source": "/spring-repair",
-      "destination": "/services/garage-door-spring-repair",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-locks",
-      "destination": "/services/general-garage-door-repair",
-      "permanent": true
-    },
-    {
-      "source": "/broken-garage-door-spring-repair-replacement",
-      "destination": "/services/garage-door-spring-repair",
-      "permanent": true
-    },
-    {
-      "source": "/feed",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-openers",
-      "destination": "/services/garage-door-opener-installation",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-hinges",
-      "destination": "/services/general-garage-door-repair",
-      "permanent": true
-    },
-    {
-      "source": "/garage-door-accessories",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/sample-page",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/commercial-garage-doors",
-      "destination": "/services/commercial-garage-door-service",
-      "permanent": true
-    }
-  ],
+  "redirects": [],
   "headers": [
     {
       "source": "/(.*)",
@@ -216,6 +70,15 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/api/maps",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=7200"
         }
       ]
     }

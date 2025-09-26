@@ -13,8 +13,10 @@ export default defineConfig({
 
   // Performance optimizations
   build: {
-    inlineStylesheets: 'auto',
-    assets: '_assets'
+    inlineStylesheets: 'always',
+    assets: '_assets',
+    format: 'directory',
+    split: true
   },
 
   // Vite optimization for better bundling

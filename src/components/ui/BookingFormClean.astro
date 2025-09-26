@@ -395,12 +395,14 @@ const formId = `booking-form-${variant}`;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Basic validation - Updated for contact preference
+        // Comprehensive validation
         const basicRequired = ['name', 'phone', 'service', 'urgency', 'consent'];
         const fullFormRequired = variant !== 'hero' ? ['contactPreference'] : [];
         const required = [...basicRequired, ...fullFormRequired];
-        
+
         let hasErrors = false;
+
+        // Required field validation
         required.forEach(field => {
           const value = field === 'consent' ? data[field] : data[field]?.trim();
           if (!value) {
@@ -409,12 +411,59 @@ const formId = `booking-form-${variant}`;
             hasErrors = true;
           }
         });
-        
-        
-        // Phone validation
-        if (data.phone && !isValidPhone(data.phone.trim())) {
-          showError('phone', 'Please enter a valid phone number.', variant);
-          hasErrors = true;
+
+        // Name validation (must be at least 2 characters, no numbers)
+        if (data.name && data.name.trim()) {
+          const name = data.name.trim();
+          if (name.length < 2) {
+            showError('name', 'Name must be at least 2 characters long.', variant);
+            hasErrors = true;
+          } else if (!/^[a-zA-Z\s\-'\.]+$/.test(name)) {
+            showError('name', 'Name can only contain letters, spaces, hyphens, apostrophes, and periods.', variant);
+            hasErrors = true;
+          } else if (name.length > 50) {
+            showError('name', 'Name cannot exceed 50 characters.', variant);
+            hasErrors = true;
+          }
+        }
+
+        // Phone validation (enhanced)
+        if (data.phone && data.phone.trim()) {
+          const phone = data.phone.trim();
+          if (!isValidPhone(phone)) {
+            showError('phone', 'Please enter a valid 10-digit phone number.', variant);
+            hasErrors = true;
+          }
+        }
+
+        // Zip code validation (if provided)
+        if (data.zip && data.zip.trim()) {
+          const zip = data.zip.trim();
+          if (!/^\d{5}(-\d{4})?$/.test(zip)) {
+            showError('zip', 'Please enter a valid 5-digit zip code.', variant);
+            hasErrors = true;
+          }
+        }
+
+        // Notes/description validation (prevent spam)
+        if (data.notes && data.notes.trim()) {
+          const notes = data.notes.trim();
+          if (notes.length > 1000) {
+            showError('notes', 'Description cannot exceed 1000 characters.', variant);
+            hasErrors = true;
+          }
+          // Check for potential spam patterns
+          const spamPatterns = [
+            /http[s]?:\/\//i, // URLs
+            /www\./i, // Website references
+            /@[a-zA-Z0-9]/i, // Email addresses
+            /\$\d+/g, // Dollar amounts
+            /(bitcoin|crypto|investment|loan)/i // Common spam words
+          ];
+          if (spamPatterns.some(pattern => pattern.test(notes))) {
+            showError('notes', 'Please provide a description of your garage door service needs only.', variant);
+            hasErrors = true;
+          }
         }
         
         if (hasErrors) return;

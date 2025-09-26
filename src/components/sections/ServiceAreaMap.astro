@@ -196,8 +196,15 @@ const {
           if (entry.isIntersecting && !mapLoaded) {
             mapLoaded = true;
             observer.disconnect(); // Stop observing
-            
+
             try {
+              // Add preconnect to Google Maps just before loading
+              const preconnectLink = document.createElement('link');
+              preconnectLink.rel = 'preconnect';
+              preconnectLink.href = 'https://maps.googleapis.com';
+              preconnectLink.crossOrigin = 'anonymous';
+              document.head.appendChild(preconnectLink);
+
               // Dynamic import maps functionality only when needed
               const { initializeGoogleMaps, createServiceAreaMap } = await import('@/lib/maps');
               

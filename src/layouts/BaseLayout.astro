@@ -640,13 +640,26 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.gstatic.com" />
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+    <link rel="dns-prefetch" href="https://www.googleadservices.com" />
+    <!-- Google Maps will preconnect only when needed via lazy loading -->
     
-    <!-- Critical resource preloading strategy -->
+    <!-- Critical resource preloading strategy - more aggressive -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" /></noscript>
+
+    <!-- Critical LCP image preload -->
+    <link rel="preload" as="image" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png?w=344&q=70&fm=avif" fetchpriority="high" />
+
+    <!-- Hero video preload for immediate playback -->
+    <link rel="preload" as="video" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4" fetchpriority="high" />
+
+    <!-- Module preload for critical JS to reduce dependency chain -->
+    <link rel="modulepreload" href="/_assets/preload-helper.BlTxHScW.js" />
+    <link rel="modulepreload" href="/_assets/env.C3-BNIkK.js" />
 
     <!-- Defer non-critical resources -->
     <link rel="prefetch" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&display=swap" />
@@ -677,13 +690,8 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <script>
       window.addEventListener('load', () => {
         setTimeout(() => {
-          // Load maps script only when needed
-          if (document.querySelector('[data-map]')) {
-            const mapsScript = document.createElement('script');
-            mapsScript.src = '/js/global-maps.js';
-            mapsScript.defer = true;
-            document.head.appendChild(mapsScript);
-          }
+          // Maps script is loaded lazily via intersection observer in components
+          // No need to preload it here
 
           // Load performance monitor after everything else
           const perfScript = document.createElement('script');

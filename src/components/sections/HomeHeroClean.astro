@@ -9,17 +9,17 @@ import CTA from '@/components/ui/CTA.astro';
   <!-- Optimized static background for LCP - video loads after interaction -->
   <div class="absolute inset-0 w-full h-full hero-background"></div>
 
-  <!-- Video loads after user interaction to improve LCP -->
+  <!-- Video loads immediately for visual impact -->
   <video
     muted
     loop
     playsinline
-    preload="none"
-    class="absolute inset-0 w-full h-full object-cover hero-video opacity-0 transition-opacity duration-500"
+    autoplay
+    preload="metadata"
+    class="absolute inset-0 w-full h-full object-cover hero-video opacity-0 transition-opacity duration-1000"
     id="heroVideo"
-    style="display: none;"
   >
-    <source data-src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
+    <source src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
   </video>
 
   <!-- Immediate background for LCP -->
@@ -112,63 +112,40 @@ import CTA from '@/components/ui/CTA.astro';
 </section>
 
 <script>
-  // Load video only after user interaction to improve LCP
-  let videoLoaded = false;
-  let userInteracted = false;
-
-  function loadVideoOnInteraction() {
-    if (videoLoaded || !userInteracted) return;
-    videoLoaded = true;
-
+  // Start video immediately when page loads
+  document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('heroVideo');
-    const source = video?.querySelector('source[data-src]');
+    if (!video) return;
 
-    if (video && source) {
-      // Load the video source
-      source.src = source.dataset.src;
-      video.style.display = 'block';
-      video.load();
+    // Check for user preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const isSlowConnection = connection && (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g');
 
-      video.addEventListener('canplaythrough', () => {
-        video.play().then(() => {
-          video.classList.remove('opacity-0');
-          video.classList.add('opacity-100');
-        }).catch(() => {
-          // Video failed to play, keep static background
-        });
-      }, { once: true });
+    if (prefersReducedMotion || isSlowConnection) {
+      // Hide video and show static background for accessibility/slow connections
+      video.style.display = 'none';
+      return;
     }
-  }
 
-  // Track user interaction
-  function handleUserInteraction() {
-    if (userInteracted) return;
-    userInteracted = true;
+    // Start video immediately
+    video.addEventListener('loadeddata', () => {
+      video.play().then(() => {
+        // Smooth fade-in once video starts playing
+        video.classList.remove('opacity-0');
+        video.classList.add('opacity-100');
+      }).catch((error) => {
+        // Video autoplay blocked or failed, keep static background
+        console.log('Video autoplay prevented:', error.message);
+        video.style.display = 'none';
+      });
+    }, { once: true });
 
-    // Load video after a delay to not block interactions
-    setTimeout(loadVideoOnInteraction, 1000);
-
-    // Remove event listeners
-    ['scroll', 'click', 'touchstart', 'keydown'].forEach(event => {
-      document.removeEventListener(event, handleUserInteraction);
-    });
-  }
-
-  // Add interaction listeners
-  ['scroll', 'click', 'touchstart', 'keydown'].forEach(event => {
-    document.addEventListener(event, handleUserInteraction, {
-      passive: true,
-      once: true
+    // Fallback in case video has issues
+    video.addEventListener('error', () => {
+      video.style.display = 'none';
     });
   });
-
-  // Fallback - load video after 3 seconds if no interaction
-  setTimeout(() => {
-    if (!userInteracted) {
-      userInteracted = true;
-      loadVideoOnInteraction();
-    }
-  }, 3000);
 </script>
 
 <style>
@@ -273,31 +250,6 @@ import CTA from '@/components/ui/CTA.astro';
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Video optimization
-    const heroVideo = document.getElementById('heroVideo');
-    if (heroVideo) {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      const isSlowConnection = connection && (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g');
-      
-      if (prefersReducedMotion || isSlowConnection) {
-        heroVideo.style.display = 'none';
-        heroVideo.closest('.hero-section').style.background = 'var(--gradient-dark)';
-      } else {
-        heroVideo.addEventListener('canplaythrough', function() {
-          this.style.opacity = '1';
-        });
-        
-        const playPromise = heroVideo.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            heroVideo.style.display = 'none';
-            heroVideo.closest('.hero-section').style.background = 'var(--gradient-dark)';
-          });
-        }
-      }
-    }
-
     // Animate elements
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
