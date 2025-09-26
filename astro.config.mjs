@@ -10,6 +10,44 @@ export default defineConfig({
   output: 'server', // Full server-side rendering for all routes
   adapter: vercel(),
   site: 'https://ez2fixllc.com',
+
+  // Performance optimizations
+  build: {
+    inlineStylesheets: 'auto',
+    assets: '_assets'
+  },
+
+  // Vite optimization for better bundling
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Split large dependencies
+            'react-vendor': ['react', 'react-dom'],
+            'ui-components': [
+              '@/components/ui/Button.astro',
+              '@/components/ui/Card.astro',
+              '@/components/ui/CTA.astro'
+            ]
+          }
+        }
+      },
+      // Use esbuild for minification (faster and included)
+      minify: 'esbuild'
+    },
+    ssr: {
+      noExternal: ['lucide-react']
+    }
+  },
+
+  // Markdown optimization
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light',
+      wrap: false
+    }
+  },
   
   // Built-in redirects for the most common old URLs
   redirects: {

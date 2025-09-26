@@ -6,18 +6,20 @@ import CTA from '@/components/ui/CTA.astro';
 ---
 
 <section class="relative hero-responsive overflow-hidden hero-section">
-  <!-- Optimized Video Background with LCP priority -->
+  <!-- Optimized static background for LCP - video loads after interaction -->
+  <div class="absolute inset-0 w-full h-full hero-background"></div>
+
+  <!-- Video loads after user interaction to improve LCP -->
   <video
-    autoplay
     muted
     loop
     playsinline
     preload="none"
-    class="absolute inset-0 w-full h-full object-cover hero-video opacity-0 transition-opacity duration-300"
+    class="absolute inset-0 w-full h-full object-cover hero-video opacity-0 transition-opacity duration-500"
     id="heroVideo"
-    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231D1912'/%3E%3Cstop offset='100%25' stop-color='%232A2420'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bg)'/%3E%3C/svg%3E"
+    style="display: none;"
   >
-    <source src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
+    <source data-src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix-hero-background.mp4" type="video/mp4">
   </video>
 
   <!-- Immediate background for LCP -->
@@ -110,26 +112,74 @@ import CTA from '@/components/ui/CTA.astro';
 </section>
 
 <script>
-  // INP-optimized video loading
-  document.addEventListener('DOMContentLoaded', () => {
+  // Load video only after user interaction to improve LCP
+  let videoLoaded = false;
+  let userInteracted = false;
+
+  function loadVideoOnInteraction() {
+    if (videoLoaded || !userInteracted) return;
+    videoLoaded = true;
+
     const video = document.getElementById('heroVideo');
-    if (video) {
-      // Load video after a short delay to not block interactions
-      setTimeout(() => {
-        video.load();
-        video.addEventListener('canplay', () => {
+    const source = video?.querySelector('source[data-src]');
+
+    if (video && source) {
+      // Load the video source
+      source.src = source.dataset.src;
+      video.style.display = 'block';
+      video.load();
+
+      video.addEventListener('canplaythrough', () => {
+        video.play().then(() => {
           video.classList.remove('opacity-0');
           video.classList.add('opacity-100');
-        }, { once: true });
-      }, 500);
+        }).catch(() => {
+          // Video failed to play, keep static background
+        });
+      }, { once: true });
     }
+  }
+
+  // Track user interaction
+  function handleUserInteraction() {
+    if (userInteracted) return;
+    userInteracted = true;
+
+    // Load video after a delay to not block interactions
+    setTimeout(loadVideoOnInteraction, 1000);
+
+    // Remove event listeners
+    ['scroll', 'click', 'touchstart', 'keydown'].forEach(event => {
+      document.removeEventListener(event, handleUserInteraction);
+    });
+  }
+
+  // Add interaction listeners
+  ['scroll', 'click', 'touchstart', 'keydown'].forEach(event => {
+    document.addEventListener(event, handleUserInteraction, {
+      passive: true,
+      once: true
+    });
   });
+
+  // Fallback - load video after 3 seconds if no interaction
+  setTimeout(() => {
+    if (!userInteracted) {
+      userInteracted = true;
+      loadVideoOnInteraction();
+    }
+  }, 3000);
 </script>
 
 <style>
   .hero-section {
     min-height: 100vh;
     min-height: 100dvh;
+  }
+
+  .hero-background {
+    background: linear-gradient(135deg, rgba(29, 25, 18, 0.95) 0%, rgba(42, 36, 32, 0.9) 100%),
+                url('/images/ez2fix-garage-door-repair.jpg') center/cover no-repeat;
   }
 
   /* Desktop optimization - better above-the-fold positioning */

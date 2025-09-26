@@ -2,6 +2,7 @@
 import { siteConfig } from '@/config/site';
 import { clientEnv } from '@/config/env';
 import ScrollToTop from '@/components/ui/ScrollToTop.astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import '@/styles/globals.css';
 
 export interface Props {
@@ -165,12 +166,12 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       }, 'low', 400);
     }
     
-    // Extreme engagement gating - require significant interaction
+    // Ultra-aggressive engagement gating for performance
     let userEngaged = false;
     let interactionCount = 0;
     let scrollDepth = 0;
-    const engagementThreshold = 1; // Reduced for better INP - load scripts faster
-    const scrollThreshold = 10; // Reduced scroll threshold for faster response
+    const engagementThreshold = 2; // Require more interaction
+    const scrollThreshold = 25; // Higher scroll threshold
     
     function trackEngagement(event) {
       interactionCount++;
@@ -186,10 +187,10 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       if (isEngaged && !userEngaged) {
         userEngaged = true;
         
-        // Progressive loading with more delays
+        // Progressive loading with aggressive delays
         scheduler.schedule(() => {
           loadGTMInChunks();
-        }, 'low', 500);
+        }, 'low', 2000);
         
         // Remove engagement listeners to prevent memory leaks
         ['click', 'scroll', 'keydown', 'touchstart'].forEach(eventType => {
@@ -206,14 +207,14 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       })
     );
     
-    // Extended fallback - 15 seconds
+    // Very long fallback - 30 seconds to prioritize performance
     setTimeout(() => {
       if (!userEngaged) {
         scheduler.schedule(() => {
           loadGTMInChunks();
         }, 'low');
       }
-    }, 15000);
+    }, 30000);
     
     // Defer performance monitor until after critical path
     scheduler.schedule(() => {
@@ -296,12 +297,44 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <link rel="preconnect" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com" />
     <link rel="preload" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/ez2fix%20logo.png" as="image" />
 
-    <!-- Critical LCP optimizations -->
-    <link rel="preload" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp" as="image" />
+    <!-- Critical LCP optimizations - Remove hero video preload -->
+    <link rel="preload" href="/images/ez2fix-garage-door-repair.webp" as="image" fetchpriority="high" />
     <style>
       /* Critical hero styles - inline for LCP */
-      .hero-section { min-height: 100vh; position: relative; }
-      .hero-video { object-fit: cover; width: 100%; height: 100%; }
+      .hero-section {
+        min-height: 100vh;
+        position: relative;
+        background: linear-gradient(135deg, #1D1912 0%, #2A2420 100%);
+      }
+      .hero-video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Immediate visible content */
+      .hero-content-responsive {
+        contain: layout style;
+        will-change: transform;
+      }
+
+      /* Critical button optimizations */
+      .btn-premium {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 60px !important;
+        background: linear-gradient(135deg, #D2A63C 0%, #EECD5C 100%) !important;
+        color: #1D1912 !important;
+        font-weight: 700 !important;
+        border: none !important;
+        border-radius: 12px !important;
+        text-decoration: none !important;
+        transform: translateZ(0) !important;
+        contain: layout style paint !important;
+      }
     </style>
     
     <!-- Critical CSS Inline - Above the Fold Performance -->
@@ -610,22 +643,18 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://maps.googleapis.com" />
     
-    <!-- Preload critical assets for performance -->
-    <!-- Video preload removed to fix 'unsupported as value' error -->
-    <link rel="prefetch" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp" />
-    <link rel="dns-prefetch" href="https://www.google.com" />
-
-    <!-- Critical font optimization - minimal weights for LCP -->
+    <!-- Critical resource preloading strategy -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" /></noscript>
 
-    <!-- Defer additional font weights to improve LCP -->
+    <!-- Defer non-critical resources -->
     <link rel="prefetch" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&display=swap" />
-    
-    <!-- Prefetch critical pages -->
     <link rel="prefetch" href="/services" />
     <link rel="prefetch" href="/booking" />
     <link rel="prefetch" href="/contact" />
+
+    <!-- Remove unnecessary prefetches that block LCP -->
+    <!-- Background video moved to load after interaction -->
     
     <!-- Modern SEO & User Experience -->
     <meta name="mobile-web-app-capable" content="yes" />
@@ -643,11 +672,26 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <!-- Additional head content -->
     <slot name="head" />
     
-    <!-- Global Maps Loader -->
-    <script src="/js/global-maps.js" defer></script>
-    
-    <!-- AI Performance Monitor -->
-    <script src="/js/ai-performance-monitor.js" defer></script>
+    <!-- Defer all non-critical scripts until after page load -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          // Load maps script only when needed
+          if (document.querySelector('[data-map]')) {
+            const mapsScript = document.createElement('script');
+            mapsScript.src = '/js/global-maps.js';
+            mapsScript.defer = true;
+            document.head.appendChild(mapsScript);
+          }
+
+          // Load performance monitor after everything else
+          const perfScript = document.createElement('script');
+          perfScript.src = '/js/ai-performance-monitor.js';
+          perfScript.defer = true;
+          document.head.appendChild(perfScript);
+        }, 1000);
+      });
+    </script>
     
     <!-- Service Worker Registration - INP optimized -->
     <script>
@@ -946,5 +990,8 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     
     <!-- Scroll to Top Button -->
     <ScrollToTop />
+
+    <!-- Vercel Speed Insights -->
+    <SpeedInsights />
   </body>
 </html>
