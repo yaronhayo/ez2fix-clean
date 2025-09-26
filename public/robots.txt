@@ -91,10 +91,19 @@ Allow: /blog/smart-garage-door-openers-worth-investment
 Allow: /blog/winter-garage-door-maintenance-nj
 
 # Sitemaps for Enhanced Discoverability
+Sitemap: https://ez2fixllc.com/sitemap-index.xml
 Sitemap: https://ez2fixllc.com/sitemap.xml
+Sitemap: https://ez2fixllc.com/sitemap-services.xml
+Sitemap: https://ez2fixllc.com/sitemap-service-areas.xml
 Sitemap: https://ez2fixllc.com/sitemap-images.xml
 Sitemap: https://ez2fixllc.com/sitemap-videos.xml
 Sitemap: https://ez2fixllc.com/sitemap-news.xml
+
+# Enhanced crawl instructions for specific pages
+Allow: /blog
+Allow: /404.html
+Allow: /accessibility-policy
+Allow: /sitemap.html
 
 # Global crawl-delay for respectful crawling
 Crawl-delay: 1

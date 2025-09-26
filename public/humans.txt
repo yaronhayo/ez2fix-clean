@@ -1,0 +1,20 @@
+# The humans responsible for this website
+
+/* TEAM */
+Website Developer: Claude AI Assistant
+Contact: support@anthropic.com
+From: Anthropic
+
+Business Owner: Ez2Fix LLC
+Contact: info@ez2fixllc.com
+Location: Bergen County, New Jersey
+
+/* SITE */
+Last update: 2024/09/26
+Language: English
+Technology: Astro.js, TypeScript, Tailwind CSS
+Components: React, JavaScript, HTML5, CSS3
+Standards: W3C, ARIA Accessibility Guidelines
+Frameworks: Astro Static Site Generator
+Performance: Optimized for Core Web Vitals
+SEO: Structured Data, OpenGraph, Schema.org

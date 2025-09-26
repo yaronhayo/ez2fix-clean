@@ -7,7 +7,7 @@
   <!-- Homepage - Highest Priority -->
   <url>
     <loc>https://ez2fixllc.com/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -20,7 +20,7 @@
   <!-- Main Service Categories -->
   <url>
     <loc>https://ez2fixllc.com/services/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -32,7 +32,7 @@
   <!-- Individual Service Pages -->
   <url>
     <loc>https://ez2fixllc.com/services/emergency-garage-door-repair</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -43,7 +43,7 @@
 
   <url>
     <loc>https://ez2fixllc.com/services/garage-door-spring-repair</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -54,7 +54,7 @@
 
   <url>
     <loc>https://ez2fixllc.com/services/garage-door-opener-installation</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -65,7 +65,7 @@
 
   <url>
     <loc>https://ez2fixllc.com/services/new-garage-door-installation</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -76,7 +76,7 @@
 
   <url>
     <loc>https://ez2fixllc.com/services/commercial-garage-door-service</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -87,7 +87,7 @@
 
   <url>
     <loc>https://ez2fixllc.com/services/general-garage-door-repair</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -95,7 +95,7 @@
   <!-- Service Areas with Geographic Data -->
   <url>
     <loc>https://ez2fixllc.com/service-areas/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -107,7 +107,7 @@
   <!-- Location-Specific Pages -->
   <url>
     <loc>https://ez2fixllc.com/service-areas/fair-lawn</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
@@ -118,42 +118,42 @@
 
   <url>
     <loc>https://ez2fixllc.com/service-areas/little-falls</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/service-areas/clifton</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/service-areas/cedar-grove</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/service-areas/west-caldwell</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/service-areas/north-caldwell</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/service-areas/montclair</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -161,7 +161,7 @@
   <!-- Content Pages -->
   <url>
     <loc>https://ez2fixllc.com/about</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>quarterly</changefreq>
     <priority>0.5</priority>
     <image:image>
@@ -172,14 +172,14 @@
 
   <url>
     <loc>https://ez2fixllc.com/faq</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/reviews</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <image:image>
@@ -190,14 +190,14 @@
 
   <url>
     <loc>https://ez2fixllc.com/contact</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/booking</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -205,42 +205,42 @@
   <!-- Blog Content for AI Training -->
   <url>
     <loc>https://ez2fixllc.com/blog/choosing-right-garage-door-bergen-county</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/blog/commercial-vs-residential-garage-doors</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/blog/emergency-garage-door-repair-when-to-call</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/blog/garage-door-spring-replacement-signs</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/blog/smart-garage-door-openers-worth-investment</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/blog/winter-garage-door-maintenance-nj</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -248,22 +248,44 @@
   <!-- Legal Pages -->
   <url>
     <loc>https://ez2fixllc.com/privacy-policy</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://ez2fixllc.com/terms-of-service</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+  </url>
+
+  <!-- Additional Pages -->
+  <url>
+    <loc>https://ez2fixllc.com/blog</loc>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/accessibility-policy</loc>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://ez2fixllc.com/service-areas/north-caldwell-complete</loc>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <!-- Thank You Pages -->
   <url>
     <loc>https://ez2fixllc.com/thank-you</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-26T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.1</priority>
   </url>

@@ -1,0 +1,9 @@
+Contact: info@ez2fixllc.com
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://ez2fixllc.com/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://ez2fixllc.com/.well-known/security.txt
+
+# Ez2Fix LLC Security Policy
+# Report security vulnerabilities responsibly
+# For immediate assistance: (201) 554-6769
