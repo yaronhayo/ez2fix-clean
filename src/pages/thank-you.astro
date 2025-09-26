@@ -48,6 +48,42 @@ const urgentServices = [
 >
   <HeaderClean />
   <main id="main-content">
+
+    <!-- Access Control Script - Must run before content loads -->
+    <script is:inline>
+      (function() {
+        // Check if user arrived via legitimate form submission
+        const formSubmitted = sessionStorage.getItem('ez2fix_form_submitted');
+        const timestamp = sessionStorage.getItem('ez2fix_form_timestamp');
+
+        if (!formSubmitted || !timestamp) {
+          // No form submission flag - redirect to home page
+          console.log('Direct access to thank-you page detected - redirecting to home');
+          window.location.replace('/');
+          return;
+        }
+
+        // Check if submission is recent (within 1 hour)
+        const submissionTime = parseInt(timestamp);
+        const currentTime = Date.now();
+        const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
+
+        if (currentTime - submissionTime > oneHour) {
+          // Submission too old - clear session and redirect
+          console.log('Thank-you page access expired - redirecting to home');
+          sessionStorage.removeItem('ez2fix_form_submitted');
+          sessionStorage.removeItem('ez2fix_form_timestamp');
+          window.location.replace('/');
+          return;
+        }
+
+        // Valid access - clear the session flags to prevent page refresh abuse
+        sessionStorage.removeItem('ez2fix_form_submitted');
+        sessionStorage.removeItem('ez2fix_form_timestamp');
+
+        console.log('Legitimate access to thank-you page confirmed');
+      })();
+    </script>
     
     <!-- Thank You Hero -->
     <section class="py-20" style="background: linear-gradient(135deg, #1D1912 0%, #2A2420 100%);">

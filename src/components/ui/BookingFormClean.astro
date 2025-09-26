@@ -514,6 +514,9 @@ const formId = `booking-form-${variant}`;
           
           if (response.ok) {
             console.log('Form submitted successfully, redirecting to thank-you page');
+            // Set session flag for legitimate form submission
+            sessionStorage.setItem('ez2fix_form_submitted', 'true');
+            sessionStorage.setItem('ez2fix_form_timestamp', Date.now().toString());
             window.location.href = '/thank-you';
           } else {
             const errorData = await response.json();

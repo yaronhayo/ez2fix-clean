@@ -397,6 +397,9 @@ const contactMethods = [
         
         if (response.ok) {
           // Success - redirect to thank you page
+          // Set session flag for legitimate form submission
+          sessionStorage.setItem('ez2fix_form_submitted', 'true');
+          sessionStorage.setItem('ez2fix_form_timestamp', Date.now().toString());
           window.location.href = '/thank-you?source=contact';
         } else {
           const errorData = await response.json();
