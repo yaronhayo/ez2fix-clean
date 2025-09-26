@@ -3,6 +3,7 @@ import { siteConfig } from '@/config/site';
 import { clientEnv } from '@/config/env';
 import ScrollToTop from '@/components/ui/ScrollToTop.astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+import Analytics from '@vercel/analytics/astro';
 import '@/styles/globals.css';
 
 export interface Props {
@@ -990,6 +991,9 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     
     <!-- Scroll to Top Button -->
     <ScrollToTop />
+
+    <!-- Vercel Analytics -->
+    <Analytics />
 
     <!-- Vercel Speed Insights -->
     <SpeedInsights />
