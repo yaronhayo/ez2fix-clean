@@ -1,5 +1,5 @@
 // Service Worker for Ez2Fix - Ultra-Aggressive JavaScript Optimization
-const CACHE_VERSION = '1.4.5-gtm-csp-bypass-fix';
+const CACHE_VERSION = '1.4.6-microsoft-clarity-bing-fix';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
@@ -98,6 +98,11 @@ self.addEventListener('fetch', event => {
 
   // Skip Google Tag Manager requests that might have CSP conflicts - let the browser handle them directly
   if (url.hostname === 'www.googletagmanager.com' && url.pathname.includes('gtm.js')) {
+    return;
+  }
+
+  // Skip Microsoft Clarity requests that might have CSP conflicts - let the browser handle them directly
+  if (url.hostname === 'c.clarity.ms' || url.hostname === 'o.clarity.ms' || url.hostname === 'c.bing.com') {
     return;
   }
 

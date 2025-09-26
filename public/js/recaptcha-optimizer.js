@@ -70,13 +70,11 @@ class RecaptchaOptimizer {
     this.loaded = true;
     
     return new Promise((resolve, reject) => {
-      // Ensure scheduler exists before use
-      if (!this.scheduler || typeof this.scheduler.schedule !== 'function') {
-        this.scheduler = this.createFallbackScheduler();
-      }
+      // Use fallback scheduler directly to avoid timing issues
+      const safeScheduler = this.createFallbackScheduler();
 
       // Break reCAPTCHA loading into smaller chunks
-      this.scheduler.schedule(() => {
+      safeScheduler.schedule(() => {
         const script = document.createElement('script');
         script.src = 'https://www.google.com/recaptcha/api.js?render=6LdFn6krAAAAAHHJIWIEjV5aTM8B19CqF8p8HOcd&onload=recaptchaLoaded';
         script.async = true;
