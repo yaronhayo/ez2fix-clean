@@ -1,5 +1,5 @@
 // Service Worker for Ez2Fix - Ultra-Aggressive JavaScript Optimization
-const CACHE_VERSION = '1.4.6-microsoft-clarity-bing-fix';
+const CACHE_VERSION = '1.4.7-csp-domains-fetch-fix';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
@@ -238,11 +238,13 @@ async function cacheFirst(request, cacheType = STATIC_CACHE, maxAge = 3600000) {
     }
     return networkResponse;
   } catch (error) {
+    // Handle CSP violations and network errors silently
+
     // Return stale cached response if network fails
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     // Return offline fallback if available
     if (request.destination === 'document') {
       const offlinePage = await cache.match('/');
@@ -250,6 +252,17 @@ async function cacheFirst(request, cacheType = STATIC_CACHE, maxAge = 3600000) {
         return offlinePage;
       }
     }
+
+    // For CSP violations or other fetch errors, return a basic response instead of throwing
+    if (error.message && error.message.includes('Content Security Policy')) {
+      // CSP violation - return empty response for resources
+      return new Response('', {
+        status: 204,
+        statusText: 'CSP Blocked',
+        headers: { 'Content-Type': 'text/plain' }
+      });
+    }
+
     throw error;
   }
 }
