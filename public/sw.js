@@ -1,5 +1,5 @@
 // Service Worker for Ez2Fix - Ultra-Aggressive JavaScript Optimization
-const CACHE_VERSION = '1.4.3-final-error-fixes';
+const CACHE_VERSION = '1.4.4-http-headers-csp-final';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;

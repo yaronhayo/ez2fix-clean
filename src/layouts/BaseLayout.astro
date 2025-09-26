@@ -602,9 +602,7 @@ const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <link rel="prefetch" href="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp" />
     <link rel="dns-prefetch" href="https://www.google.com" />
 
-    <!-- Critical font loading - blocking to prevent render delays -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=block" />
-    <!-- Non-critical font weights loaded async -->
+    <!-- Optimized font loading - single request for all weights -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" /></noscript>
     
