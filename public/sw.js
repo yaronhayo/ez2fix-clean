@@ -1,5 +1,5 @@
 // Service Worker for Ez2Fix - Ultra-Aggressive JavaScript Optimization
-const CACHE_VERSION = '1.4.1-google-ads-optimized';
+const CACHE_VERSION = '1.4.2-console-errors-fixed';
 const CACHE_NAME = `ez2fix-v${CACHE_VERSION}-performance`;
 const STATIC_CACHE = `ez2fix-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `ez2fix-images-v${CACHE_VERSION}`;
@@ -9,16 +9,14 @@ const CSS_CACHE = `ez2fix-css-v${CACHE_VERSION}`;
 const THIRD_PARTY_CACHE = `ez2fix-third-party-v${CACHE_VERSION}`;
 const RECAPTCHA_CACHE = `ez2fix-recaptcha-v${CACHE_VERSION}`;
 
-// Critical resources to cache immediately
+// Critical resources to cache immediately - only cache existing resources
 const CRITICAL_RESOURCES = [
   '/',
   '/services',
   '/service-areas',
   '/contact',
   '/booking',
-  '/manifest.json',
-  '/js/global-maps.js',
-  '/js/ai-performance-monitor.js'
+  '/manifest.json'
 ];
 
 // Static assets that can be cached
