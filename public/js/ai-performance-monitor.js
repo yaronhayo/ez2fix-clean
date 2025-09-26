@@ -4,22 +4,22 @@
 (function() {
   'use strict';
 
+  // AI Bot Detection - moved to outer scope for global access
+  function detectAIBot() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const aiBots = [
+      'googlebot', 'bingbot', 'gptbot', 'claude', 'anthropic',
+      'openai', 'chatgpt', 'google-extended', 'ccbot', 'facebookexternalhit',
+      'twitterbot', 'linkedinbot', 'whatsapp', 'alexa', 'speechbot',
+      'slurp', 'duckduckbot'
+    ];
+
+    return aiBots.some(bot => userAgent.includes(bot));
+  }
+
   // Performance monitoring with AI bot detection
   function initPerformanceMonitoring() {
     console.log('🤖 Initializing AI-compatible performance monitoring...');
-
-    // AI Bot Detection
-    function detectAIBot() {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const aiBots = [
-        'googlebot', 'bingbot', 'gptbot', 'claude', 'anthropic', 
-        'openai', 'chatgpt', 'google-extended', 'ccbot', 'facebookexternalhit',
-        'twitterbot', 'linkedinbot', 'whatsapp', 'alexa', 'speechbot',
-        'slurp', 'duckduckbot'
-      ];
-      
-      return aiBots.some(bot => userAgent.includes(bot));
-    }
 
     const isAIBot = detectAIBot();
 
