@@ -4,6 +4,8 @@ A complete, production-ready website for Ez2Fix Garage Door Services built with 
 
 **Latest Update**: Console errors fixed, Google Ads CSP optimized, and full tracking enabled.
 
+**FINAL CSP FIX**: HTTP-level CSP headers deployed via Vercel config to override caching issues.
+
 ## 🌟 Features
 
 - **Modern Static Site Generation** - Built with Astro for optimal performance
