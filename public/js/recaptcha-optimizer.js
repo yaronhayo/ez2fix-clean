@@ -70,6 +70,11 @@ class RecaptchaOptimizer {
     this.loaded = true;
     
     return new Promise((resolve, reject) => {
+      // Ensure scheduler exists before use
+      if (!this.scheduler || typeof this.scheduler.schedule !== 'function') {
+        this.scheduler = this.createFallbackScheduler();
+      }
+
       // Break reCAPTCHA loading into smaller chunks
       this.scheduler.schedule(() => {
         const script = document.createElement('script');
