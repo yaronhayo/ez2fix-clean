@@ -15,11 +15,18 @@ export interface Props {
   robotsContent?: string;
 }
 
+// Create canonical URL using the actual request origin to prevent URL mismatches
+const getCanonicalURL = () => {
+  const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+  // Use the actual request origin (for proper canonical URLs across different domains)
+  return new URL(pathname, Astro.url.origin);
+};
+
 const {
   title = siteConfig.title,
   description = siteConfig.description,
   ogImage = siteConfig.ogImage,
-  canonicalURL = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site),
+  canonicalURL = getCanonicalURL(),
   keywords = "garage door repair, garage door installation, Bergen County, Hudson County, NJ, emergency repair, licensed contractor",
   robotsContent = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 } = Astro.props;
