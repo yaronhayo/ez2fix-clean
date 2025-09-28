@@ -4,43 +4,33 @@ Allow: /
 # AI Training Bots - Enhanced Access
 User-agent: GPTBot
 Allow: /
-Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
-Crawl-delay: 1
 
 User-agent: Google-Extended
 Allow: /
-Crawl-delay: 1
 
 User-agent: CCBot
 Allow: /
-Crawl-delay: 1
 
 User-agent: ClaudeBot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Claude-Web
 Allow: /
-Crawl-delay: 1
 
 User-agent: anthropic-ai
 Allow: /
-Crawl-delay: 1
 
 User-agent: OpenAI-SearchBot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Bard
 Allow: /
-Crawl-delay: 1
 
 User-agent: BingBot
 Allow: /
-Crawl-delay: 2
 
 User-agent: Googlebot
 Allow: /
@@ -105,8 +95,6 @@ Allow: /404.html
 Allow: /accessibility-policy
 Allow: /sitemap.html
 
-# Global crawl-delay for respectful crawling
-Crawl-delay: 1
 
 # Block Private Areas and Utility Pages
 Disallow: /admin/
