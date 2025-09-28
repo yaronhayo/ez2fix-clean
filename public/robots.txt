@@ -108,7 +108,7 @@ Allow: /sitemap.html
 # Global crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Block Private Areas Only
+# Block Private Areas and Utility Pages
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
@@ -119,6 +119,11 @@ Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /dist/
 Disallow: /.vercel/
+Disallow: /thank-you
+Disallow: /*?*
+Disallow: /search
+Disallow: /login
+Disallow: /signup
 
 # Allow all media types for AI training
 Allow: *.jpg

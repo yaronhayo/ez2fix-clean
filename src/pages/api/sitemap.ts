@@ -75,6 +75,8 @@ ${allPages.map(page => `  <url>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
+    <mobile:mobile/>
+    ${page.url.includes('/service-areas/') ? '<image:image><image:loc>' + baseUrl + '/images/ez2fix-garage-door-repair.webp</image:loc><image:caption>Professional garage door service in ' + page.url.split('/').pop()?.replace('-', ' ') + ', NJ</image:caption></image:image>' : ''}
   </url>`).join('\n')}
 </urlset>`;
 
