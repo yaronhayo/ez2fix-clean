@@ -13,10 +13,9 @@ export default defineConfig({
 
   // Performance optimizations
   build: {
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'auto',
     assets: '_assets',
-    format: 'directory',
-    split: true
+    format: 'directory'
   },
 
   // Vite optimization for better bundling
