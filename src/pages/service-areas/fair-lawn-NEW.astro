@@ -7,18 +7,18 @@ import ReviewsCarouselClean from '@/components/ui/ReviewsCarouselClean.astro';
 import Card from '@/components/ui/Card.astro';
 import { siteConfig } from '@/config/site';
 
-// Cedar Grove location data
+// Fair Lawn location data
 const location = {
-  city: 'Cedar Grove',
-  county: 'Essex County',
+  city: 'Fair Lawn',
+  county: 'Bergen County',
   state: 'NJ'
 };
 
-// Services for Cedar Grove
+// Services for Fair Lawn
 const services = [
   {
     title: 'Spring Repair & Replacement',
-    description: 'Professional spring replacement for Cedar Grove homes. Safe handling of high-tension springs with proper balance and safety inspection.',
+    description: 'Professional spring replacement for Fair Lawn homes. Safe handling of high-tension springs with proper balance and safety inspection.',
     image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg',
     features: ['Torsion & Extension Springs', 'High-Cycle Options', 'Balance Testing', 'Safety Inspection'],
     warranty: '10-Year Warranty',
@@ -28,7 +28,7 @@ const services = [
   },
   {
     title: 'Emergency Door Repair',
-    description: 'Fast response for Cedar Grove garage door emergencies. Broken springs, off-track doors, and opener failures handled promptly.',
+    description: 'Fast response for Fair Lawn garage door emergencies. Broken springs, off-track doors, and opener failures handled promptly.',
     image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp',
     features: ['24/7 Availability', 'Fast Response', 'All Brands', 'Safety First'],
     warranty: '10-Year Warranty',
@@ -38,7 +38,7 @@ const services = [
   },
   {
     title: 'New Door Installation',
-    description: 'Complete garage door installation for Cedar Grove homes. Custom sizing available for historic properties and modern homes.',
+    description: 'Complete garage door installation for Fair Lawn homes. Custom sizing available for Radburn historic district and modern homes.',
     image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png',
     features: ['Custom Sizing', 'Period Styles', 'Energy Efficient', 'Curb Appeal'],
     warranty: '10-Year Warranty',
@@ -48,7 +48,7 @@ const services = [
   },
   {
     title: 'Smart Opener Installation',
-    description: 'Modern garage door openers with smartphone control. WiFi connectivity and real-time monitoring for Cedar Grove homes.',
+    description: 'Modern garage door openers with smartphone control. WiFi connectivity and real-time monitoring for Fair Lawn homes.',
     image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp',
     features: ['WiFi Control', 'Mobile Alerts', 'Battery Backup', 'Easy Setup'],
     warranty: '10-Year Warranty',
@@ -68,7 +68,7 @@ const services = [
   },
   {
     title: 'Commercial Service',
-    description: 'Business garage door solutions for Cedar Grove commercial properties. Heavy-duty repairs and maintenance programs.',
+    description: 'Business garage door solutions for Fair Lawn commercial properties. Heavy-duty repairs and maintenance programs.',
     image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg',
     features: ['Business Focus', 'Heavy-Duty', 'Maintenance Plans', 'Minimize Downtime'],
     warranty: '10-Year Warranty',
@@ -78,16 +78,16 @@ const services = [
   }
 ];
 
-// Common garage door issues in Cedar Grove
+// Common garage door issues in Fair Lawn
 const commonIssues = [
   {
     issue: 'Broken Springs',
-    description: 'Temperature extremes in Cedar Grove cause spring failures - especially in older homes near Memorial Park.',
+    description: 'Temperature extremes in Fair Lawn cause spring failures - especially in older Radburn homes.',
     icon: 'spring'
   },
   {
     issue: 'Off-Track Doors',
-    description: 'Vibration from Route 23 and Pompton Avenue traffic can loosen hardware and throw doors off track.',
+    description: 'Vibration from Route 208 traffic can loosen hardware and throw doors off track.',
     icon: 'track'
   },
   {
@@ -112,39 +112,39 @@ const commonIssues = [
   }
 ];
 
-// FAQs specific to Cedar Grove - location + service specific
+// FAQs specific to Fair Lawn - location + service specific
 const localFAQs = [
   {
-    question: 'Do you provide garage door repair throughout Cedar Grove neighborhoods?',
-    answer: 'Yes, we serve all Cedar Grove areas including Memorial Park, Lindsley Park, and North End neighborhoods. Many older homes have non-standard garage door dimensions that require custom solutions. We maintain architectural character while incorporating modern safety features like photo-eye sensors and auto-reverse.'
+    question: 'Do you provide garage door repair in the Radburn Historic District?',
+    answer: 'Yes, we specialize in Radburn homes from the 1920s-1930s. Many have non-standard garage door dimensions that require custom solutions. We maintain period architectural character while incorporating modern safety features like photo-eye sensors and auto-reverse.'
   },
   {
-    question: 'What causes garage door springs to break in Cedar Grove?',
-    answer: 'Cedar Grove\'s temperature extremes stress springs significantly. Metal contracts in sub-zero winter nights and expands in 90-degree summer days. Springs cycle 10,000+ times over 7-10 years. We use high-cycle springs rated for NJ weather extremes.'
+    question: 'What causes garage door springs to break in Fair Lawn?',
+    answer: 'Fair Lawn\'s temperature extremes stress springs significantly. Metal contracts in sub-zero winter nights and expands in 90-degree summer days. Springs cycle 10,000+ times over 7-10 years. We use high-cycle springs rated for NJ weather extremes.'
   },
   {
-    question: 'Can you fix garage doors that come off the tracks near Route 23?',
-    answer: 'Yes, homes near Route 23, Pompton Avenue, and Little Falls Road experience constant vibration from traffic. This loosens hardware over time and can throw doors off track. We realign tracks, tighten hardware, and add vibration-resistant components.'
+    question: 'Can you fix garage doors that come off the tracks near Route 208?',
+    answer: 'Yes, homes near Route 208, Route 4, and the GW Bridge approach experience constant vibration from traffic. This loosens hardware over time and can throw doors off track. We realign tracks, tighten hardware, and add vibration-resistant components.'
   },
   {
-    question: 'Do you match garage door styles for Cedar Grove\'s different neighborhoods?',
-    answer: 'Absolutely. From traditional colonial homes near Memorial Park to modern properties along the Essex Fells border, we offer doors that match your home\'s architecture. Traditional carriage house styles, modern designs, and custom options available.'
+    question: 'Do you match garage door styles for Fair Lawn\'s different neighborhoods?',
+    answer: 'Absolutely. From Tudor Revival in Radburn to mid-century ranch homes in Warren Point, we offer doors that match your home\'s architecture. Traditional carriage house styles, modern designs, and custom options available.'
   },
   {
-    question: 'What should Cedar Grove homeowners do when their garage door won\'t open?',
+    question: 'What should Fair Lawn homeowners do when their garage door won\'t open?',
     answer: 'Don\'t force it. Check if the opener has power and the remote has batteries. Look for broken springs (visible gap in spring above door) or if the door came off its tracks. For safety, call us - garage doors weigh 400+ pounds and can be dangerous.'
   },
   {
-    question: 'Do you service commercial garage doors in Cedar Grove business areas?',
-    answer: 'Yes, we service commercial properties throughout Cedar Grove including businesses along Pompton Avenue, Little Falls Road, and Route 23 corridor. We handle everything from small commercial overhead doors to heavy-duty loading dock doors with maintenance programs available.'
+    question: 'Do you service commercial garage doors in Fair Lawn business areas?',
+    answer: 'Yes, we service commercial properties throughout Fair Lawn including businesses along Route 208 and downtown. We handle everything from small commercial overhead doors to heavy-duty loading dock doors with maintenance programs available.'
   }
 ];
 ---
 
 <BaseLayout
-  title={`Garage Door Repair ${location.city}, ${location.state} | Licensed Contractor Essex County`}
-  description={`Expert garage door repair in ${location.city}, ${location.county}. Serving Memorial Park, Little Falls Road & all Cedar Grove neighborhoods. Licensed NJ contractor #13VH13553300.`}
-  keywords="garage door repair Cedar Grove NJ, Cedar Grove garage door service, Memorial Park, Essex County garage door, Cedar Grove spring repair, garage door opener Cedar Grove"
+  title={`Garage Door Repair ${location.city}, ${location.state} | Licensed Contractor Bergen County`}
+  description={`Expert garage door repair in ${location.city}, ${location.county}. Specializing in historic Radburn District homes & modern properties. Licensed NJ contractor #13VH13553300.`}
+  keywords="garage door repair Fair Lawn NJ, Fair Lawn garage door service, Radburn Historic District, Bergen County garage door, Fair Lawn spring repair, garage door opener Fair Lawn"
   noindex={true}
 >
   <HeaderClean />
@@ -199,7 +199,7 @@ const localFAQs = [
                 Licensed • Insured • 10-Year Warranty
               </p>
               <p class="text-lg sm:text-xl text-white/90 leading-relaxed">
-                Expert garage door service for {location.city}'s diverse neighborhoods. From Memorial Park's classic homes to today's modern properties.
+                Expert garage door service for {location.city}'s historic homes and modern properties. From Radburn's 1920s architecture to today's smart homes.
               </p>
             </div>
 
@@ -276,7 +276,7 @@ const localFAQs = [
       </div>
     </section>
 
-    <!-- Our Cedar Grove Services -->
+    <!-- Our Fair Lawn Services -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
@@ -285,7 +285,7 @@ const localFAQs = [
               Our {location.city} <span class="text-ez2fix-primary">Services</span>
             </h2>
             <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Comprehensive garage door solutions for Cedar Grove homes and businesses
+              Comprehensive garage door solutions for Fair Lawn homes and businesses
             </p>
           </div>
 
@@ -320,7 +320,7 @@ const localFAQs = [
       </div>
     </section>
 
-    <!-- Serving All Cedar Grove Neighborhoods -->
+    <!-- Serving All Fair Lawn Neighborhoods -->
     <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
@@ -329,32 +329,32 @@ const localFAQs = [
               Serving All {location.city} <span class="text-ez2fix-primary">Neighborhoods</span>
             </h2>
             <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Professional garage door service throughout Cedar Grove's communities
+              Professional garage door service throughout Fair Lawn's communities
             </p>
           </div>
 
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
-              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Memorial Park Area</div>
-              <div class="text-xs md:text-sm text-ez2fix-brown">Classic homes & modern service</div>
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Radburn Historic District</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Custom solutions for 1920s homes</div>
             </Card>
             <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
-              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Essex Fells Border</div>
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Warren Point</div>
               <div class="text-xs md:text-sm text-ez2fix-brown">Full service residential repairs</div>
             </Card>
             <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
-              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Little Falls Road</div>
-              <div class="text-xs md:text-sm text-ez2fix-brown">Commercial & residential service</div>
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Garden Apartments</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Multi-unit door solutions</div>
             </Card>
             <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
-              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Route 23 Corridor</div>
-              <div class="text-xs md:text-sm text-ez2fix-brown">Business & home solutions</div>
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Downtown Fair Lawn</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Residential & commercial service</div>
             </Card>
           </div>
 
           <div class="text-center mt-8">
             <p class="text-ez2fix-brown">
-              <strong>Serving all Cedar Grove neighborhoods:</strong> From Route 23 to the Verona border, we provide fast, reliable service throughout Essex County.
+              <strong>Serving all Fair Lawn neighborhoods:</strong> From Route 208 to the Passaic River, we provide fast, reliable service throughout Bergen County.
             </p>
           </div>
         </div>
@@ -370,14 +370,14 @@ const localFAQs = [
               Our {location.city} <span class="text-ez2fix-primary">Service Area</span>
             </h2>
             <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Located in the heart of Cedar Grove, ready to serve you
+              Located in the heart of Fair Lawn, ready to serve you
             </p>
           </div>
 
           <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-ez2fix-primary/20">
             <div class="aspect-video w-full">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24165.534234567890!2d-74.22843062207031!3d40.85517987910697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3a8c5e5e5e5e5%3A0x5e5e5e5e5e5e5e5e!2sCedar%20Grove%2C%20NJ!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48353.67688937024!2d-74.15096822089844!3d40.94006087910697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2fb7fc9e95957%3A0x6d1bb5bb3b3e0b1c!2sFair%20Lawn%2C%20NJ!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
                 width="100%"
                 height="100%"
                 style="border:0;"
@@ -395,14 +395,14 @@ const localFAQs = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
-              Proudly serving Cedar Grove and surrounding Essex County communities
+              Proudly serving Fair Lawn and surrounding Bergen County communities
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us for Cedar Grove -->
+    <!-- Why Choose Us for Fair Lawn -->
     <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
@@ -411,7 +411,7 @@ const localFAQs = [
               Why {location.city} Homeowners <span class="text-ez2fix-primary">Choose Us</span>
             </h2>
             <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Local expertise meets professional service for Cedar Grove's unique garage door needs
+              Local expertise meets professional service for Fair Lawn's unique garage door needs
             </p>
           </div>
 
@@ -422,9 +422,9 @@ const localFAQs = [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
               </div>
-              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">All Home Styles</h3>
+              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">Historic Home Specialists</h3>
               <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">
-                Essex County expertise for all architectural styles. We work with traditional colonials, split-levels, and modern homes, handling non-standard dimensions while maintaining aesthetic character.
+                Radburn Historic District expertise. We understand 1920s-1930s architecture and work with non-standard dimensions while maintaining period character.
               </p>
             </Card>
 
@@ -435,9 +435,9 @@ const localFAQs = [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
               </div>
-              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">Cedar Grove Area Knowledge</h3>
+              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">Fair Lawn Area Knowledge</h3>
               <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">
-                From Memorial Park to the Essex Fells border, we know Cedar Grove's neighborhoods. We understand local architecture, common issues, and the best solutions for your area.
+                From Warren Point to Radburn, we know Fair Lawn's neighborhoods. We understand local architecture, common issues, and the best solutions for your area.
               </p>
             </Card>
 
@@ -466,7 +466,7 @@ const localFAQs = [
               Common Garage Door Issues <span class="text-ez2fix-primary">We Help Fix</span>
             </h2>
             <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
-              Cedar Grove-specific problems we solve every day
+              Fair Lawn-specific problems we solve every day
             </p>
           </div>
 
@@ -491,7 +491,7 @@ const localFAQs = [
       </div>
     </section>
 
-    <!-- Common Cedar Grove Questions -->
+    <!-- Common Fair Lawn Questions -->
     <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
@@ -500,7 +500,7 @@ const localFAQs = [
               Common {location.city} <span class="text-ez2fix-primary">Questions</span>
             </h2>
             <p class="text-xl text-ez2fix-brown">
-              Answers to questions we hear from Cedar Grove homeowners
+              Answers to questions we hear from Fair Lawn homeowners
             </p>
           </div>
 
@@ -592,7 +592,7 @@ const localFAQs = [
       });
     </script>
 
-    <!-- What Cedar Grove Customers Say -->
+    <!-- What Fair Lawn Customers Say -->
     <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
@@ -601,7 +601,7 @@ const localFAQs = [
               What {location.city} <span class="text-ez2fix-primary">Customers Say</span>
             </h2>
             <p class="text-xl text-ez2fix-gold max-w-3xl mx-auto">
-              Real feedback from your neighbors throughout Cedar Grove
+              Real feedback from your neighbors throughout Fair Lawn
             </p>
           </div>
 
@@ -691,8 +691,8 @@ const localFAQs = [
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": `Ez2Fix Garage Door Repair - ${location.city}`,
-  "@id": `https://ez2fixllc.com/service-areas/cedar-grove`,
-  "url": "https://ez2fixllc.com/service-areas/cedar-grove",
+  "@id": `https://ez2fixllc.com/service-areas/fair-lawn`,
+  "url": "https://ez2fixllc.com/service-areas/fair-lawn",
   "telephone": siteConfig.business.phone,
   "address": {
     "@type": "PostalAddress",

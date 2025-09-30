@@ -3,848 +3,706 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeaderClean from '@/components/layout/HeaderClean.astro';
 import FooterClean from '@/components/layout/FooterClean.astro';
 import ServiceCard from '@/components/ui/ServiceCard.astro';
-import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import ReviewsCarouselClean from '@/components/ui/ReviewsCarouselClean.astro';
 import Card from '@/components/ui/Card.astro';
 import { siteConfig } from '@/config/site';
 
-// North Caldwell specific data
-const locationData = {
+// North Caldwell location data
+const location = {
   city: 'North Caldwell',
   county: 'Essex County',
-  state: 'NJ',
-  zip: '07006',
-  lat: 40.8715,
-  lng: -74.2585,
-  neighborhoods: [
-    'Mountain Avenue',
-    'Gould Avenue', 
-    'Personette Avenue',
-    'Hillside Avenue',
-    'Grandview Avenue'
-  ],
-  landmarks: [
-    'Grover Cleveland Park',
-    'North Caldwell Borough Hall', 
-    'Mountain Way Elementary School',
-    'Essex County Country Club',
-    'Caldwell University vicinity'
-  ],
-  serviceStats: {
-    customersServed: '680+',
-    yearsInArea: '8',
-    satisfactionRate: '99.8%'
-  }
+  state: 'NJ'
 };
 
-// Services optimized for conversion
+// Services for North Caldwell
 const services = [
   {
-    title: "24/7 Emergency Repair",
-    description: "Emergency repair service with same-day response across Northern NJ.",
-    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp",
-    features: ["Available 24/7", "Same-Day Service", "All Brands", "Safety First"],
-    badge: "24/7 AVAILABLE",
-    href: "/services/emergency-garage-door-repair",
+    title: 'Spring Repair & Replacement',
+    description: 'Professional spring replacement for North Caldwell homes. Safe handling of high-tension springs with proper balance and safety inspection.',
+    image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg',
+    features: ['Torsion & Extension Springs', 'High-Cycle Options', 'Balance Testing', 'Safety Inspection'],
+    warranty: '10-Year Warranty',
+    badge: 'MOST COMMON',
+    href: '/services/garage-door-spring-repair',
     popular: true
   },
   {
-    title: "Spring Repair",
-    description: "Expert spring replacement with safe handling and quality parts.",
-    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Spring%20Repair.jpg", 
-    features: ["Safe Replacement", "Quality Springs", "Proper Balance", "Peace of Mind"],
-    badge: "MOST COMMON",
-    href: "/services/garage-door-spring-repair",
+    title: 'Emergency Door Repair',
+    description: 'Fast response for North Caldwell garage door emergencies. Broken springs, off-track doors, and opener failures handled promptly.',
+    image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp',
+    features: ['24/7 Availability', 'Fast Response', 'All Brands', 'Safety First'],
+    warranty: '10-Year Warranty',
+    badge: '24/7 EMERGENCY',
+    href: '/services/emergency-garage-door-repair',
     popular: true
   },
   {
-    title: "Smart Opener Installation",
-    description: "Smart opener installation with WiFi connectivity and smartphone control.",
-    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp",
-    features: ["Smart Control", "Phone Alerts", "Backup Power", "Easy Setup"],
-    badge: "SMART HOME", 
-    href: "/services/garage-door-opener-installation",
+    title: 'New Door Installation',
+    description: 'Complete garage door installation for North Caldwell homes. Custom sizing available for historic properties and modern homes.',
+    image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png',
+    features: ['Custom Sizing', 'Period Styles', 'Energy Efficient', 'Curb Appeal'],
+    warranty: '10-Year Warranty',
+    badge: 'CUSTOM OPTIONS',
+    href: '/services/new-garage-door-installation',
     popular: false
   },
   {
-    title: "New Door Installation",
-    description: "Custom garage door installation to boost home value and curb appeal.",
-    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Installation.png",
-    features: ["Boost Home Value", "Custom Styles", "Energy Savings", "Curb Appeal"],
-    badge: "CURB APPEAL",
-    href: "/services/new-garage-door-installation", 
+    title: 'Smart Opener Installation',
+    description: 'Modern garage door openers with smartphone control. WiFi connectivity and real-time monitoring for North Caldwell homes.',
+    image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp',
+    features: ['WiFi Control', 'Mobile Alerts', 'Battery Backup', 'Easy Setup'],
+    warranty: '10-Year Warranty',
+    badge: 'SMART HOME',
+    href: '/services/garage-door-opener-installation',
     popular: false
   },
   {
-    title: "Commercial Service",
-    description: "Commercial repair and maintenance with priority service for businesses.",
-    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg",
-    features: ["Commercial Priority", "Heavy-Duty Doors", "Maintenance Plans", "Minimize Downtime"], 
-    badge: "BUSINESS",
-    href: "/services/commercial-garage-door-service",
+    title: 'General Repairs',
+    description: 'Complete garage door repair services. Track alignment, cable replacement, panel repair, and maintenance for all door types.',
+    image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Repair.webp',
+    features: ['All Repairs', 'Diagnostics', 'Quality Parts', 'Professional Service'],
+    warranty: '10-Year Warranty',
+    badge: 'ALL REPAIRS',
+    href: '/services/general-garage-door-repair',
     popular: false
   },
   {
-    title: "Complete Repair Service", 
-    description: "Complete service for all makes and models including track repairs.",
-    image: "https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png",
-    features: ["All Brand Service", "Track Repairs", "Cable Replacement", "Preventive Care"],
-    badge: "ALL REPAIRS",
-    href: "/services/general-garage-door-repair",
+    title: 'Commercial Service',
+    description: 'Business garage door solutions for North Caldwell commercial properties. Heavy-duty repairs and maintenance programs.',
+    image: 'https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg',
+    features: ['Business Focus', 'Heavy-Duty', 'Maintenance Plans', 'Minimize Downtime'],
+    warranty: '10-Year Warranty',
+    badge: 'COMMERCIAL',
+    href: '/services/commercial-garage-door-service',
     popular: false
   }
 ];
 
-// Local testimonials
-const localTestimonial = {
-  name: "Sarah M.",
-  location: "Mountain Avenue, North Caldwell", 
-  service: "Emergency Spring Repair",
-  quote: "When our garage door spring snapped on a Tuesday morning, Ez2Fix provided excellent service to our North Caldwell home. Professional, reliable, and quality work. They've earned our trust and recommendation to neighbors.",
-  rating: 5,
-  date: "2024-01-15"
-};
+// Common garage door issues in North Caldwell
+const commonIssues = [
+  {
+    issue: 'Broken Springs',
+    description: 'Temperature extremes in North Caldwell cause spring failures - especially in older homes near Mountain Avenue.',
+    icon: 'spring'
+  },
+  {
+    issue: 'Off-Track Doors',
+    description: 'Vibration from Passaic Avenue and Bloomfield Avenue traffic can loosen hardware and throw doors off track.',
+    icon: 'track'
+  },
+  {
+    issue: 'Opener Problems',
+    description: 'Power surges and age cause openers to fail - remote not working or motor running without movement.',
+    icon: 'opener'
+  },
+  {
+    issue: 'Weather Damage',
+    description: 'NJ storms, freezing temps, and humidity affect door panels, seals, and hardware.',
+    icon: 'weather'
+  },
+  {
+    issue: 'Cable Failures',
+    description: 'Frayed or broken cables make doors dangerous - common in homes with heavy daily use.',
+    icon: 'cable'
+  },
+  {
+    issue: 'Panel Damage',
+    description: 'Dents, cracks, or damaged panels from accidents or weather - we can match and replace.',
+    icon: 'panel'
+  }
+];
 
-// Service areas and neighborhoods
-const serviceAreas = [
-  { area: "North Caldwell Borough", zip: "07006" },
-  { area: "West Caldwell", zip: "07006" }, 
-  { area: "Caldwell", zip: "07006" },
-  { area: "Fairfield", zip: "07004" },
-  { area: "Roseland", zip: "07068" },
-  { area: "Pine Brook", zip: "07058" }
+// FAQs specific to North Caldwell - location + service specific
+const localFAQs = [
+  {
+    question: 'Do you provide garage door repair throughout North Caldwell neighborhoods?',
+    answer: 'Yes, we serve all North Caldwell areas including Mountain Avenue, Gould Avenue, and Passaic Avenue neighborhoods. Many upscale homes have custom garage door specifications that require expert solutions. We maintain architectural character while incorporating modern safety features like photo-eye sensors and auto-reverse.'
+  },
+  {
+    question: 'What causes garage door springs to break in North Caldwell?',
+    answer: 'North Caldwell\'s temperature extremes stress springs significantly. Metal contracts in sub-zero winter nights and expands in 90-degree summer days. Springs cycle 10,000+ times over 7-10 years. We use high-cycle springs rated for NJ weather extremes.'
+  },
+  {
+    question: 'Can you fix garage doors that come off the tracks near Passaic Avenue?',
+    answer: 'Yes, homes near Passaic Avenue, Bloomfield Avenue, and Mountain Avenue experience vibration from traffic. This loosens hardware over time and can throw doors off track. We realign tracks, tighten hardware, and add vibration-resistant components.'
+  },
+  {
+    question: 'Do you match garage door styles for North Caldwell\'s upscale homes?',
+    answer: 'Absolutely. From traditional estates on Mountain Avenue to contemporary homes throughout North Caldwell, we offer doors that match your home\'s architecture. Custom designs, carriage house styles, and modern options available.'
+  },
+  {
+    question: 'What should North Caldwell homeowners do when their garage door won\'t open?',
+    answer: 'Don\'t force it. Check if the opener has power and the remote has batteries. Look for broken springs (visible gap in spring above door) or if the door came off its tracks. For safety, call us - garage doors weigh 400+ pounds and can be dangerous.'
+  },
+  {
+    question: 'Do you service commercial garage doors in North Caldwell business areas?',
+    answer: 'Yes, we service commercial properties throughout North Caldwell including businesses along Passaic Avenue and Bloomfield Avenue. We handle everything from small commercial overhead doors to heavy-duty loading dock doors with maintenance programs available.'
+  }
 ];
 ---
 
-<BaseLayout 
-  title="North Caldwell Garage Door Repair & Installation | Same-Day Service | Ez2Fix LLC"
-  description="Professional garage door repair in North Caldwell, NJ. Emergency service, spring replacement, opener installation. Licensed #13VH13553300. Call for same-day service!"
+<BaseLayout
+  title={`Garage Door Repair ${location.city}, ${location.state} | Licensed Contractor Essex County`}
+  description={`Expert garage door repair in ${location.city}, ${location.county}. Serving Mountain Avenue, Gould Avenue & all North Caldwell neighborhoods. Licensed NJ contractor #13VH13553300.`}
+  keywords="garage door repair North Caldwell NJ, North Caldwell garage door service, Mountain Avenue, Essex County garage door, North Caldwell spring repair, garage door opener North Caldwell"
+  noindex={true}
 >
   <HeaderClean />
-  
-  <main>
-    <!-- Service Area Hero Section -->
-    <section class="relative hero-responsive overflow-hidden hero-section bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
-      <div class="container-responsive relative z-10">
-        <!-- Hero Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
-          
-          <!-- Left Side - Hero Content -->
-          <div class="hero-content-responsive order-2 lg:order-1">
-            <!-- Local Trust Badge -->
-            <div class="flex items-center justify-center lg:justify-start space-x-4 mb-4 lg:mb-6 animate-on-scroll">
-              <div class="flex items-center space-x-2">
-                <svg class="h-4 w-4 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span class="text-xs md:text-sm font-semibold text-white">{locationData.serviceStats.customersServed} Local Customers</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <svg class="h-4 w-4 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                </svg>
-                <span class="text-xs md:text-sm font-semibold text-white">Licensed & Insured</span>
-              </div>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="relative py-16 md:py-24 overflow-hidden">
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0">
+        <img
+          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage-door.webp"
+          alt={`Professional garage door services in ${location.city}, NJ`}
+          class="w-full h-full object-cover"
+          width="1920"
+          height="1080"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-gradient-to-br from-black/85 via-black/70 to-black/85"></div>
+        <div class="absolute inset-0 bg-ez2fix-dark/20"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-7xl mx-auto">
+
+          <!-- Breadcrumb -->
+          <nav class="flex items-center justify-center space-x-2 text-sm mb-8 text-ez2fix-gold">
+            <a href="/" class="hover:text-ez2fix-primary transition-colors">Home</a>
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+            <a href="/service-areas" class="hover:text-ez2fix-primary transition-colors">Service Areas</a>
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+            <span class="text-ez2fix-primary font-semibold">{location.city}</span>
+          </nav>
+
+          <!-- Main Content -->
+          <div class="text-center max-w-5xl mx-auto">
+
+            <!-- Main Headlines -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+              Garage Door Repair<br/>
+              <span class="text-ez2fix-gold">{location.city}, NJ</span>
+            </h1>
+
+            <!-- Value Proposition -->
+            <div class="max-w-3xl mx-auto mb-8">
+              <p class="text-xl sm:text-2xl text-ez2fix-gold mb-6 font-medium">
+                Licensed • Insured • 10-Year Warranty
+              </p>
+              <p class="text-lg sm:text-xl text-white/90 leading-relaxed">
+                Expert garage door service for {location.city}'s upscale neighborhoods. From Mountain Avenue estates to Gould Avenue homes.
+              </p>
             </div>
 
-            <!-- SEO-Optimized Main Headlines -->
-            <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6 animate-on-scroll">
-              <span class="text-white">Expert Garage Door Repair in</span>
-              <br />
-              <span class="text-ez2fix-gold">{locationData.city}, NJ</span>
-            </h1>
-            
-            <!-- SEO-Optimized Subtitle with Local Hook -->
-            <div class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8 animate-on-scroll">
-              <p class="mb-3">Professional <strong class="text-ez2fix-gold">garage door repair in North Caldwell, NJ</strong> with <strong class="text-ez2fix-gold">same-day emergency service</strong>. Licensed & insured with {locationData.serviceStats.yearsInArea} years serving <strong class="text-ez2fix-primary">Essex County</strong> families.</p>
-            </div>
-            
-            <!-- Service Coverage -->
-            <div class="text-center lg:text-left mb-6 animate-on-scroll">
-              <p class="text-sm md:text-base text-ez2fix-gold mb-2">Serving {locationData.neighborhoods.slice(0, 3).join(' • ')} & All North Caldwell Areas</p>
-            </div>
-            
             <!-- CTAs -->
-            <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0 animate-on-scroll">
-              <a 
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+              <a
                 href={siteConfig.links.phone}
-                class="flex-1 btn-responsive bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold btn-premium shadow-premium hover-lift"
+                class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-base sm:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
               >
-                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                Call {siteConfig.business.phone}
+                <span class="truncate">Call {siteConfig.business.phone}</span>
               </a>
-              <a 
+
+              <a
                 href="/booking"
-                class="flex-1 btn-responsive border-2 border-ez2fix-gold text-ez2fix-gold hover:bg-ez2fix-gold hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold bg-transparent btn-premium hover-lift"
+                class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-ez2fix-gold hover:bg-ez2fix-gold text-ez2fix-gold hover:text-ez2fix-dark font-bold text-base sm:text-lg rounded-lg transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-2"
               >
-                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2z"/>
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                Get Free Estimate
+                Schedule Service
               </a>
             </div>
           </div>
-
-          <!-- Right Side - Booking Form -->
-          <div class="order-1 lg:order-2 hidden lg:block animate-on-scroll">
-            <div class="bg-ez2fix-cream border-2 border-ez2fix-primary rounded-xl p-6 shadow-premium max-w-md mx-auto">
-              <BookingFormClean 
-                variant="hero" 
-                title="Get Your North Caldwell Estimate"
-                subtitle="Tell us about your garage door issue and we'll provide a personalized estimate for your North Caldwell home."
-                buttonText="Get My Free Estimate"
-              />
-              
-              <!-- Form Benefits -->
-              <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
-                <div class="grid grid-cols-2 gap-3 text-center">
-                  <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Same Day</div>
-                    <div class="text-body-small text-ez2fix-brown">Service Available</div>
-                  </div>
-                  <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Licensed NJ</div>
-                    <div class="text-body-small text-ez2fix-brown">#13VH13553300</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Complete Garage Door Services Section -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
-            Complete Garage Door Services in <span class="text-ez2fix-primary">North Caldwell, New Jersey</span>
-          </h2>
-          <p class="text-xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-            From emergency repairs near <strong>Grover Cleveland Park</strong> to smart opener installations on <strong>Mountain Avenue</strong>, we handle every garage door need in North Caldwell with the expertise and reliability your family deserves.
-          </p>
-        </div>
-
-        <!-- Service-Specific Content Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 max-w-6xl mx-auto">
-          
-          <!-- Emergency Garage Door Repair -->
-          <Card class="p-6 h-full bg-white border-2 border-ez2fix-primary/20 hover:border-ez2fix-primary hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center mb-4">
-              <svg class="h-8 w-8 text-ez2fix-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <h3 class="text-xl font-bold text-ez2fix-dark">Emergency Garage Door Repair North Caldwell</h3>
-            </div>
-            <p class="text-ez2fix-brown mb-4 leading-relaxed">
-              When you need <strong>emergency garage door repair in North Caldwell</strong>, we provide 24/7 availability. You're never stuck with a broken garage door, whether it's a snapped spring at dawn or a door that won't close at night.
-            </p>
-            <ul class="space-y-2 text-sm text-ez2fix-brown">
-              <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>24/7 emergency response in North Caldwell</li>
-              <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>Reliable emergency response service</li>
-              <li class="flex items-center"><span class="text-ez2fix-primary mr-2">•</span>Same-day repair completion</li>
-            </ul>
-          </Card>
-
-          <!-- Garage Door Spring Replacement -->
-          <Card class="p-6 h-full bg-white border-2 border-ez2fix-gold/20 hover:border-ez2fix-gold hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center mb-4">
-              <svg class="h-8 w-8 text-ez2fix-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-              </svg>
-              <h3 class="text-xl font-bold text-ez2fix-dark">Garage Door Spring Replacement North Caldwell</h3>
-            </div>
-            <p class="text-ez2fix-brown mb-4 leading-relaxed">
-              North Caldwell's freeze-thaw cycles are particularly hard on garage door springs. Our <strong>garage door spring replacement North Caldwell</strong> service uses heavy-duty springs designed for New Jersey weather, with a 10-year warranty for your peace of mind.
-            </p>
-            <ul class="space-y-2 text-sm text-ez2fix-brown">
-              <li class="flex items-center"><span class="text-ez2fix-gold mr-2">•</span>Torsion and extension spring replacement</li>
-              <li class="flex items-center"><span class="text-ez2fix-gold mr-2">•</span>Weather-resistant springs for NJ climate</li>
-              <li class="flex items-center"><span class="text-ez2fix-gold mr-2">•</span>10-year warranty on all spring work</li>
-            </ul>
-          </Card>
-
-          <!-- Smart Garage Door Opener Installation -->
-          <Card class="p-6 h-full bg-white border-2 border-ez2fix-brown/20 hover:border-ez2fix-brown hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center mb-4">
-              <svg class="h-8 w-8 text-ez2fix-brown mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-              </svg>
-              <h3 class="text-xl font-bold text-ez2fix-dark">Smart Garage Door Opener Installation</h3>
-            </div>
-            <p class="text-ez2fix-brown mb-4 leading-relaxed">
-              Many North Caldwell homes are embracing smart technology. Our <strong>garage door opener installation North Caldwell</strong> service includes WiFi-connected openers that work with your smartphone, perfect for modern homes in the Mountain Avenue area.
-            </p>
-            <ul class="space-y-2 text-sm text-ez2fix-brown">
-              <li class="flex items-center"><span class="text-ez2fix-brown mr-2">•</span>LiftMaster, Chamberlain, Genie brands</li>
-              <li class="flex items-center"><span class="text-ez2fix-brown mr-2">•</span>WiFi connectivity and smartphone control</li>
-              <li class="flex items-center"><span class="text-ez2fix-brown mr-2">•</span>Professional programming and setup</li>
-            </ul>
-          </Card>
-        </div>
-
-        <!-- Service Area Map -->
-        <div class="text-center mb-16">
-          <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark mb-6">
-            Our <span class="text-ez2fix-primary">North Caldwell Service Area</span>
-          </h3>
-          <p class="text-lg text-ez2fix-brown mb-8 max-w-3xl mx-auto">
-            We serve all of North Caldwell and surrounding Essex County areas. See our coverage map below.
-          </p>
-          
-          <!-- Map Container -->
-          <div class="bg-white rounded-xl shadow-lg border-2 border-ez2fix-primary/20 p-4 max-w-4xl mx-auto">
-            <div id="service-area-map" class="w-full h-96 rounded-lg overflow-hidden bg-ez2fix-cream/30 flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
-                  <svg class="w-8 h-8 text-ez2fix-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                </div>
-                <div class="text-lg font-bold text-ez2fix-dark mb-2">Loading Service Area Map...</div>
-                <div class="text-ez2fix-brown">North Caldwell & Surrounding Areas</div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Service Area Info -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 max-w-4xl mx-auto">
-            <div class="text-center p-4 bg-white rounded-lg shadow-md border border-ez2fix-primary/20">
-              <div class="text-lg font-bold text-ez2fix-primary mb-2">Same Day</div>
-              <div class="text-ez2fix-brown">Service Available</div>
-            </div>
-            <div class="text-center p-4 bg-white rounded-lg shadow-md border border-ez2fix-primary/20">
-              <div class="text-lg font-bold text-ez2fix-primary mb-2">{locationData.serviceStats.customersServed}</div>
-              <div class="text-ez2fix-brown">Local Customers Served</div>
-            </div>
-            <div class="text-center p-4 bg-white rounded-lg shadow-md border border-ez2fix-primary/20">
-              <div class="text-lg font-bold text-ez2fix-primary mb-2">24/7</div>
-              <div class="text-ez2fix-brown">Emergency Service</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Service Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <ServiceCard
-              title={service.title}
-              description={service.description}
-              image={service.image}
-              features={service.features}
-              badge={service.badge}
-              href={service.href}
-              popular={service.popular}
-              theme="light"
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Why North Caldwell Homeowners Choose Ez2Fix Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
+    <!-- Trust Indicators -->
+    <section class="py-8 md:py-12 bg-white border-y border-ez2fix-brown/20">
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-cream mb-6">
-              Why North Caldwell Homeowners Choose <span class="text-ez2fix-primary">Ez2Fix for Garage Door Repair</span>
-            </h2>
-            <p class="text-xl text-ez2fix-gold max-w-4xl mx-auto">
-              Over <strong>{locationData.serviceStats.customersServed} North Caldwell families</strong> have trusted us with their garage door repair needs. Here's why we're the <strong>garage door company North Caldwell NJ</strong> residents call first.
-            </p>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            
-            <!-- Local Authority -->
-            <Card class="p-6 text-center bg-ez2fix-cream border-2 border-ez2fix-primary">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-primary mx-auto mb-4 flex items-center justify-center">
-                <svg class="w-8 h-8 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-4">Local North Caldwell Expertise</h3>
-              <p class="text-ez2fix-brown leading-relaxed mb-4">
-                {locationData.serviceStats.yearsInArea} years serving North Caldwell specifically. We know every neighborhood from Grover Cleveland Park to the Essex County Country Club area, understanding the unique challenges of homes in this exclusive community.
-              </p>
-              <div class="text-2xl font-bold text-ez2fix-primary">{locationData.serviceStats.customersServed}</div>
-              <div class="text-sm text-ez2fix-brown">Local Families Served</div>
-            </Card>
-
-            <!-- Professional Credentials -->
-            <Card class="p-6 text-center bg-ez2fix-cream border-2 border-ez2fix-gold">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-gold mx-auto mb-4 flex items-center justify-center">
-                <svg class="w-8 h-8 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="text-center p-3">
+              <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 md:w-7 md:h-7 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-4">Licensed & Insured in NJ</h3>
-              <p class="text-ez2fix-brown leading-relaxed mb-4">
-                New Jersey State License #13VH13553300, fully insured for your protection. BBB A+ rated with transparent pricing that matches the professional standards expected in North Caldwell's luxury community.
-              </p>
-              <div class="text-lg font-bold text-ez2fix-gold">#13VH13553300</div>
-              <div class="text-sm text-ez2fix-brown">NJ State Licensed</div>
-            </Card>
-
-            <!-- Emergency Response -->
-            <Card class="p-6 text-center bg-ez2fix-cream border-2 border-ez2fix-brown">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-brown mx-auto mb-4 flex items-center justify-center">
-                <svg class="w-8 h-8 text-ez2fix-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="font-bold text-sm md:text-base text-ez2fix-dark mb-1">Licensed</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">NJ #13VH13553300</div>
+            </div>
+            <div class="text-center p-3">
+              <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 md:w-7 md:h-7 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                </svg>
+              </div>
+              <div class="font-bold text-sm md:text-base text-ez2fix-dark mb-1">5.0★ Rating</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Verified Reviews</div>
+            </div>
+            <div class="text-center p-3">
+              <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 md:w-7 md:h-7 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-4">Rapid Response Service</h3>
-              <p class="text-ez2fix-brown leading-relaxed mb-4">
-                <strong>Same-day garage door service North Caldwell</strong> with reliable and prompt service. We understand that in a community like North Caldwell, quality service and reliability aren't luxuries—they're expectations.
-              </p>
-              <div class="text-2xl font-bold text-ez2fix-brown">Same Day</div>
-              <div class="text-sm text-ez2fix-brown">Service Available</div>
-            </Card>
-          </div>
-
-          <!-- Local Testimonial -->
-          <Card class="p-8 bg-ez2fix-cream border-2 border-ez2fix-primary max-w-4xl mx-auto">
-            <div class="flex items-center mb-6">
-              <div class="flex text-ez2fix-gold mr-4">
-                {[...Array(localTestimonial.rating)].map((_, i) => (
-                  <svg key={i} class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                  </svg>
-                ))}
+              <div class="font-bold text-sm md:text-base text-ez2fix-dark mb-1">24/7 Service</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Always Available</div>
+            </div>
+            <div class="text-center p-3">
+              <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 md:w-7 md:h-7 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
               </div>
-              <span class="text-sm font-bold px-3 py-1 rounded-full bg-ez2fix-primary/10 text-ez2fix-primary border border-ez2fix-primary/20">
-                VERIFIED NORTH CALDWELL CUSTOMER
-              </span>
+              <div class="font-bold text-sm md:text-base text-ez2fix-dark mb-1">10-Year</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Warranty</div>
             </div>
-            
-            <blockquote class="text-xl text-ez2fix-brown italic mb-6 leading-relaxed">
-              "{localTestimonial.quote}"
-            </blockquote>
-            
-            <div class="border-t border-ez2fix-brown/20 pt-6">
-              <div class="font-bold text-ez2fix-dark text-lg">{localTestimonial.name}</div>
-              <div class="text-ez2fix-brown font-medium">{localTestimonial.location}</div>
-              <div class="text-ez2fix-primary font-bold text-sm mt-2">{localTestimonial.service}</div>
-            </div>
-          </Card>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Service Areas Near North Caldwell Section -->
-    <section class="py-16 md:py-20 bg-ez2fix-cream">
+    <!-- Our North Caldwell Services -->
+    <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
-              Service Areas Near <span class="text-ez2fix-primary">North Caldwell, New Jersey</span>
+              Our {location.city} <span class="text-ez2fix-primary">Services</span>
             </h2>
-            <p class="text-xl text-ez2fix-brown max-w-4xl mx-auto">
-              We provide <strong>licensed garage door installation North Caldwell</strong> and repair services throughout Essex County, including these neighboring communities.
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Comprehensive garage door solutions for North Caldwell homes and businesses
             </p>
           </div>
-          
-          <!-- Service Areas Grid -->
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-            {serviceAreas.map((area) => (
-              <Card class="p-4 text-center hover:shadow-lg transition-shadow bg-white border border-ez2fix-primary/20">
-                <h4 class="font-bold text-ez2fix-dark text-sm mb-2">{area.area}</h4>
-                <p class="text-xs text-ez2fix-brown">{area.zip}</p>
-              </Card>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((service) => (
+              <ServiceCard
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                features={service.features}
+                warranty={service.warranty}
+                badge={service.badge}
+                href={service.href}
+                popular={service.popular}
+                theme="light"
+              />
             ))}
           </div>
 
-          <!-- North Caldwell Specific Areas -->
-          <div class="text-center">
-            <h3 class="text-2xl font-bold text-ez2fix-dark mb-6">North Caldwell Neighborhoods We Serve</h3>
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {locationData.neighborhoods.map((neighborhood) => (
-                <Card class="p-4 text-center bg-gradient-to-br from-ez2fix-primary/5 to-ez2fix-gold/5 border border-ez2fix-primary/20">
-                  <h4 class="font-semibold text-ez2fix-dark text-sm">{neighborhood}</h4>
-                  <p class="text-xs text-ez2fix-brown mt-1">Same-Day Service</p>
-                </Card>
-              ))}
-            </div>
+          <div class="text-center mt-8 md:mt-12">
+            <a
+              href="/services"
+              class="inline-flex items-center px-6 py-3 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 font-bold text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              View All Services
+              <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- What to Expect Section -->
-    <section class="py-16 md:py-20 bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-cream mb-6">
-            What to Expect from Our <span class="text-ez2fix-gold">North Caldwell Garage Door Service</span>
-          </h2>
-          <p class="text-xl text-ez2fix-cream mb-12">
-            When you call for <strong>garage door repair near me North Caldwell</strong>, here's exactly what happens.
-          </p>
-          
-          <!-- Process Steps -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-primary mx-auto mb-4 flex items-center justify-center">
-                <span class="text-2xl font-bold text-ez2fix-dark">1</span>
-              </div>
-              <h4 class="text-lg font-bold text-ez2fix-cream mb-3">Initial Contact</h4>
-              <p class="text-ez2fix-gold">When you call for garage door repair in North Caldwell, we answer 24/7 and schedule your same-day appointment.</p>
-            </div>
-            
-            <div class="text-center">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-gold mx-auto mb-4 flex items-center justify-center">
-                <span class="text-2xl font-bold text-ez2fix-dark">2</span>
-              </div>
-              <h4 class="text-lg font-bold text-ez2fix-cream mb-3">Scheduling</h4>
-              <p class="text-ez2fix-gold">Same-day appointment availability with arrival windows that respect your time and North Caldwell's professional standards.</p>
-            </div>
-            
-            <div class="text-center">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-primary mx-auto mb-4 flex items-center justify-center">
-                <span class="text-2xl font-bold text-ez2fix-dark">3</span>
-              </div>
-              <h4 class="text-lg font-bold text-ez2fix-cream mb-3">Arrival & Diagnosis</h4>
-              <p class="text-ez2fix-gold">Licensed technician with proper identification arrives, performs thorough diagnosis, and explains issues in clear terms.</p>
-            </div>
-            
-            <div class="text-center">
-              <div class="w-16 h-16 rounded-full bg-ez2fix-gold mx-auto mb-4 flex items-center justify-center">
-                <span class="text-2xl font-bold text-ez2fix-dark">4</span>
-              </div>
-              <h4 class="text-lg font-bold text-ez2fix-cream mb-3">Repair & Follow-up</h4>
-              <p class="text-ez2fix-gold">Professional service with quality parts, warranty explanation, and maintenance tips to keep your door running smoothly.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA Section -->
+    <!-- Serving All North Caldwell Neighborhoods -->
     <section class="py-16 md:py-24 bg-ez2fix-cream">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
-            Ready for Professional <span class="text-ez2fix-primary">North Caldwell Garage Door Service?</span>
-          </h2>
-          
-          <p class="text-xl text-ez2fix-brown mb-8 leading-relaxed">
-            Join <strong>{locationData.serviceStats.customersServed} satisfied customers</strong> in North Caldwell who chose the <strong>garage door company North Caldwell NJ</strong> trusts most. Professional help is just one call away.
-          </p>
-          
-          <!-- Emergency & Contact Info -->
-          <Card class="p-8 bg-gradient-to-r from-ez2fix-primary/10 to-ez2fix-gold/10 border-2 border-ez2fix-primary mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div>
-                <div class="text-2xl font-bold text-ez2fix-primary mb-2">24/7 Emergency</div>
-                <div class="text-ez2fix-brown">Usually Available</div>
-              </div>
-              <div>
-                <div class="text-2xl font-bold text-ez2fix-primary mb-2">Same Day</div>
-                <div class="text-ez2fix-brown">Service Available</div>
-              </div>
-              <div>
-                <div class="text-2xl font-bold text-ez2fix-primary mb-2">Licensed</div>
-                <div class="text-ez2fix-brown">#13VH13553300</div>
-              </div>
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
+              Serving All {location.city} <span class="text-ez2fix-primary">Neighborhoods</span>
+            </h2>
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Professional garage door service throughout North Caldwell's communities
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Mountain Avenue</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Premium residential service</div>
+            </Card>
+            <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Gould Avenue</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Full service residential repairs</div>
+            </Card>
+            <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Passaic Avenue</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Residential & commercial service</div>
+            </Card>
+            <Card class="p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
+              <div class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">Smull Avenue</div>
+              <div class="text-xs md:text-sm text-ez2fix-brown">Quality home solutions</div>
+            </Card>
+          </div>
+
+          <div class="text-center mt-8">
+            <p class="text-ez2fix-brown">
+              <strong>Serving all North Caldwell neighborhoods:</strong> From Mountain Avenue to Passaic Avenue, we provide fast, reliable service throughout Essex County.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Area Map -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
+              Our {location.city} <span class="text-ez2fix-primary">Service Area</span>
+            </h2>
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Located in the heart of North Caldwell, ready to serve you
+            </p>
+          </div>
+
+          <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-ez2fix-primary/20">
+            <div class="aspect-video w-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24165.987654321098!2d-74.26234567890123!3d40.86234567890123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3a6c6c6c6c6c6%3A0x6c6c6c6c6c6c6c6c!2sNorth%20Caldwell%2C%20NJ!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title={`${location.city} service area map`}
+              ></iframe>
             </div>
-          </Card>
-          
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto mb-8">
-            <a 
-              href={siteConfig.links.phone}
-              class="flex-1 sm:flex-none px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+          </div>
+
+          <div class="text-center mt-8">
+            <p class="text-ez2fix-brown text-lg">
+              <svg class="w-5 h-5 inline-block text-ez2fix-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              Proudly serving North Caldwell and surrounding Essex County communities
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us for North Caldwell -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
+              Why {location.city} Homeowners <span class="text-ez2fix-primary">Choose Us</span>
+            </h2>
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Local expertise meets professional service for North Caldwell's unique garage door needs
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <Card class="p-6 md:p-8 text-center border-2 border-ez2fix-primary/20 hover:border-ez2fix-primary transition-all duration-300">
+              <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-ez2fix-primary mx-auto mb-4 md:mb-6 flex items-center justify-center">
+                <svg class="w-7 h-7 md:w-8 md:h-8 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+              </div>
+              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">Upscale Home Specialists</h3>
+              <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">
+                Essex County expertise for premium properties. We work with custom estates, traditional homes, and modern properties, handling unique specifications while maintaining architectural excellence.
+              </p>
+            </Card>
+
+            <Card class="p-6 md:p-8 text-center border-2 border-ez2fix-primary/20 hover:border-ez2fix-primary transition-all duration-300">
+              <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-ez2fix-primary mx-auto mb-4 md:mb-6 flex items-center justify-center">
+                <svg class="w-7 h-7 md:w-8 md:h-8 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">North Caldwell Area Knowledge</h3>
+              <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">
+                From Mountain Avenue to Gould Avenue, we know North Caldwell's neighborhoods. We understand local architecture, common issues, and the best solutions for your area.
+              </p>
+            </Card>
+
+            <Card class="p-6 md:p-8 text-center border-2 border-ez2fix-primary/20 hover:border-ez2fix-primary transition-all duration-300">
+              <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-ez2fix-primary mx-auto mb-4 md:mb-6 flex items-center justify-center">
+                <svg class="w-7 h-7 md:w-8 md:h-8 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark mb-3 md:mb-4">Weather-Ready Solutions</h3>
+              <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">
+                NJ's temperature extremes demand quality parts. We use high-cycle springs rated for sub-zero winters to 90-degree summers—built to last.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Garage Door Issues We Help Fix -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
+              Common Garage Door Issues <span class="text-ez2fix-primary">We Help Fix</span>
+            </h2>
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              North Caldwell-specific problems we solve every day
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {commonIssues.map((item) => (
+              <Card class="p-4 md:p-6 hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
+                <div class="flex items-start gap-3 md:gap-4">
+                  <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-ez2fix-primary/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 md:w-6 md:h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">{item.issue}</h3>
+                    <p class="text-ez2fix-brown text-xs md:text-sm leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common North Caldwell Questions -->
+    <section class="py-16 md:py-24 bg-ez2fix-cream">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
+              Common {location.city} <span class="text-ez2fix-primary">Questions</span>
+            </h2>
+            <p class="text-xl text-ez2fix-brown">
+              Answers to questions we hear from North Caldwell homeowners
+            </p>
+          </div>
+
+          <!-- FAQ Items -->
+          <div class="space-y-3 md:space-y-4">
+            {localFAQs.map((faq, index) => (
+              <div class="border-2 border-ez2fix-primary/20 rounded-lg md:rounded-xl overflow-hidden hover:border-ez2fix-primary transition-all duration-300 hover:shadow-lg">
+                <button
+                  class="faq-question w-full text-left p-4 md:p-6 flex items-start justify-between bg-white hover:bg-ez2fix-gold/5 transition-colors"
+                  data-faq-index={index}
+                  aria-expanded="false"
+                >
+                  <h3 class="text-sm md:text-base font-bold text-ez2fix-dark pr-3 md:pr-4 flex-1">
+                    {faq.question}
+                  </h3>
+                  <div class="flex-shrink-0">
+                    <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                      <svg
+                        class="faq-icon w-4 h-4 md:w-5 md:h-5 transform transition-transform duration-300 text-ez2fix-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+                <div
+                  class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-gradient-to-br from-white to-ez2fix-cream/30"
+                >
+                  <div class="p-4 md:p-6 pt-0">
+                    <div class="border-l-4 border-ez2fix-primary/30 pl-3 md:pl-4">
+                      <p class="text-ez2fix-brown text-sm md:text-base leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="text-center mt-8 md:mt-12">
+            <a
+              href="/faq"
+              class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 border-2 border-ez2fix-primary text-ez2fix-primary hover:bg-ez2fix-primary hover:text-white font-bold text-sm md:text-base rounded-lg transition-all duration-300"
             >
-              <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Read All FAQs
+              <svg class="h-4 w-4 md:h-5 md:w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const faqButtons = document.querySelectorAll('.faq-question');
+
+        faqButtons.forEach((button) => {
+          button.addEventListener('click', function() {
+            const faqItem = this.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = faqItem.querySelector('.faq-icon');
+
+            const isOpen = this.getAttribute('aria-expanded') === 'true';
+
+            // Close all FAQs
+            faqButtons.forEach((btn) => {
+              const otherAnswer = btn.parentElement.querySelector('.faq-answer');
+              const otherIcon = btn.parentElement.querySelector('.faq-icon');
+
+              btn.setAttribute('aria-expanded', 'false');
+              otherAnswer.style.maxHeight = '0px';
+              otherIcon.style.transform = 'rotate(0deg)';
+            });
+
+            // Open clicked FAQ if it wasn't open
+            if (!isOpen) {
+              this.setAttribute('aria-expanded', 'true');
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+              icon.style.transform = 'rotate(45deg)';
+            }
+          });
+        });
+      });
+    </script>
+
+    <!-- What North Caldwell Customers Say -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-cream mb-6">
+              What {location.city} <span class="text-ez2fix-primary">Customers Say</span>
+            </h2>
+            <p class="text-xl text-ez2fix-gold max-w-3xl mx-auto">
+              Real feedback from your neighbors throughout North Caldwell
+            </p>
+          </div>
+
+          <ReviewsCarouselClean pageType="services" />
+
+          <div class="text-center mt-8 md:mt-12">
+            <a
+              href="/reviews"
+              class="inline-flex items-center px-6 py-3 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 font-bold text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+              </svg>
+              Read All Reviews
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-12 md:py-16 lg:py-20 gradient-dark">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-ez2fix-cream mb-4 md:mb-6">
+            Ready to Fix Your Garage Door?
+          </h2>
+
+          <p class="text-lg md:text-xl text-ez2fix-gold leading-relaxed mb-8 md:mb-10">
+            Licensed NJ contractor with 10-year warranty. Call now or schedule online.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+            <a
+              href={siteConfig.links.phone}
+              class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-base sm:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
               </svg>
-              Call {siteConfig.business.phone}
+              <span class="truncate">Call {siteConfig.business.phone}</span>
             </a>
-            <a 
+
+            <a
               href="/booking"
-              class="flex-1 sm:flex-none px-8 py-4 border-2 border-ez2fix-primary text-ez2fix-primary hover:bg-ez2fix-primary hover:text-ez2fix-dark inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg bg-transparent"
+              class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-ez2fix-gold hover:bg-ez2fix-gold text-ez2fix-gold hover:text-ez2fix-dark font-bold text-base sm:text-lg rounded-lg transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-2"
             >
-              <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2z"/>
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
-              Get Free Estimate
+              Book Service Online
             </a>
           </div>
 
           <!-- Trust Indicators -->
-          <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-8 text-ez2fix-brown">
+          <div class="mt-8 md:mt-10 flex flex-wrap justify-center items-center gap-4 md:gap-6">
             <div class="flex items-center space-x-2">
-              <svg class="h-5 w-5 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 md:h-6 md:w-6 text-ez2fix-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
               </svg>
-              <span class="font-semibold">Licensed & Insured NJ</span>
+              <span class="font-semibold text-sm md:text-base text-ez2fix-cream">Licensed & Insured</span>
             </div>
             <div class="flex items-center space-x-2">
-              <svg class="h-5 w-5 text-ez2fix-primary" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 md:h-6 md:w-6 text-ez2fix-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
               </svg>
-              <span class="font-semibold">5.0★ Rating</span>
+              <span class="font-semibold text-sm md:text-base text-ez2fix-cream">5.0★ Rating</span>
             </div>
             <div class="flex items-center space-x-2">
-              <svg class="h-5 w-5 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+              <svg class="h-5 w-5 md:h-6 md:w-6 text-ez2fix-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
               </svg>
-              <span class="font-semibold">10-Year Warranty</span>
+              <span class="font-semibold text-sm md:text-base text-ez2fix-cream">10-Year Warranty</span>
             </div>
           </div>
         </div>
       </div>
     </section>
-
   </main>
-  
+
   <FooterClean />
 </BaseLayout>
 
-<style>
-  .hero-section {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-
-  /* Desktop optimization - better above-the-fold positioning */
-  @media (min-width: 1024px) {
-    .hero-section {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 6rem;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .hero-section {
-      padding-top: 8rem;
-    }
-  }
-
-  @media screen and (max-height: 600px) and (orientation: landscape) {
-    .hero-section {
-      min-height: auto;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .hero-section {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-  }
-
-  /* Mobile-specific spacing adjustments */
-  @media screen and (max-width: 1023px) {
-    .hero-section {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-    
-    .hero-content-responsive {
-      margin-top: -2rem;
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    .hero-content-responsive {
-      margin-top: -3rem;
-    }
-  }
-
-  @media (min-width: 475px) {
-    .xs\:text-3xl {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Animate elements
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    // Animate hero content
-    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-    elementsToAnimate.forEach((el, index) => {
-      setTimeout(() => {
-        el.classList.add('animate-in');
-      }, index * 100);
-    });
-    
-    // Observe other scroll animations
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-  });
-</script>
-
-<!-- Google Maps JavaScript API for Service Area Map -->
-<script>
-  // Initialize service area map
-  function initServiceAreaMap() {
-    if (!window.google || !window.google.maps) {
-      console.error('Google Maps API not available for service area map');
-      showMapError();
-      return;
-    }
-    
-    const mapElement = document.getElementById('service-area-map');
-    if (!mapElement) return;
-
-    // Location data for North Caldwell
-    const center = { lat: 40.8715, lng: -74.2585 };
-    const locations = [
-      { name: 'North Caldwell', lat: 40.8715, lng: -74.2585, primary: true },
-      { name: 'West Caldwell', lat: 40.8398, lng: -74.2951 },
-      { name: 'Caldwell', lat: 40.8390, lng: -74.2765 },
-      { name: 'Fairfield', lat: 40.8837, lng: -74.3065 },
-      { name: 'Roseland', lat: 40.8201, lng: -74.3043 },
-      { name: 'Pine Brook', lat: 40.8590, lng: -74.3493 }
-    ];
-
-    // Create map
-    const map = new google.maps.Map(mapElement, {
-      zoom: 12,
-      center: center,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [
-        {
-          featureType: "all",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#F3F3E6" }]
-        },
-        {
-          featureType: "water",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#BB8525" }]
-        },
-        {
-          featureType: "road",
-          elementType: "geometry.stroke",
-          stylers: [{ color: "#1D1912" }]
-        }
-      ]
-    });
-
-    // Add markers for each location
-    locations.forEach(location => {
-      const marker = new google.maps.Marker({
-        position: { lat: location.lat, lng: location.lng },
-        map: map,
-        title: `${location.name} - Ez2Fix Service Area`,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: location.primary ? 20 : 15,
-          fillColor: location.primary ? '#D2A63C' : '#BB8525',
-          fillOpacity: 1,
-          strokeColor: '#1D1912',
-          strokeWeight: 3
-        }
-      });
-      
-      const infoWindow = new google.maps.InfoWindow({
-        content: `
-          <div style="padding: 12px; font-family: Arial, sans-serif; max-width: 250px;">
-            <h4 style="color: #1D1912; margin: 0 0 8px 0; font-size: 16px;">${location.name}</h4>
-            <p style="color: #BB8525; margin: 0 0 8px 0; font-size: 14px;">
-              ${location.primary ? 'Primary Service Area' : 'Service Coverage Area'}
-            </p>
-            <div style="display: flex; gap: 6px; margin-top: 8px;">
-              <a href="tel:(201) 554-6769" 
-                 style="background-color: #D2A63C; color: #F3F3E6; padding: 6px 12px; 
-                        border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">Call Now</a>
-            </div>
-          </div>
-        `
-      });
-      
-      marker.addListener('click', () => {
-        infoWindow.open(map, marker);
-      });
-    });
-
-    // Show primary location info window by default
-    const primaryMarker = locations.find(loc => loc.primary);
-    if (primaryMarker) {
-      const primaryInfoWindow = new google.maps.InfoWindow({
-        content: `
-          <div style="padding: 12px; font-family: Arial, sans-serif; max-width: 250px;">
-            <h4 style="color: #1D1912; margin: 0 0 8px 0; font-size: 16px;">North Caldwell</h4>
-            <p style="color: #BB8525; margin: 0 0 8px 0; font-size: 14px;">Primary Service Area</p>
-            <div style="display: flex; gap: 6px; margin-top: 8px;">
-              <a href="tel:(201) 554-6769" 
-                 style="background-color: #D2A63C; color: #F3F3E6; padding: 6px 12px; 
-                        border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">Call Now</a>
-            </div>
-          </div>
-        `
-      });
-      
-      const marker = new google.maps.Marker({
-        position: center,
-        map: map
-      });
-      
-      primaryInfoWindow.open(map, marker);
-    }
-  }
-
-  function showMapError() {
-    const mapElement = document.getElementById('service-area-map');
-    if (mapElement) {
-      mapElement.innerHTML = `
-        <div class="text-center p-8">
-          <div class="text-lg font-semibold mb-2" style="color: #1D1912;">Service Area Map Temporarily Unavailable</div>
-          <div class="text-sm" style="color: #BB8525;">We serve North Caldwell and all surrounding Essex County areas</div>
-        </div>
-      `;
-    }
-  }
-
-  // Load map when Google Maps API is available
-  async function loadServiceAreaMap() {
-    try {
-      const response = await fetch('/api/maps-key');
-      const config = await response.json();
-      
-      if (config.apiKey) {
-        await window.EZ2FIX_MAPS.loadAPI(config.apiKey);
-        initServiceAreaMap();
-      } else {
-        showMapError();
-      }
-    } catch (error) {
-      console.error('Failed to load service area map:', error);
-      showMapError();
-    }
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadServiceAreaMap);
-  } else {
-    loadServiceAreaMap();
-  }
-
-  // Fallback timeout
-  setTimeout(showMapError, 10000);
-</script>
+<!-- Schema Markup -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": `Ez2Fix Garage Door Repair - ${location.city}`,
+  "@id": `https://ez2fixllc.com/service-areas/north-caldwell`,
+  "url": "https://ez2fixllc.com/service-areas/north-caldwell",
+  "telephone": siteConfig.business.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": location.city,
+    "addressRegion": location.state,
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": location.city
+  },
+  "serviceType": ["Garage Door Repair", "Spring Replacement", "Opener Installation", "Emergency Service"]
+})} />
