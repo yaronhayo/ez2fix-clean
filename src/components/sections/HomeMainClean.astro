@@ -96,113 +96,115 @@ const processSteps = [
 ];
 ---
 
-<section class="space-section-md bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown/20 to-ez2fix-dark">
-  <div class="container-responsive">
-      
+<section class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="max-w-7xl mx-auto">
+
       <!-- SEO-Optimized Services Header -->
-      <div class="section-header-responsive animate-on-scroll">
-        <h2 class="section-title-responsive text-ez2fix-cream">
-          Complete <span class="text-ez2fix-primary">Garage Door Services</span> New Jersey
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6">
+          Complete <span class="text-ez2fix-primary">Garage Door Services</span> in New Jersey
         </h2>
-        <p class="section-subtitle-responsive text-white">
-          When you search <strong class="text-ez2fix-gold">"garage door companies near me"</strong> in New Jersey, <span class="text-ez2fix-primary font-bold">12,000+ families choose Ez2Fix</span> for professional <strong class="text-ez2fix-gold">garage door service</strong> and <strong class="text-ez2fix-gold">emergency repair</strong>.
+        <p class="text-base md:text-lg text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+          When you search <strong class="text-ez2fix-dark">"garage door companies near me"</strong> in New Jersey, <span class="text-ez2fix-primary font-bold">12,000+ families choose Ez2Fix</span> for professional <strong class="text-ez2fix-dark">garage door service</strong> and <strong class="text-ez2fix-dark">emergency repair</strong>.
         </p>
-        
-        <!-- Enhanced Services Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <div class="animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
-              <ServiceCard
-                title={service.title}
-                description={service.description}
-                image={service.image}
-                features={service.features}
-                warranty={service.warranty}
-                badge={service.badge}
-                href={service.href}
-                popular={service.popular}
-                theme="dark"
-              />
-            </div>
-          ))}
-        </div>
-        
-        <!-- Enhanced View All Services CTA -->
-        <div class="text-center mt-12 animate-on-scroll">
-          <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold shadow-premium">
-            <a href="/services" class="cta-responsive bg-ez2fix-cream text-ez2fix-primary hover:bg-ez2fix-primary hover:text-ez2fix-dark btn-premium hover-lift inline-flex items-center justify-center shadow-lg transition-all duration-300">
-              <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m3 0h4"/>
-              </svg>
-              View All Services
-              <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
-          <p class="text-body-small text-white/80 mt-3 max-w-md mx-auto">
-            Explore our complete range of professional garage door services
-          </p>
-        </div>
       </div>
+
+      <!-- Enhanced Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {services.map((service) => (
+          <ServiceCard
+            title={service.title}
+            description={service.description}
+            image={service.image}
+            features={service.features}
+            warranty={service.warranty}
+            badge={service.badge}
+            href={service.href}
+            popular={service.popular}
+            theme="light"
+          />
+        ))}
+      </div>
+
+      <!-- Enhanced View All Services CTA -->
+      <div class="text-center mt-12">
+        <a
+          href="/services"
+          class="inline-flex items-center px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 font-bold text-base md:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m3 0h4"/>
+          </svg>
+          View All Services
+          <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
   </div>
 </section>
 
 <!-- Why Choose Us Section -->
-<section class="space-section-md gradient-dark">
-  <div class="container-responsive">
-      
-      <div class="section-header-responsive">
-        <h2 class="section-title-responsive text-ez2fix-cream">
-          Why New Jersey Homeowners Choose <span class="text-ez2fix-primary">Our Garage Door Company</span>
+<section class="py-16 md:py-24 bg-ez2fix-cream">
+  <div class="container mx-auto px-4">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-10 md:mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4 md:mb-6">
+          Why New Jersey Homeowners Choose <span class="text-ez2fix-primary">Ez2Fix</span>
         </h2>
-        <p class="section-subtitle-responsive text-white">
-          Unlike other <strong class="text-ez2fix-gold">garage door companies near me</strong>, Ez2Fix offers <span class="text-ez2fix-primary font-bold">same-day garage door service</span> across all 5 New Jersey counties with professional expertise and reliable service you can trust.
+        <p class="text-base md:text-lg text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
+          Unlike other <strong class="text-ez2fix-dark">garage door companies near me</strong>, Ez2Fix offers <span class="text-ez2fix-primary font-bold">same-day garage door service</span> across all 5 New Jersey counties with professional expertise and reliable service you can trust.
         </p>
-        
-        <div class="grid-responsive-features gap-responsive mb-8 md:mb-12">
-          {whyChooseUs.map((reason, index) => (
-            <Card class={`card-responsive-large shadow-premium border-2 text-center h-full bg-ez2fix-cream ${
-              reason.color === 'primary' ? 'border-ez2fix-primary' : 
-              reason.color === 'gold' ? 'border-ez2fix-gold' : 'border-ez2fix-brown'
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
+        {whyChooseUs.map((reason) => (
+          <Card class={`p-6 md:p-8 border-2 text-center h-full bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${
+            reason.color === 'primary' ? 'border-ez2fix-primary/20 hover:border-ez2fix-primary' :
+            reason.color === 'gold' ? 'border-ez2fix-gold/20 hover:border-ez2fix-gold' : 'border-ez2fix-brown/20 hover:border-ez2fix-brown'
+          }`}>
+            <div class={`text-3xl md:text-4xl font-bold mb-3 ${
+              reason.color === 'primary' ? 'text-ez2fix-primary' :
+              reason.color === 'gold' ? 'text-ez2fix-gold' : 'text-ez2fix-brown'
             }`}>
-              <div class={`text-heading-2 font-bold mb-3 md:mb-4 ${
-                reason.color === 'primary' ? 'text-ez2fix-primary' : 
-                reason.color === 'gold' ? 'text-ez2fix-gold' : 'text-ez2fix-brown'
-              }`}>
-                {reason.stat}
-              </div>
-              <h3 class="text-heading-1 text-ez2fix-dark mb-3 md:mb-4">{reason.title}</h3>
-              <p class="text-body-large text-ez2fix-brown">{reason.description}</p>
-            </Card>
-          ))}
-        </div>
+              {reason.stat}
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold text-ez2fix-dark mb-3">{reason.title}</h3>
+            <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">{reason.description}</p>
+          </Card>
+        ))}
       </div>
 
       <!-- Simple Process -->
-      <div class="text-center">
-        <h3 class="text-display-3 text-ez2fix-cream mb-6 sm:mb-8">
+      <div class="text-center bg-white rounded-2xl p-6 md:p-10 lg:p-12 shadow-xl border-2 border-ez2fix-primary/20 hover:shadow-2xl transition-shadow duration-300">
+        <h3 class="text-2xl md:text-3xl font-bold text-ez2fix-dark mb-8 md:mb-10">
           Simple <span class="text-ez2fix-primary">4-Step</span> Process
         </h3>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-responsive max-w-5xl mx-auto">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
           {processSteps.map((step, index) => (
-            <div class="text-center">
-              <div class={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
-                index === 0 ? 'bg-ez2fix-primary' : 
-                index === 1 ? 'bg-ez2fix-gold' : 
+            <div class="text-center group">
+              <div class={`w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 ${
+                index === 0 ? 'bg-ez2fix-primary' :
+                index === 1 ? 'bg-ez2fix-gold' :
                 index === 2 ? 'bg-ez2fix-brown' : 'bg-ez2fix-primary'
               }`}>
-                <span class={`text-heading-1 font-bold ${index === 1 ? 'text-ez2fix-dark' : 'text-ez2fix-cream'}`}>
+                <span class={`text-2xl md:text-3xl font-bold ${index === 1 ? 'text-ez2fix-dark' : 'text-white'}`}>
                   {step.step}
                 </span>
               </div>
-              <h4 class="text-heading-2 text-ez2fix-cream mb-2">{step.title}</h4>
-              <p class="text-body-base text-ez2fix-gold">{step.description}</p>
+              <h4 class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">{step.title}</h4>
+              <p class="text-sm md:text-base text-ez2fix-brown leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>
       </div>
+
+    </div>
   </div>
 </section>
 

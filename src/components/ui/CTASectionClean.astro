@@ -58,23 +58,23 @@ const icons = {
 };
 ---
 
-<section class={`py-16 ${bgClass}`}>
+<section class={`py-16 md:py-24 ${bgClass}`}>
   <div class="container mx-auto px-4">
-    <div class="max-w-4xl mx-auto text-center animate-on-scroll">
-      <h2 class={`text-4xl md:text-5xl font-bold mb-6 ${textClass}`} set:html={title} />
-      
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class={`text-3xl md:text-4xl font-bold mb-6 ${textClass}`} set:html={title} />
+
       {subtitle && (
-        <p class={`text-xl md:text-2xl leading-relaxed mb-8 ${textClass}`} set:html={subtitle} />
+        <p class={`text-base md:text-lg leading-relaxed mb-8 ${textClass}`} set:html={subtitle} />
       )}
-      
+
       {stats && (
-        <div class="grid-responsive-3 gap-responsive mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {stats.map(stat => (
-            <div class="text-center p-6 rounded-lg bg-ez2fix-gold/10">
-              <div class={`text-4xl font-bold mb-2 ${theme === 'dark' ? 'text-ez2fix-primary' : 'text-ez2fix-primary'}`}>
+            <div class="text-center p-6 md:p-8 rounded-lg bg-ez2fix-gold/10">
+              <div class={`text-3xl md:text-4xl font-bold mb-2 ${theme === 'dark' ? 'text-ez2fix-primary' : 'text-ez2fix-primary'}`}>
                 {stat.number}
               </div>
-              <div class={`text-lg ${accentClass}`}>
+              <div class={`text-base md:text-lg ${accentClass}`}>
                 {stat.label}
               </div>
             </div>
@@ -83,38 +83,37 @@ const icons = {
       )}
 
       <!-- CTA Buttons -->
-      <div class="cta-mobile-stack justify-center max-w-2xl mx-auto">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
         {primaryCTA && (
-          <CTA 
+          <CTA
             variant={primaryCTA.icon === 'phone' ? 'phone' : 'primary'}
             size="medium"
             href={primaryCTA.href}
             text={primaryCTA.text}
             icon={primaryCTA.icon}
-            class="cta-mobile-full"
           />
         )}
-        
+
         {secondaryCTA && (
-          <CTA 
+          <CTA
             variant="secondary"
             size="medium"
             href={secondaryCTA.href}
             text={secondaryCTA.text}
             icon={secondaryCTA.icon}
-            class={`cta-mobile-full ${theme === 'dark' ? 'bg-transparent' : ''}`}
+            class={`${theme === 'dark' ? 'bg-transparent' : ''}`}
           />
         )}
       </div>
 
       {trustIndicators && (
-        <div class="mt-12 flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-8 gap-2 sm:gap-4">
+        <div class="mt-12 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
           {trustIndicators.map(indicator => (
             <div class="flex items-center space-x-2">
               <svg class={`h-6 w-6 ${theme === 'dark' ? 'text-ez2fix-primary' : 'text-ez2fix-primary'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[indicator.icon]} />
               </svg>
-              <span class={`font-semibold ${textClass}`}>{indicator.text}</span>
+              <span class={`font-semibold text-base ${textClass}`}>{indicator.text}</span>
             </div>
           ))}
         </div>

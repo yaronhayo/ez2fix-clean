@@ -4,168 +4,163 @@ import HeaderClean from '@/components/layout/HeaderClean.astro';
 import FooterClean from '@/components/layout/FooterClean.astro';
 import Card from '@/components/ui/Card.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import FAQComponentClean from '@/components/ui/FAQComponentClean.astro';
 import { siteConfig } from '@/config/site';
 
-// General garage door repair scenarios requiring professional service
-const repairScenarios = [
+// Common repair problems
+const repairProblems = [
   {
-    scenario: "Complete Door Malfunction",
-    description: "When your garage door won't open or close at all, professional repair identifies root causes and provides comprehensive solutions. Don't let door failures trap your car or compromise security.",
-    urgency: "Emergency",
-    icon: "warning"
+    scenario: "Door Won't Open or Close",
+    problem: "Stuck door, no movement",
+    solution: "Diagnose and fix root cause",
+    benefit: "Full access restored",
+    icon: "door"
   },
   {
-    scenario: "Track Misalignment Issues",
-    description: "Doors coming off tracks or moving unevenly require immediate professional attention. Track problems worsen quickly and can cause serious safety hazards and expensive damage.",
-    urgency: "Same Day", 
-    icon: "power"
+    scenario: "Noisy Operation",
+    problem: "Grinding, squeaking, rattling",
+    solution: "Lubrication and hardware tightening",
+    benefit: "Quiet, smooth operation",
+    icon: "noise"
   },
   {
-    scenario: "Cable and Spring Problems",
-    description: "Broken cables or spring issues create dangerous conditions requiring professional repair expertise. These high-tension components demand specialized tools and safety knowledge.",
-    urgency: "Emergency",
-    icon: "track"
-  },
-  {
-    scenario: "Excessive Noise During Operation",
-    description: "Grinding, squealing, or rattling sounds indicate mechanical problems requiring professional diagnosis. Noise issues often signal worn components that need immediate attention.",
-    urgency: "Schedule Soon",
-    icon: "storm"
-  },
-  {
-    scenario: "Panel and Section Damage",
-    description: "Damaged door panels affect both function and appearance, requiring professional repair or replacement. Structural damage compromises security and energy efficiency.",
-    urgency: "Schedule Soon",
-    icon: "cable"
-  },
-  {
-    scenario: "Opener System Failures",
-    description: "Remote control problems, inconsistent operation, or opener malfunctions require professional troubleshooting and repair to restore convenient garage access.",
-    urgency: "Same Day",
-    icon: "power-out"
+    scenario: "Crooked or Uneven Door",
+    problem: "Door tilts or jams",
+    solution: "Track alignment and balance",
+    benefit: "Straight, balanced operation",
+    icon: "balance"
   }
 ];
 
-// Professional garage door repair services
+// Why choose professional repair
+const whyProfessional = [
+  {
+    title: "Accurate Diagnosis",
+    description: "We find the real problem, not just symptoms",
+    icon: "diagnosis",
+    stat: "Fix It Right"
+  },
+  {
+    title: "All Repairs",
+    description: "Springs, cables, tracks, openers - we fix it all",
+    icon: "tools",
+    stat: "Complete Service"
+  },
+  {
+    title: "Quality Parts",
+    description: "Premium replacement parts with warranties",
+    icon: "parts",
+    stat: "Long-Lasting"
+  },
+  {
+    title: "Licensed Pros",
+    description: "Trained technicians with proper insurance",
+    icon: "license",
+    stat: "#13VH13553300"
+  }
+];
+
+// Repair services
 const repairServices = [
   {
-    title: "Track Alignment & Hardware Repair",
-    description: "Expert track realignment, hardware replacement, and structural adjustments to restore smooth door operation and prevent future mechanical problems.",
-    features: ["Professional track realignment", "Hardware replacement and tightening", "Structural reinforcement", "Precision operational adjustments"]
+    title: "Broken Spring Repair",
+    tagline: "Most common repair - we fix it fast.",
+    description: "Professional spring replacement with proper tension and safety protocols. We replace both springs to ensure balanced operation and prevent future failures.",
+    benefits: ["Both springs replaced", "Proper tension calculation", "10-year warranty", "Same-day service available"],
+    image: "spring"
   },
   {
-    title: "Cable & Spring System Repair", 
-    description: "Safe replacement of broken cables and spring adjustments using professional tools and techniques. Critical safety components require expert handling.",
-    features: ["Safe cable replacement", "Spring system adjustments", "Professional safety protocols", "High-tension component expertise"]
+    title: "Track & Roller Repair",
+    tagline: "Get your door back on track.",
+    description: "Track realignment, bent track straightening, and roller replacement. We ensure smooth operation and prevent future binding or jamming.",
+    benefits: ["Track straightening", "Roller replacement", "Alignment verification", "Lubrication service"],
+    image: "track"
   },
   {
-    title: "Roller & Moving Parts Service",
-    description: "Comprehensive roller replacement, hinge lubrication, and moving parts maintenance to eliminate noise and ensure smooth, reliable door operation.",
-    features: ["Quality roller replacement", "Professional lubrication service", "Moving parts maintenance", "Noise elimination solutions"]
-  },
-  {
-    title: "Panel & Section Restoration",
-    description: "Door panel repair and replacement services to restore both function and appearance. Complete section restoration maintains door integrity and curb appeal.",
-    features: ["Panel repair and replacement", "Section restoration services", "Weatherstripping installation", "Aesthetic and functional restoration"]
+    title: "Cable & Pulley Repair",
+    tagline: "Critical safety components fixed right.",
+    description: "Cable replacement and pulley repair to restore safe door operation. Broken cables can cause doors to fall unexpectedly - we fix them fast.",
+    benefits: ["Cable replacement", "Pulley inspection", "Safety check", "Balance verification"],
+    image: "cable"
   }
 ];
 
-// Critical signs indicating repair needs
-const repairSigns = [
-  "Garage door completely fails to open or close when activated",
-  "Door comes off tracks or moves unevenly during operation", 
-  "Visible broken cables, damaged springs, or loose hardware",
-  "Excessive grinding, squealing, or rattling noises during movement",
-  "Door panels showing cracks, dents, or structural damage",
-  "Remote controls working intermittently or not responding",
-  "Door opening or closing too quickly, indicating spring problems",
-  "Visible gaps or misalignment when door is fully closed"
-];
-
-// Professional repair process
-const repairProcess = [
+// Reviews
+const repairReviews = [
   {
-    step: "Comprehensive Diagnosis & Assessment",
-    description: "Thorough inspection of all door components including tracks, cables, springs, rollers, and opener systems to identify all issues requiring attention.",
-    timeframe: "Upon arrival"
+    text: "Door was making terrible grinding noises. They diagnosed worn rollers and replaced them same day. Now it's quieter than when it was new!",
+    author: "Patricia S.",
+    location: "Montclair, NJ",
+    service: "Roller Replacement",
+    rating: 5
   },
   {
-    step: "Professional Problem Resolution",
-    description: "Expert repair using proper tools, quality parts, and professional techniques to address root causes rather than temporary fixes.",
-    timeframe: "Comprehensive Repair"
+    text: "One cable snapped and the door was hanging crooked. They came out quickly, replaced both cables, and adjusted everything. Professional work.",
+    author: "Michael B.",
+    location: "Fair Lawn, NJ",
+    service: "Cable Repair",
+    rating: 5
   },
   {
-    step: "System Integration & Adjustment",
-    description: "Precise adjustments ensuring all components work together harmoniously with proper tension, alignment, and operational balance.",
-    timeframe: "Professional Service"
+    text: "Thought I needed a new door but they just needed to realign the tracks and replace some rollers. Honest service and fair pricing.",
+    author: "Susan L.",
+    location: "Clifton, NJ",
+    service: "Track Alignment",
+    rating: 5
   },
   {
-    step: "Safety Feature Verification",
-    description: "Complete testing of safety systems including auto-reverse functionality, photo-eye sensors, and emergency disconnect mechanisms.",
-    timeframe: "Quality Testing"
+    text: "Door wouldn't close all the way. They diagnosed it quickly and fixed the issue with the track and sensors. Works perfectly now.",
+    author: "Robert K.",
+    location: "Elmwood Park, NJ",
+    service: "Track & Sensor Repair",
+    rating: 5
   },
   {
-    step: "Final Testing & Quality Assurance",
-    description: "Comprehensive operational testing, performance verification, and customer training on proper maintenance and operation procedures.",
-    timeframe: "Final Inspection"
+    text: "Professional service from start to finish. They explained what was wrong, showed me the worn parts, and fixed everything in one visit.",
+    author: "Linda M.",
+    location: "Paramus, NJ",
+    service: "Complete Door Repair",
+    rating: 5
+  },
+  {
+    text: "Our garage door was so loud the neighbors complained. They lubricated everything and replaced worn parts. Now it's whisper quiet!",
+    author: "Thomas R.",
+    location: "Wayne, NJ",
+    service: "Noise Reduction Service",
+    rating: 5
   }
 ];
 
-// Customer testimonials specific to repair services
-const repairTestimonials = [
+// FAQs
+const repairFAQs = [
   {
-    text: "Track alignment repair was perfect. My door was completely off track and they had it working like new again. Professional diagnosis and quality repair work.",
-    author: "Robert T.",
-    location: "Hoboken, NJ",
-    service: "Track Alignment Repair"
+    question: "How much does typical garage door repair cost?",
+    answer: "Repair costs vary based on the specific issue and parts needed. We provide transparent upfront pricing after diagnosing your garage door. Common repairs like spring replacement, cable repair, or roller replacement are typically affordable, especially compared to full door replacement."
   },
   {
-    text: "Cable replacement was handled safely and professionally. The door works perfectly now and they explained how to prevent future issues.",
-    author: "Maria C.",
-    location: "West New York, NJ", 
-    service: "Cable Replacement Service"
+    question: "Can you repair any brand of garage door?",
+    answer: "Yes, we service all major garage door brands including Clopay, Amarr, Wayne Dalton, CHI, Raynor, and more. Our technicians carry common parts and can source specialized components for any brand."
   },
   {
-    text: "Noise problem completely solved. My garage door was waking the whole neighborhood - now it operates whisper quiet. Excellent repair service.",
-    author: "John S.",
-    location: "Bayonne, NJ",
-    service: "Roller & Parts Maintenance"
-  }
-];
-
-// FAQ specific to repair services
-const repairFAQ = [
-  {
-    question: "How do I know if my garage door needs professional repair?",
-    answer: "Call for professional repair if your door won't open or close, makes unusual noises, moves unevenly, comes off tracks, has visible damage to springs or cables, or if safety features aren't working properly. These issues require expert diagnosis and repair."
+    question: "How long does a typical repair take?",
+    answer: "Most repairs are completed in 1-2 hours during a single visit. Complex repairs requiring special parts may need a follow-up visit, but we complete the majority of repairs same-day with parts we carry on our trucks."
   },
   {
-    question: "What causes garage doors to come off their tracks?",
-    answer: "Common causes include broken cables, worn rollers, loose hardware, track misalignment, or impact damage. Track problems are serious safety hazards that require immediate professional attention to prevent injury and further damage."
+    question: "Do you offer warranties on repair work?",
+    answer: "Yes, all our repairs come with warranties covering both parts and labor. Warranty length varies by repair type and parts used, but we stand behind our work with comprehensive coverage."
   },
   {
-    question: "Why is my garage door making excessive noise during operation?",
-    answer: "Noisy operation typically indicates worn rollers, dry hinges, loose hardware, stretched chains, or misaligned tracks. Professional diagnosis identifies the specific cause and provides targeted solutions for quiet operation."
-  },
-  {
-    question: "Can you repair garage doors from all manufacturers?",
-    answer: "Yes, our technicians are experienced with all major garage door brands and models. We maintain extensive parts inventory and have the expertise to repair any residential or commercial garage door system."
-  },
-  {
-    question: "How long do typical garage door repairs take to complete?",
-    answer: "Repair duration varies depending on complexity. Simple adjustments are handled quickly, while major repairs like spring or cable replacement take more time. We provide accurate estimates before beginning work."
-  },
-  {
-    question: "What warranty do you provide on garage door repair work?",
-    answer: "All repairs are backed by comprehensive warranty coverage on both parts and labor. Warranty terms vary by repair type, ensuring your investment is protected and providing confidence in our professional workmanship."
+    question: "Should I repair or replace my garage door?",
+    answer: "Most garage door problems can be repaired cost-effectively. We'll provide honest recommendations about repair versus replacement based on your door's age, condition, and repair needs. Generally, if repair costs exceed 50% of replacement cost, replacement makes more sense."
   }
 ];
 ---
 
-<BaseLayout 
-  title="Professional Garage Door Repair NJ | All Makes & Models | Ez2Fix"
-  description="Expert garage door repair in New Jersey. Comprehensive service for tracks, cables, rollers, panels & openers. Licensed #13VH13553300. Quality repair solutions."
-  keywords="garage door repair new jersey, garage door service nj, track repair, cable replacement, roller repair, panel replacement, garage door maintenance, professional garage door repair, same day garage door repair, licensed garage door technicians"
+<BaseLayout
+  title="Professional Garage Door Repair NJ | Same-Day Service | Ez2Fix"
+  description="Expert garage door repair in New Jersey. Springs, cables, tracks, rollers, and more. Licensed #13VH13553300. Same-day service available."
+  keywords="garage door repair, garage door repair NJ, garage door service, broken garage door, garage door fix, garage door maintenance"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -173,327 +168,203 @@ const repairFAQ = [
       "@type": "Service",
       "@id": "https://ez2fixllc.com/services/general-garage-door-repair#repair-service",
       "name": "Professional Garage Door Repair Services in New Jersey",
-      "description": "Comprehensive garage door repair services for all makes and models including track alignment, cable replacement, roller repair, and panel restoration throughout New Jersey.",
-      "serviceType": [
-        "Garage door repair",
-        "Track alignment and repair", 
-        "Cable and hardware repair",
-        "Roller and hinge service",
-        "Panel and section repair",
-        "Garage door maintenance",
-        "Opener system repair",
-        "Safety system restoration"
-      ],
-      "provider": {
-        "@id": "https://ez2fixllc.com#business"
-      },
+      "description": "Expert garage door repair for springs, cables, tracks, rollers, and all components with same-day service availability.",
+      "serviceType": ["Garage door repair", "Spring replacement", "Cable repair", "Track alignment", "Roller replacement"],
+      "provider": { "@id": "https://ez2fixllc.com#business" },
       "areaServed": [
-        {
-          "@type": "AdministrativeArea",
-          "name": "Bergen County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Essex County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Morris County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Hudson County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Passaic County, NJ"
-        }
-      ]
+        { "@type": "AdministrativeArea", "name": "Bergen County, NJ" },
+        { "@type": "AdministrativeArea", "name": "Essex County, NJ" },
+        { "@type": "AdministrativeArea", "name": "Morris County, NJ" },
+        { "@type": "AdministrativeArea", "name": "Hudson County, NJ" },
+        { "@type": "AdministrativeArea", "name": "Passaic County, NJ" }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": repairReviews.length
+      }
     })} />
   </Fragment>
-  
+
   <HeaderClean />
   <main id="main-content">
-    
-    <!-- Hero Section -->
-    <section class="relative hero-responsive overflow-hidden">
-      <div class="absolute inset-0">
-        <img 
-          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage%20door%20repair.png" 
-          alt="Professional garage door repair service" 
-          class="w-full h-full object-cover"
-          width="1920"
-          height="1080"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-ez2fix-cream">
+      <div class="container mx-auto px-4 py-4">
+        <Breadcrumbs items={[
+          { name: 'Services', url: '/services' },
+          { name: 'Garage Door Repair', url: '/services/general-garage-door-repair' }
+        ]} />
       </div>
-      
-      <div class="container-responsive relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
-          
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 md:py-24 overflow-hidden bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown to-ez2fix-dark">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_var(--ez2fix-primary)_0%,_transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_var(--ez2fix-gold)_0%,_transparent_50%)]"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+
           <!-- Hero Content -->
-          <div class="hero-content-responsive order-2 lg:order-1">
-            
-            <!-- Badge -->
-            <div class="mb-6">
-              <span class="inline-block px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm">
-                COMPREHENSIVE REPAIR SOLUTIONS
-              </span>
+          <div>
+            <div class="inline-flex items-center px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm mb-6">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              SAME-DAY REPAIRS AVAILABLE
             </div>
-            
-            <!-- Headlines -->
-            <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6">
-              <span class="text-white">Professional</span>
-              <br />
-              <span class="text-ez2fix-gold">Garage Door Repair</span>
-              <br />
-              <span class="text-ez2fix-primary">Services</span>
-              <br />
-              <span class="text-white">in New Jersey</span>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span class="text-white">Expert</span><br />
+              <span class="text-ez2fix-primary">Garage Door Repair</span><br />
+              <span class="text-ez2fix-gold">in New Jersey</span>
             </h1>
-            
-            <!-- Subtitle -->
-            <p class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8">
-              Expert garage door repair for all makes and models. Licensed technicians provide comprehensive solutions for tracks, cables, rollers, panels, and opener systems with quality parts and professional expertise.
+
+            <p class="text-xl md:text-2xl text-ez2fix-cream mb-8 leading-relaxed">
+              From noisy doors to broken springs, we fix it all. <span class="text-ez2fix-primary font-bold">Accurate diagnosis, quality parts, and repairs that last.</span>
             </p>
-            
-            <!-- CTAs -->
-            <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0">
-              <a 
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <a
                 href={siteConfig.links.phone}
-                class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+                class="inline-flex items-center justify-center px-8 py-5 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-gold font-bold text-xl rounded-xl shadow-2xl hover:shadow-ez2fix-primary/50 transition-all duration-300 hover:scale-105"
               >
-                <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                <span>Call {siteConfig.business.phone}</span>
+                Call {siteConfig.business.phone}
               </a>
+            </div>
+
+            <div class="flex flex-wrap gap-6 text-ez2fix-cream">
+              <div class="flex items-center">
+                <svg class="w-6 h-6 text-ez2fix-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="font-semibold">Same-Day Service</span>
+              </div>
+              <div class="flex items-center">
+                <svg class="w-6 h-6 text-ez2fix-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="font-semibold">All Brands Serviced</span>
+              </div>
             </div>
           </div>
 
-          <!-- Booking Form (Desktop) -->
-          <div class="order-1 lg:order-2 hidden lg:block">
-            <Card class="card-responsive-large shadow-premium border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
+          <!-- Booking Form -->
+          <div>
+            <div class="bg-white rounded-2xl shadow-2xl p-8 border-4 border-ez2fix-primary">
+              <div class="text-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-ez2fix-dark mb-2">Get Your Door Fixed Today</h2>
+                <p class="text-ez2fix-brown">Fast, professional repair service</p>
+              </div>
               <BookingFormClean variant="hero" />
-              
-              <!-- Form Benefits -->
-              <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
-                <div class="grid grid-cols-2 gap-3 text-center">
+
+              <div class="mt-6 pt-6 border-t-2 border-ez2fix-cream">
+                <div class="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Expert Repair</div>
-                    <div class="text-body-small text-ez2fix-brown">Quality Solutions</div>
+                    <div class="text-3xl font-bold text-ez2fix-primary">Same Day</div>
+                    <div class="text-xs text-ez2fix-brown">Available</div>
                   </div>
                   <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Licensed Tech</div>
-                    <div class="text-body-small text-ez2fix-brown">Same Day Fix</div>
+                    <div class="text-3xl font-bold text-ez2fix-primary">All Brands</div>
+                    <div class="text-xs text-ez2fix-brown">Serviced</div>
+                  </div>
+                  <div>
+                    <div class="text-3xl font-bold text-ez2fix-primary">Warranty</div>
+                    <div class="text-xs text-ez2fix-brown">Included</div>
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- When You Need Garage Door Repair -->
+    <!-- Repair Problems -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
-          
+
           <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              When You Need Professional <span class="text-ez2fix-primary">Garage Door Repair</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Common Problems <span class="text-ez2fix-primary">We Fix</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Professional garage door repair addresses mechanical failures, safety hazards, and operational problems that DIY fixes cannot safely resolve. Understanding these scenarios protects your family and prevents costly damage.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {repairScenarios.map((scenario) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div class="flex items-center mb-4">
-                  <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
-                    {scenario.icon === 'warning' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'power' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'track' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'storm' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'cable' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'power-out' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364L18.364 5.636"/>
-                      </svg>
-                    )}
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-bold text-ez2fix-dark">{scenario.scenario}</h3>
-                    <span class={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                      scenario.urgency === 'Emergency' ? 'bg-ez2fix-primary/10 text-ez2fix-primary' :
-                      scenario.urgency === 'Same Day' ? 'bg-ez2fix-gold/10 text-ez2fix-gold' :
-                      'bg-ez2fix-brown/10 text-ez2fix-brown'
-                    }`}>
-                      {scenario.urgency}
-                    </span>
-                  </div>
-                </div>
-                <p class="text-ez2fix-brown leading-relaxed">{scenario.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Garage Door Repair Process -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Professional Repair <span class="text-ez2fix-primary">Process</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Our garage door repair process ensures accurate diagnosis, quality repairs, and reliable long-term solutions using professional techniques and quality components.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {repairProcess.map((step, index) => (
-              <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-ez2fix-primary/20 text-center">
-                <div class="w-16 h-16 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span class="text-2xl font-bold text-ez2fix-primary">{index + 1}</span>
-                </div>
-                <h3 class="text-lg font-bold text-ez2fix-dark mb-3">{step.step}</h3>
-                <p class="text-ez2fix-brown text-sm mb-2">{step.description}</p>
-                <span class="text-xs text-ez2fix-gold font-medium">{step.timeframe}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Garage Door Repair Services -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              <span class="text-ez2fix-primary">Professional Repair</span> Services
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Comprehensive garage door repair services designed to address all mechanical issues, safety concerns, and operational problems with expert diagnosis and quality solutions.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {repairServices.map((service) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">{service.title}</h3>
-                <p class="text-ez2fix-brown leading-relaxed mb-6">{service.description}</p>
-                <ul class="space-y-2">
-                  {service.features.map((feature) => (
-                    <li class="flex items-center text-ez2fix-dark">
-                      <svg class="w-5 h-5 text-ez2fix-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Critical Repair Indicators -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Signs You Need <span class="text-ez2fix-primary">Professional Repair</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Recognizing these warning signs helps identify when professional garage door repair is needed to prevent safety hazards, security risks, and expensive damage.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {repairSigns.map((sign) => (
-              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg flex items-center">
-                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                  </svg>
-                </div>
-                <p class="text-ez2fix-dark font-medium">{sign}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Customer Success Stories -->  
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Repair Service <span class="text-ez2fix-primary">Success Stories</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Real experiences from New Jersey homeowners who trusted Ez2Fix for their garage door repair needs and complex mechanical problems.
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Whatever's wrong with your garage door, we diagnose it accurately and fix it right the first time.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {repairTestimonials.map((testimonial) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                  <div class="flex text-ez2fix-gold">
-                    {[...Array(5)].map(() => (
-                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                      </svg>
-                    ))}
+            {repairProblems.map((problem) => (
+              <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
+                <div class="relative bg-white rounded-2xl p-8 m-1">
+                  <div class="w-16 h-16 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
+                    <svg class="w-8 h-8 text-ez2fix-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-2xl font-bold text-ez2fix-dark mb-3">{problem.scenario}</h3>
+                  <div class="space-y-3 mb-6">
+                    <div class="flex items-start">
+                      <span class="text-red-600 font-bold mr-2">Problem:</span>
+                      <span class="text-ez2fix-brown">{problem.problem}</span>
+                    </div>
+                    <div class="flex items-start">
+                      <span class="text-ez2fix-primary font-bold mr-2">Solution:</span>
+                      <span class="text-ez2fix-brown">{problem.solution}</span>
+                    </div>
+                    <div class="flex items-start">
+                      <span class="text-green-600 font-bold mr-2">Result:</span>
+                      <span class="text-ez2fix-dark font-semibold">{problem.benefit}</span>
+                    </div>
                   </div>
                 </div>
-                <p class="text-ez2fix-brown italic leading-relaxed mb-4">"{testimonial.text}"</p>
-                <div class="border-t border-ez2fix-brown/20 pt-4">
-                  <p class="font-bold text-ez2fix-dark">{testimonial.author}</p>
-                  <p class="text-sm text-ez2fix-brown">{testimonial.location}</p>
-                  <p class="text-xs text-ez2fix-primary font-medium mt-1">{testimonial.service}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Professional -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-brown via-ez2fix-dark to-ez2fix-brown relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEyYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-7xl mx-auto">
+
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+              Why Choose <span class="text-ez2fix-primary">Professional Repair</span>?
+            </h2>
+            <p class="text-xl text-ez2fix-cream max-w-3xl mx-auto">
+              Don't guess what's wrong or waste money on parts you don't need. We diagnose accurately and fix it right.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {whyProfessional.map((reason) => (
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border-2 border-ez2fix-primary/30 hover:border-ez2fix-primary hover:bg-white/20 transition-all duration-300">
+                <div class="text-center">
+                  <div class="w-20 h-20 bg-ez2fix-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                    <svg class="w-10 h-10 text-ez2fix-dark" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div class="text-3xl font-bold text-ez2fix-primary mb-2">{reason.stat}</div>
+                  <h3 class="text-xl font-bold text-white mb-3">{reason.title}</h3>
+                  <p class="text-ez2fix-cream">{reason.description}</p>
                 </div>
               </div>
             ))}
@@ -502,25 +373,57 @@ const repairFAQ = [
       </div>
     </section>
 
-    <!-- Garage Door Repair FAQ -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
+    <!-- Repair Services -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-cream to-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          
+        <div class="max-w-7xl mx-auto">
+
           <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Repair Service <span class="text-ez2fix-primary">Frequently Asked Questions</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+              Our <span class="text-ez2fix-primary">Repair Services</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown leading-relaxed">
-              Common questions about garage door repair services and what to expect from professional mechanical solutions and expert diagnosis.
+            <p class="text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              From simple fixes to complex repairs, we handle everything your garage door needs.
             </p>
           </div>
 
-          <div class="space-y-6">
-            {repairFAQ.map((faq) => (
-              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg">
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">{faq.question}</h3>
-                <p class="text-ez2fix-brown leading-relaxed">{faq.answer}</p>
+          <div class="space-y-12">
+            {repairServices.map((service, index) => (
+              <div class={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+                <div class={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                  <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold rounded-2xl opacity-20 blur-xl"></div>
+                    <div class="relative bg-white rounded-2xl p-8 shadow-2xl border-2 border-ez2fix-primary/20">
+                      <div class="inline-block px-4 py-1 bg-ez2fix-primary/10 text-ez2fix-primary font-bold rounded-full text-sm mb-4">
+                        WARRANTY INCLUDED
+                      </div>
+                      <h3 class="text-3xl font-bold text-ez2fix-dark mb-3">{service.title}</h3>
+                      <p class="text-2xl text-ez2fix-primary font-bold mb-4">{service.tagline}</p>
+                      <p class="text-lg text-ez2fix-brown mb-6 leading-relaxed">{service.description}</p>
+                      <div class="space-y-3">
+                        {service.benefits.map((benefit) => (
+                          <div class="flex items-center">
+                            <svg class="w-6 h-6 text-ez2fix-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-ez2fix-dark font-medium">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                  <div class="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown opacity-90"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -528,103 +431,114 @@ const repairFAQ = [
       </div>
     </section>
 
-    <!-- Repair Service Expertise Across New Jersey Counties -->
-    <section class="py-16 md:py-24 bg-white">
+    <!-- Reviews -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Repair Service Expertise Across <span class="text-ez2fix-primary">New Jersey Counties</span>
+
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+              Real Repairs, <span class="text-ez2fix-primary">Real Reviews</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Our professional garage door repair expertise extends throughout New Jersey's residential communities, providing reliable solutions for all mechanical problems and safety concerns.
+            <p class="text-xl text-ez2fix-cream max-w-3xl mx-auto">
+              See what New Jersey homeowners say about our garage door repair service.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Bergen County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Comprehensive repair services for track alignment, cable replacement, and mechanical restoration</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Elmwood Park • Fair Lawn • Clifton</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Essex County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Expert repair solutions for residential doors with professional diagnosis and quality parts</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Montclair • Newark • Bloomfield</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Morris County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Professional repair services with same-day availability and comprehensive warranty coverage</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Pine Brook • Roseland • Montville</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Hudson County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Reliable repair services for all door types with expert mechanical troubleshooting</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Jersey City • Hoboken • Bayonne</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Passaic County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Complete repair solutions covering all residential garage door systems and safety features</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Wayne • Clifton • Paterson</div>
-            </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {repairReviews.map((review) => (
+              <div class="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div class="flex text-ez2fix-gold mb-4">
+                  {[...Array(5)].map(() => (
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-ez2fix-dark leading-relaxed mb-4 text-lg italic">"{review.text}"</p>
+                <div class="border-t-2 border-ez2fix-cream pt-4">
+                  <p class="font-bold text-ez2fix-dark text-lg">{review.author}</p>
+                  <p class="text-sm text-ez2fix-brown">{review.location}</p>
+                  <div class="mt-2 inline-block px-3 py-1 bg-ez2fix-primary/10 text-ez2fix-primary text-xs font-bold rounded-full">
+                    {review.service}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Call-to-Action Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown text-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-          
-          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-gold mb-6">
-            Get Your Garage Door Fixed Right
-          </h2>
-          
-          <p class="text-xl md:text-2xl text-ez2fix-cream mb-8 leading-relaxed">
-            Professional garage door repair with expert diagnosis, quality parts, and comprehensive warranty protection. Our licensed technicians provide lasting solutions for all mechanical problems.
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            <a 
-              href={siteConfig.links.phone}
-              class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
-            >
-              <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          <div class="text-center">
+            <a href="/reviews" class="inline-flex items-center px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-gold font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <svg class="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
               </svg>
-              <span>Call for Repair Service: {siteConfig.business.phone}</span>
-            </a>
-            
-            <a 
-              href="/services"
-              class="px-8 py-4 bg-transparent text-ez2fix-cream border-2 border-ez2fix-cream hover:bg-ez2fix-cream hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 rounded-lg font-bold text-lg"
-            >
-              <span>View All Services</span>
-              <svg class="ml-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Read All 100+ Reviews
+              <svg class="h-6 w-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </a>
           </div>
-          
-          <div class="flex items-center justify-center space-x-8 text-sm">
-            <div class="flex items-center space-x-2">
-              <svg class="w-5 h-5 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <FAQComponentClean
+      faqs={repairFAQs}
+      title="Garage Door Repair <span class='text-ez2fix-primary'>Questions Answered</span>"
+      subtitle="Common questions about garage door repair services and what to expect."
+    />
+
+    <!-- Final CTA -->
+    <section class="py-20 md:py-32 bg-gradient-to-br from-ez2fix-primary via-ez2fix-gold to-ez2fix-primary relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_var(--ez2fix-dark)_0%,_transparent_50%)]"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+
+          <div class="inline-block px-6 py-2 bg-ez2fix-dark text-ez2fix-primary font-bold rounded-full text-sm mb-6">
+            SAME-DAY SERVICE AVAILABLE
+          </div>
+
+          <h2 class="text-4xl md:text-6xl font-bold text-ez2fix-dark mb-6">
+            Stop Dealing With A<br />
+            <span class="text-white">Broken Garage Door</span>
+          </h2>
+
+          <p class="text-xl md:text-2xl text-ez2fix-dark mb-12 leading-relaxed max-w-2xl mx-auto">
+            Professional repair with <span class="text-white font-bold">accurate diagnosis, quality parts, and work that lasts</span>. Most repairs done same-day.
+          </p>
+
+          <a
+            href={siteConfig.links.phone}
+            class="inline-flex items-center justify-center px-12 py-6 bg-ez2fix-dark text-ez2fix-primary hover:bg-ez2fix-brown font-bold text-2xl rounded-2xl shadow-2xl transition-all duration-300 hover:scale-110 mb-8"
+          >
+            <svg class="mr-3 h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call Now: {siteConfig.business.phone}
+          </a>
+
+          <div class="flex flex-wrap items-center justify-center gap-8 text-ez2fix-dark">
+            <div class="flex items-center">
+              <svg class="w-6 h-6 text-white mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-ez2fix-cream font-medium">Licensed #13VH13553300</span>
+              <span class="font-bold">Same-Day Repairs</span>
             </div>
-            <div class="flex items-center space-x-2">
-              <svg class="w-5 h-5 text-ez2fix-gold" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+            <div class="flex items-center">
+              <svg class="w-6 h-6 text-white mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-ez2fix-cream font-medium">Professional Repair Expertise</span>
+              <span class="font-bold">Licensed #13VH13553300</span>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-6 h-6 text-white mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              <span class="font-bold">Warranty Included</span>
             </div>
           </div>
         </div>

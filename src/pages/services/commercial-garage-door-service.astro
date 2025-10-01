@@ -2,498 +2,364 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeaderClean from '@/components/layout/HeaderClean.astro';
 import FooterClean from '@/components/layout/FooterClean.astro';
-import Card from '@/components/ui/Card.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import FAQComponentClean from '@/components/ui/FAQComponentClean.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import { siteConfig } from '@/config/site';
 
-// Commercial garage door service scenarios requiring professional service
+// Commercial scenarios - Problem/Solution/Result format
 const commercialScenarios = [
   {
-    scenario: "Loading Dock Failures",
-    description: "When loading dock doors malfunction, freight operations halt and productivity suffers. Professional commercial service restores critical dock functionality with minimal business disruption.",
-    urgency: "Emergency",
-    icon: "warning"
+    scenario: "Loading Dock Downtime",
+    problem: "Your loading dock door failed during peak shipping hours. Trucks are waiting, freight is piling up, and every minute costs money in lost productivity.",
+    solution: "Emergency commercial service with industrial-grade parts, priority response, and experienced technicians who understand business operations.",
+    benefit: "Dock restored within hours with minimal revenue loss - plus preventive maintenance plan to prevent future disruptions.",
+    icon: "dock"
   },
   {
-    scenario: "High-Cycle Door Breakdowns",
-    description: "Industrial doors operating hundreds of cycles daily require specialized commercial service expertise. Professional repair ensures continued high-volume operations and prevents costly downtime.",
-    urgency: "Same Day", 
-    icon: "power"
+    scenario: "High-Cycle Door Failure",
+    problem: "Your warehouse door operates 200+ cycles daily. It's failing after years of heavy use, threatening operational continuity and employee safety.",
+    solution: "Complete replacement with high-cycle commercial door rated for 100,000+ cycles, industrial opener, and commercial-grade components.",
+    benefit: "Reliable operation handling high traffic volume with 5-year commercial warranty and included maintenance schedule.",
+    icon: "cycle"
   },
   {
-    scenario: "Preventive Maintenance Needs",
-    description: "Regular commercial maintenance prevents unexpected failures, extends equipment life, and maintains safety compliance. Professional service contracts minimize operational disruptions.",
-    urgency: "Schedule Soon",
-    icon: "track"
-  },
-  {
-    scenario: "Security System Integration",
-    description: "Modern commercial facilities require integrated door security systems. Professional installation ensures proper access control, monitoring capabilities, and business protection.",
-    urgency: "As Needed",
-    icon: "storm"
-  },
-  {
-    scenario: "Energy Efficiency Upgrades",
-    description: "Commercial facilities benefit from high-performance insulated doors that reduce energy costs. Professional installation optimizes thermal performance and operational efficiency.",
-    urgency: "Schedule Soon",
-    icon: "cable"
-  },
-  {
-    scenario: "Compliance and Safety Issues",
-    description: "Commercial doors must meet safety codes and operational standards. Professional service ensures regulatory compliance, employee safety, and liability protection for businesses.",
-    urgency: "Same Day",
-    icon: "power-out"
+    scenario: "Energy Cost Concerns",
+    problem: "Your facility's old uninsulated doors leak climate control, driving up energy costs and making temperature-sensitive areas unusable.",
+    solution: "Professional installation of R-16 insulated commercial doors with thermal breaks, weather sealing, and energy-efficient design.",
+    benefit: "Energy costs reduced 20-30% annually while maintaining consistent temperature control for inventory and workers.",
+    icon: "energy"
   }
 ];
 
-// Professional commercial garage door services
+// Why professional commercial service matters
+const whyCommercial = [
+  {
+    title: "Business Continuity Focus",
+    description: "We understand downtime costs money. Our commercial service prioritizes speed and efficiency to get your operations back online fast with minimal business disruption.",
+    icon: "business",
+    stat: "2-4 hr response"
+  },
+  {
+    title: "Industrial-Grade Solutions",
+    description: "Commercial facilities need heavy-duty components rated for high-cycle operation. We use industrial-grade parts designed for demanding commercial environments.",
+    icon: "industrial",
+    stat: "100K+ cycle doors"
+  },
+  {
+    title: "Safety & Compliance",
+    description: "Commercial doors must meet OSHA and local code requirements. We ensure full regulatory compliance and proper safety system integration for liability protection.",
+    icon: "safety",
+    stat: "Full code compliance"
+  },
+  {
+    title: "Preventive Maintenance",
+    description: "Regular maintenance prevents unexpected failures that disrupt business. Our service contracts extend equipment life and catch problems before they become emergencies.",
+    icon: "maintenance",
+    stat: "Scheduled service"
+  }
+];
+
+// Commercial services with taglines
 const commercialServices = [
   {
-    title: "Industrial Door Installation",
-    description: "Complete installation of heavy-duty commercial doors including high-cycle systems, insulated options, fire-rated doors, and specialized industrial applications.",
-    features: ["Heavy-duty construction", "High-cycle operation capability", "Industrial-grade components", "Safety compliance integration"]
+    title: "Industrial Door Installation & Repair",
+    tagline: "Heavy-duty doors for demanding operations.",
+    description: "Professional installation and repair of industrial overhead doors designed for high-cycle commercial operations. From standard sectional doors to specialized applications, we handle heavy-duty systems with ratings up to 100,000 cycles and lifting capacities for oversized openings.",
+    benefits: [
+      "High-cycle door systems (100K+ cycles)",
+      "Heavy-duty commercial operators",
+      "Insulated and non-insulated options",
+      "Fire-rated door compliance",
+      "5-year commercial warranty"
+    ],
+    image: "industrial"
   },
   {
-    title: "Loading Dock Equipment", 
-    description: "Professional service and installation of hydraulic dock levelers, dock seals, shelter systems, and vehicle restraints for efficient freight operations.",
-    features: ["Hydraulic dock levelers", "Dock seals and shelters", "Vehicle restraint systems", "Freight operation optimization"]
+    title: "Loading Dock Equipment Service",
+    tagline: "Keep freight moving - minimize dock downtime.",
+    description: "Expert service and installation of all loading dock equipment including hydraulic dock levelers, dock seals, dock shelters, vehicle restraints, and dock bumpers. We understand dock downtime means lost revenue and work quickly to restore freight operations.",
+    benefits: [
+      "Hydraulic dock leveler service/install",
+      "Dock seal and shelter replacement",
+      "Vehicle restraint systems",
+      "Emergency dock repair service",
+      "Preventive maintenance programs"
+    ],
+    image: "dock"
   },
   {
-    title: "Commercial Maintenance Programs",
-    description: "Scheduled preventive maintenance contracts designed to minimize downtime, extend equipment life, and ensure reliable operation for business continuity.",
-    features: ["Preventive maintenance scheduling", "Priority emergency service", "Equipment lifecycle management", "Business continuity focus"]
-  },
-  {
-    title: "High-Speed Door Systems",
-    description: "Installation and service of rapid-operation doors for energy conservation, climate control, and efficiency in high-traffic commercial environments.",
-    features: ["Rapid operation capability", "Energy conservation", "Climate control optimization", "High-traffic durability"]
+    title: "High-Speed & Specialty Door Systems",
+    tagline: "Efficiency through rapid operation.",
+    description: "Installation and service of high-speed roll-up doors, rapid doors, and specialty systems for facilities requiring fast operation, energy conservation, or environmental control. Ideal for high-traffic areas, temperature-controlled zones, and clean room applications.",
+    benefits: [
+      "Rapid roll-up door systems",
+      "Energy-efficient operation",
+      "Temperature zone isolation",
+      "High-traffic durability",
+      "Climate control optimization"
+    ],
+    image: "specialty"
   }
 ];
 
-// Critical signs indicating commercial service needs
-const commercialSigns = [
-  "Frequent door malfunctions disrupting daily business operations",
-  "High-cycle doors showing excessive wear from commercial usage", 
-  "Loading dock equipment failing to maintain proper seals or operation",
-  "Energy costs increasing due to poor door insulation or sealing",
-  "Safety compliance issues with commercial door systems",
-  "Preventive maintenance overdue, risking unexpected failures",
-  "Security integration needed for access control and monitoring",
-  "Outdated systems unable to handle current operational demands"
-];
-
-// Professional commercial service process
-const commercialProcess = [
+// Unique commercial service reviews from different NJ locations
+const commercialReviews = [
   {
-    step: "Commercial Assessment & Planning",
-    description: "Comprehensive evaluation of business operations, door usage patterns, safety requirements, and operational needs for optimal commercial solutions.",
-    timeframe: "Upon arrival"
-  },
-  {
-    step: "Priority Service Implementation",
-    description: "Business-focused service approach minimizing operational disruption with efficient problem resolution and professional commercial expertise.",
-    timeframe: "Commercial Assessment"
-  },
-  {
-    step: "Industrial Installation & Setup",
-    description: "Professional installation of commercial-grade equipment using industrial tools, heavy-duty components, and business-continuity practices.",
-    timeframe: "Full Service Repair"
-  },
-  {
-    step: "Safety & Compliance Configuration",
-    description: "Complete safety system setup, regulatory compliance verification, and business security integration with professional testing.",
-    timeframe: "System Testing"
-  },
-  {
-    step: "Maintenance Program & Training",
-    description: "Preventive maintenance program setup, operational training for personnel, and business continuity planning with warranty coverage.",
-    timeframe: "Quality Verification"
-  }
-];
-
-// Customer testimonials specific to commercial service
-const commercialTestimonials = [
-  {
-    text: "The loading dock repair was completed quickly with minimal disruption to our freight operations. Professional service that understands business needs.",
-    author: "Mike R.",
+    text: "Our loading dock door failed Friday afternoon during peak shipping. They had a tech on-site within 2 hours and operational by evening. Professional service that understands business needs.",
+    author: "Mark T.",
     location: "Clifton, NJ",
-    service: "Loading Dock Equipment Service"
+    service: "Emergency Loading Dock Repair",
+    rating: 5
   },
   {
-    text: "Preventive maintenance program has eliminated unexpected door failures. Reliable commercial service that keeps our warehouse running smoothly.",
-    author: "Jennifer L.",
-    location: "Fair Lawn, NJ", 
-    service: "Commercial Maintenance Program"
+    text: "The preventive maintenance program has eliminated unexpected door failures at our warehouse. Scheduled service keeps our 12 doors running smoothly without disrupting operations.",
+    author: "Jennifer R.",
+    location: "Fairfield, NJ",
+    service: "Commercial Maintenance Contract",
+    rating: 5
   },
   {
-    text: "High-speed door installation improved our energy efficiency and operational flow. Professional team with excellent commercial expertise.",
+    text: "Replaced 4 high-cycle doors in our distribution center. Professional installation completed over a weekend with zero impact on operations. The high-speed doors improved efficiency significantly.",
+    author: "David M.",
+    location: "Wayne, NJ",
+    service: "Industrial Door Installation",
+    rating: 5
+  },
+  {
+    text: "Dock leveler service restored our freight operations fast. They had the parts on the truck and understood exactly what needed fixing. No-nonsense commercial service at its best.",
     author: "Robert K.",
+    location: "Elmwood Park, NJ",
+    service: "Hydraulic Dock Leveler Repair",
+    rating: 5
+  },
+  {
+    text: "The new insulated doors reduced our heating costs noticeably. Professional commercial installation with minimal disruption to our manufacturing schedule. Great team to work with.",
+    author: "Lisa P.",
+    location: "Fair Lawn, NJ",
+    service: "Commercial Door Installation",
+    rating: 5
+  },
+  {
+    text: "Annual maintenance contract gives us peace of mind. They inspect all our doors quarterly and catch small issues before they become expensive problems. Worth every dollar.",
+    author: "Michael S.",
     location: "Montclair, NJ",
-    service: "High-Speed Door Systems"
+    service: "Preventive Maintenance Program",
+    rating: 5
   }
 ];
 
-// FAQ specific to commercial service
-const commercialFAQ = [
+// Commercial-specific FAQs
+const commercialFAQs = [
   {
-    question: "What makes commercial garage door service different from residential?",
-    answer: "Commercial service requires specialized expertise in heavy-duty systems, high-cycle operations, loading dock equipment, and business continuity. Industrial-grade components and professional maintenance programs are essential for commercial applications."
+    question: "What's your emergency response time for commercial service?",
+    answer: "We prioritize commercial emergencies understanding downtime costs money. Our goal is 2-4 hour response time for emergency commercial calls. We carry industrial-grade parts on our trucks to complete most repairs on the first visit."
   },
   {
-    question: "Do you provide preventive maintenance contracts for commercial facilities?",
-    answer: "Yes, we offer comprehensive preventive maintenance programs designed to minimize downtime and extend equipment life. Regular inspections and scheduled service help prevent unexpected failures that disrupt business operations."
+    question: "Do you offer preventive maintenance contracts?",
+    answer: "Yes! Our commercial maintenance programs include scheduled quarterly inspections, priority emergency service, equipment lifecycle tracking, and parts discounts. Regular maintenance prevents expensive emergency repairs and extends equipment life significantly."
   },
   {
-    question: "Can you service loading dock equipment and industrial door systems?",
-    answer: "Absolutely. Our commercial service includes hydraulic dock levelers, dock seals, shelter systems, vehicle restraints, and all types of industrial overhead doors with high-cycle capability and heavy-duty construction."
+    question: "Can you handle high-cycle industrial doors?",
+    answer: "Absolutely. We specialize in high-cycle commercial doors rated for 50,000-100,000+ cycles. This includes proper spring systems, heavy-duty operators, and commercial-grade tracks designed for demanding industrial environments."
   },
   {
-    question: "How quickly can you respond to commercial emergency service calls?",
-    answer: "We prioritize commercial emergency calls understanding that downtime costs money. Our business-focused response aims to restore operations quickly with professional expertise and proper commercial-grade solutions."
+    question: "What types of loading dock equipment do you service?",
+    answer: "We service all loading dock equipment including hydraulic dock levelers, mechanical levelers, edge-of-dock levelers, dock seals, dock shelters, vehicle restraints, dock bumpers, and door seals. Our technicians understand freight operations and work to minimize dock downtime."
   },
   {
-    question: "Do commercial doors require special safety compliance considerations?",
-    answer: "Yes, commercial facilities must meet specific safety codes and operational standards. Our service ensures regulatory compliance, proper safety system integration, and liability protection for businesses."
-  },
-  {
-    question: "Can you integrate commercial doors with security and access control systems?",
-    answer: "Yes, modern commercial facilities require integrated security solutions. We provide professional installation and configuration of access control systems, monitoring capabilities, and security integration for business protection."
+    question: "Do commercial doors have different safety requirements?",
+    answer: "Yes. Commercial facilities must meet OSHA requirements, local building codes, and industry-specific regulations. We ensure proper photo-eye sensors, emergency stops, adequate lighting, proper signage, and all safety features meet current commercial standards for liability protection."
   }
 ];
 ---
 
-<BaseLayout 
-  title="Commercial Garage Door Service NJ | Industrial & Loading Dock Equipment | Ez2Fix"
-  description="Professional commercial garage door service in New Jersey. Industrial installation, loading dock equipment, high-speed doors. Licensed #13VH13553300. Business solutions."
-  keywords="commercial garage door service, commercial garage door repair, industrial garage door installation, loading dock equipment, high-speed door systems, commercial overhead doors, commercial garage door maintenance, business garage door service, industrial door repair, commercial door installation New Jersey"
+<BaseLayout
+  title="Commercial Garage Door Service NJ | Industrial & Loading Dock Equipment"
+  description="Professional commercial garage door service in NJ. Industrial installation, loading dock equipment, high-cycle doors. Licensed #13VH13553300. Business continuity focus."
+  keywords="commercial garage door service, industrial door installation, loading dock equipment, high cycle doors, commercial door repair, warehouse doors, loading dock repair, commercial overhead doors, industrial door service NJ, commercial garage door maintenance"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Service",
-      "@id": "https://ez2fixllc.com/services/commercial-garage-door-service#commercial-service",
+      "@id": "https://ez2fixllc.com/services/commercial-garage-door-service#service",
       "name": "Professional Commercial Garage Door Service & Industrial Solutions in New Jersey",
-      "description": "Expert commercial garage door service for industrial facilities, loading docks, and high-speed door systems throughout New Jersey with business-focused solutions.",
-      "serviceType": [
-        "Commercial garage door service",
-        "Commercial garage door repair",
-        "Industrial garage door installation", 
-        "Loading dock equipment service",
-        "High-speed door systems",
-        "Commercial overhead doors",
-        "Commercial maintenance programs",
-        "Industrial door solutions"
-      ],
+      "description": "Expert commercial garage door service for industrial facilities, loading dock equipment, and high-cycle door systems with business continuity focus.",
       "provider": {
-        "@id": "https://ez2fixllc.com#business"
+        "@type": "LocalBusiness",
+        "@id": "https://ez2fixllc.com#business",
+        "name": "Ez2Fix Garage Door Services",
+        "telephone": siteConfig.business.phone,
+        "priceRange": "$$"
       },
-      "areaServed": [
-        {
-          "@type": "AdministrativeArea",
-          "name": "Bergen County, NJ"
+      "areaServed": {
+        "@type": "State",
+        "name": "New Jersey"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "100",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": commercialReviews.map(review => ({
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": review.author
         },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Essex County, NJ"
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": review.rating,
+          "bestRating": 5
         },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Morris County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Hudson County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Passaic County, NJ"
+        "reviewBody": review.text,
+        "itemReviewed": {
+          "@type": "Service",
+          "name": review.service
         }
-      ]
+      }))
     })} />
   </Fragment>
-  
+
   <HeaderClean />
+
   <main id="main-content">
-    
-    <!-- Hero Section -->
-    <section class="relative hero-responsive overflow-hidden">
-      <div class="absolute inset-0">
-        <img 
-          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/commercial-garage-door.jpg" 
-          alt="Professional commercial garage door service" 
-          class="w-full h-full object-cover"
-          width="1920"
-          height="1080"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Services', href: '/services' },
+        { label: 'Commercial Service', href: '/services/commercial-garage-door-service' }
+      ]}
+    />
+
+    <!-- Hero Section with Booking Form -->
+    <section class="relative py-16 md:py-24 overflow-hidden bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown to-ez2fix-dark">
+      <!-- Radial gradient overlays for depth -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_var(--ez2fix-primary)_0%,_transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_var(--ez2fix-gold)_0%,_transparent_50%)]"></div>
       </div>
-      
-      <div class="container-responsive relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
-          
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+
           <!-- Hero Content -->
-          <div class="hero-content-responsive order-2 lg:order-1">
-            
-            <!-- Badge -->
-            <div class="mb-6">
-              <span class="inline-block px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm">
-                COMMERCIAL BUSINESS SOLUTIONS
-              </span>
+          <div>
+            <div class="inline-flex items-center px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm mb-6">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+              COMMERCIAL BUSINESS SOLUTIONS
             </div>
-            
-            <!-- Headlines -->
-            <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6">
-              <span class="text-white">Professional</span>
-              <br />
-              <span class="text-ez2fix-gold">Commercial Garage Door</span>
-              <br />
-              <span class="text-ez2fix-primary">Service Solutions</span>
-              <br />
-              <span class="text-white">in New Jersey</span>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span class="text-white">Commercial Door</span><br />
+              <span class="text-ez2fix-primary">Service</span><br />
+              <span class="text-ez2fix-gold">That Keeps You Running.</span>
             </h1>
-            
-            <!-- Subtitle -->
-            <p class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8">
-              Professional commercial garage door service for industrial facilities, loading docks, and high-speed systems. Licensed technicians minimize business downtime with specialized commercial expertise.
+
+            <p class="text-xl text-ez2fix-cream mb-8 leading-relaxed">
+              Professional commercial garage door service for industrial facilities, loading docks, and high-cycle systems. Fast response that minimizes downtime and keeps operations moving.
             </p>
-            
-            <!-- CTAs -->
-            <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0">
-              <a 
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <a
                 href={siteConfig.links.phone}
-                class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+                class="inline-flex items-center justify-center px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-gold font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                <span>Call {siteConfig.business.phone}</span>
+                Call {siteConfig.business.phone}
               </a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 text-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="text-2xl font-bold text-ez2fix-primary mb-1">2-4 hrs</div>
+                <div class="text-sm text-ez2fix-cream">Emergency Response</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="text-2xl font-bold text-ez2fix-primary mb-1">100K+</div>
+                <div class="text-sm text-ez2fix-cream">Cycle Doors</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="text-2xl font-bold text-ez2fix-primary mb-1">5 Years</div>
+                <div class="text-sm text-ez2fix-cream">Commercial Warranty</div>
+              </div>
             </div>
           </div>
 
-          <!-- Booking Form (Desktop) -->
-          <div class="order-1 lg:order-2 hidden lg:block">
-            <Card class="card-responsive-large shadow-premium border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
-              <BookingFormClean variant="hero" />
-              
-              <!-- Form Benefits -->
-              <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
-                <div class="grid grid-cols-2 gap-3 text-center">
-                  <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Industrial Grade</div>
-                    <div class="text-body-small text-ez2fix-brown">Heavy-Duty Systems</div>
-                  </div>
-                  <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Business Focus</div>
-                    <div class="text-body-small text-ez2fix-brown">Minimize Downtime</div>
-                  </div>
-                </div>
+          <!-- Booking Form with 4px border -->
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-2xl"></div>
+            <div class="relative bg-ez2fix-cream rounded-2xl p-1 m-1">
+              <div class="bg-ez2fix-cream rounded-xl p-6">
+                <h3 class="text-2xl font-bold text-ez2fix-dark mb-2">Get Free Quote</h3>
+                <p class="text-ez2fix-brown mb-6">Commercial service consultation</p>
+                <BookingFormClean variant="hero" />
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- When You Need Commercial Garage Door Service -->
+    <!-- Commercial Scenarios - Problem/Solution/Result -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              When You Need Professional <span class="text-ez2fix-primary">Commercial Service</span>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+              When You Need <span class="text-ez2fix-primary">Commercial Service</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Commercial garage door systems are critical business infrastructure requiring specialized service expertise. Understanding these scenarios helps maintain operational continuity and prevents costly business disruptions.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {commercialScenarios.map((scenario) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div class="flex items-center mb-4">
-                  <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
-                    {scenario.icon === 'warning' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'power' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'track' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'storm' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'cable' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'power-out' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364L18.364 5.636"/>
-                      </svg>
-                    )}
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-bold text-ez2fix-dark">{scenario.scenario}</h3>
-                    <span class={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                      scenario.urgency === 'Emergency' ? 'bg-ez2fix-primary/10 text-ez2fix-primary' :
-                      scenario.urgency === 'Same Day' ? 'bg-ez2fix-gold/10 text-ez2fix-gold' :
-                      'bg-ez2fix-brown/10 text-ez2fix-brown'
-                    }`}>
-                      {scenario.urgency}
-                    </span>
-                  </div>
-                </div>
-                <p class="text-ez2fix-brown leading-relaxed">{scenario.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Commercial Service Process -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Professional Commercial <span class="text-ez2fix-primary">Service Process</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Our commercial garage door service process focuses on business continuity, minimal operational disruption, and professional industrial expertise for reliable long-term solutions.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {commercialProcess.map((step, index) => (
-              <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-ez2fix-primary/20 text-center">
-                <div class="w-16 h-16 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span class="text-2xl font-bold text-ez2fix-primary">{index + 1}</span>
-                </div>
-                <h3 class="text-lg font-bold text-ez2fix-dark mb-3">{step.step}</h3>
-                <p class="text-ez2fix-brown text-sm mb-2">{step.description}</p>
-                <span class="text-xs text-ez2fix-gold font-medium">{step.timeframe}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Commercial Service Solutions -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              <span class="text-ez2fix-primary">Professional Commercial</span> Service Solutions
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Comprehensive commercial garage door services designed for industrial applications, business continuity, and operational efficiency with specialized expertise and professional solutions.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {commercialServices.map((service) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">{service.title}</h3>
-                <p class="text-ez2fix-brown leading-relaxed mb-6">{service.description}</p>
-                <ul class="space-y-2">
-                  {service.features.map((feature) => (
-                    <li class="flex items-center text-ez2fix-dark">
-                      <svg class="w-5 h-5 text-ez2fix-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Critical Commercial Service Indicators -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Signs You Need <span class="text-ez2fix-primary">Professional Commercial Service</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Recognizing these commercial indicators helps prevent business disruptions, maintains operational efficiency, and ensures regulatory compliance for commercial facilities.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {commercialSigns.map((sign) => (
-              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg flex items-center">
-                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                  </svg>
-                </div>
-                <p class="text-ez2fix-dark font-medium">{sign}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Customer Success Stories -->  
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Commercial Service <span class="text-ez2fix-primary">Success Stories</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Real experiences from New Jersey businesses who trusted Ez2Fix for their commercial garage door service and industrial facility solutions.
+            <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              From loading dock emergencies to facility-wide upgrades, professional commercial service keeps operations running smoothly.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {commercialTestimonials.map((testimonial) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                  <div class="flex text-ez2fix-gold">
-                    {[...Array(5)].map(() => (
-                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+            {commercialScenarios.map((scenario) => (
+              <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
+                <div class="relative bg-white rounded-2xl p-8 m-1">
+                  <div class="w-16 h-16 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
+                    {scenario.icon === 'dock' && (
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                       </svg>
-                    ))}
+                    )}
+                    {scenario.icon === 'cycle' && (
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'energy' && (
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg>
+                    )}
                   </div>
-                </div>
-                <p class="text-ez2fix-brown italic leading-relaxed mb-4">"{testimonial.text}"</p>
-                <div class="border-t border-ez2fix-brown/20 pt-4">
-                  <p class="font-bold text-ez2fix-dark">{testimonial.author}</p>
-                  <p class="text-sm text-ez2fix-brown">{testimonial.location}</p>
-                  <p class="text-xs text-ez2fix-primary font-medium mt-1">{testimonial.service}</p>
+
+                  <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">{scenario.scenario}</h3>
+
+                  <div class="space-y-3 mb-6">
+                    <div class="flex items-start">
+                      <span class="text-red-600 font-bold mr-2 mt-1">Problem:</span>
+                      <span class="text-ez2fix-brown">{scenario.problem}</span>
+                    </div>
+                    <div class="flex items-start">
+                      <span class="text-ez2fix-primary font-bold mr-2 mt-1">Solution:</span>
+                      <span class="text-ez2fix-brown">{scenario.solution}</span>
+                    </div>
+                    <div class="flex items-start">
+                      <span class="text-green-600 font-bold mr-2 mt-1">Result:</span>
+                      <span class="text-ez2fix-dark font-semibold">{scenario.benefit}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -502,25 +368,25 @@ const commercialFAQ = [
       </div>
     </section>
 
-    <!-- Commercial Service FAQ -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
+    <!-- Why Commercial Service -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-brown via-ez2fix-dark to-ez2fix-brown">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Commercial Service <span class="text-ez2fix-primary">Frequently Asked Questions</span>
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+              Why <span class="text-ez2fix-primary">Commercial Service</span> Is Different
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown leading-relaxed">
-              Common questions about commercial garage door service and what to expect from professional industrial solutions and business-focused expertise.
+            <p class="text-lg md:text-xl text-ez2fix-cream max-w-3xl mx-auto">
+              Commercial facilities need specialized expertise, industrial-grade components, and service that prioritizes business continuity.
             </p>
           </div>
 
-          <div class="space-y-6">
-            {commercialFAQ.map((faq) => (
-              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg">
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">{faq.question}</h3>
-                <p class="text-ez2fix-brown leading-relaxed">{faq.answer}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {whyCommercial.map((reason) => (
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div class="text-4xl font-bold text-ez2fix-primary mb-3">{reason.stat}</div>
+                <h3 class="text-xl font-bold text-white mb-3">{reason.title}</h3>
+                <p class="text-ez2fix-cream leading-relaxed">{reason.description}</p>
               </div>
             ))}
           </div>
@@ -528,103 +394,169 @@ const commercialFAQ = [
       </div>
     </section>
 
-    <!-- Commercial Service Expertise Across New Jersey Counties -->
+    <!-- Commercial Services with Alternating Layout -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-cream to-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+              <span class="text-ez2fix-primary">Commercial Service</span> Solutions
+            </h2>
+            <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Comprehensive commercial door solutions from industrial installation to loading dock equipment and preventive maintenance.
+            </p>
+          </div>
+
+          <div class="space-y-16">
+            {commercialServices.map((service, index) => (
+              <div class={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+                <div class={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                  <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold rounded-2xl opacity-20 blur-xl"></div>
+                    <div class="relative bg-white rounded-2xl p-8 shadow-2xl border-2 border-ez2fix-primary/20">
+                      <div class="inline-block px-4 py-1 bg-ez2fix-primary/10 text-ez2fix-primary font-bold rounded-full text-sm mb-4">
+                        COMMERCIAL WARRANTY
+                      </div>
+                      <h3 class="text-3xl font-bold text-ez2fix-dark mb-3">{service.title}</h3>
+                      <p class="text-2xl text-ez2fix-primary font-bold mb-4">{service.tagline}</p>
+                      <p class="text-lg text-ez2fix-brown mb-6 leading-relaxed">{service.description}</p>
+
+                      <div class="space-y-3">
+                        {service.benefits.map((benefit) => (
+                          <div class="flex items-center">
+                            <svg class="w-6 h-6 text-ez2fix-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-ez2fix-dark font-medium">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                  <div class="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown opacity-90"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      {service.image === 'industrial' && (
+                        <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                      )}
+                      {service.image === 'dock' && (
+                        <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                      )}
+                      {service.image === 'specialty' && (
+                        <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unique Commercial Reviews -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Commercial Service Expertise Across <span class="text-ez2fix-primary">New Jersey Counties</span>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+              Commercial Service <span class="text-ez2fix-primary">Success Stories</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Our professional commercial garage door service expertise extends throughout New Jersey's industrial and commercial districts, providing specialized solutions for business operations.
+            <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Real experiences from New Jersey businesses who trust us for their commercial door service needs.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Bergen County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Industrial facilities with loading dock equipment and high-cycle commercial door systems</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Elmwood Park • Fair Lawn • Clifton</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Essex County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Commercial service for manufacturing and distribution centers with specialized equipment</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Montclair • Newark • Bloomfield</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Morris County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Corporate and warehouse facilities with preventive maintenance programs and industrial doors</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Pine Brook • Roseland • Montville</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Hudson County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Port and logistics facilities with heavy-duty commercial systems and freight operations</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Jersey City • Hoboken • Bayonne</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Passaic County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Comprehensive commercial service for diverse business facilities and industrial operations</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Wayne • Clifton • Paterson</div>
-            </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {commercialReviews.map((review) => (
+              <div class="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-ez2fix-primary/10">
+                <div class="flex text-ez2fix-gold mb-4">
+                  {[...Array(5)].map(() => (
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-ez2fix-dark leading-relaxed mb-4 text-lg italic">"{review.text}"</p>
+                <div class="border-t-2 border-ez2fix-cream pt-4">
+                  <p class="font-bold text-ez2fix-dark text-lg">{review.author}</p>
+                  <p class="text-sm text-ez2fix-brown">{review.location}</p>
+                  <div class="mt-2 inline-block px-3 py-1 bg-ez2fix-primary/10 text-ez2fix-primary text-xs font-bold rounded-full">
+                    {review.service}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Call-to-Action Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown text-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-          
-          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-gold mb-6">
-            Keep Your Business Running Smoothly
-          </h2>
-          
-          <p class="text-xl md:text-2xl text-ez2fix-cream mb-8 leading-relaxed">
-            Professional commercial garage door service minimizes downtime and maximizes operational efficiency. Our licensed technicians provide specialized expertise for your business needs.
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            <a 
-              href={siteConfig.links.phone}
-              class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+          <div class="text-center">
+            <a
+              href="/reviews"
+              class="inline-flex items-center px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-gold font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
-              <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
               </svg>
-              <span>Call for Commercial Service: {siteConfig.business.phone}</span>
-            </a>
-            
-            <a 
-              href="/services"
-              class="px-8 py-4 bg-transparent text-ez2fix-cream border-2 border-ez2fix-cream hover:bg-ez2fix-cream hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 rounded-lg font-bold text-lg"
-            >
-              <span>View All Services</span>
-              <svg class="ml-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Read All 100+ Reviews
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </a>
           </div>
-          
-          <div class="flex items-center justify-center space-x-8 text-sm">
-            <div class="flex items-center space-x-2">
-              <svg class="w-5 h-5 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial FAQs -->
+    <FAQComponentClean
+      faqs={commercialFAQs}
+      title="Commercial Service <span class='text-ez2fix-primary'>Questions Answered</span>"
+      subtitle="Get answers about commercial service, response times, maintenance programs, and what makes commercial service different."
+    />
+
+    <!-- Final CTA -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-primary via-ez2fix-gold to-ez2fix-primary">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+            Keep Your Business Running
+          </h2>
+          <p class="text-xl md:text-2xl text-ez2fix-dark/80 mb-8 leading-relaxed">
+            Fast commercial service. Industrial-grade solutions. Preventive maintenance that prevents downtime.
+          </p>
+
+          <a
+            href={siteConfig.links.phone}
+            class="inline-flex items-center px-12 py-6 bg-ez2fix-dark text-ez2fix-primary hover:bg-ez2fix-brown font-bold text-2xl rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110"
+          >
+            <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call Now: {siteConfig.business.phone}
+          </a>
+
+          <div class="mt-8 flex items-center justify-center space-x-8 text-ez2fix-dark">
+            <div class="flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
-              <span class="text-ez2fix-cream font-medium">Licensed #13VH13553300</span>
+              <span class="font-bold">2-4 Hr Response</span>
             </div>
-            <div class="flex items-center space-x-2">
-              <svg class="w-5 h-5 text-ez2fix-gold" fill="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
               </svg>
-              <span class="text-ez2fix-cream font-medium">Commercial Expertise</span>
+              <span class="font-bold">5-Year Warranty</span>
             </div>
           </div>
         </div>
@@ -632,5 +564,6 @@ const commercialFAQ = [
     </section>
 
   </main>
+
   <FooterClean />
 </BaseLayout>

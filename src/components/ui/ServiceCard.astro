@@ -48,8 +48,8 @@ const warrantyTitleColor = isDark ? 'text-ez2fix-gold' : 'text-ez2fix-dark';
 const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
 ---
 
-<Card class={`relative overflow-hidden card-responsive shadow-premium hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 group hover-lift h-full flex flex-col ${cardBg} ${cardBorder} ${className}`}>
-  
+<Card class={`relative overflow-hidden p-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 group h-full flex flex-col ${cardBg} ${cardBorder} ${className}`}>
+
   <!-- Service Image - Clickable Link to Service Page -->
   <a href={href} class="relative aspect-video overflow-hidden rounded-t-lg block group-hover:opacity-95 transition-opacity duration-300">
     <ResponsiveImage
@@ -60,11 +60,11 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
     />
     <div class={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-black/80 via-black/40 to-transparent' : 'bg-gradient-to-t from-black/70 via-black/20 to-transparent'}`}></div>
-    
+
     <!-- Enhanced Badge -->
     <div class="absolute top-3 left-3">
       <div class={`px-3 py-1.5 text-xs font-bold rounded-full shadow-lg backdrop-blur-sm ${
-        isDark 
+        isDark
           ? (popular ? 'bg-ez2fix-primary text-ez2fix-dark border border-ez2fix-gold/50' : 'bg-ez2fix-gold/90 text-ez2fix-dark border border-ez2fix-primary/30')
           : (popular ? 'bg-ez2fix-primary text-ez2fix-dark border border-ez2fix-gold/30' : 'bg-ez2fix-brown/90 text-ez2fix-cream border border-white/20')
       }`}>
@@ -84,13 +84,13 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
     )}
   </a>
 
-  <div class="p-4 sm:p-6 space-y-4 flex-1 flex flex-col">
+  <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col">
     <!-- Service Header - Clickable Title -->
     <div class="flex-1">
       <a href={href} class="block group-hover:opacity-90 transition-opacity duration-300">
-        <h3 class={`text-heading-3 ${titleColor} mb-3 line-clamp-2 hover:text-ez2fix-primary transition-colors duration-300`}>{title}</h3>
+        <h3 class={`text-xl md:text-2xl font-bold ${titleColor} mb-3 line-clamp-2 hover:text-ez2fix-primary transition-colors duration-300`}>{title}</h3>
       </a>
-      <p class={`text-body-base ${descColor} line-clamp-3 leading-relaxed`}>{description}</p>
+      <p class={`text-base ${descColor} line-clamp-3 leading-relaxed`}>{description}</p>
     </div>
 
     <!-- Service Features -->
@@ -103,7 +103,7 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
               </svg>
             </div>
-            <span class={`text-body-small ${featureColor} font-medium`}>{feature}</span>
+            <span class={`text-sm ${featureColor} font-medium`}>{feature}</span>
           </div>
         ))}
       </div>
@@ -112,13 +112,13 @@ const warrantyTextColor = isDark ? 'text-ez2fix-cream' : 'text-ez2fix-brown';
 
     <!-- Enhanced CTA Buttons -->
     <div class="flex flex-col sm:flex-row gap-3 pt-2">
-      <a href={siteConfig.links.phone} class={`flex-1 btn-responsive-small bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold ${isDark ? 'shadow-lg' : ''}`}>
+      <a href={siteConfig.links.phone} class={`flex-1 px-4 py-3 text-sm md:text-base rounded-lg bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold ${isDark ? 'shadow-lg' : ''}`}>
         <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
         </svg>
         Call Now
       </a>
-      <a href="/booking" class={`flex-1 btn-responsive-small border-2 border-ez2fix-primary text-ez2fix-primary hover:bg-ez2fix-primary hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold ${isDark ? 'bg-transparent hover:bg-ez2fix-primary' : 'bg-transparent'}`}>
+      <a href="/booking" class={`flex-1 px-4 py-3 text-sm md:text-base rounded-lg border-2 border-ez2fix-primary text-ez2fix-primary hover:bg-ez2fix-primary hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 font-semibold ${isDark ? 'bg-transparent hover:bg-ez2fix-primary' : 'bg-transparent'}`}>
         <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
         </svg>

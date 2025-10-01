@@ -37,106 +37,106 @@ const formId = `booking-form-${variant}`;
 ---
 
 <div class="booking-form-container relative">
-  <div class={variant === 'hero' ? 'mb-3' : 'mb-4 md:mb-6'}>
-    <h3 class={variant === 'hero' ? 'text-base lg:text-lg font-bold text-ez2fix-dark mb-1' : 'text-lg md:text-xl lg:text-2xl font-bold text-ez2fix-dark mb-2'}>
+  <div class={variant === 'hero' ? 'mb-2' : 'mb-4 md:mb-6'}>
+    <h3 class={variant === 'hero' ? 'text-sm lg:text-base font-bold text-ez2fix-dark mb-0.5' : 'text-lg md:text-xl lg:text-2xl font-bold text-ez2fix-dark mb-2'}>
       {title}
     </h3>
     {subtitle && (
-      <p class={variant === 'hero' ? 'text-xs lg:text-sm text-ez2fix-brown' : 'text-sm md:text-base text-ez2fix-brown'}>
+      <p class={variant === 'hero' ? 'text-xs text-ez2fix-brown leading-snug' : 'text-sm md:text-base text-ez2fix-brown'}>
         {subtitle}
       </p>
     )}
   </div>
-  
-  <form class={variant === 'hero' ? 'space-y-3' : 'space-y-4'} id={formId} data-variant={variant}>
+
+  <form class={variant === 'hero' ? 'space-y-2.5' : 'space-y-4'} id={formId} data-variant={variant}>
     <!-- Name -->
     <div>
-      <label for={`name-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+      <label for={`name-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-0.5 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
         Name*
       </label>
-      <input 
-        type="text" 
+      <input
+        type="text"
         id={`name-${variant}`}
-        name="name" 
+        name="name"
         required
-        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
+        class={variant === 'hero' ? 'form-input w-full px-2.5 py-1.5 text-xs border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
         placeholder="Enter your full name"
         aria-describedby={`name-error-${variant}`}
       />
-      <div id={`name-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert" aria-live="polite"></div>
+      <div id={`name-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert" aria-live="polite"></div>
     </div>
 
     <!-- Phone -->
     <div>
-      <label for={`phone-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+      <label for={`phone-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-0.5 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
         Phone Number*
       </label>
-      <input 
-        type="tel" 
+      <input
+        type="tel"
         id={`phone-${variant}`}
-        name="phone" 
+        name="phone"
         required
-        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
+        class={variant === 'hero' ? 'form-input w-full px-2.5 py-1.5 text-xs border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
         placeholder="(201) 234-5678"
         aria-describedby={`phone-error-${variant}`}
       />
-      <div id={`phone-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert" aria-live="polite"></div>
+      <div id={`phone-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert" aria-live="polite"></div>
     </div>
 
 
     <!-- Service Type -->
     <div>
-      <label for={`service-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+      <label for={`service-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-0.5 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
         Service Needed*
       </label>
-      <select 
+      <select
         id={`service-${variant}`}
-        name="service" 
+        name="service"
         required
-        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white'}
+        class={variant === 'hero' ? 'form-input w-full px-2.5 py-1.5 text-xs border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white'}
       >
         <option value="">What can we help with?</option>
         {services.map(serviceOption => (
           <option value={serviceOption} selected={service === serviceOption}>{serviceOption}</option>
         ))}
       </select>
-      <div id={`service-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      <div id={`service-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert"></div>
     </div>
 
 
     <!-- Address -->
     <div>
-      <label for={`address-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+      <label for={`address-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-0.5 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
         Address <span class="text-ez2fix-brown/70">(optional)</span>
       </label>
-      <input 
-        type="text" 
+      <input
+        type="text"
         id={`address-${variant}`}
-        name="address" 
-        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
-        placeholder={variant === 'hero' ? 'Address (helps with faster service)...' : 'Address (helps us serve you faster)...'}
+        name="address"
+        class={variant === 'hero' ? 'form-input w-full px-2.5 py-1.5 text-xs border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors'}
+        placeholder={variant === 'hero' ? 'Street address...' : 'Address (helps us serve you faster)...'}
         autocomplete="street-address"
       />
-      <div id={`address-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
-      
+      <div id={`address-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert"></div>
+
       {variant === 'hero' && (
         <!-- Compact Zip Code field for Hero variant -->
-        <div class="mt-2">
-          <label for={`zip-${variant}`} class="block text-xs font-semibold mb-1 text-ez2fix-dark">
+        <div class="mt-1.5">
+          <label for={`zip-${variant}`} class="block text-xs font-semibold mb-0.5 text-ez2fix-dark">
             Zip Code
           </label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             id={`zip-${variant}`}
-            name="zip" 
-            class="form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
-            placeholder="Enter 5-digit zip code"
+            name="zip"
+            class="form-input w-full px-2.5 py-1.5 text-xs border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors"
+            placeholder="5-digit zip"
             autocomplete="postal-code"
             pattern="[0-9]{5}(-[0-9]{4})?"
             title="Enter 5-digit zip code"
             aria-describedby={`zip-error-${variant}`}
           />
-          <div id={`zip-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert" aria-live="polite"></div>
+          <div id={`zip-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert" aria-live="polite"></div>
         </div>
       )}
       
@@ -210,14 +210,14 @@ const formId = `booking-form-${variant}`;
 
     <!-- How Soon? -->
     <div>
-      <label for={`urgency-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-1 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
+      <label for={`urgency-${variant}`} class={variant === 'hero' ? 'block text-xs font-semibold mb-0.5 text-ez2fix-dark' : 'block text-sm font-semibold mb-2 text-ez2fix-dark'}>
         How Soon?*
       </label>
-      <select 
+      <select
         id={`urgency-${variant}`}
-        name="urgency" 
+        name="urgency"
         required
-        class={variant === 'hero' ? 'form-input w-full px-3 py-2 text-sm border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white'}
+        class={variant === 'hero' ? 'form-input w-full px-2.5 py-1.5 text-xs border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white' : 'form-input w-full px-4 py-3 border-2 border-ez2fix-brown/30 rounded-lg focus:border-ez2fix-primary focus:outline-none transition-colors bg-white'}
       >
         <option value="">When do you need service?</option>
         <option value="asap">ASAP</option>
@@ -226,7 +226,7 @@ const formId = `booking-form-${variant}`;
         <option value="few-weeks">Within a few weeks</option>
         <option value="browsing">Not sure / Just browsing</option>
       </select>
-      <div id={`urgency-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      <div id={`urgency-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert"></div>
     </div>
 
     {variant !== 'hero' && (
@@ -297,26 +297,26 @@ const formId = `booking-form-${variant}`;
 
     <!-- Consent Checkbox -->
     <div>
-      <div class={variant === 'hero' ? 'flex items-start space-x-2' : 'flex items-start space-x-3'}>
-        <input 
-          type="checkbox" 
+      <div class={variant === 'hero' ? 'flex items-start space-x-1.5' : 'flex items-start space-x-3'}>
+        <input
+          type="checkbox"
           id={`consent-${variant}`}
-          name="consent" 
+          name="consent"
           required
-          class={variant === 'hero' ? 'mt-0.5 h-3 w-3 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-1 focus:ring-offset-1' : 'mt-1 h-4 w-4 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2 focus:ring-offset-2'}
+          class={variant === 'hero' ? 'mt-0.5 h-3 w-3 flex-shrink-0 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-1 focus:ring-offset-1' : 'mt-1 h-4 w-4 rounded border-2 border-ez2fix-brown/30 text-ez2fix-primary focus:ring-ez2fix-primary focus:ring-2 focus:ring-offset-2'}
         />
-        <label for={`consent-${variant}`} class={variant === 'hero' ? 'text-xs leading-tight text-ez2fix-dark' : 'text-sm leading-relaxed text-ez2fix-dark'}>
-          I agree to receive service updates via call, text, or email, and I accept the 
-          <a href="/privacy-policy" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Privacy Policy</a> and 
-          <a href="/terms-of-service" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Terms & Conditions</a>.*
+        <label for={`consent-${variant}`} class={variant === 'hero' ? 'text-[10px] leading-tight text-ez2fix-dark' : 'text-sm leading-relaxed text-ez2fix-dark'}>
+          I agree to receive service updates and accept the
+          <a href="/privacy-policy" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Privacy Policy</a> &
+          <a href="/terms-of-service" class="underline hover:no-underline text-ez2fix-primary" target="_blank">Terms</a>.*
         </label>
       </div>
-      <div id={`consent-error-${variant}`} class="text-red-600 text-xs mt-1 hidden" role="alert"></div>
+      <div id={`consent-error-${variant}`} class="text-red-600 text-xs mt-0.5 hidden" role="alert"></div>
     </div>
 
     <!-- Submit Button -->
-    <div class={variant === 'hero' ? 'pt-1' : 'pt-2'}>
-      <CTA 
+    <div class={variant === 'hero' ? 'pt-0.5' : 'pt-2'}>
+      <CTA
         variant="primary"
         size={variant === 'hero' ? 'small' : 'medium'}
         text={buttonText}
@@ -324,12 +324,12 @@ const formId = `booking-form-${variant}`;
         class="w-full btn-premium shadow-premium hover-lift"
       />
     </div>
-    
+
     <!-- Hidden reCAPTCHA badge container -->
     <div id="recaptcha-badge" style="display: none; visibility: hidden; opacity: 0; width: 0; height: 0; position: absolute; left: -9999px;"></div>
-    
-    <p class={variant === 'hero' ? 'text-ez2fix-brown text-center text-xs mt-2' : 'text-ez2fix-brown text-center text-xs mt-3'}>
-      * Required fields. We respect your privacy and never share your information. This form is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" class="underline hover:no-underline" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" class="underline hover:no-underline" target="_blank" rel="noopener">Terms of Service</a> apply.
+
+    <p class={variant === 'hero' ? 'text-ez2fix-brown text-center text-[9px] leading-tight mt-1' : 'text-ez2fix-brown text-center text-xs mt-3'}>
+      * Required. Protected by reCAPTCHA. <a href="https://policies.google.com/privacy" class="underline hover:no-underline" target="_blank" rel="noopener">Privacy</a> & <a href="https://policies.google.com/terms" class="underline hover:no-underline" target="_blank" rel="noopener">Terms</a>.
     </p>
   </form>
 </div>

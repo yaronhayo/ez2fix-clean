@@ -15,33 +15,33 @@ const {
 } = Astro.props;
 ---
 
-<section class="space-section-sm bg-gradient-to-br from-white via-ez2fix-cream/50 to-ez2fix-gold/10">
-  <div class="container-responsive">
+<section class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4">
     <!-- Enhanced Section Header -->
-    <div class="section-header-responsive animate-on-scroll">
-      <h2 class="section-title-responsive text-ez2fix-dark" set:html={title} />
-      <p class="section-subtitle-responsive text-ez2fix-brown" set:html={subtitle} />
+    <div class="text-center mb-12 max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-6" set:html={title} />
+      <p class="text-base md:text-lg text-ez2fix-brown" set:html={subtitle} />
     </div>
-    
+
     <!-- Enhanced FAQ Grid -->
-    <div class="max-w-4xl mx-auto space-y-3 mb-6">
+    <div class="max-w-4xl mx-auto space-y-4 mb-8">
       {faqs.map((faq, index) => (
-        <div class="faq-item card-responsive shadow-premium border-2 border-ez2fix-brown/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-ez2fix-primary hover-lift animate-on-scroll">
-          <button 
-            class="faq-question w-full text-left p-3 sm:p-4 flex items-start justify-between focus-enhanced bg-white hover:bg-ez2fix-gold/5 transition-colors touch-target"
+        <div class="faq-item bg-white shadow-xl border-2 border-ez2fix-brown/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-ez2fix-primary">
+          <button
+            class="faq-question w-full text-left p-4 md:p-6 flex items-start justify-between bg-white hover:bg-ez2fix-gold/5 transition-colors"
             data-faq-index={index}
             aria-expanded="false"
             aria-controls={`faq-answer-${index}`}
           >
-            <h3 class="text-heading-3 text-ez2fix-dark pr-4 flex-1">
+            <h3 class="text-lg md:text-xl font-bold text-ez2fix-dark pr-4 flex-1">
               {faq.question}
             </h3>
             <div class="flex-shrink-0 ml-4">
-              <div class="w-8 h-8 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
-                <svg 
-                  class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary" 
-                  fill="none" 
-                  stroke="currentColor" 
+              <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-ez2fix-primary/10 flex items-center justify-center">
+                <svg
+                  class="faq-icon w-5 h-5 transform transition-transform duration-300 text-ez2fix-primary"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -49,14 +49,14 @@ const {
               </div>
             </div>
           </button>
-          <div 
+          <div
             class="faq-answer max-h-0 overflow-hidden transition-all duration-300 bg-gradient-to-br from-white to-ez2fix-cream/30"
             id={`faq-answer-${index}`}
             aria-labelledby={`faq-question-${index}`}
           >
-            <div class="p-3 sm:p-4 pt-0">
+            <div class="p-4 md:p-6 pt-0">
               <div class="border-l-4 border-ez2fix-primary/30 pl-4">
-                <p class="text-body-base text-ez2fix-brown leading-relaxed">
+                <p class="text-base text-ez2fix-brown leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
@@ -65,20 +65,18 @@ const {
         </div>
       ))}
     </div>
-    
+
     <!-- Enhanced Read All FAQs CTA -->
-    <div class="text-center animate-on-scroll">
-      <div class="inline-block p-1 rounded-xl bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold">
-        <a href="/faq" class="cta-responsive bg-white text-ez2fix-primary hover:bg-ez2fix-primary hover:text-white btn-premium hover-lift inline-flex items-center justify-center shadow-lg">
-          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          Read All FAQs
-          <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
+    <div class="text-center">
+      <a href="/faq" class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 font-bold text-base md:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Read All FAQs
+        <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>

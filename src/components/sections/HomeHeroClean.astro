@@ -5,7 +5,7 @@ import Card from '@/components/ui/Card.astro';
 import CTA from '@/components/ui/CTA.astro';
 ---
 
-<section class="relative hero-responsive overflow-hidden hero-section">
+<section class="relative py-8 lg:py-12 overflow-hidden hero-section">
   <!-- Optimized static background for LCP - video loads after interaction -->
   <div class="absolute inset-0 w-full h-full hero-background"></div>
 
@@ -25,79 +25,78 @@ import CTA from '@/components/ui/CTA.astro';
   <!-- Immediate background for LCP -->
   <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+  <!-- Overlay with clean gradient -->
+  <div class="absolute inset-0 bg-gradient-to-br from-black/85 via-black/70 to-black/85"></div>
 
-  <div class="container-responsive relative z-10">
-      
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-7xl mx-auto">
+
       <!-- Hero Content Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
-        
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start lg:items-center">
+
         <!-- Left Side - Hero Content -->
-        <div class="hero-content-responsive order-2 lg:order-1">
-          
+        <div class="order-2 lg:order-1 pt-4 lg:pt-0">
 
           <!-- SEO-Optimized Main Headlines -->
-          <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6 animate-on-scroll">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 lg:mb-5 leading-tight">
             <span class="text-white">Professional</span> <span class="text-ez2fix-gold">Garage Door Repair</span>
             <br />
             <span class="text-white">&</span> <span class="text-ez2fix-primary">Installation Services</span>
             <br />
             <span class="text-ez2fix-gold">in New Jersey</span>
           </h1>
-          
+
           <!-- SEO-Optimized Subtitle with Keywords -->
-          <p class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8 animate-on-scroll">
+          <p class="text-lg sm:text-xl lg:text-2xl text-white mb-4 lg:mb-5 leading-relaxed">
             Professional <span class="text-ez2fix-gold font-semibold">garage door repair near me</span> and <span class="text-ez2fix-gold font-semibold">garage door installation</span> across 5 New Jersey counties.
           </p>
-          
+
           <!-- Service Coverage -->
-          <div class="text-center lg:text-left mb-6 animate-on-scroll">
-            <p class="text-sm md:text-base text-ez2fix-gold mb-2">Serving Bergen • Essex • Morris • Hudson • Passaic Counties</p>
-            <p class="text-sm text-ez2fix-primary">Licensed Contractor #13VH13553300 • 12,000+ Families Served</p>
+          <div class="text-center lg:text-left mb-5 lg:mb-6">
+            <p class="text-sm sm:text-base text-ez2fix-gold mb-1.5">Serving Bergen • Essex • Morris • Hudson • Passaic Counties</p>
+            <p class="text-xs sm:text-sm text-ez2fix-primary">Licensed Contractor #13VH13553300 • 12,000+ Families Served</p>
           </div>
 
-          
+
           <!-- CTAs -->
-          <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0 animate-on-scroll">
-            <CTA 
-              variant="phone"
-              size="large"
+          <div class="flex flex-col sm:flex-row gap-3 mb-6 lg:mb-0">
+            <a
               href={siteConfig.links.phone}
-              text={`Call ${siteConfig.business.phone}`}
-              icon="phone"
-              ariaLabel={`Call Ez2Fix at ${siteConfig.business.phone}`}
-              class="btn-premium shadow-premium hover-lift cta-responsive w-full sm:w-auto"
-            />
-            <CTA 
-              variant="secondary"
-              size="medium"
+              class="px-8 py-4 lg:px-10 lg:py-4 bg-ez2fix-primary hover:bg-ez2fix-primary/90 text-ez2fix-dark font-bold text-base lg:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              <span>Call {siteConfig.business.phone}</span>
+            </a>
+            <a
               href="/services"
-              text="View Services"
-              icon="arrow"
-              ariaLabel="View all garage door services"
-              class="hover-lift cta-responsive w-full sm:w-auto"
-            />
+              class="px-8 py-4 lg:px-10 lg:py-4 border-2 border-ez2fix-gold hover:bg-ez2fix-gold text-ez2fix-gold hover:text-ez2fix-dark font-bold text-base lg:text-lg rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <span>View Services</span>
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
           </div>
-
 
         </div>
 
         <!-- Right Side - Booking Form (Desktop) -->
-        <div class="order-1 lg:order-2 hidden lg:block animate-on-scroll">
-          <Card class="card-responsive-large shadow-premium border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
+        <div class="order-1 lg:order-2 hidden lg:block">
+          <Card class="p-5 shadow-xl border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
             <BookingFormClean variant="hero" />
-            
+
             <!-- Form Benefits -->
-            <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
-              <div class="grid grid-cols-2 gap-3 text-center">
+            <div class="mt-3 pt-3 border-t border-ez2fix-brown/20">
+              <div class="grid grid-cols-2 gap-2 text-center">
                 <div>
-                  <div class="text-heading-3 text-ez2fix-dark">Same Day Fix</div>
-                  <div class="text-body-small text-ez2fix-brown">Professional Service</div>
+                  <div class="text-base font-bold text-ez2fix-dark">Same Day Fix</div>
+                  <div class="text-xs text-ez2fix-brown">Professional Service</div>
                 </div>
                 <div>
-                  <div class="text-heading-3 text-ez2fix-dark">Honest Pricing</div>
-                  <div class="text-body-small text-ez2fix-brown">Price Before Work</div>
+                  <div class="text-base font-bold text-ez2fix-dark">Honest Pricing</div>
+                  <div class="text-xs text-ez2fix-brown">Price Before Work</div>
                 </div>
               </div>
             </div>
@@ -105,10 +104,8 @@ import CTA from '@/components/ui/CTA.astro';
         </div>
       </div>
 
-
-
-      </div>
     </div>
+  </div>
 </section>
 
 <script>
@@ -150,8 +147,17 @@ import CTA from '@/components/ui/CTA.astro';
 
 <style>
   .hero-section {
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-section {
+      min-height: calc(100vh - 80px);
+      min-height: calc(100dvh - 80px);
+      max-height: 900px;
+      display: flex;
+      align-items: center;
+    }
   }
 
   .hero-background {
@@ -159,142 +165,10 @@ import CTA from '@/components/ui/CTA.astro';
                 url('/images/ez2fix-garage-door-repair.jpg') center/cover no-repeat;
   }
 
-  /* Desktop optimization - better above-the-fold positioning */
-  @media (min-width: 1024px) {
-    .hero-section {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 6rem;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .hero-section {
-      padding-top: 8rem;
-    }
-  }
-
-
-
-  @media screen and (max-height: 600px) and (orientation: landscape) {
-    .hero-section {
-      min-height: auto;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-    .scroll-indicator {
-      display: none;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .hero-section {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-  }
-
-  /* Mobile-specific spacing adjustments */
-  @media screen and (max-width: 1023px) {
-    .hero-section {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-    
-    .hero-content-responsive {
-      margin-top: -2rem;
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    .hero-content-responsive {
-      margin-top: -3rem;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .hero-video {
       display: none;
     }
-    .hero-section {
-      background: var(--gradient-dark);
-    }
-    .scroll-indicator,
-    .animate-bounce,
-    .animate-scroll-dot {
-      animation: none;
-    }
-  }
-
-  @media (min-width: 475px) {
-    .xs\:text-3xl {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-  }
-
-  /* Form positioning optimization */
-  @media (min-width: 1024px) {
-    .hero-section .max-w-md {
-      max-width: 24rem;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .hero-section .max-w-md {
-      max-width: 26rem;
-    }
   }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Animate elements
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    // Animate hero content
-    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-    elementsToAnimate.forEach((el, index) => {
-      setTimeout(() => {
-        el.classList.add('animate-in');
-      }, index * 100);
-    });
-    
-    // Observe other scroll animations
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Handle mobile scroll indicator
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-      let hasScrolled = false;
-      
-      const handleScroll = () => {
-        if (!hasScrolled && window.scrollY > 50) {
-          hasScrolled = true;
-          scrollIndicator.classList.add('hidden');
-          window.removeEventListener('scroll', handleScroll);
-        }
-      };
-      
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      
-      // Also hide on touch/click
-      scrollIndicator.addEventListener('click', () => {
-        window.scrollTo({
-          top: window.innerHeight,
-          behavior: 'smooth'
-        });
-      });
-    }
-  });
-</script>

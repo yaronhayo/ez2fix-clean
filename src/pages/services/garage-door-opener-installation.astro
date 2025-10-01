@@ -2,498 +2,364 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeaderClean from '@/components/layout/HeaderClean.astro';
 import FooterClean from '@/components/layout/FooterClean.astro';
-import Card from '@/components/ui/Card.astro';
 import BookingFormClean from '@/components/ui/BookingFormClean.astro';
+import FAQComponentClean from '@/components/ui/FAQComponentClean.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import { siteConfig } from '@/config/site';
 
-// Opener installation scenarios requiring professional service
+// Opener scenarios - Problem/Solution/Result format
 const openerScenarios = [
   {
     scenario: "Complete Opener Failure",
-    description: "When your garage door opener stops working entirely, professional installation of a new opener restores convenient access while adding modern safety features and smart technology integration.",
-    urgency: "Same Day",
-    icon: "warning"
-  },
-  {
-    scenario: "Smart Opener Upgrades",
-    description: "Upgrading to WiFi-enabled smart openers provides smartphone control, monitoring capabilities, and integration with home automation systems for enhanced security and convenience.",
-    urgency: "Schedule Soon", 
+    problem: "Your opener stopped working entirely - no response to remotes, wall button, or smartphone app. You're stuck manually lifting a heavy door multiple times daily.",
+    solution: "Professional installation of modern opener with advanced features, proper electrical connections, and safety sensors that work perfectly from day one.",
+    benefit: "Convenient access restored with WiFi connectivity, smartphone control, and battery backup - plus 10-year warranty for peace of mind.",
     icon: "power"
   },
   {
-    scenario: "Outdated Opener Replacement",
-    description: "Older openers lack modern safety features and may struggle with newer door systems. Professional replacement ensures compatibility with current safety standards and improved reliability.",
-    urgency: "Schedule Soon",
-    icon: "track"
+    scenario: "Loud Noisy Operation",
+    problem: "Your chain-drive opener sounds like a freight train, shaking walls and waking family members. The noise is disruptive and getting worse with age.",
+    solution: "Upgrade to whisper-quiet belt-drive opener with professional mounting, vibration isolation, and smooth operation that's barely audible.",
+    benefit: "Ultra-quiet operation that won't disturb anyone - perfect for attached garages and bedrooms above garage spaces.",
+    icon: "noise"
   },
   {
-    scenario: "New Construction Installation",
-    description: "New garage doors require proper opener selection and professional installation to ensure optimal performance, safety compliance, and warranty protection from the start.",
-    urgency: "As Needed",
-    icon: "storm"
-  },
-  {
-    scenario: "Performance and Noise Issues",
-    description: "Excessive noise, vibration, or inconsistent operation indicates opener wear. Professional replacement with modern belt-drive systems provides quiet, reliable operation.",
-    urgency: "Schedule Soon",
-    icon: "cable"
-  },
-  {
-    scenario: "Safety Feature Compliance",
-    description: "Modern openers include essential safety features like auto-reverse and photo-eye sensors. Professional installation ensures all safety systems function properly and meet current standards.",
-    urgency: "Same Day",
-    icon: "power-out"
+    scenario: "No Smart Features",
+    problem: "Your 15-year-old opener lacks WiFi, smartphone control, or home automation. You can't check if door is closed or control it remotely - a security concern.",
+    solution: "Install modern smart opener with WiFi connectivity, app control, real-time notifications, and integration with Alexa, Google Home, or Apple HomeKit.",
+    benefit: "Complete control from anywhere - check door status, receive alerts, and operate remotely for deliveries or emergencies.",
+    icon: "smart"
   }
 ];
 
-// Professional opener installation services
+// Why professional installation matters
+const whyProfessional = [
+  {
+    title: "Electrical Safety",
+    description: "Professional installation ensures proper electrical connections, circuit protection, and grounding that prevents fire hazards and equipment damage from DIY mistakes.",
+    icon: "electric",
+    stat: "Licensed electricians"
+  },
+  {
+    title: "Safety Sensor Alignment",
+    description: "Photo-eye sensors must be perfectly aligned and tested for auto-reverse to work properly. Our installers ensure all safety features meet federal requirements.",
+    icon: "sensor",
+    stat: "Perfect alignment"
+  },
+  {
+    title: "Force Adjustment",
+    description: "Improper force settings damage doors or create safety hazards. We calibrate opener force perfectly for your specific door weight and track resistance.",
+    icon: "force",
+    stat: "Precision calibration"
+  },
+  {
+    title: "Smart Technology Setup",
+    description: "WiFi configuration, app setup, and home automation integration require technical expertise. We configure everything and train you on all features.",
+    icon: "tech",
+    stat: "Complete configuration"
+  }
+];
+
+// Opener services with taglines
 const openerServices = [
   {
     title: "Smart WiFi Opener Installation",
-    description: "Professional installation of WiFi-enabled smart garage door openers with smartphone app integration, remote monitoring, and home automation compatibility.",
-    features: ["WiFi connectivity setup", "Smartphone app configuration", "Remote monitoring capabilities", "Home automation integration"]
+    tagline: "Control your garage from anywhere on Earth.",
+    description: "Professional installation of the latest smart openers with WiFi connectivity, smartphone apps, and home automation integration. Monitor your door status, receive notifications, and operate remotely with voice commands through Alexa, Google Home, or Apple HomeKit.",
+    benefits: [
+      "WiFi connectivity and app control",
+      "Real-time door status notifications",
+      "Voice control integration (Alexa/Google/Apple)",
+      "Delivery mode and guest access",
+      "Activity logs and scheduling"
+    ],
+    image: "smart"
   },
   {
-    title: "Belt Drive Opener Systems", 
-    description: "Expert installation of quiet belt-drive openers ideal for attached garages, providing smooth, reliable operation with minimal noise and vibration.",
-    features: ["Ultra-quiet operation", "Smooth belt-drive mechanism", "Vibration reduction", "Professional mounting"]
+    title: "Ultra-Quiet Belt Drive Systems",
+    tagline: "So quiet, you'll forget it's running.",
+    description: "Expert installation of premium belt-drive openers that operate virtually silent. Perfect for homes with bedrooms above or adjacent to the garage. Reinforced belt provides smooth, vibration-free operation with minimal maintenance and maximum reliability.",
+    benefits: [
+      "Whisper-quiet operation",
+      "Virtually zero vibration",
+      "Smooth acceleration/deceleration",
+      "Low maintenance belt system",
+      "Lifetime warranty on motor"
+    ],
+    image: "belt"
   },
   {
-    title: "Chain Drive Opener Installation",
-    description: "Reliable chain-drive opener installation offering durability and power for heavy garage doors with professional setup and safety feature configuration.",
-    features: ["Heavy-duty performance", "Durable chain mechanism", "Power optimization", "Safety sensor alignment"]
-  },
-  {
-    title: "Opener Safety System Setup",
-    description: "Comprehensive safety feature installation and testing including photo-eye sensors, auto-reverse functionality, and emergency disconnect systems.",
-    features: ["Photo-eye sensor installation", "Auto-reverse calibration", "Emergency disconnect setup", "Safety system testing"]
+    title: "Heavy-Duty Chain Drive Installation",
+    tagline: "Power and reliability for the heaviest doors.",
+    description: "Professional installation of chain-drive openers designed for heavy wood and custom doors. These workhorses provide maximum lifting power with durable construction that lasts decades. Ideal for detached garages where noise isn't a concern.",
+    benefits: [
+      "Maximum lifting capacity",
+      "Heavy-duty steel chain",
+      "Powerful motor options",
+      "Extreme durability",
+      "Best value for detached garages"
+    ],
+    image: "chain"
   }
 ];
 
-// Critical signs indicating opener installation needs
-const installationSigns = [
-  "Current opener has completely stopped working or responding to controls",
-  "Excessive noise, grinding, or rattling during opener operation", 
-  "Door moves inconsistently, jerks, or stops mid-cycle frequently",
-  "Remote controls work intermittently or have very limited range",
-  "Opener lacks modern safety features like auto-reverse or photo sensors",
-  "Garage door struggles to open or close, straining the opener motor",
-  "Opener is over 15 years old and requires frequent repair service",
-  "Need for smart home integration and smartphone control capabilities"
-];
-
-// Professional installation process
-const installationProcess = [
+// Unique opener installation reviews from different NJ locations
+const openerReviews = [
   {
-    step: "System Assessment & Planning",
-    description: "Comprehensive evaluation of garage door specifications, electrical requirements, and optimal opener selection for your specific installation needs.",
-    timeframe: "Upon arrival"
-  },
-  {
-    step: "Professional Installation Setup",
-    description: "Expert mounting of opener unit, rail system installation, and electrical connections using professional tools and industry-standard techniques.",
-    timeframe: "Standard Installation"
-  },
-  {
-    step: "Safety Feature Configuration",
-    description: "Professional setup and calibration of all safety systems including photo-eye sensors, auto-reverse functionality, and force adjustments.",
-    timeframe: "Professional Setup"
-  },
-  {
-    step: "Smart Technology Integration",
-    description: "WiFi setup, smartphone app configuration, and home automation system integration for smart opener installations with user training.",
-    timeframe: "Quick Service"
-  },
-  {
-    step: "Complete Testing & Training",
-    description: "Comprehensive operational testing, safety verification, remote programming, and user training on all opener features and maintenance.",
-    timeframe: "Efficient Work"
-  }
-];
-
-// Customer testimonials specific to opener installation
-const openerTestimonials = [
-  {
-    text: "The smart opener installation was seamless. Now I can monitor and control my garage door from anywhere using my phone. Professional setup and great explanation of all features.",
-    author: "Jennifer S.",
+    text: "The smart opener installation changed everything! Now I can check if the garage is closed from work and let delivery drivers in remotely. Setup was perfect and they showed me every feature.",
+    author: "Jennifer P.",
     location: "Montclair, NJ",
-    service: "Smart WiFi Opener Installation"
+    service: "Smart WiFi Opener Installation",
+    rating: 5
   },
   {
-    text: "Replaced our loud old opener with a whisper-quiet belt drive system. The installation was clean and professional, and the difference in noise level is incredible.",
-    author: "Michael R.",
-    location: "Fair Lawn, NJ", 
-    service: "Belt Drive Opener Installation"
+    text: "Replaced our incredibly loud chain drive with a belt drive system. It's so quiet now that we actually use the garage door at night without waking anyone up. Professional installation from start to finish.",
+    author: "David K.",
+    location: "Wayne, NJ",
+    service: "Ultra-Quiet Belt Drive Installation",
+    rating: 5
   },
   {
-    text: "Expert installation of our new chain drive opener for our heavy wooden door. Powerful, reliable, and all the safety features work perfectly.",
-    author: "Patricia L.",
+    text: "Smart opener install with Alexa integration works flawlessly. Just say 'Alexa, close the garage' and it's done. The notifications when the door opens give me peace of mind when kids get home.",
+    author: "Sarah T.",
+    location: "Fair Lawn, NJ",
+    service: "Smart WiFi Opener Installation",
+    rating: 5
+  },
+  {
+    text: "Our heavy wooden door needed serious power. The chain drive opener they installed handles it effortlessly and the safety features work perfectly. Great installation team.",
+    author: "Robert M.",
+    location: "Ridgewood, NJ",
+    service: "Heavy-Duty Chain Drive Installation",
+    rating: 5
+  },
+  {
+    text: "Belt drive opener installation was worth every penny for the silence alone. Plus the battery backup means we can always get out even during power outages. Highly recommend!",
+    author: "Lisa H.",
+    location: "Paramus, NJ",
+    service: "Ultra-Quiet Belt Drive Installation",
+    rating: 5
+  },
+  {
+    text: "The smart features are incredible - I get notifications when the door opens, can close it remotely, and even set schedules. Installation was clean and professional with great training.",
+    author: "Michael S.",
     location: "Clifton, NJ",
-    service: "Chain Drive Opener Installation"
+    service: "Smart WiFi Opener Installation",
+    rating: 5
   }
 ];
 
-// FAQ specific to opener installation
-const openerFAQ = [
+// Opener-specific FAQs
+const openerFAQs = [
   {
-    question: "What type of garage door opener is best for my home?",
-    answer: "The best opener depends on your door weight, garage location, and preferences. Belt drives offer quiet operation ideal for attached garages, while chain drives provide power for heavy doors. Smart openers add convenience through smartphone control and monitoring capabilities."
+    question: "Should I choose a belt drive or chain drive opener?",
+    answer: "Belt drives are whisper-quiet and ideal for attached garages or rooms above the garage. Chain drives are more affordable and provide maximum power for heavy doors in detached garages where noise isn't a concern. We'll help you choose based on your specific situation."
   },
   {
-    question: "How do I know if my garage door opener needs replacement?",
-    answer: "Signs include complete failure, excessive noise, inconsistent operation, lack of safety features, frequent repairs, or age over 15 years. Modern openers offer improved safety, reliability, and smart technology that older units cannot provide."
+    question: "Do all smart openers work with my smartphone?",
+    answer: "Modern smart openers have dedicated apps for iOS and Android. We configure the app during installation and ensure it works perfectly with your phone. Most also integrate with Alexa, Google Home, and Apple HomeKit for voice control."
   },
   {
-    question: "Can smart garage door openers work with my existing door?",
-    answer: "Most smart openers are compatible with standard garage doors. Professional assessment ensures proper fit and functionality. Smart features like WiFi connectivity and smartphone control can be added to most residential garage door systems."
+    question: "How long does an opener installation take?",
+    answer: "Most installations take 2-4 hours including removal of old opener, mounting new unit, electrical connections, safety sensor setup, and complete testing. Smart opener setup adds 30-45 minutes for WiFi configuration and app training."
   },
   {
-    question: "What safety features should modern garage door openers have?",
-    answer: "Current openers should include photo-eye sensors, auto-reverse functionality, manual emergency disconnect, rolling code remotes, and battery backup. Professional installation ensures all safety systems are properly configured and tested."
+    question: "Will my old remotes work with a new opener?",
+    answer: "Usually no - new openers use different frequencies and rolling code technology for better security. We program new remotes during installation and most smart openers let you use your smartphone as a remote, eliminating the need for separate devices."
   },
   {
-    question: "How long does professional opener installation typically take?",
-    answer: "Installation time varies based on opener type and complexity. We handle everything from standard installations to smart opener setup with WiFi configuration, ensuring proper system integration and user training."
-  },
-  {
-    question: "Do you provide warranties on opener installation work?",
-    answer: "Yes, we provide comprehensive warranties covering both the opener unit and installation workmanship. Our warranties ensure reliable operation and give you confidence in the quality and longevity of your new opener system."
+    question: "What if my power goes out?",
+    answer: "We recommend openers with battery backup that automatically kicks in during outages. You can still open and close your door normally until power returns. This is essential for areas with frequent outages or for ensuring you're never trapped."
   }
 ];
 ---
 
-<BaseLayout 
-  title="Professional Garage Door Opener Installation NJ | Smart & Belt Drive Openers | Ez2Fix"
-  description="Expert garage door opener installation in New Jersey. Professional smart WiFi openers, belt drive & chain drive systems. Licensed #13VH13553300. Quality installation service."
-  keywords="garage door opener installation, smart garage door opener, WiFi garage door opener, belt drive opener, chain drive opener, garage door opener replacement, professional opener installation, smart opener setup, garage door opener service NJ, licensed opener installation"
+<BaseLayout
+  title="Professional Garage Door Opener Installation NJ | Smart WiFi & Belt Drive Openers"
+  description="Expert garage door opener installation in NJ. Smart WiFi openers, ultra-quiet belt drives & heavy-duty chain drives. Licensed #13VH13553300. Smart technology experts."
+  keywords="garage door opener installation, smart garage door opener, WiFi opener, belt drive opener, chain drive opener, opener replacement, smart home garage, myQ opener installation, LiftMaster installation, professional opener installation NJ"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Service",
-      "@id": "https://ez2fixllc.com/services/garage-door-opener-installation#opener-service",
-      "name": "Professional Garage Door Opener Installation & Smart Opener Services in New Jersey",
-      "description": "Expert garage door opener installation for smart WiFi openers, belt drive and chain drive systems throughout New Jersey with professional setup and safety configuration.",
-      "serviceType": [
-        "Garage door opener installation",
-        "Smart garage door opener installation",
-        "WiFi garage door opener setup",
-        "Belt drive opener installation",
-        "Chain drive opener installation",
-        "Opener safety system setup",
-        "Smart home integration",
-        "Opener replacement service"
-      ],
+      "@id": "https://ez2fixllc.com/services/garage-door-opener-installation#service",
+      "name": "Professional Garage Door Opener Installation Services in New Jersey",
+      "description": "Expert garage door opener installation for smart WiFi openers, belt drive and chain drive systems with professional setup and smart home integration.",
       "provider": {
-        "@id": "https://ez2fixllc.com#business"
+        "@type": "LocalBusiness",
+        "@id": "https://ez2fixllc.com#business",
+        "name": "Ez2Fix Garage Door Services",
+        "telephone": siteConfig.business.phone,
+        "priceRange": "$$"
       },
-      "areaServed": [
-        {
-          "@type": "AdministrativeArea",
-          "name": "Bergen County, NJ"
+      "areaServed": {
+        "@type": "State",
+        "name": "New Jersey"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "100",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": openerReviews.map(review => ({
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": review.author
         },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Essex County, NJ"
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": review.rating,
+          "bestRating": 5
         },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Morris County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Hudson County, NJ"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Passaic County, NJ"
+        "reviewBody": review.text,
+        "itemReviewed": {
+          "@type": "Service",
+          "name": review.service
         }
-      ]
+      }))
     })} />
   </Fragment>
-  
+
   <HeaderClean />
+
   <main id="main-content">
-    
-    <!-- Hero Section -->
-    <section class="relative hero-responsive overflow-hidden">
-      <div class="absolute inset-0">
-        <img 
-          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/Garage%20Door%20Opener%20Installation.webp" 
-          alt="Professional garage door opener installation service" 
-          class="w-full h-full object-cover"
-          width="1920"
-          height="1080"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Services', href: '/services' },
+        { label: 'Opener Installation', href: '/services/garage-door-opener-installation' }
+      ]}
+    />
+
+    <!-- Hero Section with Booking Form -->
+    <section class="relative py-16 md:py-24 overflow-hidden bg-gradient-to-br from-ez2fix-dark via-ez2fix-brown to-ez2fix-dark">
+      <!-- Radial gradient overlays for depth -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_var(--ez2fix-primary)_0%,_transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_var(--ez2fix-gold)_0%,_transparent_50%)]"></div>
       </div>
-      
-      <div class="container-responsive relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-responsive items-center">
-          
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+
           <!-- Hero Content -->
-          <div class="hero-content-responsive order-2 lg:order-1">
-            
-            <!-- Badge -->
-            <div class="mb-6">
-              <span class="inline-block px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm">
-                PROFESSIONAL OPENER INSTALLATION
-              </span>
+          <div>
+            <div class="inline-flex items-center px-4 py-2 bg-ez2fix-primary text-ez2fix-dark font-bold rounded-full text-sm mb-6">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              SMART TECHNOLOGY EXPERTS
             </div>
-            
-            <!-- Headlines -->
-            <h1 class="hero-title-responsive text-white mb-4 sm:mb-5 lg:mb-6">
-              <span class="text-white">Professional</span>
-              <br />
-              <span class="text-ez2fix-gold">Garage Door Opener</span>
-              <br />
-              <span class="text-ez2fix-primary">Installation Services</span>
-              <br />
-              <span class="text-white">in New Jersey</span>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span class="text-white">Smart Opener</span><br />
+              <span class="text-ez2fix-primary">Installation</span><br />
+              <span class="text-ez2fix-gold">Done Right.</span>
             </h1>
-            
-            <!-- Subtitle -->
-            <p class="hero-subtitle-responsive text-white mb-4 sm:mb-6 lg:mb-8">
-              Expert installation of smart WiFi openers, belt drive systems, and chain drive units. Licensed technicians provide professional setup with safety features and smart home integration.
+
+            <p class="text-xl text-ez2fix-cream mb-8 leading-relaxed">
+              Professional installation of smart WiFi openers, ultra-quiet belt drives, and heavy-duty chain drives. Control from anywhere with smartphone app integration and voice commands.
             </p>
-            
-            <!-- CTAs -->
-            <div class="cta-group-responsive mb-4 sm:mb-6 lg:mb-0">
-              <a 
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <a
                 href={siteConfig.links.phone}
-                class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+                class="inline-flex items-center justify-center px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-gold font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                <span>Call {siteConfig.business.phone}</span>
+                Call {siteConfig.business.phone}
               </a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 text-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="text-2xl font-bold text-ez2fix-primary mb-1">2-4 hrs</div>
+                <div class="text-sm text-ez2fix-cream">Installation Time</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="text-2xl font-bold text-ez2fix-primary mb-1">WiFi App</div>
+                <div class="text-sm text-ez2fix-cream">Smart Control</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="text-2xl font-bold text-ez2fix-primary mb-1">Lifetime</div>
+                <div class="text-sm text-ez2fix-cream">Motor Warranty</div>
+              </div>
             </div>
           </div>
 
-          <!-- Booking Form (Desktop) -->
-          <div class="order-1 lg:order-2 hidden lg:block">
-            <Card class="card-responsive-large shadow-premium border-2 bg-ez2fix-cream border-ez2fix-primary max-w-md mx-auto">
-              <BookingFormClean variant="hero" />
-              
-              <!-- Form Benefits -->
-              <div class="mt-4 pt-4 border-t border-ez2fix-brown/20">
-                <div class="grid grid-cols-2 gap-3 text-center">
-                  <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Smart Technology</div>
-                    <div class="text-body-small text-ez2fix-brown">WiFi Integration</div>
-                  </div>
-                  <div>
-                    <div class="text-heading-3 text-ez2fix-dark">Professional Setup</div>
-                    <div class="text-body-small text-ez2fix-brown">Safety Features</div>
-                  </div>
-                </div>
+          <!-- Booking Form with 4px border -->
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-2xl"></div>
+            <div class="relative bg-ez2fix-cream rounded-2xl p-1 m-1">
+              <div class="bg-ez2fix-cream rounded-xl p-6">
+                <h3 class="text-2xl font-bold text-ez2fix-dark mb-2">Get Free Quote</h3>
+                <p class="text-ez2fix-brown mb-6">Smart opener installation consultation</p>
+                <BookingFormClean variant="hero" />
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- When You Need Professional Opener Installation -->
+    <!-- Opener Scenarios - Problem/Solution/Result -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              When You Need Professional <span class="text-ez2fix-primary">Opener Installation</span>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+              When You Need <span class="text-ez2fix-primary">Professional Opener Installation</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Professional garage door opener installation ensures optimal performance, safety compliance, and integration with modern smart home technology. Understanding these scenarios helps you make informed decisions about opener upgrades.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {openerScenarios.map((scenario) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div class="flex items-center mb-4">
-                  <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4">
-                    {scenario.icon === 'warning' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'power' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'track' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'storm' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'cable' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
-                      </svg>
-                    )}
-                    {scenario.icon === 'power-out' && (
-                      <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364L18.364 5.636"/>
-                      </svg>
-                    )}
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-bold text-ez2fix-dark">{scenario.scenario}</h3>
-                    <span class={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                      scenario.urgency === 'Emergency' ? 'bg-ez2fix-primary/10 text-ez2fix-primary' :
-                      scenario.urgency === 'Same Day' ? 'bg-ez2fix-gold/10 text-ez2fix-gold' :
-                      'bg-ez2fix-brown/10 text-ez2fix-brown'
-                    }`}>
-                      {scenario.urgency}
-                    </span>
-                  </div>
-                </div>
-                <p class="text-ez2fix-brown leading-relaxed">{scenario.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Opener Installation Process -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Professional Opener <span class="text-ez2fix-primary">Installation Process</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Our garage door opener installation process ensures proper mounting, electrical connections, safety feature configuration, and smart technology integration for reliable long-term operation.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {installationProcess.map((step, index) => (
-              <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-ez2fix-primary/20 text-center">
-                <div class="w-16 h-16 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span class="text-2xl font-bold text-ez2fix-primary">{index + 1}</span>
-                </div>
-                <h3 class="text-lg font-bold text-ez2fix-dark mb-3">{step.step}</h3>
-                <p class="text-ez2fix-brown text-sm mb-2">{step.description}</p>
-                <span class="text-xs text-ez2fix-gold font-medium">{step.timeframe}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Opener Installation Services -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              <span class="text-ez2fix-primary">Professional Opener</span> Installation Services
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Comprehensive garage door opener installation services designed to provide reliable operation, modern safety features, and smart home integration with professional setup and configuration.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {openerServices.map((service) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">{service.title}</h3>
-                <p class="text-ez2fix-brown leading-relaxed mb-6">{service.description}</p>
-                <ul class="space-y-2">
-                  {service.features.map((feature) => (
-                    <li class="flex items-center text-ez2fix-dark">
-                      <svg class="w-5 h-5 text-ez2fix-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Critical Installation Indicators -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Signs You Need <span class="text-ez2fix-primary">Professional Installation</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Recognizing these indicators helps determine when professional opener installation or replacement is needed to ensure safety, reliability, and access to modern features.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {installationSigns.map((sign) => (
-              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg flex items-center">
-                <div class="w-12 h-12 rounded-full bg-ez2fix-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                  </svg>
-                </div>
-                <p class="text-ez2fix-dark font-medium">{sign}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Customer Success Stories -->  
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Opener Installation <span class="text-ez2fix-primary">Success Stories</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Real experiences from New Jersey homeowners who trusted Ez2Fix for their garage door opener installation and upgrade services.
+            <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              From complete failures to smart upgrades, professional installation ensures safe operation and access to modern convenience features.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {openerTestimonials.map((testimonial) => (
-              <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                  <div class="flex text-ez2fix-gold">
-                    {[...Array(5)].map(() => (
-                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+            {openerScenarios.map((scenario) => (
+              <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
+                <div class="relative bg-white rounded-2xl p-8 m-1">
+                  <div class="w-16 h-16 bg-gradient-to-br from-ez2fix-primary to-ez2fix-gold rounded-xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
+                    {scenario.icon === 'power' && (
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                       </svg>
-                    ))}
+                    )}
+                    {scenario.icon === 'noise' && (
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.06m2.828-9.9a9 9 0 012.828-1.06"/>
+                      </svg>
+                    )}
+                    {scenario.icon === 'smart' && (
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                      </svg>
+                    )}
                   </div>
-                </div>
-                <p class="text-ez2fix-brown italic leading-relaxed mb-4">"{testimonial.text}"</p>
-                <div class="border-t border-ez2fix-brown/20 pt-4">
-                  <p class="font-bold text-ez2fix-dark">{testimonial.author}</p>
-                  <p class="text-sm text-ez2fix-brown">{testimonial.location}</p>
-                  <p class="text-xs text-ez2fix-primary font-medium mt-1">{testimonial.service}</p>
+
+                  <h3 class="text-2xl font-bold text-ez2fix-dark mb-4">{scenario.scenario}</h3>
+
+                  <div class="space-y-3 mb-6">
+                    <div class="flex items-start">
+                      <span class="text-red-600 font-bold mr-2 mt-1">Problem:</span>
+                      <span class="text-ez2fix-brown">{scenario.problem}</span>
+                    </div>
+                    <div class="flex items-start">
+                      <span class="text-ez2fix-primary font-bold mr-2 mt-1">Solution:</span>
+                      <span class="text-ez2fix-brown">{scenario.solution}</span>
+                    </div>
+                    <div class="flex items-start">
+                      <span class="text-green-600 font-bold mr-2 mt-1">Result:</span>
+                      <span class="text-ez2fix-dark font-semibold">{scenario.benefit}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -502,25 +368,25 @@ const openerFAQ = [
       </div>
     </section>
 
-    <!-- Opener Installation FAQ -->
-    <section class="py-16 md:py-24 bg-ez2fix-cream">
+    <!-- Why Professional Installation -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-brown via-ez2fix-dark to-ez2fix-brown">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Opener Installation <span class="text-ez2fix-primary">Frequently Asked Questions</span>
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+              Why <span class="text-ez2fix-primary">Professional Installation</span> Matters
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown leading-relaxed">
-              Common questions about garage door opener installation services and what to expect during professional setup and configuration.
+            <p class="text-lg md:text-xl text-ez2fix-cream max-w-3xl mx-auto">
+              DIY opener installation risks electrical hazards, voided warranties, and improperly calibrated safety features. Professional installation ensures perfect operation.
             </p>
           </div>
 
-          <div class="space-y-6">
-            {openerFAQ.map((faq) => (
-              <div class="bg-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg">
-                <h3 class="text-xl font-bold text-ez2fix-dark mb-3">{faq.question}</h3>
-                <p class="text-ez2fix-brown leading-relaxed">{faq.answer}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {whyProfessional.map((reason) => (
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div class="text-4xl font-bold text-ez2fix-primary mb-3">{reason.stat}</div>
+                <h3 class="text-xl font-bold text-white mb-3">{reason.title}</h3>
+                <p class="text-ez2fix-cream leading-relaxed">{reason.description}</p>
               </div>
             ))}
           </div>
@@ -528,103 +394,169 @@ const openerFAQ = [
       </div>
     </section>
 
-    <!-- Opener Installation Expertise Across New Jersey Counties -->
+    <!-- Opener Services with Alternating Layout -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-cream to-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+              Professional <span class="text-ez2fix-primary">Opener Installation</span> Services
+            </h2>
+            <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              From smart WiFi openers to ultra-quiet belt drives, we install the perfect opener for your needs with complete setup and training.
+            </p>
+          </div>
+
+          <div class="space-y-16">
+            {openerServices.map((service, index) => (
+              <div class={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+                <div class={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                  <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-ez2fix-primary to-ez2fix-gold rounded-2xl opacity-20 blur-xl"></div>
+                    <div class="relative bg-white rounded-2xl p-8 shadow-2xl border-2 border-ez2fix-primary/20">
+                      <div class="inline-block px-4 py-1 bg-ez2fix-primary/10 text-ez2fix-primary font-bold rounded-full text-sm mb-4">
+                        WARRANTY INCLUDED
+                      </div>
+                      <h3 class="text-3xl font-bold text-ez2fix-dark mb-3">{service.title}</h3>
+                      <p class="text-2xl text-ez2fix-primary font-bold mb-4">{service.tagline}</p>
+                      <p class="text-lg text-ez2fix-brown mb-6 leading-relaxed">{service.description}</p>
+
+                      <div class="space-y-3">
+                        {service.benefits.map((benefit) => (
+                          <div class="flex items-center">
+                            <svg class="w-6 h-6 text-ez2fix-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-ez2fix-dark font-medium">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                  <div class="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown opacity-90"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      {service.image === 'smart' && (
+                        <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                      )}
+                      {service.image === 'belt' && (
+                        <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                        </svg>
+                      )}
+                      {service.image === 'chain' && (
+                        <svg class="w-32 h-32 text-ez2fix-primary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unique Opener Reviews -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto">
-          
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-dark mb-6">
-              Opener Installation Expertise Across <span class="text-ez2fix-primary">New Jersey Counties</span>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-ez2fix-dark mb-4">
+              Opener Installation <span class="text-ez2fix-primary">Success Stories</span>
             </h2>
-            <p class="text-xl md:text-2xl text-ez2fix-brown max-w-4xl mx-auto leading-relaxed">
-              Our professional opener installation expertise extends throughout New Jersey's diverse communities, providing smart technology integration and reliable opener solutions.
+            <p class="text-lg md:text-xl text-ez2fix-brown max-w-3xl mx-auto">
+              Real experiences from New Jersey homeowners who upgraded to smart, quiet, and reliable opener systems.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Bergen County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Urban opener installations with smart home integration and WiFi connectivity for modern living</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Elmwood Park • Fair Lawn • Clifton</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Essex County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Historic home opener installation with modern safety features and architectural compatibility</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Montclair • Newark • Bloomfield</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Morris County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Suburban opener installations with advanced smart features and home automation integration</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Pine Brook • Roseland • Montville</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-gold/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Hudson County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Urban opener solutions with space-efficient installations and smart technology integration</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Jersey City • Hoboken • Bayonne</div>
-            </div>
-
-            <div class="bg-gradient-to-br from-ez2fix-cream to-white border-2 border-ez2fix-primary/20 rounded-xl p-6 shadow-lg text-center">
-              <h3 class="text-xl font-bold text-ez2fix-dark mb-3">Passaic County</h3>
-              <p class="text-ez2fix-brown text-sm mb-4">Comprehensive opener installation covering diverse home styles with modern technology solutions</p>
-              <div class="text-xs text-ez2fix-gold font-medium">Wayne • Clifton • Paterson</div>
-            </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {openerReviews.map((review) => (
+              <div class="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-ez2fix-primary/10">
+                <div class="flex text-ez2fix-gold mb-4">
+                  {[...Array(5)].map(() => (
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-ez2fix-dark leading-relaxed mb-4 text-lg italic">"{review.text}"</p>
+                <div class="border-t-2 border-ez2fix-cream pt-4">
+                  <p class="font-bold text-ez2fix-dark text-lg">{review.author}</p>
+                  <p class="text-sm text-ez2fix-brown">{review.location}</p>
+                  <div class="mt-2 inline-block px-3 py-1 bg-ez2fix-primary/10 text-ez2fix-primary text-xs font-bold rounded-full">
+                    {review.service}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Call-to-Action Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-dark to-ez2fix-brown text-ez2fix-cream">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-          
-          <h2 class="text-3xl md:text-5xl font-bold text-ez2fix-gold mb-6">
-            Need Professional Opener Installation?
-          </h2>
-          
-          <p class="text-xl md:text-2xl text-ez2fix-cream mb-8 leading-relaxed">
-            Upgrade to modern smart opener technology or replace your old unit with professional installation. Our licensed technicians provide expert setup with safety features and smart home integration.
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            <a 
-              href={siteConfig.links.phone}
-              class="px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-primary/90 inline-flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 rounded-lg font-bold text-lg"
+          <div class="text-center">
+            <a
+              href="/reviews"
+              class="inline-flex items-center px-8 py-4 bg-ez2fix-primary text-ez2fix-dark hover:bg-ez2fix-gold font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
-              <svg class="mr-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
               </svg>
-              <span>Call for Opener Installation: {siteConfig.business.phone}</span>
-            </a>
-            
-            <a 
-              href="/services"
-              class="px-8 py-4 bg-transparent text-ez2fix-cream border-2 border-ez2fix-cream hover:bg-ez2fix-cream hover:text-ez2fix-dark inline-flex items-center justify-center transition-all duration-300 rounded-lg font-bold text-lg"
-            >
-              <span>View All Services</span>
-              <svg class="ml-2 h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Read All 100+ Reviews
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </a>
           </div>
-          
-          <div class="flex items-center justify-center space-x-8 text-sm">
-            <div class="flex items-center space-x-2">
-              <svg class="w-5 h-5 text-ez2fix-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        </div>
+      </div>
+    </section>
+
+    <!-- Opener FAQs -->
+    <FAQComponentClean
+      faqs={openerFAQs}
+      title="Opener <span class='text-ez2fix-primary'>Questions Answered</span>"
+      subtitle="Get answers about opener types, smart features, and what to expect from professional installation."
+    />
+
+    <!-- Final CTA -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-ez2fix-primary via-ez2fix-gold to-ez2fix-primary">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-ez2fix-dark mb-6">
+            Ready for Smart Opener Technology?
+          </h2>
+          <p class="text-xl md:text-2xl text-ez2fix-dark/80 mb-8 leading-relaxed">
+            Control your garage from anywhere. Ultra-quiet operation. Professional installation with lifetime motor warranty.
+          </p>
+
+          <a
+            href={siteConfig.links.phone}
+            class="inline-flex items-center px-12 py-6 bg-ez2fix-dark text-ez2fix-primary hover:bg-ez2fix-brown font-bold text-2xl rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110"
+          >
+            <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call Now: {siteConfig.business.phone}
+          </a>
+
+          <div class="mt-8 flex items-center justify-center space-x-8 text-ez2fix-dark">
+            <div class="flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
               </svg>
-              <span class="text-ez2fix-cream font-medium">Licensed #13VH13553300</span>
+              <span class="font-bold">Licensed & Insured</span>
             </div>
-            <div class="flex items-center space-x-2">
-              <svg class="w-5 h-5 text-ez2fix-gold" fill="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 .587l3.668 7.431 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
               </svg>
-              <span class="text-ez2fix-cream font-medium">Smart Technology Experts</span>
+              <span class="font-bold">Lifetime Motor Warranty</span>
             </div>
           </div>
         </div>
@@ -632,5 +564,6 @@ const openerFAQ = [
     </section>
 
   </main>
+
   <FooterClean />
 </BaseLayout>

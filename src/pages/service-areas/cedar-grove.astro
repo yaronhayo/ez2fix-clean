@@ -83,32 +83,38 @@ const commonIssues = [
   {
     issue: 'Broken Springs',
     description: 'Temperature extremes in Cedar Grove cause spring failures - especially in older homes near Memorial Park.',
-    icon: 'spring'
+    icon: 'spring',
+    href: '/services/garage-door-spring-repair'
   },
   {
     issue: 'Off-Track Doors',
     description: 'Vibration from Route 23 and Pompton Avenue traffic can loosen hardware and throw doors off track.',
-    icon: 'track'
+    icon: 'track',
+    href: '/services/general-garage-door-repair'
   },
   {
     issue: 'Opener Problems',
     description: 'Power surges and age cause openers to fail - remote not working or motor running without movement.',
-    icon: 'opener'
+    icon: 'opener',
+    href: '/services/garage-door-opener-installation'
   },
   {
     issue: 'Weather Damage',
     description: 'NJ storms, freezing temps, and humidity affect door panels, seals, and hardware.',
-    icon: 'weather'
+    icon: 'weather',
+    href: '/services/general-garage-door-repair'
   },
   {
     issue: 'Cable Failures',
     description: 'Frayed or broken cables make doors dangerous - common in homes with heavy daily use.',
-    icon: 'cable'
+    icon: 'cable',
+    href: '/services/general-garage-door-repair'
   },
   {
     issue: 'Panel Damage',
     description: 'Dents, cracks, or damaged panels from accidents or weather - we can match and replace.',
-    icon: 'panel'
+    icon: 'panel',
+    href: '/services/general-garage-door-repair'
   }
 ];
 
@@ -155,8 +161,8 @@ const localFAQs = [
       <!-- Background Image with Overlay -->
       <div class="absolute inset-0">
         <img
-          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/garage-door.webp"
-          alt={`Professional garage door services in ${location.city}, NJ`}
+          src="https://qjvikxuhqs1py0go.public.blob.vercel-storage.com/cedar-grove-nj-neighborhood-D0nG2aC5sTp.jpg"
+          alt="Professional garage door services in Cedar Grove, NJ"
           class="w-full h-full object-cover"
           width="1920"
           height="1080"
@@ -471,21 +477,29 @@ const localFAQs = [
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {commonIssues.map((item) => (
-              <Card class="p-4 md:p-6 hover:shadow-lg transition-all duration-300 border border-ez2fix-primary/20">
-                <div class="flex items-start gap-3 md:gap-4">
-                  <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-ez2fix-primary/10 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 md:w-6 md:h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                    </svg>
+            {commonIssues.map((item) =>
+              <a href={item.href} class="block group">
+                <Card class="p-4 md:p-6 hover:shadow-xl hover:border-ez2fix-primary transition-all duration-300 border border-ez2fix-primary/20 h-full">
+                  <div class="flex items-start gap-3 md:gap-4">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-ez2fix-primary/10 group-hover:bg-ez2fix-primary/20 flex items-center justify-center flex-shrink-0 transition-colors">
+                      <svg class="w-5 h-5 md:w-6 md:h-6 text-ez2fix-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                      </svg>
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-base md:text-lg font-bold text-ez2fix-dark mb-2 group-hover:text-ez2fix-primary transition-colors">{item.issue}</h3>
+                      <p class="text-ez2fix-brown text-xs md:text-sm leading-relaxed">{item.description}</p>
+                      <div class="mt-3 flex items-center text-xs md:text-sm text-ez2fix-primary font-semibold">
+                        Learn more
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 class="text-base md:text-lg font-bold text-ez2fix-dark mb-2">{item.issue}</h3>
-                    <p class="text-ez2fix-brown text-xs md:text-sm leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              </a>
+            )}
           </div>
         </div>
       </div>
